@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class AppDelegateRouter: Router {
+public class AppRouter: Router {
 	
 	public let window: UIWindow
 	

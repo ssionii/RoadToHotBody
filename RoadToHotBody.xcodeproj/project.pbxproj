@@ -18,9 +18,17 @@
 		FAFA46C826BD248300CD820C /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA46C726BD248300CD820C /* Coordinator.swift */; };
 		FAFA46CF26BD24B900CD820C /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA46CE26BD24B900CD820C /* UIView+Extension.swift */; };
 		FAFA46DB26BD250E00CD820C /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA46DA26BD250E00CD820C /* MainCoordinator.swift */; };
-		FAFA46E126BD253A00CD820C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA46DF26BD253A00CD820C /* MainViewController.swift */; };
-		FAFA46E226BD253A00CD820C /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAFA46E026BD253A00CD820C /* MainViewController.xib */; };
-		FAFA46EA26BD256B00CD820C /* AppDelegateRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA46E926BD256B00CD820C /* AppDelegateRouter.swift */; };
+		FAFA46EA26BD256B00CD820C /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA46E926BD256B00CD820C /* AppRouter.swift */; };
+		FAFA46F126C0A80800CD820C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA46EF26C0A80800CD820C /* HomeViewController.swift */; };
+		FAFA46F226C0A80800CD820C /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAFA46F026C0A80800CD820C /* HomeViewController.xib */; };
+		FAFA46FC26C0A82900CD820C /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA46FA26C0A82900CD820C /* CalendarViewController.swift */; };
+		FAFA46FD26C0A82900CD820C /* CalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAFA46FB26C0A82900CD820C /* CalendarViewController.xib */; };
+		FAFA470D26C0BC8F00CD820C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA470B26C0BC8F00CD820C /* DetailViewController.swift */; };
+		FAFA470E26C0BC8F00CD820C /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAFA470C26C0BC8F00CD820C /* DetailViewController.xib */; };
+		FAFA472226C0C79100CD820C /* TabBarRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA472126C0C79100CD820C /* TabBarRouter.swift */; };
+		FAFA473B26C0DE1600CD820C /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA473A26C0DE1600CD820C /* AppCoordinator.swift */; };
+		FAFA478926C20A4300CD820C /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA478826C20A4300CD820C /* HomeCoordinator.swift */; };
+		FAFA478E26C20B9700CD820C /* CalendarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA478D26C20B9700CD820C /* CalendarCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,9 +66,17 @@
 		FAFA46C726BD248300CD820C /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		FAFA46CE26BD24B900CD820C /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		FAFA46DA26BD250E00CD820C /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
-		FAFA46DF26BD253A00CD820C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		FAFA46E026BD253A00CD820C /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
-		FAFA46E926BD256B00CD820C /* AppDelegateRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateRouter.swift; sourceTree = "<group>"; };
+		FAFA46E926BD256B00CD820C /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
+		FAFA46EF26C0A80800CD820C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		FAFA46F026C0A80800CD820C /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
+		FAFA46FA26C0A82900CD820C /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		FAFA46FB26C0A82900CD820C /* CalendarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarViewController.xib; sourceTree = "<group>"; };
+		FAFA470B26C0BC8F00CD820C /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		FAFA470C26C0BC8F00CD820C /* DetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
+		FAFA472126C0C79100CD820C /* TabBarRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarRouter.swift; sourceTree = "<group>"; };
+		FAFA473A26C0DE1600CD820C /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		FAFA478826C20A4300CD820C /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		FAFA478D26C20B9700CD820C /* CalendarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,7 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				FAFA467126BD1F9D00CD820C /* AppDelegate.swift */,
-				FAFA46E926BD256B00CD820C /* AppDelegateRouter.swift */,
+				FAFA473A26C0DE1600CD820C /* AppCoordinator.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -208,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				FAFA46AD26BD23EE00CD820C /* Scene */,
+				FAFA470A26C0BC7D00CD820C /* Detail */,
 				FAFA46AE26BD23F400CD820C /* Utils */,
 			);
 			path = Presentation;
@@ -217,6 +234,8 @@
 			isa = PBXGroup;
 			children = (
 				FAFA46D926BD250200CD820C /* Main */,
+				FAFA46EE26C0A7EF00CD820C /* Home */,
+				FAFA46F926C0A81C00CD820C /* Calendar */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -242,8 +261,10 @@
 			isa = PBXGroup;
 			children = (
 				FAFA46B526BD243B00CD820C /* Router.swift */,
+				FAFA46E926BD256B00CD820C /* AppRouter.swift */,
 				FAFA46BD26BD245700CD820C /* NavigationRouter.swift */,
 				FAFA46C226BD246F00CD820C /* ModalNavigationRouter.swift */,
+				FAFA472126C0C79100CD820C /* TabBarRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -267,11 +288,38 @@
 		FAFA46D926BD250200CD820C /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				FAFA46DF26BD253A00CD820C /* MainViewController.swift */,
-				FAFA46E026BD253A00CD820C /* MainViewController.xib */,
 				FAFA46DA26BD250E00CD820C /* MainCoordinator.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		FAFA46EE26C0A7EF00CD820C /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				FAFA46EF26C0A80800CD820C /* HomeViewController.swift */,
+				FAFA46F026C0A80800CD820C /* HomeViewController.xib */,
+				FAFA478826C20A4300CD820C /* HomeCoordinator.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		FAFA46F926C0A81C00CD820C /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				FAFA46FA26C0A82900CD820C /* CalendarViewController.swift */,
+				FAFA46FB26C0A82900CD820C /* CalendarViewController.xib */,
+				FAFA478D26C20B9700CD820C /* CalendarCoordinator.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		FAFA470A26C0BC7D00CD820C /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				FAFA470B26C0BC8F00CD820C /* DetailViewController.swift */,
+				FAFA470C26C0BC8F00CD820C /* DetailViewController.xib */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -378,8 +426,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAFA467E26BD1FA400CD820C /* LaunchScreen.storyboard in Resources */,
-				FAFA46E226BD253A00CD820C /* MainViewController.xib in Resources */,
+				FAFA470E26C0BC8F00CD820C /* DetailViewController.xib in Resources */,
+				FAFA46FD26C0A82900CD820C /* CalendarViewController.xib in Resources */,
 				FAFA467B26BD1FA400CD820C /* Assets.xcassets in Resources */,
+				FAFA46F226C0A80800CD820C /* HomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,13 +456,19 @@
 			files = (
 				FAFA46CF26BD24B900CD820C /* UIView+Extension.swift in Sources */,
 				FAFA46DB26BD250E00CD820C /* MainCoordinator.swift in Sources */,
-				FAFA46EA26BD256B00CD820C /* AppDelegateRouter.swift in Sources */,
+				FAFA46EA26BD256B00CD820C /* AppRouter.swift in Sources */,
+				FAFA470D26C0BC8F00CD820C /* DetailViewController.swift in Sources */,
+				FAFA473B26C0DE1600CD820C /* AppCoordinator.swift in Sources */,
+				FAFA478926C20A4300CD820C /* HomeCoordinator.swift in Sources */,
+				FAFA46FC26C0A82900CD820C /* CalendarViewController.swift in Sources */,
 				FAFA46C326BD246F00CD820C /* ModalNavigationRouter.swift in Sources */,
 				FAFA46B626BD243B00CD820C /* Router.swift in Sources */,
+				FAFA46F126C0A80800CD820C /* HomeViewController.swift in Sources */,
 				FAFA46C826BD248300CD820C /* Coordinator.swift in Sources */,
 				FAFA467226BD1F9D00CD820C /* AppDelegate.swift in Sources */,
 				FAFA46BE26BD245700CD820C /* NavigationRouter.swift in Sources */,
-				FAFA46E126BD253A00CD820C /* MainViewController.swift in Sources */,
+				FAFA472226C0C79100CD820C /* TabBarRouter.swift in Sources */,
+				FAFA478E26C20B9700CD820C /* CalendarCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

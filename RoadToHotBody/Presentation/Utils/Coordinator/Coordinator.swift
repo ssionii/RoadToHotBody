@@ -5,7 +5,7 @@
 //  Created by  60117280 on 2021/08/06.
 //
 
-import Foundation
+import UIKit
 
 public protocol Coordinator: class {
 	var children: [Coordinator] { get set }
