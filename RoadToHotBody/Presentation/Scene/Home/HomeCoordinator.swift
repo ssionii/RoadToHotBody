@@ -26,9 +26,12 @@ class HomeCoordinator: Coordinator {
 	}
 	
 	private func presentDetail(name: String) {
-		let viewModel = DetailViewModel(muscleName: name)
-		let detailViewController = DetailViewController(viewModel: viewModel)
-		router.present(detailViewController, animated: true)
+//		let viewModel = DetailViewModel(muscleName: name)
+//		let detailViewController = DetailViewController(viewModel: viewModel)
+//		router.present(detailViewController, animated: true)
+        
+        let coordinator = DetailCoordinator(router: router, muscleName: name)
+        presentChild(coordinator, animated: true)
 	}
 }
 

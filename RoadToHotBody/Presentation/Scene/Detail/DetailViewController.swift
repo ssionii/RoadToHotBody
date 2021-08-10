@@ -9,6 +9,10 @@ import RxSwift
 import RxCocoa
 import JJFloatingActionButton
 
+protocol DetailVCCoordinatorDelegate: AnyObject {
+    func memoButtonClicked(_ parentViewController: UIViewController)
+}
+
 class DetailViewController: UIViewController {
 
 	@IBOutlet weak var tableView: UITableView!
@@ -24,7 +28,9 @@ class DetailViewController: UIViewController {
         let button = JJFloatingActionButton()
         button.buttonColor = UIColor(named: "mainColor") ?? .white
         
-        button.addItem(title: "", image: UIImage(systemName: "pencil"), action: nil)
+        button.addItem(title: "", image: UIImage(systemName: "pencil")) { _ in
+            self.coordinatorDelegate?.memoButtonClicked(self)
+        }
         button.addItem(title: "", image: UIImage(systemName: "photo"), action: nil)
         button.addItem(title: "", image: UIImage(systemName: "video"), action: nil)
         
@@ -32,6 +38,7 @@ class DetailViewController: UIViewController {
     }()
 	
 	private let viewModel: DetailViewModel
+    weak var coordinatorDelegate: DetailVCCoordinatorDelegate?
 	private let disposeBag = DisposeBag()
 	
 	private var contents: [Content] = [] {
