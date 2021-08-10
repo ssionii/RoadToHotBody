@@ -23,7 +23,7 @@ class HomeViewController: UIViewController {
 
 	var coordinatorDelegate: HomeVCCoordinatorDelegate?
 
-	private let muscleList = ["A", "B"]
+	private let muscleList = ["Title1", "Title2"]
 	
 	init() {
 		super.init(nibName: "HomeViewController", bundle: nil)

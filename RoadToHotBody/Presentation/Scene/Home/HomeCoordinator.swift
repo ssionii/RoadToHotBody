@@ -25,9 +25,9 @@ class HomeCoordinator: Coordinator {
 		router.present(homeViewController, animated: false)
 	}
 	
-	
 	private func presentDetail(name: String) {
-		let detailViewController = DetailViewController(name: name)
+		let viewModel = DetailViewModel(muscleName: name)
+		let detailViewController = DetailViewController(viewModel: viewModel)
 		router.present(detailViewController, animated: true)
 	}
 }
