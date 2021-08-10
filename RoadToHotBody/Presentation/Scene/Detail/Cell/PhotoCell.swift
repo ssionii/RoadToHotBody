@@ -29,6 +29,10 @@ class PhotoCell: UITableViewCell {
 		
         photoView.roundCorners([.topLeft, .topRight, .bottomLeft, .bottomRight], radius: 10)
         photoView.layer.masksToBounds = true
+        
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = .clear
+        selectedBackgroundView = backgroundView
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

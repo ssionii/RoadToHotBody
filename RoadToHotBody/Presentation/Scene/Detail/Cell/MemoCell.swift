@@ -19,6 +19,10 @@ class MemoCell: UITableViewCell {
 		
 		memoBackgroundView.roundCorners([.topLeft, .topRight, .bottomLeft, .bottomRight], radius: 10)
 		memoBackgroundView.backgroundColor = .systemGray6
+        
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = .clear
+        selectedBackgroundView = backgroundView
     }
 	
 	func bind(text: String?) {
