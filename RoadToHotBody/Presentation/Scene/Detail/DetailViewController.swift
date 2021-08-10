@@ -89,11 +89,18 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
 			return cell
 		case .Photo:
 			let cell = tableView.dequeueReusableCell(withIdentifier: PhotoCell.ID, for: indexPath) as! PhotoCell
-			cell.bind(url: contents[indexPath.row].url)
+            cell.delegate = self
+            cell.bind(url: contents[indexPath.row].url, index: indexPath)
 			return cell
 		default:
 			let cell = tableView.dequeueReusableCell(withIdentifier: MemoCell.ID, for: indexPath)
 			return cell
 		}
 	}
+}
+
+extension DetailViewController: PhotoCellDelegate {
+    func resizeImage(indexPath: IndexPath) {
+        self.tableView.reloadRows(at: [indexPath], with: .none)
+    }
 }
