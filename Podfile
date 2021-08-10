@@ -10,6 +10,7 @@ target 'RoadToHotBody' do
 pod 'RxSwift'
 pod 'RxCocoa'
 pod 'SDWebImage'
+pod 'JJFloatingActionButton'
 
   target 'RoadToHotBodyTests' do
     inherit! :search_paths

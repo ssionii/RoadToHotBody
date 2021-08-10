@@ -7,6 +7,7 @@
 
 import RxSwift
 import RxCocoa
+import JJFloatingActionButton
 
 class DetailViewController: UIViewController {
 
@@ -18,6 +19,17 @@ class DetailViewController: UIViewController {
 		
 		return button
 	}()
+    
+    lazy var floatingButton: JJFloatingActionButton = {
+        let button = JJFloatingActionButton()
+        button.buttonColor = UIColor(named: "mainColor") ?? .white
+        
+        button.addItem(title: "", image: UIImage(systemName: "pencil"), action: nil)
+        button.addItem(title: "", image: UIImage(systemName: "photo"), action: nil)
+        button.addItem(title: "", image: UIImage(systemName: "video"), action: nil)
+        
+        return button
+    }()
 	
 	private let viewModel: DetailViewModel
 	private let disposeBag = DisposeBag()
@@ -48,6 +60,8 @@ class DetailViewController: UIViewController {
 	
 	private func configureUI() {
 		self.navigationItem.rightBarButtonItem = doExerciseButton
+        
+        floatingButton.display(inViewController: self)
 	}
 	
 	private func configureTableView() {
