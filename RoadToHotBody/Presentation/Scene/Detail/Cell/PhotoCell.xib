@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,9 +22,6 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RgP-cs-ypW">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="248"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="248" id="GCL-Hw-7l1"/>
-                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -47,7 +44,6 @@
             <connections>
                 <outlet property="photoBackgroundView" destination="ghx-D9-J2U" id="J3r-zZ-u3E"/>
                 <outlet property="photoView" destination="RgP-cs-ypW" id="mao-e6-clu"/>
-                <outlet property="photoViewHeight" destination="GCL-Hw-7l1" id="qtv-Kc-CJw"/>
             </connections>
             <point key="canvasLocation" x="140.57971014492756" y="227.67857142857142"/>
         </tableViewCell>

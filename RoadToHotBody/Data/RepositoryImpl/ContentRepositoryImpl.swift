@@ -16,6 +16,7 @@ class ContentRepository: ContentRepositoryProtocol {
 			Content(type: .Memo, text: "승모근 운동방법 1 \n승모근은 이렇게 한다. 으쓱으쓱호오오오잇 하아아아잇 \n줄바꿈 했다", url: nil),
 			Content(type: .Video, text: nil, url: ""),
 			Content(type: .Photo, text: nil, url: "https://img1.yna.co.kr/photo/cms/2020/04/29/15/PCM20200429000015005_P2.jpg"),
+			Content(type: .Photo, text: nil, url: "http://img.segye.com/content/image/2021/06/18/20210618504877.jpg"),
 			Content(type: .Memo, text: "승모근 운동방법 2 메롱메롱 메에롱", url: nil),
             Content(type: .Memo, text: "승모근 운동방법 3 오랜만에 마라탕 먹어서 그런지 배아프네;", url: nil),
             Content(type: .Memo, text: "승모근 운동방법 4", url: nil)

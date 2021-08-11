@@ -45,6 +45,8 @@
 		FAFA47C726C24ED800CD820C /* ContentRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA47C626C24ED800CD820C /* ContentRepositoryImpl.swift */; };
 		FAFA47DF26C2665D00CD820C /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA47DD26C2665C00CD820C /* PhotoCell.swift */; };
 		FAFA47E026C2665D00CD820C /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAFA47DE26C2665C00CD820C /* PhotoCell.xib */; };
+		FAFA484526C3A77D00CD820C /* UITextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA484426C3A77D00CD820C /* UITextView+Extension.swift */; };
+		FAFA484A26C3ADBA00CD820C /* MemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA484926C3ADBA00CD820C /* MemoViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +117,8 @@
 		FAFA47C626C24ED800CD820C /* ContentRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentRepositoryImpl.swift; sourceTree = "<group>"; };
 		FAFA47DD26C2665C00CD820C /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		FAFA47DE26C2665C00CD820C /* PhotoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCell.xib; sourceTree = "<group>"; };
+		FAFA484426C3A77D00CD820C /* UITextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extension.swift"; sourceTree = "<group>"; };
+		FAFA484926C3ADBA00CD820C /* MemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +177,7 @@
 			children = (
 				B541963026C2B27A00B2080A /* MemoViewController.swift */,
 				B541963126C2B27A00B2080A /* MemoViewController.xib */,
+				FAFA484926C3ADBA00CD820C /* MemoViewModel.swift */,
 				B541963426C2B29F00B2080A /* MemoCoordinator.swift */,
 			);
 			path = Memo;
@@ -362,6 +367,7 @@
 			isa = PBXGroup;
 			children = (
 				FAFA46CE26BD24B900CD820C /* UIView+Extension.swift */,
+				FAFA484426C3A77D00CD820C /* UITextView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -663,12 +669,14 @@
 				FAFA46CF26BD24B900CD820C /* UIView+Extension.swift in Sources */,
 				FAFA46DB26BD250E00CD820C /* MainCoordinator.swift in Sources */,
 				FAFA46EA26BD256B00CD820C /* AppRouter.swift in Sources */,
+				FAFA484A26C3ADBA00CD820C /* MemoViewModel.swift in Sources */,
 				FAFA470D26C0BC8F00CD820C /* DetailViewController.swift in Sources */,
 				FAFA473B26C0DE1600CD820C /* AppCoordinator.swift in Sources */,
 				FAFA47C226C24E4300CD820C /* ContentRepository.swift in Sources */,
 				FAFA478926C20A4300CD820C /* HomeCoordinator.swift in Sources */,
 				FAFA46FC26C0A82900CD820C /* CalendarViewController.swift in Sources */,
 				B541963726C2B2E400B2080A /* DetailCoordinator.swift in Sources */,
+				FAFA484526C3A77D00CD820C /* UITextView+Extension.swift in Sources */,
 				FAFA479B26C245E600CD820C /* MemoCell.swift in Sources */,
 				FAFA46C326BD246F00CD820C /* ModalNavigationRouter.swift in Sources */,
 				B541963526C2B29F00B2080A /* MemoCoordinator.swift in Sources */,

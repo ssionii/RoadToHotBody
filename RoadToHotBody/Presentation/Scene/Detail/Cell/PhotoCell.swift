@@ -18,9 +18,6 @@ class PhotoCell: UITableViewCell {
 	
 	@IBOutlet weak var photoBackgroundView: UIView!
 	@IBOutlet weak var photoView: UIImageView!
-    @IBOutlet weak var photoViewHeight: NSLayoutConstraint!
-    
-    private var image: UIImage?
     
     weak var delegate: PhotoCellDelegate?
     
@@ -47,10 +44,6 @@ class PhotoCell: UITableViewCell {
 		}
 		
         photoView.sd_setImage(with: URL(string: url)) { _, _, _, _ in
-            guard let image = self.photoView.image else { return }
-            let height = (image.size.height * self.photoView.frame.width ) / image.size.width
-            
-            self.photoViewHeight.constant = height
             self.delegate?.resizeImage(indexPath: index)
         }
 	}

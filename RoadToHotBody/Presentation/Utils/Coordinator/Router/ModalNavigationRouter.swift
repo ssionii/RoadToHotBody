@@ -48,7 +48,7 @@ extension ModalNavigationRouter: Router {
 	}
 
 	private func addCloseButton(to viewController: UIViewController) {
-		viewController.navigationItem.rightBarButtonItem = UIBarButtonItem(
+		viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(
 			title: "닫기",
 			style: .plain,
 			target: self,
