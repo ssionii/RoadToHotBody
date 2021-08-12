@@ -11,9 +11,7 @@ import RxCocoa
 enum MemoType {
 	case Read
 	case Write
-	case Edit
 }
-
 
 class MemoViewModel {
 	struct Input {
@@ -29,64 +27,41 @@ class MemoViewModel {
 	private let fetchDetailContentUseCase = FetchDetailContentUseCase(repository:  DetailContentRepository())
 	private let saveDetailContentUseCase = SaveDetailContentUseCase(repository:  DetailContentRepository())
 	
-	let memoType: MemoType
-	private var index: Int?
+	var memoType: MemoType
+	private var content: Content?
 	
-	init(memoType: MemoType, contentIndex: Int?) {
+	init(memoType: MemoType, content: Content?) {
 		self.memoType = memoType
-		self.index = contentIndex
+		self.content = content
 	}
 	
 	func transfrom(input: Input) -> Output {
 		
-		switch memoType {
-		case .Read:
-			let text = self.text(input: input)
-			let isSaved = self.isSaved(input: input)
-			
-			return Output(text: text, isSaved: isSaved)
-		case .Write:
-			let isSaved = self.isSaved(input: input)
-			
-			return Output(text: nil, isSaved: isSaved)
-		case .Edit:
-			let text = self.text(input: input)
-			let isSaved = self.isSaved(input: input)
-		
-			return Output(text: text, isSaved: isSaved)
-		}
-	}
-	
-	private func isSaved(input: Input) -> Observable<Bool> {
-		return input.confirmButtonClicked
+		let isSaved = input.confirmButtonClicked
 			.withLatestFrom(input.text)
 			.compactMap { $0 }
 			.flatMap({ text -> Observable<SaveDetailContentUseCaseModels.Response> in
 				self.saveDetailContentUseCase.execute(
-					request: SaveDetailContentUseCaseModels.Request(text: text)
+					request: SaveDetailContentUseCaseModels.Request(index: self.content?.index, text: text)
 				)
 			})
 			.map { response -> Bool in
 				return response.isSuccess
 			}
-	}
-	
-	private func text(input: Input) -> Driver<String> {
-		guard let index = self.index
-		else {
-			print("memo index 없음")
-			return Driver.of("")
-		}
 		
-		return fetchDetailContentUseCase.execute(
-			request: FetchDetailContentUseCaseModels.Request(
-				index: index
-			)
-		)
-		.map { response -> String in
-			self.index = response.content.index
-			return response.content.text ?? ""
+		switch memoType {
+		case .Read:
+			let text = Observable.of(self.content)
+				.compactMap { $0 }
+				.map { content -> String? in
+					content.text
+				}
+				.compactMap { $0 }
+				.asDriver(onErrorJustReturn: "")
+			
+			return Output(text: text, isSaved: isSaved)
+		case .Write:
+			return Output(text: nil, isSaved: isSaved)
 		}
-		.asDriver(onErrorJustReturn: "")
 	}
 }

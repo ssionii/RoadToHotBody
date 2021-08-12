@@ -15,6 +15,7 @@ protocol SaveDetailContentUseCaseProtocol {
 
 struct SaveDetailContentUseCaseModels {
 	struct Request {
+		var index: Int?
 		var text: String
 	}
 	

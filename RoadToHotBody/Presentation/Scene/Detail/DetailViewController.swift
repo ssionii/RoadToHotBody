@@ -11,6 +11,7 @@ import JJFloatingActionButton
 
 protocol DetailVCCoordinatorDelegate: AnyObject {
     func writeMemoButtonClicked(_ parentViewController: DetailViewController)
+	func readMemo(_ parentViewController: DetailViewController, content: Content)
 }
 
 class DetailViewController: UIViewController {
@@ -122,6 +123,18 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
 		default:
 			let cell = tableView.dequeueReusableCell(withIdentifier: MemoCell.ID, for: indexPath)
 			return cell
+		}
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		switch contents[indexPath.row].type {
+		case .Memo:
+			self.coordinatorDelegate?.readMemo(self, content: contents[indexPath.row])
+			break
+		case .Photo:
+			break
+		default:
+			break
 		}
 	}
 }

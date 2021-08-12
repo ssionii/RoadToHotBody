@@ -12,18 +12,18 @@ class MemoCoordinator: Coordinator {
     var router: Router
 	
 	private let memoType: MemoType
-	private let contentIndex: Int?
+	private let content: Content?
     
-	init(router: Router, memoType: MemoType, contentIndex: Int? = nil) {
+	init(router: Router, memoType: MemoType, content: Content? = nil) {
         self.router = router
 		
 		self.memoType = memoType
-		self.contentIndex = contentIndex
+		self.content = content
     }
     
     func present(animated: Bool, onDismissed: (() -> Void)?) {
 		
-		let memoViewModel = MemoViewModel(memoType: memoType, contentIndex: contentIndex)
+		let memoViewModel = MemoViewModel(memoType: memoType, content: content)
         let memoViewController = MemoViewController(viewModel: memoViewModel)
 		memoViewController.coordinatorDelegate = self
 		router.present(memoViewController, animated: true, onDismissed: onDismissed)

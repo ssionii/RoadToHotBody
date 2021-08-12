@@ -25,9 +25,9 @@ class DetailCoordinator: Coordinator {
         router.present(detailViewController, animated: true)
     }
     
-	private func presentMemo(parentViewController: DetailViewController, memoType: MemoType, contentIndex: Int?) {
-        let router = ModalNavigationRouter(parentViewController: parentViewController, modalPresentationStyle: .pageSheet)
-        let coordinator = MemoCoordinator(router: router, memoType: memoType, contentIndex: contentIndex)
+	private func presentMemo(parentViewController: DetailViewController, memoType: MemoType, content: Content?) {
+		let router = ModalNavigationRouter(parentViewController: parentViewController, modalPresentationStyle: .automatic)
+        let coordinator = MemoCoordinator(router: router, memoType: memoType, content: content)
 
 		presentChild(coordinator, animated: true, onDismissed: {
 			parentViewController.reloadView.onNext(())
@@ -36,7 +36,11 @@ class DetailCoordinator: Coordinator {
 }
 
 extension DetailCoordinator: DetailVCCoordinatorDelegate {
-    func writeMemoButtonClicked(_ parentViewController: DetailViewController) {
-		self.presentMemo(parentViewController: parentViewController, memoType: .Write, contentIndex: nil)
+	func writeMemoButtonClicked(_ parentViewController: DetailViewController) {
+		self.presentMemo(parentViewController: parentViewController, memoType: .Write, content: nil)
     }
+	
+	func readMemo(_ parentViewController: DetailViewController, content: Content) {
+		self.presentMemo(parentViewController: parentViewController, memoType: .Read, content: content)
+	}
 }

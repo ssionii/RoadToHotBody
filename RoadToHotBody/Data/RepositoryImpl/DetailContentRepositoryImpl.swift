@@ -12,7 +12,7 @@ class DetailContentRepository: DetailContentRepositoryProtocol {
 	// dummy data
 	let detailContents = [
 		Content(index: 0, type: .Memo, text: "승모근 운동방법 1 \n승모근은 이렇게 한다. 으쓱으쓱호오오오잇 하아아아잇 \n줄바꿈 했다"),
-		Content(index: 1, type: .Video, text: ""),
+		Content(index: 1, type: .Memo, text: "야야 ~"),
 		Content(index: 2, type: .Photo, text: "http://img.segye.com/content/image/2021/06/18/20210618504877.jpg"),
 		Content(index: 3, type: .Photo, text: "https://img1.yna.co.kr/photo/cms/2020/04/29/15/PCM20200429000015005_P2.jpg"),
 		Content(index: 4, type: .Memo, text: "승모근 운동방법 2 메롱메롱 메에롱"),
@@ -38,8 +38,19 @@ class DetailContentRepository: DetailContentRepositoryProtocol {
 		// TODO: 저장
 		print(request.text)
 		
-		let response = SaveDetailContentUseCaseModels.Response(isSuccess: true)
-		return Observable.of(response)
+		if let index = request.index {
+			// 업데이트
+			
+			let response = SaveDetailContentUseCaseModels.Response(isSuccess: true)
+			return Observable.of(response)
+		} else {
+			// 새로 저장
+			
+			let response = SaveDetailContentUseCaseModels.Response(isSuccess: true)
+			return Observable.of(response)
+		}
+		
+		
 	}
 	
 	

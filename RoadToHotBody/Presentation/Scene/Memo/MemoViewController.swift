@@ -55,8 +55,7 @@ class MemoViewController: UIViewController {
 	private func configureUI() {
 		self.navigationItem.rightBarButtonItem = confirmButton
 		
-		if viewModel.memoType == MemoType.Write ||
-		   viewModel.memoType == MemoType.Edit {
+		if viewModel.memoType == MemoType.Write {
 			configureTextView()
 		}
 	}
@@ -91,30 +90,17 @@ class MemoViewController: UIViewController {
 	private func keyboardNotification() {
 		NotificationCenter.default.addObserver(
 			self,
-			selector: #selector(keyboardWillShow),
-			name: UIResponder.keyboardWillShowNotification,
-			object: nil
-		)
-		
-		NotificationCenter.default.addObserver(
-			self,
-			selector: #selector(keyboardWillHide),
-			name: UIResponder.keyboardWillHideNotification,
+			selector: #selector(keyboardWillChangeFrameNotification),
+			name: UIResponder.keyboardWillChangeFrameNotification,
 			object: nil
 		)
 	}
-	
-	@objc private func keyboardWillShow(_ notification: Notification) {
+
+	@objc private func keyboardWillChangeFrameNotification(_ notification: Notification) {
 		if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
 			let keyboardHeight = keyboardFrame.cgRectValue.height
-			textViewBottomConstraint.constant += keyboardHeight
-		}
-	}
-	
-	@objc private func keyboardWillHide(_ notification: Notification) {
-		if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-			let keyboardHeight = keyboardFrame.cgRectValue.height
-			textViewBottomConstraint.constant -= keyboardHeight
+			
+			textViewBottomConstraint.constant = keyboardHeight
 		}
 	}
 }
