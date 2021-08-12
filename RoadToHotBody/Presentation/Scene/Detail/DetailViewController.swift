@@ -10,7 +10,7 @@ import RxCocoa
 import JJFloatingActionButton
 
 protocol DetailVCCoordinatorDelegate: AnyObject {
-    func memoButtonClicked(_ parentViewController: UIViewController)
+    func writeMemoButtonClicked(_ parentViewController: DetailViewController)
 }
 
 class DetailViewController: UIViewController {
@@ -29,7 +29,7 @@ class DetailViewController: UIViewController {
         button.buttonColor = UIColor(named: "mainColor") ?? .white
         
         button.addItem(title: "", image: UIImage(systemName: "pencil")) { _ in
-            self.coordinatorDelegate?.memoButtonClicked(self)
+            self.coordinatorDelegate?.writeMemoButtonClicked(self)
         }
         button.addItem(title: "", image: UIImage(systemName: "photo"), action: nil)
         button.addItem(title: "", image: UIImage(systemName: "video"), action: nil)
@@ -40,6 +40,8 @@ class DetailViewController: UIViewController {
 	private let viewModel: DetailViewModel
     weak var coordinatorDelegate: DetailVCCoordinatorDelegate?
 	private let disposeBag = DisposeBag()
+	
+	let reloadView = ReplaySubject<Void>.create(bufferSize: 1)
 	
 	private var contents: [Content] = [] {
 		didSet {
@@ -59,7 +61,9 @@ class DetailViewController: UIViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-
+		
+		reloadView.onNext(())
+		
 		configureUI()
 		configureTableView()
 		bind()
@@ -80,7 +84,9 @@ class DetailViewController: UIViewController {
 	}
 	
 	private func bind() {
-		let output = viewModel.transform(input: DetailViewModel.Input())
+		let output = viewModel.transform(
+			input: DetailViewModel.Input(reloadView: reloadView.asObserver())
+		)
 		
 		output.muscleName
 			.drive(self.navigationItem.rx.title)
@@ -111,7 +117,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
 		case .Photo:
 			let cell = tableView.dequeueReusableCell(withIdentifier: PhotoCell.ID, for: indexPath) as! PhotoCell
             cell.delegate = self
-            cell.bind(url: contents[indexPath.row].url, index: indexPath)
+            cell.bind(url: contents[indexPath.row].text, index: indexPath)
 			return cell
 		default:
 			let cell = tableView.dequeueReusableCell(withIdentifier: MemoCell.ID, for: indexPath)

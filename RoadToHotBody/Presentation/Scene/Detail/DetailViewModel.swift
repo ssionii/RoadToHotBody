@@ -10,7 +10,7 @@ import RxCocoa
 
 class DetailViewModel {
 	struct Input {
-		
+		var reloadView: Observable<Void>
 	}
 	
 	struct Output {
@@ -19,7 +19,7 @@ class DetailViewModel {
 	}
 	
 	// TODO: DI
-	let fetchDetailContentsUseCase = FetchDetailContentUseCase(repository: ContentRepository())
+	let fetchDetailContentsUseCase = FetchDetailContentsUseCase(repository: DetailContentRepository())
 	
 	private var muscleName: String
 	
@@ -32,12 +32,15 @@ class DetailViewModel {
 		let name = Observable.of(muscleName)
 			.asDriver(onErrorJustReturn: "")
 		
-		let contents =  self.fetchDetailContentsUseCase.execute(
-			request: FetchDetailContentsUseCaseModels.Request(muscleName: self.muscleName)
-		)
-		.map { response -> [Content]? in
-			response.contents
-		}
+		let contents = input.reloadView
+			.flatMap { _ -> Observable<FetchDetailContentsUseCaseModels.Response> in
+				self.fetchDetailContentsUseCase.execute(
+					request: FetchDetailContentsUseCaseModels.Request(muscleName: self.muscleName)
+				)
+			}
+			.map { response -> [Content]? in
+				response.contents
+			}
 		
 		return Output(muscleName: name, contents: contents)
 	}

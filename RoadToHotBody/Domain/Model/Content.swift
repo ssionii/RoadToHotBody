@@ -8,9 +8,9 @@
 import Foundation
 
 struct Content {
+	let index: Int
 	let type: ContentType		// 콘텐츠 타입
-	let text: String?			// 텍스트 (메모, 운동 기록)
-	let url: String?				// 사진, 비디오 url
+	let text: String?			// 내용
 }
 
 enum ContentType {

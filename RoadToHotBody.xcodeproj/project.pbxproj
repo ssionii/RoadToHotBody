@@ -41,12 +41,14 @@
 		FAFA47A426C246FE00CD820C /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA47A326C246FE00CD820C /* Content.swift */; };
 		FAFA47A926C2488500CD820C /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA47A826C2488500CD820C /* DetailViewModel.swift */; };
 		FAFA47BA26C24D5500CD820C /* FetchDetailContentsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA47B926C24D5500CD820C /* FetchDetailContentsUseCase.swift */; };
-		FAFA47C226C24E4300CD820C /* ContentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA47C126C24E4300CD820C /* ContentRepository.swift */; };
-		FAFA47C726C24ED800CD820C /* ContentRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA47C626C24ED800CD820C /* ContentRepositoryImpl.swift */; };
+		FAFA47C226C24E4300CD820C /* DetailContentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA47C126C24E4300CD820C /* DetailContentRepository.swift */; };
+		FAFA47C726C24ED800CD820C /* DetailContentRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA47C626C24ED800CD820C /* DetailContentRepositoryImpl.swift */; };
 		FAFA47DF26C2665D00CD820C /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA47DD26C2665C00CD820C /* PhotoCell.swift */; };
 		FAFA47E026C2665D00CD820C /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAFA47DE26C2665C00CD820C /* PhotoCell.xib */; };
 		FAFA484526C3A77D00CD820C /* UITextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA484426C3A77D00CD820C /* UITextView+Extension.swift */; };
 		FAFA484A26C3ADBA00CD820C /* MemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA484926C3ADBA00CD820C /* MemoViewModel.swift */; };
+		FAFA484F26C3B2FD00CD820C /* SaveDetailContentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA484E26C3B2FD00CD820C /* SaveDetailContentUseCase.swift */; };
+		FAFA486626C3B90A00CD820C /* FetchDetailContentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA486526C3B90A00CD820C /* FetchDetailContentUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,12 +115,14 @@
 		FAFA47A326C246FE00CD820C /* Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Content.swift; sourceTree = "<group>"; };
 		FAFA47A826C2488500CD820C /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		FAFA47B926C24D5500CD820C /* FetchDetailContentsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDetailContentsUseCase.swift; sourceTree = "<group>"; };
-		FAFA47C126C24E4300CD820C /* ContentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentRepository.swift; sourceTree = "<group>"; };
-		FAFA47C626C24ED800CD820C /* ContentRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentRepositoryImpl.swift; sourceTree = "<group>"; };
+		FAFA47C126C24E4300CD820C /* DetailContentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailContentRepository.swift; sourceTree = "<group>"; };
+		FAFA47C626C24ED800CD820C /* DetailContentRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailContentRepositoryImpl.swift; sourceTree = "<group>"; };
 		FAFA47DD26C2665C00CD820C /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		FAFA47DE26C2665C00CD820C /* PhotoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCell.xib; sourceTree = "<group>"; };
 		FAFA484426C3A77D00CD820C /* UITextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extension.swift"; sourceTree = "<group>"; };
 		FAFA484926C3ADBA00CD820C /* MemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoViewModel.swift; sourceTree = "<group>"; };
+		FAFA484E26C3B2FD00CD820C /* SaveDetailContentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveDetailContentUseCase.swift; sourceTree = "<group>"; };
+		FAFA486526C3B90A00CD820C /* FetchDetailContentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDetailContentUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -266,7 +270,7 @@
 		FAFA46A726BD23B000CD820C /* RepositoryImpl */ = {
 			isa = PBXGroup;
 			children = (
-				FAFA47C626C24ED800CD820C /* ContentRepositoryImpl.swift */,
+				FAFA47C626C24ED800CD820C /* DetailContentRepositoryImpl.swift */,
 			);
 			path = RepositoryImpl;
 			sourceTree = "<group>";
@@ -284,7 +288,7 @@
 		FAFA46A926BD23C100CD820C /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				FAFA47C126C24E4300CD820C /* ContentRepository.swift */,
+				FAFA47C126C24E4300CD820C /* DetailContentRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -293,6 +297,8 @@
 			isa = PBXGroup;
 			children = (
 				FAFA47B926C24D5500CD820C /* FetchDetailContentsUseCase.swift */,
+				FAFA486526C3B90A00CD820C /* FetchDetailContentUseCase.swift */,
+				FAFA484E26C3B2FD00CD820C /* SaveDetailContentUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -666,13 +672,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAFA486626C3B90A00CD820C /* FetchDetailContentUseCase.swift in Sources */,
 				FAFA46CF26BD24B900CD820C /* UIView+Extension.swift in Sources */,
 				FAFA46DB26BD250E00CD820C /* MainCoordinator.swift in Sources */,
 				FAFA46EA26BD256B00CD820C /* AppRouter.swift in Sources */,
 				FAFA484A26C3ADBA00CD820C /* MemoViewModel.swift in Sources */,
 				FAFA470D26C0BC8F00CD820C /* DetailViewController.swift in Sources */,
 				FAFA473B26C0DE1600CD820C /* AppCoordinator.swift in Sources */,
-				FAFA47C226C24E4300CD820C /* ContentRepository.swift in Sources */,
+				FAFA47C226C24E4300CD820C /* DetailContentRepository.swift in Sources */,
 				FAFA478926C20A4300CD820C /* HomeCoordinator.swift in Sources */,
 				FAFA46FC26C0A82900CD820C /* CalendarViewController.swift in Sources */,
 				B541963726C2B2E400B2080A /* DetailCoordinator.swift in Sources */,
@@ -681,9 +688,10 @@
 				FAFA46C326BD246F00CD820C /* ModalNavigationRouter.swift in Sources */,
 				B541963526C2B29F00B2080A /* MemoCoordinator.swift in Sources */,
 				FAFA46B626BD243B00CD820C /* Router.swift in Sources */,
+				FAFA484F26C3B2FD00CD820C /* SaveDetailContentUseCase.swift in Sources */,
 				FAFA46F126C0A80800CD820C /* HomeViewController.swift in Sources */,
 				FAFA46C826BD248300CD820C /* Coordinator.swift in Sources */,
-				FAFA47C726C24ED800CD820C /* ContentRepositoryImpl.swift in Sources */,
+				FAFA47C726C24ED800CD820C /* DetailContentRepositoryImpl.swift in Sources */,
 				FAFA467226BD1F9D00CD820C /* AppDelegate.swift in Sources */,
 				FAFA47A926C2488500CD820C /* DetailViewModel.swift in Sources */,
 				FAFA46BE26BD245700CD820C /* NavigationRouter.swift in Sources */,

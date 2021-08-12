@@ -6,14 +6,11 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 protocol MemoVCCoordinatorDelegate: class {
-	
-}
-
-enum MemoType {
-	case Read
-	case Edit
+	func dismissMemo(isSaved: Bool)
 }
 
 class MemoViewController: UIViewController {
@@ -26,15 +23,19 @@ class MemoViewController: UIViewController {
 			title: "완료",
 			style: .plain,
 			target: self,
-			action: #selector(confirmButtonClicked)
+			action: nil
 		)
 		return button
 	}()
 	
-	private var memoType: MemoType
+	private let viewModel: MemoViewModel
+	weak var coordinatorDelegate: MemoVCCoordinatorDelegate?
 	
-	init(memoType: MemoType) {
-		self.memoType = memoType
+	private let disposeBag = DisposeBag()
+	private let tapButton = PublishSubject<Void>()
+	
+	init(viewModel: MemoViewModel) {
+		self.viewModel = viewModel
 		
 		super.init(nibName: "MemoViewController", bundle: nil)
 	}
@@ -48,14 +49,37 @@ class MemoViewController: UIViewController {
         
 		configureUI()
 		keyboardNotification()
+		bind()
     }
 	
 	private func configureUI() {
 		self.navigationItem.rightBarButtonItem = confirmButton
 		
-		if memoType == MemoType.Edit {
+		if viewModel.memoType == MemoType.Write ||
+		   viewModel.memoType == MemoType.Edit {
 			configureTextView()
 		}
+	}
+	
+	private func bind() {
+		
+		let output = viewModel.transfrom(
+			input: MemoViewModel.Input(
+				confirmButtonClicked: confirmButton.rx.tap.asObservable(),
+				text: textView.rx.text.asObservable()
+			)
+		)
+		
+		output.text?
+			.drive(textView.rx.text)
+			.disposed(by: disposeBag)
+		
+		output.isSaved
+			.withUnretained(self)
+			.subscribe(onNext: { owner, isSaved in
+				owner.coordinatorDelegate?.dismissMemo(isSaved: isSaved)
+			})
+			.disposed(by: disposeBag)
 	}
 	
 	private func configureTextView() {
@@ -78,18 +102,6 @@ class MemoViewController: UIViewController {
 			name: UIResponder.keyboardWillHideNotification,
 			object: nil
 		)
-	}
-	
-	@objc private func confirmButtonClicked() {
-		
-		switch memoType {
-		case .Read:
-			// update
-			break
-		case .Edit:
-			// 새로 저장
-			break
-		}
 	}
 	
 	@objc private func keyboardWillShow(_ notification: Notification) {
