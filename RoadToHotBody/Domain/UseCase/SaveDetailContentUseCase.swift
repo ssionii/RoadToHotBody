@@ -26,9 +26,9 @@ struct SaveDetailContentUseCaseModels {
 
 class SaveDetailContentUseCase: SaveDetailContentUseCaseProtocol {
 	
-	private let detailContentRepository: DetailContentRepositoryProtocol
+	private let detailContentRepository: TrainingDetailRepositoryProtocol
 	
-	init(repository: DetailContentRepositoryProtocol) {
+	init(repository: TrainingDetailRepositoryProtocol) {
 		self.detailContentRepository = repository
 	}
 	

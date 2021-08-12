@@ -13,9 +13,9 @@ struct Content {
 	let text: String?			// 내용
 }
 
-enum ContentType {
-	case Memo
-	case Exercise
-	case Photo
-	case Video
+enum ContentType: Int {
+	case Memo = 0
+	case Photo = 1
+	case Video = 2
+	case Exercise = 3
 }

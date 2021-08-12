@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class AppCoordinator: Coordinator {
 	var children: [Coordinator] = []

@@ -19,7 +19,7 @@ class DetailViewModel {
 	}
 	
 	// TODO: DI
-	let fetchDetailContentsUseCase = FetchDetailContentsUseCase(repository: DetailContentRepository())
+	let fetchDetailContentsUseCase = FetchDetailContentsUseCase(repository: TrainingDetailRepository(dataSource: TrainingDetailDataSource(trainingDetailCoreData: TrainingDetailCoreData())))
 	
 	private var muscleName: String
 	

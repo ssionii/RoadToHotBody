@@ -24,8 +24,8 @@ class MemoViewModel {
 		var isSaved: Observable<Bool>
 	}
 	
-	private let fetchDetailContentUseCase = FetchDetailContentUseCase(repository:  DetailContentRepository())
-	private let saveDetailContentUseCase = SaveDetailContentUseCase(repository:  DetailContentRepository())
+	private let fetchDetailContentUseCase = FetchDetailContentUseCase(repository: TrainingDetailRepository(dataSource: TrainingDetailDataSource(trainingDetailCoreData: TrainingDetailCoreData())))
+	private let saveDetailContentUseCase = SaveDetailContentUseCase(repository: TrainingDetailRepository(dataSource: TrainingDetailDataSource(trainingDetailCoreData: TrainingDetailCoreData())))
 	
 	var memoType: MemoType
 	private var content: Content?

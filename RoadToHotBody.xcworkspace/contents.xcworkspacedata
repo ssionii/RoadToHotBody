@@ -2,6 +2,18 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/a60117280/Desktop/ssionii/RoadToHotBody/RoadToHotBody/Data/CoreData/Extension/Training+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/a60117280/Desktop/ssionii/RoadToHotBody/RoadToHotBody/Data/CoreData/Extension/Training+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/a60117280/Desktop/ssionii/RoadToHotBody/RoadToHotBody/Data/CoreData/TrainingDetail+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/a60117280/Desktop/ssionii/RoadToHotBody/RoadToHotBody/Data/CoreData/TrainingDetail+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
       location = "group:RoadToHotBody.xcodeproj">
    </FileRef>
    <FileRef

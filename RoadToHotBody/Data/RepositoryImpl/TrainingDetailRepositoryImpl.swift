@@ -7,7 +7,7 @@
 
 import RxSwift
 
-class DetailContentRepository: DetailContentRepositoryProtocol {
+class TrainingDetailRepository: TrainingDetailRepositoryProtocol {
 	
 	// dummy data
 	let detailContents = [
@@ -20,11 +20,18 @@ class DetailContentRepository: DetailContentRepositoryProtocol {
 		Content(index: 6, type: .Memo, text: "승모근 운동방법 4")
 	]
 	
+	private let trainingDetailDataSource: TrainingDetailDataSourceProtocol
+	
+	init(dataSource: TrainingDetailDataSourceProtocol) {
+		self.trainingDetailDataSource = dataSource
+	}
+	
 	func fetchDetailContents(request: FetchDetailContentsUseCaseModels.Request) -> Observable<FetchDetailContentsUseCaseModels.Response> {
 		
-		let response = FetchDetailContentsUseCaseModels.Response(contents: detailContents)
-		
-		return Observable.of(response)
+		return trainingDetailDataSource.fetchDetailContents()
+			.asObservable().map { contents -> FetchDetailContentsUseCaseModels.Response in
+				return FetchDetailContentsUseCaseModels.Response(contents: contents)
+			}
 	}
 	
 	func fetchDetailContent(request: FetchDetailContentUseCaseModels.Request) -> Observable<FetchDetailContentUseCaseModels.Response> {

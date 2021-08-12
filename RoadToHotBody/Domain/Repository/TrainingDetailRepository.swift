@@ -7,7 +7,7 @@
 
 import RxSwift
 
-protocol DetailContentRepositoryProtocol {
+protocol TrainingDetailRepositoryProtocol {
 	func fetchDetailContents(
 		request: FetchDetailContentsUseCaseModels.Request
 	) -> Observable<FetchDetailContentsUseCaseModels.Response>
