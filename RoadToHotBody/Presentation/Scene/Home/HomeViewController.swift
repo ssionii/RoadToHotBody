@@ -6,26 +6,36 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 protocol HomeVCCoordinatorDelegate: class {
-	func buttonClicked(name: String)
+	func buttonClicked(muscle: Muscle)
 }
 
 class HomeViewController: UIViewController {
 	
 	@IBAction func AButtonClicked(_ sender: Any) {
-		self.coordinatorDelegate?.buttonClicked(name: muscleList[0])
+		self.coordinatorDelegate?.buttonClicked(muscle: muscleList[0])
 	}
 	
 	@IBAction func BButtonClicked(_ sender: Any) {
-		self.coordinatorDelegate?.buttonClicked(name: muscleList[1])
+		self.coordinatorDelegate?.buttonClicked(muscle: muscleList[1])
 	}
 
+	private let viewModel: HomeViewModel
 	var coordinatorDelegate: HomeVCCoordinatorDelegate?
-
-	private let muscleList = ["Title1", "Title2"]
 	
-	init() {
+	private let disposeBag = DisposeBag()
+
+	private let muscleList = [
+		Muscle(index: 0, name: "승모근", direction: .Front),
+		Muscle(index: 1, name: "대퇴근", direction: .Both),
+	]
+	
+	init(viewModel: HomeViewModel) {
+		self.viewModel = viewModel
+		
 		super.init(nibName: "HomeViewController", bundle: nil)
 		
 		self.tabBarItem = UITabBarItem(title: "홈", image: UIImage(systemName: "house"), tag: 1)
@@ -38,9 +48,21 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		configureUI()
+		bind()
     }
 	
 	private func configureUI() {
 		self.navigationItem.title = "title"
+	}
+	
+	private func bind() {
+		let output = viewModel.transform(input: HomeViewModel.Input())
+		
+		output.muscles
+			.subscribe(onNext: { item in
+				
+				print(item)
+			})
+			.disposed(by: disposeBag)
 	}
 }

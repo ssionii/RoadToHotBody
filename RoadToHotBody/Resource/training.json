@@ -1,0 +1,64 @@
+{
+	"training": [
+	{
+		"index": 0,
+		"name": "삼각근",
+		"direction": 0
+	},
+	{
+		"index": 1,
+		"name": "승모근",
+		"direction": 0
+	},
+	{
+		"index": 2,
+		"name": "대흉근",
+		"direction": 1
+	},
+	{
+		"index": 3,
+		"name": "상완이두근",
+		"direction": 1
+	},
+	{
+		"index": 4,
+		"name": "상완삼두근",
+		"direction": 1
+	},
+	{
+		"index": 5,
+		"name": "완근",
+		"direction": 1
+	},
+	{
+		"index": 6,
+		"name": "복근",
+		"direction": 1
+	},
+	{
+		"index": 7,
+		"name": "대퇴근",
+		"direction": 1
+	},
+	{
+		"index": 8,
+		"name": "비복근",
+		"direction": 0
+	},
+	{
+		"index": 9,
+		"name": "광배근",
+		"direction": 2
+	},
+	{
+		"index": 10,
+		"name": "대둔근",
+		"direction": 2
+	},
+	{
+		"index": 11,
+		"name": "대퇴이두근",
+		"direction": 2
+	}
+	]
+}

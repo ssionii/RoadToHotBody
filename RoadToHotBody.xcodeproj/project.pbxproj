@@ -14,14 +14,20 @@
 		B541963526C2B29F00B2080A /* MemoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B541963426C2B29F00B2080A /* MemoCoordinator.swift */; };
 		B541963726C2B2E400B2080A /* DetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B541963626C2B2E400B2080A /* DetailCoordinator.swift */; };
 		C33815C08C875C8F95249255 /* Pods_RoadToHotBody.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E77AEEB598B06694A614A896 /* Pods_RoadToHotBody.framework */; };
-		FA0B49CE26C505310018DE69 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FA0B49CC26C505310018DE69 /* Model.xcdatamodeld */; };
-		FA0B49D826C509190018DE69 /* TrainingDetailDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B49D726C509190018DE69 /* TrainingDetailDataSource.swift */; };
-		FA0B49EC26C50A820018DE69 /* TrainingDetailCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B49EB26C50A820018DE69 /* TrainingDetailCoreData.swift */; };
-		FA0B49F226C50E520018DE69 /* TrainingDetail+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B49F026C50E520018DE69 /* TrainingDetail+CoreDataClass.swift */; };
-		FA0B49F326C50E520018DE69 /* TrainingDetail+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B49F126C50E520018DE69 /* TrainingDetail+CoreDataProperties.swift */; };
-		FA0B49FE26C511CE0018DE69 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B49FD26C511CE0018DE69 /* CoreDataError.swift */; };
-		FA0B4A0726C514C50018DE69 /* Training+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B4A0526C514C50018DE69 /* Training+CoreDataClass.swift */; };
-		FA0B4A0826C514C50018DE69 /* Training+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B4A0626C514C50018DE69 /* Training+CoreDataProperties.swift */; };
+		FA0B49D826C509190018DE69 /* DetailContentDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B49D726C509190018DE69 /* DetailContentDataSource.swift */; };
+		FA0B49EC26C50A820018DE69 /* TrainingDetailInternalDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B49EB26C50A820018DE69 /* TrainingDetailInternalDB.swift */; };
+		FA0B49FE26C511CE0018DE69 /* InternalDBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B49FD26C511CE0018DE69 /* InternalDBError.swift */; };
+		FAB2948026C5F785003788CA /* TrainingDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2947F26C5F785003788CA /* TrainingDetail.swift */; };
+		FAB2948826C5FBF5003788CA /* Muscle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2948726C5FBF5003788CA /* Muscle.swift */; };
+		FAB2948D26C5FE5C003788CA /* EmptyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2948C26C5FE5C003788CA /* EmptyError.swift */; };
+		FAB294A126C5FFA8003788CA /* TrainingInternalDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB294A026C5FFA8003788CA /* TrainingInternalDB.swift */; };
+		FAB294B126C6088B003788CA /* Training.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB294B026C6088B003788CA /* Training.swift */; };
+		FAB294BC26C60C8E003788CA /* MuscleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB294BB26C60C8E003788CA /* MuscleDataSource.swift */; };
+		FAB294C126C60D42003788CA /* MuscleRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB294C026C60D42003788CA /* MuscleRepositoryImpl.swift */; };
+		FAB294C626C60D74003788CA /* MuscleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB294C526C60D74003788CA /* MuscleRepository.swift */; };
+		FAB294CB26C60DC7003788CA /* FetchMusclesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB294CA26C60DC7003788CA /* FetchMusclesUseCase.swift */; };
+		FAB294D326C60F25003788CA /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB294D226C60F25003788CA /* HomeViewModel.swift */; };
+		FAB294D826C62003003788CA /* training.json in Resources */ = {isa = PBXBuildFile; fileRef = FAB294D726C62003003788CA /* training.json */; };
 		FAFA467226BD1F9D00CD820C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA467126BD1F9D00CD820C /* AppDelegate.swift */; };
 		FAFA467B26BD1FA400CD820C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAFA467A26BD1FA400CD820C /* Assets.xcassets */; };
 		FAFA467E26BD1FA400CD820C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAFA467C26BD1FA400CD820C /* LaunchScreen.storyboard */; };
@@ -49,8 +55,8 @@
 		FAFA47A426C246FE00CD820C /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA47A326C246FE00CD820C /* Content.swift */; };
 		FAFA47A926C2488500CD820C /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA47A826C2488500CD820C /* DetailViewModel.swift */; };
 		FAFA47BA26C24D5500CD820C /* FetchDetailContentsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA47B926C24D5500CD820C /* FetchDetailContentsUseCase.swift */; };
-		FAFA47C226C24E4300CD820C /* TrainingDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA47C126C24E4300CD820C /* TrainingDetailRepository.swift */; };
-		FAFA47C726C24ED800CD820C /* TrainingDetailRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA47C626C24ED800CD820C /* TrainingDetailRepositoryImpl.swift */; };
+		FAFA47C226C24E4300CD820C /* DetailContentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA47C126C24E4300CD820C /* DetailContentRepository.swift */; };
+		FAFA47C726C24ED800CD820C /* DetailContentRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA47C626C24ED800CD820C /* DetailContentRepositoryImpl.swift */; };
 		FAFA47DF26C2665D00CD820C /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA47DD26C2665C00CD820C /* PhotoCell.swift */; };
 		FAFA47E026C2665D00CD820C /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAFA47DE26C2665C00CD820C /* PhotoCell.xib */; };
 		FAFA484526C3A77D00CD820C /* UITextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA484426C3A77D00CD820C /* UITextView+Extension.swift */; };
@@ -90,14 +96,20 @@
 		E77AEEB598B06694A614A896 /* Pods_RoadToHotBody.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoadToHotBody.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED5047F09EC0E1FEEA2F521D /* Pods-RoadToHotBodyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoadToHotBodyTests.release.xcconfig"; path = "Target Support Files/Pods-RoadToHotBodyTests/Pods-RoadToHotBodyTests.release.xcconfig"; sourceTree = "<group>"; };
 		F0B6360B526218DC1B578501 /* Pods_RoadToHotBodyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoadToHotBodyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FA0B49CD26C505310018DE69 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		FA0B49D726C509190018DE69 /* TrainingDetailDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingDetailDataSource.swift; sourceTree = "<group>"; };
-		FA0B49EB26C50A820018DE69 /* TrainingDetailCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingDetailCoreData.swift; sourceTree = "<group>"; };
-		FA0B49F026C50E520018DE69 /* TrainingDetail+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "TrainingDetail+CoreDataClass.swift"; path = "/Users/a60117280/Desktop/ssionii/RoadToHotBody/RoadToHotBody/Data/CoreData/TrainingDetail+CoreDataClass.swift"; sourceTree = "<absolute>"; };
-		FA0B49F126C50E520018DE69 /* TrainingDetail+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "TrainingDetail+CoreDataProperties.swift"; path = "/Users/a60117280/Desktop/ssionii/RoadToHotBody/RoadToHotBody/Data/CoreData/TrainingDetail+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
-		FA0B49FD26C511CE0018DE69 /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
-		FA0B4A0526C514C50018DE69 /* Training+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Training+CoreDataClass.swift"; path = "/Users/a60117280/Desktop/ssionii/RoadToHotBody/RoadToHotBody/Data/CoreData/Extension/Training+CoreDataClass.swift"; sourceTree = "<absolute>"; };
-		FA0B4A0626C514C50018DE69 /* Training+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Training+CoreDataProperties.swift"; path = "/Users/a60117280/Desktop/ssionii/RoadToHotBody/RoadToHotBody/Data/CoreData/Extension/Training+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
+		FA0B49D726C509190018DE69 /* DetailContentDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailContentDataSource.swift; sourceTree = "<group>"; };
+		FA0B49EB26C50A820018DE69 /* TrainingDetailInternalDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingDetailInternalDB.swift; sourceTree = "<group>"; };
+		FA0B49FD26C511CE0018DE69 /* InternalDBError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalDBError.swift; sourceTree = "<group>"; };
+		FAB2947F26C5F785003788CA /* TrainingDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingDetail.swift; sourceTree = "<group>"; };
+		FAB2948726C5FBF5003788CA /* Muscle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Muscle.swift; sourceTree = "<group>"; };
+		FAB2948C26C5FE5C003788CA /* EmptyError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyError.swift; sourceTree = "<group>"; };
+		FAB294A026C5FFA8003788CA /* TrainingInternalDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingInternalDB.swift; sourceTree = "<group>"; };
+		FAB294B026C6088B003788CA /* Training.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Training.swift; sourceTree = "<group>"; };
+		FAB294BB26C60C8E003788CA /* MuscleDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleDataSource.swift; sourceTree = "<group>"; };
+		FAB294C026C60D42003788CA /* MuscleRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleRepositoryImpl.swift; sourceTree = "<group>"; };
+		FAB294C526C60D74003788CA /* MuscleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleRepository.swift; sourceTree = "<group>"; };
+		FAB294CA26C60DC7003788CA /* FetchMusclesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMusclesUseCase.swift; sourceTree = "<group>"; };
+		FAB294D226C60F25003788CA /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		FAB294D726C62003003788CA /* training.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = training.json; sourceTree = "<group>"; };
 		FAFA466E26BD1F9D00CD820C /* RoadToHotBody.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoadToHotBody.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAFA467126BD1F9D00CD820C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAFA467A26BD1FA400CD820C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -131,8 +143,8 @@
 		FAFA47A326C246FE00CD820C /* Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Content.swift; sourceTree = "<group>"; };
 		FAFA47A826C2488500CD820C /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		FAFA47B926C24D5500CD820C /* FetchDetailContentsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDetailContentsUseCase.swift; sourceTree = "<group>"; };
-		FAFA47C126C24E4300CD820C /* TrainingDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingDetailRepository.swift; sourceTree = "<group>"; };
-		FAFA47C626C24ED800CD820C /* TrainingDetailRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingDetailRepositoryImpl.swift; sourceTree = "<group>"; };
+		FAFA47C126C24E4300CD820C /* DetailContentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailContentRepository.swift; sourceTree = "<group>"; };
+		FAFA47C626C24ED800CD820C /* DetailContentRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailContentRepositoryImpl.swift; sourceTree = "<group>"; };
 		FAFA47DD26C2665C00CD820C /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		FAFA47DE26C2665C00CD820C /* PhotoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCell.xib; sourceTree = "<group>"; };
 		FAFA484426C3A77D00CD820C /* UITextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extension.swift"; sourceTree = "<group>"; };
@@ -203,49 +215,40 @@
 			path = Memo;
 			sourceTree = "<group>";
 		};
-		FA0B49CB26C505140018DE69 /* CoreData */ = {
+		FA0B49CB26C505140018DE69 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				FA0B49F726C50E590018DE69 /* Extension */,
-				FA0B49CC26C505310018DE69 /* Model.xcdatamodeld */,
-				FA0B49EB26C50A820018DE69 /* TrainingDetailCoreData.swift */,
+				FAB294A026C5FFA8003788CA /* TrainingInternalDB.swift */,
+				FA0B49EB26C50A820018DE69 /* TrainingDetailInternalDB.swift */,
 			);
-			path = CoreData;
+			path = Service;
 			sourceTree = "<group>";
 		};
 		FA0B49D626C508A90018DE69 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
-				FA0B49D726C509190018DE69 /* TrainingDetailDataSource.swift */,
+				FAB294BB26C60C8E003788CA /* MuscleDataSource.swift */,
+				FA0B49D726C509190018DE69 /* DetailContentDataSource.swift */,
 			);
 			path = DataSource;
-			sourceTree = "<group>";
-		};
-		FA0B49F726C50E590018DE69 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				FA0B4A0526C514C50018DE69 /* Training+CoreDataClass.swift */,
-				FA0B4A0626C514C50018DE69 /* Training+CoreDataProperties.swift */,
-				FA0B49F026C50E520018DE69 /* TrainingDetail+CoreDataClass.swift */,
-				FA0B49F126C50E520018DE69 /* TrainingDetail+CoreDataProperties.swift */,
-			);
-			path = Extension;
-			sourceTree = "<group>";
-		};
-		FA0B49FB26C511AE0018DE69 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				FA0B49FC26C511BC0018DE69 /* Error */,
-			);
-			path = Common;
 			sourceTree = "<group>";
 		};
 		FA0B49FC26C511BC0018DE69 /* Error */ = {
 			isa = PBXGroup;
 			children = (
-				FA0B49FD26C511CE0018DE69 /* CoreDataError.swift */,
+				FA0B49FD26C511CE0018DE69 /* InternalDBError.swift */,
+				FAB2948C26C5FE5C003788CA /* EmptyError.swift */,
 			);
 			path = Error;
+			sourceTree = "<group>";
+		};
+		FAB2946926C5F42D003788CA /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				FAB294B026C6088B003788CA /* Training.swift */,
+				FAB2947F26C5F785003788CA /* TrainingDetail.swift */,
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 		FAFA466526BD1F9D00CD820C = {
@@ -273,7 +276,6 @@
 		FAFA467026BD1F9D00CD820C /* RoadToHotBody */ = {
 			isa = PBXGroup;
 			children = (
-				FA0B49FB26C511AE0018DE69 /* Common */,
 				FAFA46A426BD237600CD820C /* App */,
 				FAFA46A526BD239200CD820C /* Resource */,
 				FAFA46A626BD23A300CD820C /* Data */,
@@ -317,6 +319,7 @@
 			children = (
 				FAFA467A26BD1FA400CD820C /* Assets.xcassets */,
 				FAFA467C26BD1FA400CD820C /* LaunchScreen.storyboard */,
+				FAB294D726C62003003788CA /* training.json */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -324,9 +327,11 @@
 		FAFA46A626BD23A300CD820C /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				FA0B49D626C508A90018DE69 /* DataSource */,
 				FAFA46A726BD23B000CD820C /* RepositoryImpl */,
-				FA0B49CB26C505140018DE69 /* CoreData */,
+				FA0B49D626C508A90018DE69 /* DataSource */,
+				FA0B49CB26C505140018DE69 /* Service */,
+				FAB2946926C5F42D003788CA /* Entity */,
+				FA0B49FC26C511BC0018DE69 /* Error */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -334,7 +339,8 @@
 		FAFA46A726BD23B000CD820C /* RepositoryImpl */ = {
 			isa = PBXGroup;
 			children = (
-				FAFA47C626C24ED800CD820C /* TrainingDetailRepositoryImpl.swift */,
+				FAB294C026C60D42003788CA /* MuscleRepositoryImpl.swift */,
+				FAFA47C626C24ED800CD820C /* DetailContentRepositoryImpl.swift */,
 			);
 			path = RepositoryImpl;
 			sourceTree = "<group>";
@@ -352,7 +358,8 @@
 		FAFA46A926BD23C100CD820C /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				FAFA47C126C24E4300CD820C /* TrainingDetailRepository.swift */,
+				FAB294C526C60D74003788CA /* MuscleRepository.swift */,
+				FAFA47C126C24E4300CD820C /* DetailContentRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -360,6 +367,7 @@
 		FAFA46AA26BD23C700CD820C /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				FAB294CA26C60DC7003788CA /* FetchMusclesUseCase.swift */,
 				FAFA47B926C24D5500CD820C /* FetchDetailContentsUseCase.swift */,
 				FAFA486526C3B90A00CD820C /* FetchDetailContentUseCase.swift */,
 				FAFA484E26C3B2FD00CD820C /* SaveDetailContentUseCase.swift */,
@@ -371,6 +379,7 @@
 			isa = PBXGroup;
 			children = (
 				FAFA47A326C246FE00CD820C /* Content.swift */,
+				FAB2948726C5FBF5003788CA /* Muscle.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -456,6 +465,7 @@
 				FAFA46EF26C0A80800CD820C /* HomeViewController.swift */,
 				FAFA46F026C0A80800CD820C /* HomeViewController.xib */,
 				FAFA478826C20A4300CD820C /* HomeCoordinator.swift */,
+				FAB294D226C60F25003788CA /* HomeViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -605,6 +615,7 @@
 				FAFA470E26C0BC8F00CD820C /* DetailViewController.xib in Resources */,
 				FAFA46FD26C0A82900CD820C /* CalendarViewController.xib in Resources */,
 				FAFA467B26BD1FA400CD820C /* Assets.xcassets in Resources */,
+				FAB294D826C62003003788CA /* training.json in Resources */,
 				B541963326C2B27A00B2080A /* MemoViewController.xib in Resources */,
 				FAFA46F226C0A80800CD820C /* HomeViewController.xib in Resources */,
 				FAFA479C26C245E600CD820C /* MemoCell.xib in Resources */,
@@ -736,37 +747,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA0B49D826C509190018DE69 /* TrainingDetailDataSource.swift in Sources */,
+				FAB2948826C5FBF5003788CA /* Muscle.swift in Sources */,
+				FA0B49D826C509190018DE69 /* DetailContentDataSource.swift in Sources */,
 				FAFA486626C3B90A00CD820C /* FetchDetailContentUseCase.swift in Sources */,
+				FAB294D326C60F25003788CA /* HomeViewModel.swift in Sources */,
 				FAFA46CF26BD24B900CD820C /* UIView+Extension.swift in Sources */,
 				FAFA46DB26BD250E00CD820C /* MainCoordinator.swift in Sources */,
+				FAB2948D26C5FE5C003788CA /* EmptyError.swift in Sources */,
 				FAFA46EA26BD256B00CD820C /* AppRouter.swift in Sources */,
+				FAB2948026C5F785003788CA /* TrainingDetail.swift in Sources */,
 				FAFA484A26C3ADBA00CD820C /* MemoViewModel.swift in Sources */,
 				FAFA470D26C0BC8F00CD820C /* DetailViewController.swift in Sources */,
-				FA0B4A0726C514C50018DE69 /* Training+CoreDataClass.swift in Sources */,
 				FAFA473B26C0DE1600CD820C /* AppCoordinator.swift in Sources */,
-				FAFA47C226C24E4300CD820C /* TrainingDetailRepository.swift in Sources */,
-				FA0B49EC26C50A820018DE69 /* TrainingDetailCoreData.swift in Sources */,
+				FAFA47C226C24E4300CD820C /* DetailContentRepository.swift in Sources */,
+				FAB294BC26C60C8E003788CA /* MuscleDataSource.swift in Sources */,
+				FAB294B126C6088B003788CA /* Training.swift in Sources */,
+				FA0B49EC26C50A820018DE69 /* TrainingDetailInternalDB.swift in Sources */,
 				FAFA478926C20A4300CD820C /* HomeCoordinator.swift in Sources */,
 				FAFA46FC26C0A82900CD820C /* CalendarViewController.swift in Sources */,
+				FAB294CB26C60DC7003788CA /* FetchMusclesUseCase.swift in Sources */,
 				B541963726C2B2E400B2080A /* DetailCoordinator.swift in Sources */,
 				FAFA484526C3A77D00CD820C /* UITextView+Extension.swift in Sources */,
 				FAFA479B26C245E600CD820C /* MemoCell.swift in Sources */,
 				FAFA46C326BD246F00CD820C /* ModalNavigationRouter.swift in Sources */,
 				B541963526C2B29F00B2080A /* MemoCoordinator.swift in Sources */,
-				FA0B4A0826C514C50018DE69 /* Training+CoreDataProperties.swift in Sources */,
 				FAFA46B626BD243B00CD820C /* Router.swift in Sources */,
 				FAFA484F26C3B2FD00CD820C /* SaveDetailContentUseCase.swift in Sources */,
-				FA0B49F226C50E520018DE69 /* TrainingDetail+CoreDataClass.swift in Sources */,
-				FA0B49CE26C505310018DE69 /* Model.xcdatamodeld in Sources */,
 				FAFA46F126C0A80800CD820C /* HomeViewController.swift in Sources */,
 				FAFA46C826BD248300CD820C /* Coordinator.swift in Sources */,
-				FAFA47C726C24ED800CD820C /* TrainingDetailRepositoryImpl.swift in Sources */,
-				FA0B49F326C50E520018DE69 /* TrainingDetail+CoreDataProperties.swift in Sources */,
+				FAFA47C726C24ED800CD820C /* DetailContentRepositoryImpl.swift in Sources */,
 				FAFA467226BD1F9D00CD820C /* AppDelegate.swift in Sources */,
 				FAFA47A926C2488500CD820C /* DetailViewModel.swift in Sources */,
-				FA0B49FE26C511CE0018DE69 /* CoreDataError.swift in Sources */,
+				FA0B49FE26C511CE0018DE69 /* InternalDBError.swift in Sources */,
 				FAFA46BE26BD245700CD820C /* NavigationRouter.swift in Sources */,
+				FAB294C126C60D42003788CA /* MuscleRepositoryImpl.swift in Sources */,
+				FAB294A126C5FFA8003788CA /* TrainingInternalDB.swift in Sources */,
+				FAB294C626C60D74003788CA /* MuscleRepository.swift in Sources */,
 				FAFA472226C0C79100CD820C /* TabBarRouter.swift in Sources */,
 				B541963226C2B27A00B2080A /* MemoViewController.swift in Sources */,
 				FAFA47A426C246FE00CD820C /* Content.swift in Sources */,
@@ -1103,19 +1119,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		FA0B49CC26C505310018DE69 /* Model.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				FA0B49CD26C505310018DE69 /* Model.xcdatamodel */,
-			);
-			currentVersion = FA0B49CD26C505310018DE69 /* Model.xcdatamodel */;
-			path = Model.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = FAFA466626BD1F9D00CD820C /* Project object */;
 }

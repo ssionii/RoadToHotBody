@@ -17,7 +17,8 @@ class HomeCoordinator: Coordinator {
 	init(router: Router) {
 		self.router = router
 		
-		self.homeViewController = HomeViewController()
+		let homeViewModel = HomeViewModel()
+		self.homeViewController = HomeViewController(viewModel: homeViewModel)
 		homeViewController.coordinatorDelegate = self
 	}
 	
@@ -25,18 +26,14 @@ class HomeCoordinator: Coordinator {
 		router.present(homeViewController, animated: false)
 	}
 	
-	private func presentDetail(name: String) {
-//		let viewModel = DetailViewModel(muscleName: name)
-//		let detailViewController = DetailViewController(viewModel: viewModel)
-//		router.present(detailViewController, animated: true)
-        
-        let coordinator = DetailCoordinator(router: router, muscleName: name)
+	private func presentDetail(muscle: Muscle) {
+        let coordinator = DetailCoordinator(router: router, muscle: muscle)
         presentChild(coordinator, animated: true)
 	}
 }
 
 extension HomeCoordinator: HomeVCCoordinatorDelegate {
-	func buttonClicked(name: String) {
-		self.presentDetail(name: name)
+	func buttonClicked(muscle: Muscle) {
+		self.presentDetail(muscle: muscle)
 	}
 }

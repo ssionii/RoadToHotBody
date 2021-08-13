@@ -1,5 +1,10 @@
 PODS:
   - JJFloatingActionButton (2.5.0)
+  - Realm (10.12.0):
+    - Realm/Headers (= 10.12.0)
+  - Realm/Headers (10.12.0)
+  - RealmSwift (10.12.0):
+    - Realm (= 10.12.0)
   - RxCocoa (6.2.0):
     - RxRelay (= 6.2.0)
     - RxSwift (= 6.2.0)
@@ -12,6 +17,7 @@ PODS:
 
 DEPENDENCIES:
   - JJFloatingActionButton
+  - RealmSwift
   - RxCocoa
   - RxSwift
   - SDWebImage
@@ -19,6 +25,8 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - JJFloatingActionButton
+    - Realm
+    - RealmSwift
     - RxCocoa
     - RxRelay
     - RxSwift
@@ -26,11 +34,13 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   JJFloatingActionButton: fdc3aefb0f28f04d0f988fa25d5fac97028a9ea7
+  Realm: 32488213acb44660539c619d620cec1bac046166
+  RealmSwift: 0abdca6231d5ff8a4f84cef9c1121ef95a483faf
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
   RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
   RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
 
-PODFILE CHECKSUM: 2ba485c9a61499bcd0922b43a3a41c2a8adcb9dc
+PODFILE CHECKSUM: 69a959262ee7e69c656aeee65a189f6efba82d3c
 
 COCOAPODS: 1.10.1
