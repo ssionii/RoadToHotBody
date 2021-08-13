@@ -7,7 +7,7 @@
 
 import RxSwift
 
-protocol TrainingDetailRepositoryProtocol {
+protocol DetailContentRepositoryProtocol {
 	func fetchDetailContents(
 		request: FetchDetailContentsUseCaseModels.Request
 	) -> Observable<FetchDetailContentsUseCaseModels.Response>
@@ -19,4 +19,8 @@ protocol TrainingDetailRepositoryProtocol {
 	func saveDetailContent(
 		request: SaveDetailContentUseCaseModels.Request
 	) -> Observable<SaveDetailContentUseCaseModels.Response>
+	
+	func deleteDetailContent(
+		request: DeleteDetailContentUseCaseModels.Request
+	) -> Observable<DeleteDetailContentUseCaseModels.Response>
 }

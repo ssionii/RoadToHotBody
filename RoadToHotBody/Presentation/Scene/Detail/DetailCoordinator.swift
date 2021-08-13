@@ -11,15 +11,15 @@ class DetailCoordinator: Coordinator {
     var children: [Coordinator] = []
     var router: Router
     
-    private var muscleName: String
+	private var muscle: Muscle
 	
-    init(router: Router, muscleName: String) {
+    init(router: Router, muscle: Muscle) {
         self.router = router
-        self.muscleName = muscleName
+        self.muscle = muscle
     }
     
     func present(animated: Bool, onDismissed: (() -> Void)?) {
-        let detailViewModel = DetailViewModel(muscleName: muscleName)
+		let detailViewModel = DetailViewModel(muscle: muscle)
         let detailViewController = DetailViewController(viewModel: detailViewModel)
         detailViewController.coordinatorDelegate = self
         router.present(detailViewController, animated: true)
@@ -27,7 +27,7 @@ class DetailCoordinator: Coordinator {
     
 	private func presentMemo(parentViewController: DetailViewController, memoType: MemoType, content: Content?) {
 		let router = ModalNavigationRouter(parentViewController: parentViewController, modalPresentationStyle: .automatic)
-        let coordinator = MemoCoordinator(router: router, memoType: memoType, content: content)
+        let coordinator = MemoCoordinator(router: router, memoType: memoType, content: content, muscle: muscle)
 
 		presentChild(coordinator, animated: true, onDismissed: {
 			parentViewController.reloadView.onNext(())

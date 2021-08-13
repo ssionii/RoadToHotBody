@@ -25,9 +25,9 @@ enum FetchDetailContentUseCaseModels {
 
 class FetchDetailContentUseCase: FetchDetailContentUseCaseProtocol {
 	
-	private let contentRepository: TrainingDetailRepository
+	private let contentRepository: DetailContentRepository
 	
-	init(repository: TrainingDetailRepository) {
+	init(repository: DetailContentRepository) {
 		self.contentRepository = repository
 	}
 

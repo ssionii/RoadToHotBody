@@ -7,7 +7,7 @@
 
 import RxSwift
 
-class TrainingDetailRepository: TrainingDetailRepositoryProtocol {
+class DetailContentRepository: DetailContentRepositoryProtocol {
 	
 	// dummy data
 	let detailContents = [
@@ -20,18 +20,23 @@ class TrainingDetailRepository: TrainingDetailRepositoryProtocol {
 		Content(index: 6, type: .Memo, text: "승모근 운동방법 4")
 	]
 	
-	private let trainingDetailDataSource: TrainingDetailDataSourceProtocol
+	private let trainingDetailDataSource: DetailContentDataSourceProtocol
 	
-	init(dataSource: TrainingDetailDataSourceProtocol) {
+	init(dataSource: DetailContentDataSourceProtocol) {
 		self.trainingDetailDataSource = dataSource
 	}
 	
 	func fetchDetailContents(request: FetchDetailContentsUseCaseModels.Request) -> Observable<FetchDetailContentsUseCaseModels.Response> {
 		
-		return trainingDetailDataSource.fetchDetailContents()
-			.asObservable().map { contents -> FetchDetailContentsUseCaseModels.Response in
-				return FetchDetailContentsUseCaseModels.Response(contents: contents)
-			}
+//		return trainingDetailDataSource.fetchDetailContents(muscleIndex: request.trainingIndex)
+//			.asObservable().map { contents -> FetchDetailContentsUseCaseModels.Response in
+//				if contents.isEmpty {
+//					throw DetailContentEmptyError(detailMessage: "repository.fetchDetailContes")
+//				}
+//				return FetchDetailContentsUseCaseModels.Response(contents: contents)
+//			}
+		
+		return Observable.just(FetchDetailContentsUseCaseModels.Response(contents: detailContents))
 	}
 	
 	func fetchDetailContent(request: FetchDetailContentUseCaseModels.Request) -> Observable<FetchDetailContentUseCaseModels.Response> {
@@ -42,24 +47,22 @@ class TrainingDetailRepository: TrainingDetailRepositoryProtocol {
 	
 	func saveDetailContent(request: SaveDetailContentUseCaseModels.Request) -> Observable<SaveDetailContentUseCaseModels.Response> {
 		
-		// TODO: 저장
-		print(request.text)
-		
 		if let index = request.index {
 			// 업데이트
 			
 			let response = SaveDetailContentUseCaseModels.Response(isSuccess: true)
 			return Observable.of(response)
 		} else {
-			// 새로 저장
 			
-			let response = SaveDetailContentUseCaseModels.Response(isSuccess: true)
-			return Observable.of(response)
+			return trainingDetailDataSource.saveDetailContent(muscleIndex: request.muscleIndex, text: request.text, type: request.type)
+				.andThen(Observable.of(SaveDetailContentUseCaseModels.Response(isSuccess: true)))
 		}
-		
-		
 	}
 	
+	func deleteDetailContent(request: DeleteDetailContentUseCaseModels.Request) -> Observable<DeleteDetailContentUseCaseModels.Response> {
+		return trainingDetailDataSource.deleteDetailContent(index: request.index)
+			.andThen(Observable.of(DeleteDetailContentUseCaseModels.Response(isSuccess: true)))
+	}
 	
 
 }

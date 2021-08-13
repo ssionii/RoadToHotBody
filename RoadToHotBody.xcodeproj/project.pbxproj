@@ -28,6 +28,10 @@
 		FAB294CB26C60DC7003788CA /* FetchMusclesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB294CA26C60DC7003788CA /* FetchMusclesUseCase.swift */; };
 		FAB294D326C60F25003788CA /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB294D226C60F25003788CA /* HomeViewModel.swift */; };
 		FAB294D826C62003003788CA /* training.json in Resources */ = {isa = PBXBuildFile; fileRef = FAB294D726C62003003788CA /* training.json */; };
+		FAB294E426C62DCC003788CA /* MuscleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB294E226C62DCC003788CA /* MuscleCell.swift */; };
+		FAB294E526C62DCC003788CA /* MuscleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAB294E326C62DCC003788CA /* MuscleCell.xib */; };
+		FAB294ED26C65E17003788CA /* RealmObjectError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB294EC26C65E17003788CA /* RealmObjectError.swift */; };
+		FAB294F226C65EAF003788CA /* DeleteDetailContentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB294F126C65EAF003788CA /* DeleteDetailContentUseCase.swift */; };
 		FAFA467226BD1F9D00CD820C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA467126BD1F9D00CD820C /* AppDelegate.swift */; };
 		FAFA467B26BD1FA400CD820C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAFA467A26BD1FA400CD820C /* Assets.xcassets */; };
 		FAFA467E26BD1FA400CD820C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAFA467C26BD1FA400CD820C /* LaunchScreen.storyboard */; };
@@ -110,6 +114,10 @@
 		FAB294CA26C60DC7003788CA /* FetchMusclesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMusclesUseCase.swift; sourceTree = "<group>"; };
 		FAB294D226C60F25003788CA /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		FAB294D726C62003003788CA /* training.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = training.json; sourceTree = "<group>"; };
+		FAB294E226C62DCC003788CA /* MuscleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleCell.swift; sourceTree = "<group>"; };
+		FAB294E326C62DCC003788CA /* MuscleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MuscleCell.xib; sourceTree = "<group>"; };
+		FAB294EC26C65E17003788CA /* RealmObjectError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmObjectError.swift; sourceTree = "<group>"; };
+		FAB294F126C65EAF003788CA /* DeleteDetailContentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDetailContentUseCase.swift; sourceTree = "<group>"; };
 		FAFA466E26BD1F9D00CD820C /* RoadToHotBody.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoadToHotBody.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAFA467126BD1F9D00CD820C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAFA467A26BD1FA400CD820C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -238,6 +246,7 @@
 			children = (
 				FA0B49FD26C511CE0018DE69 /* InternalDBError.swift */,
 				FAB2948C26C5FE5C003788CA /* EmptyError.swift */,
+				FAB294EC26C65E17003788CA /* RealmObjectError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -371,6 +380,7 @@
 				FAFA47B926C24D5500CD820C /* FetchDetailContentsUseCase.swift */,
 				FAFA486526C3B90A00CD820C /* FetchDetailContentUseCase.swift */,
 				FAFA484E26C3B2FD00CD820C /* SaveDetailContentUseCase.swift */,
+				FAB294F126C65EAF003788CA /* DeleteDetailContentUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -464,8 +474,10 @@
 			children = (
 				FAFA46EF26C0A80800CD820C /* HomeViewController.swift */,
 				FAFA46F026C0A80800CD820C /* HomeViewController.xib */,
-				FAFA478826C20A4300CD820C /* HomeCoordinator.swift */,
 				FAB294D226C60F25003788CA /* HomeViewModel.swift */,
+				FAFA478826C20A4300CD820C /* HomeCoordinator.swift */,
+				FAB294E226C62DCC003788CA /* MuscleCell.swift */,
+				FAB294E326C62DCC003788CA /* MuscleCell.xib */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -613,6 +625,7 @@
 			files = (
 				FAFA467E26BD1FA400CD820C /* LaunchScreen.storyboard in Resources */,
 				FAFA470E26C0BC8F00CD820C /* DetailViewController.xib in Resources */,
+				FAB294E526C62DCC003788CA /* MuscleCell.xib in Resources */,
 				FAFA46FD26C0A82900CD820C /* CalendarViewController.xib in Resources */,
 				FAFA467B26BD1FA400CD820C /* Assets.xcassets in Resources */,
 				FAB294D826C62003003788CA /* training.json in Resources */,
@@ -749,6 +762,7 @@
 			files = (
 				FAB2948826C5FBF5003788CA /* Muscle.swift in Sources */,
 				FA0B49D826C509190018DE69 /* DetailContentDataSource.swift in Sources */,
+				FAB294E426C62DCC003788CA /* MuscleCell.swift in Sources */,
 				FAFA486626C3B90A00CD820C /* FetchDetailContentUseCase.swift in Sources */,
 				FAB294D326C60F25003788CA /* HomeViewModel.swift in Sources */,
 				FAFA46CF26BD24B900CD820C /* UIView+Extension.swift in Sources */,
@@ -776,6 +790,7 @@
 				FAFA46F126C0A80800CD820C /* HomeViewController.swift in Sources */,
 				FAFA46C826BD248300CD820C /* Coordinator.swift in Sources */,
 				FAFA47C726C24ED800CD820C /* DetailContentRepositoryImpl.swift in Sources */,
+				FAB294F226C65EAF003788CA /* DeleteDetailContentUseCase.swift in Sources */,
 				FAFA467226BD1F9D00CD820C /* AppDelegate.swift in Sources */,
 				FAFA47A926C2488500CD820C /* DetailViewModel.swift in Sources */,
 				FA0B49FE26C511CE0018DE69 /* InternalDBError.swift in Sources */,
@@ -789,6 +804,7 @@
 				FAFA478E26C20B9700CD820C /* CalendarCoordinator.swift in Sources */,
 				FAFA47DF26C2665D00CD820C /* PhotoCell.swift in Sources */,
 				FAFA47BA26C24D5500CD820C /* FetchDetailContentsUseCase.swift in Sources */,
+				FAB294ED26C65E17003788CA /* RealmObjectError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

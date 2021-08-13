@@ -15,7 +15,7 @@ protocol FetchDetailContentsUseCaseProtocol {
 
 enum FetchDetailContentsUseCaseModels {
 	struct Request {
-		var muscleName: String
+		var trainingIndex: Int
 	}
 	
 	struct Response {
@@ -25,9 +25,9 @@ enum FetchDetailContentsUseCaseModels {
 
 class FetchDetailContentsUseCase: FetchDetailContentsUseCaseProtocol {
 	
-	private let contentRepository: TrainingDetailRepository
+	private let contentRepository: DetailContentRepository
 	
-	init(repository: TrainingDetailRepository) {
+	init(repository: DetailContentRepository) {
 		self.contentRepository = repository
 	}
 
@@ -35,6 +35,8 @@ class FetchDetailContentsUseCase: FetchDetailContentsUseCaseProtocol {
 	func execute(
 		request: FetchDetailContentsUseCaseModels.Request
 	) -> Observable<FetchDetailContentsUseCaseModels.Response> {
-		return contentRepository.fetchDetailContents(request: request)
+		let response = contentRepository.fetchDetailContents(request: request)
+		print("response \(response)")
+		return response
 	}
 }

@@ -10,13 +10,14 @@ import RxSwift
 import RxCocoa
 
 protocol MemoVCCoordinatorDelegate: class {
-	func dismissMemo(isSaved: Bool)
+	func dismissMemo(isSuccess: Bool)
 }
 
 class MemoViewController: UIViewController {
 
 	@IBOutlet weak var textView: UITextView!
 	@IBOutlet weak var textViewBottomConstraint: NSLayoutConstraint!
+	@IBOutlet weak var deleteButton: UIButton!
 	
 	lazy var confirmButton: UIBarButtonItem = {
 		let button = UIBarButtonItem(
@@ -65,6 +66,7 @@ class MemoViewController: UIViewController {
 		let output = viewModel.transfrom(
 			input: MemoViewModel.Input(
 				confirmButtonClicked: confirmButton.rx.tap.asObservable(),
+				deleteButtonClicked: deleteButton.rx.tap.asObservable(),
 				text: textView.rx.text.asObservable()
 			)
 		)
@@ -76,7 +78,14 @@ class MemoViewController: UIViewController {
 		output.isSaved
 			.withUnretained(self)
 			.subscribe(onNext: { owner, isSaved in
-				owner.coordinatorDelegate?.dismissMemo(isSaved: isSaved)
+				owner.coordinatorDelegate?.dismissMemo(isSuccess: isSaved)
+			})
+			.disposed(by: disposeBag)
+		
+		output.isDeleted
+			.withUnretained(self)
+			.subscribe(onNext: { owner, isDeleted in
+				owner.coordinatorDelegate?.dismissMemo(isSuccess: isDeleted)
 			})
 			.disposed(by: disposeBag)
 	}

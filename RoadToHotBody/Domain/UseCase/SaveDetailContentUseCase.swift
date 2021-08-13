@@ -16,7 +16,9 @@ protocol SaveDetailContentUseCaseProtocol {
 struct SaveDetailContentUseCaseModels {
 	struct Request {
 		var index: Int?
+		var type: ContentType
 		var text: String
+		var muscleIndex: Int
 	}
 	
 	struct Response {
@@ -26,9 +28,9 @@ struct SaveDetailContentUseCaseModels {
 
 class SaveDetailContentUseCase: SaveDetailContentUseCaseProtocol {
 	
-	private let detailContentRepository: TrainingDetailRepositoryProtocol
+	private let detailContentRepository: DetailContentRepositoryProtocol
 	
-	init(repository: TrainingDetailRepositoryProtocol) {
+	init(repository: DetailContentRepositoryProtocol) {
 		self.detailContentRepository = repository
 	}
 	

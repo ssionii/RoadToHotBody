@@ -42,7 +42,7 @@ class DetailViewController: UIViewController {
     weak var coordinatorDelegate: DetailVCCoordinatorDelegate?
 	private let disposeBag = DisposeBag()
 	
-	let reloadView = ReplaySubject<Void>.create(bufferSize: 1)
+	let reloadView = BehaviorSubject<Void>(value: ())
 	
 	private var contents: [Content] = [] {
 		didSet {
@@ -62,9 +62,7 @@ class DetailViewController: UIViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		
-		reloadView.onNext(())
-		
+	
 		configureUI()
 		configureTableView()
 		bind()
@@ -98,8 +96,13 @@ class DetailViewController: UIViewController {
 			.withUnretained(self)
 			.subscribe(onNext: { owner, contents in
 				owner.contents = contents
+				print("contents 불림 !")
 			})
 			.disposed(by: disposeBag)
+		
+		reloadView.subscribe(onNext: { _ in
+			print("hello ~")
+		})
 	}
 }
 

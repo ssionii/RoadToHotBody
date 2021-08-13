@@ -19,23 +19,26 @@ class DetailViewModel {
 	}
 	
 	// TODO: DI
-	let fetchDetailContentsUseCase = FetchDetailContentsUseCase(repository: TrainingDetailRepository(dataSource: TrainingDetailDataSource(trainingDetailCoreData: TrainingDetailCoreData())))
+	let fetchDetailContentsUseCase = FetchDetailContentsUseCase(repository: DetailContentRepository(dataSource: DetailContentDataSource()))
 	
-	private var muscleName: String
+	private var muscle: Muscle
 	
-	init(muscleName: String) {
-		self.muscleName = muscleName
+	init(muscle: Muscle) {
+		self.muscle = muscle
 	}
 	
 	func transform(input: Input) -> Output {
 		
-		let name = Observable.of(muscleName)
+		let name = Observable.of(muscle.name)
 			.asDriver(onErrorJustReturn: "")
 		
 		let contents = input.reloadView
+			.do(onNext: {
+				print("hello ~ 2")
+			})
 			.flatMap { _ -> Observable<FetchDetailContentsUseCaseModels.Response> in
 				self.fetchDetailContentsUseCase.execute(
-					request: FetchDetailContentsUseCaseModels.Request(muscleName: self.muscleName)
+					request: FetchDetailContentsUseCaseModels.Request(trainingIndex: self.muscle.index)
 				)
 			}
 			.map { response -> [Content]? in
