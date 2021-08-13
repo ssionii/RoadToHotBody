@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="RoadToHotBody" customModuleProvider="target">
             <connections>
+                <outlet property="directionButton" destination="NUJ-pa-1mq" id="Spc-yq-ImW"/>
+                <outlet property="tableView" destination="zeu-wq-XqF" id="tGS-jd-eWf"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,33 +20,37 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yYB-3m-fJn">
-                    <rect key="frame" x="192" y="219" width="30" height="30"/>
-                    <state key="normal" title="A"/>
-                    <connections>
-                        <action selector="AButtonClicked:" destination="-1" eventType="touchUpInside" id="alS-bS-cId"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nd7-5H-5pp">
-                    <rect key="frame" x="192" y="309" width="30" height="30"/>
-                    <state key="normal" title="B"/>
-                    <connections>
-                        <action selector="BButtonClicked:" destination="-1" eventType="touchUpInside" id="oKh-rP-Pp4"/>
-                    </connections>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zeu-wq-XqF">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NUJ-pa-1mq">
+                    <rect key="frame" x="342" y="790" width="56" height="56"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="56" id="Qvd-Ic-w78"/>
+                        <constraint firstAttribute="width" constant="56" id="hru-GQ-MoY"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" image="arrow.clockwise" catalog="system"/>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="yYB-3m-fJn" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="X15-oc-GF1"/>
-                <constraint firstItem="Nd7-5H-5pp" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="g8p-Q3-4hr"/>
-                <constraint firstItem="Nd7-5H-5pp" firstAttribute="top" secondItem="yYB-3m-fJn" secondAttribute="bottom" constant="60" id="ige-gN-4uz"/>
-                <constraint firstItem="yYB-3m-fJn" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="175" id="jxA-69-ibZ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NUJ-pa-1mq" secondAttribute="trailing" constant="16" id="1lg-t4-EhX"/>
+                <constraint firstItem="zeu-wq-XqF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="L6I-Zg-S64"/>
+                <constraint firstItem="zeu-wq-XqF" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Txf-Hq-v3h"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="zeu-wq-XqF" secondAttribute="bottom" id="VbE-XN-S6N"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="zeu-wq-XqF" secondAttribute="trailing" id="jLq-h6-l3B"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="NUJ-pa-1mq" secondAttribute="bottom" constant="16" id="uge-1k-p9n"/>
             </constraints>
             <point key="canvasLocation" x="140.57971014492756" y="153.34821428571428"/>
         </view>
     </objects>
     <resources>
+        <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

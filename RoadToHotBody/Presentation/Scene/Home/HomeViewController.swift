@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import JJFloatingActionButton
 
 protocol HomeVCCoordinatorDelegate: class {
 	func buttonClicked(muscle: Muscle)
@@ -15,26 +16,22 @@ protocol HomeVCCoordinatorDelegate: class {
 
 class HomeViewController: UIViewController {
 	
-	@IBAction func AButtonClicked(_ sender: Any) {
-		self.coordinatorDelegate?.buttonClicked(muscle: muscleList[0])
-	}
+	@IBOutlet weak var tableView: UITableView!
+	@IBOutlet weak var directionButton: UIButton!
 	
-	@IBAction func BButtonClicked(_ sender: Any) {
-		self.coordinatorDelegate?.buttonClicked(muscle: muscleList[1])
-	}
-
 	private let viewModel: HomeViewModel
 	var coordinatorDelegate: HomeVCCoordinatorDelegate?
-	
 	private let disposeBag = DisposeBag()
 
-	private let muscleList = [
-		Muscle(index: 0, name: "승모근", direction: .Front),
-		Muscle(index: 1, name: "대퇴근", direction: .Both),
-	]
+	private var muscleList : [Muscle] {
+		didSet {
+			tableView.reloadData()
+		}
+	}
 	
 	init(viewModel: HomeViewModel) {
 		self.viewModel = viewModel
+		muscleList = [Muscle]()
 		
 		super.init(nibName: "HomeViewController", bundle: nil)
 		
@@ -47,22 +44,57 @@ class HomeViewController: UIViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+		
 		configureUI()
 		bind()
+		configureTableView()
+		
+		// FIXME: 이게 맞나..
+		directionButton.sendActions(for: .touchUpInside)
     }
 	
 	private func configureUI() {
-		self.navigationItem.title = "title"
+		self.navigationController?.navigationItem.title = "title"
+
+		directionButton.layer.cornerRadius = directionButton.frame.width / 2
+		directionButton.layer.shadowColor = UIColor.black.cgColor
+		directionButton.layer.shadowOffset = CGSize(width: 0, height: 1)
+		directionButton.layer.shadowOpacity = 0.4
+		directionButton.layer.shadowRadius = 2
 	}
 	
 	private func bind() {
-		let output = viewModel.transform(input: HomeViewModel.Input())
+		
+		let output = viewModel.transform(input: HomeViewModel.Input(changeDirection: directionButton.rx.tap.asObservable()))
 		
 		output.muscles
-			.subscribe(onNext: { item in
-				
-				print(item)
+			.withUnretained(self)
+			.subscribe(onNext: { owner, items in
+				owner.muscleList = items
 			})
 			.disposed(by: disposeBag)
+	}
+	
+	private func configureTableView() {
+		tableView.dataSource = self
+		tableView.delegate = self
+		
+		tableView.register(UINib(nibName: "MuscleCell", bundle: nil), forCellReuseIdentifier: "MuscleCell")
+	}
+}
+
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		self.muscleList.count
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "MuscleCell", for: indexPath) as! MuscleCell
+		cell.bind(name: muscleList[indexPath.row].name)
+		return cell
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		self.coordinatorDelegate?.buttonClicked(muscle: muscleList[indexPath.row])
 	}
 }

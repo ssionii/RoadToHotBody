@@ -15,7 +15,7 @@ protocol FetchMuscleUseCaseProtocol {
 
 struct FetchMuscleUseCaseModels {
 	struct Request {
-		
+		var direction: Direction
 	}
 	
 	struct Response {
@@ -34,7 +34,7 @@ class FetchMuscleUseCase: FetchMuscleUseCaseProtocol {
 	func execute(
 		request: FetchMuscleUseCaseModels.Request
 	) -> Observable<FetchMuscleUseCaseModels.Response> {
-		muscleRepository.fetchMuscles(request: request)
+		return muscleRepository.fetchMuscles(request: request)
 	}
 	
 }

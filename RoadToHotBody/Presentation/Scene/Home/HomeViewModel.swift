@@ -10,7 +10,7 @@ import RxCocoa
 
 class HomeViewModel {
 	struct Input {
-		
+		var changeDirection: Observable<Void>
 	}
 	
 	struct Output {
@@ -19,10 +19,25 @@ class HomeViewModel {
 	
 	let fetchMusclesUseCase = FetchMuscleUseCase(repository: MuscleRepository(dataSource: MuscleDataSource()))
 	
+	private var direction = Direction.Front
+	
 	func transform(input: Input) -> Output {
-		let muscles = fetchMusclesUseCase.execute(request: FetchMuscleUseCaseModels.Request())
+	
+		let muscles = input.changeDirection
+			.flatMap { () -> Observable<FetchMuscleUseCaseModels.Response> in
+				
+				if self.direction == Direction.Front {
+					self.direction = Direction.Back
+				} else {
+					self.direction = Direction.Front
+				}
+				
+				return self.fetchMusclesUseCase.execute(
+					request: FetchMuscleUseCaseModels.Request(direction: self.direction)
+				)
+			}
 			.map { response -> [Muscle] in
-				response.muscles
+				return response.muscles
 			}
 		
 		return Output(muscles: muscles)

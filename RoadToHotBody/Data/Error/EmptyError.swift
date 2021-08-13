@@ -25,3 +25,13 @@ struct DetailContentEmptyError: Error {
 		self.detailMessage = detailMessage
 	}
 }
+
+
+struct MuscleCacheEmptyError: Error {
+	var message = "Muscle 캐시가 없습니다. (MuscleCacheEmptyError)"
+	var detailMessage: String
+	
+	init(detailMessage: String) {
+		self.detailMessage = detailMessage
+	}
+}
