@@ -11,6 +11,7 @@ import RxSwift
 protocol DetailContentDataSourceProtocol {
 	func fetchDetailContents(muscleIndex: Int) -> Single<[Content]>
 	func saveDetailContent(muscleIndex: Int, text: String, type: ContentType) -> Completable
+    func updateDetailContent(index: Int, text: String) -> Completable
 	func deleteDetailContent(index: Int) -> Completable
 }
 
@@ -34,6 +35,11 @@ class DetailContentDataSource: DetailContentDataSourceProtocol {
 	func saveDetailContent(muscleIndex: Int, text: String, type: ContentType) -> Completable {
 		return trainingDetailInternalDB.saveTrainingDetail(trainingIndex: muscleIndex, content: text, type: type.rawValue)
 	}
+    
+    
+    func updateDetailContent(index: Int, text: String) -> Completable {
+        return trainingDetailInternalDB.updateTrainingDetail(index: index, content: text)
+    }
 	
 	func deleteDetailContent(index: Int) -> Completable {
 		return trainingDetailInternalDB.deleteTrainingDetail(index: index)

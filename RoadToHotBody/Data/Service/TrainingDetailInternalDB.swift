@@ -11,6 +11,7 @@ import RealmSwift
 protocol TrainingDetailInternalDBProtocol {
 	func fetchTrainingDetails(trainingIndex: Int) -> Single<[TrainingDetail]>
 	func saveTrainingDetail(trainingIndex: Int, content: String, type: Int) -> Completable
+    func updateTrainingDetail(index: Int, content: String) -> Completable
 	func deleteTrainingDetail(index: Int) -> Completable
 }
 
@@ -21,8 +22,8 @@ class TrainingDetailInternalDB: TrainingDetailInternalDBProtocol {
 	init() {
 		do {
 			realm = try Realm()
-		} catch {
-			
+		} catch (let error) {
+            print(error)
 		}
 	}
 	
@@ -75,6 +76,32 @@ class TrainingDetailInternalDB: TrainingDetailInternalDBProtocol {
 			return Disposables.create { }
 		}
 	}
+    
+    func updateTrainingDetail(index: Int, content: String) -> Completable {
+        return Completable.create { completable in
+            
+            if let realm = self.realm {
+                
+                guard let detail = realm.object(ofType: TrainingDetail.self, forPrimaryKey: index) else {
+                    completable(.error(TrainingDetailNotFoundError(detailMessage: "")))
+                    return Disposables.create { }
+                }
+                
+                do {
+                    try realm.write {
+                        detail.content = content
+                        completable(.completed)
+                    }
+                } catch (let error) {
+                    print(error)
+                }
+            } else {
+                completable(.error(RealmNotInitError(detailMessage: "")))
+            }
+
+            return Disposables.create { }
+        }
+    }
 	
 	func deleteTrainingDetail(index: Int) -> Completable {
 		return Completable.create { completable in

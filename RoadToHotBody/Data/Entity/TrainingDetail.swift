@@ -14,11 +14,11 @@ class TrainingDetail: Object {
 	@objc dynamic var date: Date = Date()
 	@objc dynamic var trainingIndex: Int = 0
 	
-//	override class func primaryKey() -> String? {
-//		return "index"
-//	}
-//	
-//	override class func indexedProperties() -> [String] {
-//		return ["index"]
-//	}
+	override class func primaryKey() -> String? {
+		return "index"
+	}
+	
+	override class func indexedProperties() -> [String] {
+		return ["index"]
+	}
 }

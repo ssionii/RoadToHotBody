@@ -9,10 +9,17 @@
 /* Begin PBXBuildFile section */
 		5FF627ABB4851819CF13F7D5 /* Pods_RoadToHotBody_RoadToHotBodyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8134247A7D02BF2AD8DAEF1 /* Pods_RoadToHotBody_RoadToHotBodyUITests.framework */; };
 		836C27234C1CCA15094D2249 /* Pods_RoadToHotBodyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0B6360B526218DC1B578501 /* Pods_RoadToHotBodyTests.framework */; };
-		B541963226C2B27A00B2080A /* MemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B541963026C2B27A00B2080A /* MemoViewController.swift */; };
-		B541963326C2B27A00B2080A /* MemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B541963126C2B27A00B2080A /* MemoViewController.xib */; };
-		B541963526C2B29F00B2080A /* MemoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B541963426C2B29F00B2080A /* MemoCoordinator.swift */; };
+		B541963326C2B27A00B2080A /* WriteMemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B541963126C2B27A00B2080A /* WriteMemoViewController.xib */; };
 		B541963726C2B2E400B2080A /* DetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B541963626C2B2E400B2080A /* DetailCoordinator.swift */; };
+		B56EFA4626C79B57008A5346 /* ReadMemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EFA4526C79B57008A5346 /* ReadMemoViewModel.swift */; };
+		B56EFA4826C79C3E008A5346 /* WriteMemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EFA4726C79C3E008A5346 /* WriteMemoViewModel.swift */; };
+		B56EFA4D26C7A098008A5346 /* ReadMemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EFA4B26C7A098008A5346 /* ReadMemoViewController.swift */; };
+		B56EFA5026C7A18B008A5346 /* MemoVCCoordinatorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EFA4F26C7A18B008A5346 /* MemoVCCoordinatorDelegate.swift */; };
+		B56EFA5226C7A2E1008A5346 /* WriteMemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EFA5126C7A2E1008A5346 /* WriteMemoViewController.swift */; };
+		B56EFA5426C7A532008A5346 /* ReadMemoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EFA5326C7A532008A5346 /* ReadMemoCoordinator.swift */; };
+		B56EFA5626C7A623008A5346 /* WriteMemoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EFA5526C7A623008A5346 /* WriteMemoCoordinator.swift */; };
+		B56EFA5826C7C2C0008A5346 /* ReadMemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B56EFA5726C7C2C0008A5346 /* ReadMemoViewController.xib */; };
+		B56EFA5A26C7D5E6008A5346 /* UpdateDetailContentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EFA5926C7D5E6008A5346 /* UpdateDetailContentUseCase.swift */; };
 		C33815C08C875C8F95249255 /* Pods_RoadToHotBody.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E77AEEB598B06694A614A896 /* Pods_RoadToHotBody.framework */; };
 		FA0B49D826C509190018DE69 /* DetailContentDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B49D726C509190018DE69 /* DetailContentDataSource.swift */; };
 		FA0B49EC26C50A820018DE69 /* TrainingDetailInternalDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B49EB26C50A820018DE69 /* TrainingDetailInternalDB.swift */; };
@@ -64,7 +71,6 @@
 		FAFA47DF26C2665D00CD820C /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA47DD26C2665C00CD820C /* PhotoCell.swift */; };
 		FAFA47E026C2665D00CD820C /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAFA47DE26C2665C00CD820C /* PhotoCell.xib */; };
 		FAFA484526C3A77D00CD820C /* UITextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA484426C3A77D00CD820C /* UITextView+Extension.swift */; };
-		FAFA484A26C3ADBA00CD820C /* MemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA484926C3ADBA00CD820C /* MemoViewModel.swift */; };
 		FAFA484F26C3B2FD00CD820C /* SaveDetailContentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA484E26C3B2FD00CD820C /* SaveDetailContentUseCase.swift */; };
 		FAFA486626C3B90A00CD820C /* FetchDetailContentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA486526C3B90A00CD820C /* FetchDetailContentUseCase.swift */; };
 /* End PBXBuildFile section */
@@ -92,10 +98,17 @@
 		7C102BA349609BF759994D0A /* Pods-RoadToHotBody-RoadToHotBodyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoadToHotBody-RoadToHotBodyUITests.release.xcconfig"; path = "Target Support Files/Pods-RoadToHotBody-RoadToHotBodyUITests/Pods-RoadToHotBody-RoadToHotBodyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		90CE53B0D93AD0E247216CCF /* Pods-RoadToHotBody.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoadToHotBody.debug.xcconfig"; path = "Target Support Files/Pods-RoadToHotBody/Pods-RoadToHotBody.debug.xcconfig"; sourceTree = "<group>"; };
 		B3BDFFEC9A18FC24E387C1BE /* Pods-RoadToHotBody-RoadToHotBodyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoadToHotBody-RoadToHotBodyUITests.debug.xcconfig"; path = "Target Support Files/Pods-RoadToHotBody-RoadToHotBodyUITests/Pods-RoadToHotBody-RoadToHotBodyUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		B541963026C2B27A00B2080A /* MemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoViewController.swift; sourceTree = "<group>"; };
-		B541963126C2B27A00B2080A /* MemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemoViewController.xib; sourceTree = "<group>"; };
-		B541963426C2B29F00B2080A /* MemoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoCoordinator.swift; sourceTree = "<group>"; };
+		B541963126C2B27A00B2080A /* WriteMemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WriteMemoViewController.xib; sourceTree = "<group>"; };
 		B541963626C2B2E400B2080A /* DetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCoordinator.swift; sourceTree = "<group>"; };
+		B56EFA4526C79B57008A5346 /* ReadMemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadMemoViewModel.swift; sourceTree = "<group>"; };
+		B56EFA4726C79C3E008A5346 /* WriteMemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteMemoViewModel.swift; sourceTree = "<group>"; };
+		B56EFA4B26C7A098008A5346 /* ReadMemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadMemoViewController.swift; sourceTree = "<group>"; };
+		B56EFA4F26C7A18B008A5346 /* MemoVCCoordinatorDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoVCCoordinatorDelegate.swift; sourceTree = "<group>"; };
+		B56EFA5126C7A2E1008A5346 /* WriteMemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteMemoViewController.swift; sourceTree = "<group>"; };
+		B56EFA5326C7A532008A5346 /* ReadMemoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadMemoCoordinator.swift; sourceTree = "<group>"; };
+		B56EFA5526C7A623008A5346 /* WriteMemoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteMemoCoordinator.swift; sourceTree = "<group>"; };
+		B56EFA5726C7C2C0008A5346 /* ReadMemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReadMemoViewController.xib; sourceTree = "<group>"; };
+		B56EFA5926C7D5E6008A5346 /* UpdateDetailContentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDetailContentUseCase.swift; sourceTree = "<group>"; };
 		C8134247A7D02BF2AD8DAEF1 /* Pods_RoadToHotBody_RoadToHotBodyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoadToHotBody_RoadToHotBodyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E77AEEB598B06694A614A896 /* Pods_RoadToHotBody.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoadToHotBody.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED5047F09EC0E1FEEA2F521D /* Pods-RoadToHotBodyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoadToHotBodyTests.release.xcconfig"; path = "Target Support Files/Pods-RoadToHotBodyTests/Pods-RoadToHotBodyTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -156,7 +169,6 @@
 		FAFA47DD26C2665C00CD820C /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		FAFA47DE26C2665C00CD820C /* PhotoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCell.xib; sourceTree = "<group>"; };
 		FAFA484426C3A77D00CD820C /* UITextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extension.swift"; sourceTree = "<group>"; };
-		FAFA484926C3ADBA00CD820C /* MemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoViewModel.swift; sourceTree = "<group>"; };
 		FAFA484E26C3B2FD00CD820C /* SaveDetailContentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveDetailContentUseCase.swift; sourceTree = "<group>"; };
 		FAFA486526C3B90A00CD820C /* FetchDetailContentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDetailContentUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -215,12 +227,33 @@
 		B541962F26C2B25A00B2080A /* Memo */ = {
 			isa = PBXGroup;
 			children = (
-				B541963026C2B27A00B2080A /* MemoViewController.swift */,
-				B541963126C2B27A00B2080A /* MemoViewController.xib */,
-				FAFA484926C3ADBA00CD820C /* MemoViewModel.swift */,
-				B541963426C2B29F00B2080A /* MemoCoordinator.swift */,
+				B56EFA4226C79A5F008A5346 /* Read */,
+				B56EFA4126C79A58008A5346 /* Write */,
+				B56EFA4F26C7A18B008A5346 /* MemoVCCoordinatorDelegate.swift */,
 			);
 			path = Memo;
+			sourceTree = "<group>";
+		};
+		B56EFA4126C79A58008A5346 /* Write */ = {
+			isa = PBXGroup;
+			children = (
+				B56EFA5126C7A2E1008A5346 /* WriteMemoViewController.swift */,
+				B541963126C2B27A00B2080A /* WriteMemoViewController.xib */,
+				B56EFA4726C79C3E008A5346 /* WriteMemoViewModel.swift */,
+				B56EFA5526C7A623008A5346 /* WriteMemoCoordinator.swift */,
+			);
+			path = Write;
+			sourceTree = "<group>";
+		};
+		B56EFA4226C79A5F008A5346 /* Read */ = {
+			isa = PBXGroup;
+			children = (
+				B56EFA4B26C7A098008A5346 /* ReadMemoViewController.swift */,
+				B56EFA5726C7C2C0008A5346 /* ReadMemoViewController.xib */,
+				B56EFA4526C79B57008A5346 /* ReadMemoViewModel.swift */,
+				B56EFA5326C7A532008A5346 /* ReadMemoCoordinator.swift */,
+			);
+			path = Read;
 			sourceTree = "<group>";
 		};
 		FA0B49CB26C505140018DE69 /* Service */ = {
@@ -380,6 +413,7 @@
 				FAFA47B926C24D5500CD820C /* FetchDetailContentsUseCase.swift */,
 				FAFA486526C3B90A00CD820C /* FetchDetailContentUseCase.swift */,
 				FAFA484E26C3B2FD00CD820C /* SaveDetailContentUseCase.swift */,
+				B56EFA5926C7D5E6008A5346 /* UpdateDetailContentUseCase.swift */,
 				FAB294F126C65EAF003788CA /* DeleteDetailContentUseCase.swift */,
 			);
 			path = UseCase;
@@ -629,10 +663,11 @@
 				FAFA46FD26C0A82900CD820C /* CalendarViewController.xib in Resources */,
 				FAFA467B26BD1FA400CD820C /* Assets.xcassets in Resources */,
 				FAB294D826C62003003788CA /* training.json in Resources */,
-				B541963326C2B27A00B2080A /* MemoViewController.xib in Resources */,
+				B541963326C2B27A00B2080A /* WriteMemoViewController.xib in Resources */,
 				FAFA46F226C0A80800CD820C /* HomeViewController.xib in Resources */,
 				FAFA479C26C245E600CD820C /* MemoCell.xib in Resources */,
 				FAFA47E026C2665D00CD820C /* PhotoCell.xib in Resources */,
+				B56EFA5826C7C2C0008A5346 /* ReadMemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -770,21 +805,24 @@
 				FAB2948D26C5FE5C003788CA /* EmptyError.swift in Sources */,
 				FAFA46EA26BD256B00CD820C /* AppRouter.swift in Sources */,
 				FAB2948026C5F785003788CA /* TrainingDetail.swift in Sources */,
-				FAFA484A26C3ADBA00CD820C /* MemoViewModel.swift in Sources */,
+				B56EFA5226C7A2E1008A5346 /* WriteMemoViewController.swift in Sources */,
 				FAFA470D26C0BC8F00CD820C /* DetailViewController.swift in Sources */,
+				B56EFA5626C7A623008A5346 /* WriteMemoCoordinator.swift in Sources */,
 				FAFA473B26C0DE1600CD820C /* AppCoordinator.swift in Sources */,
 				FAFA47C226C24E4300CD820C /* DetailContentRepository.swift in Sources */,
 				FAB294BC26C60C8E003788CA /* MuscleDataSource.swift in Sources */,
 				FAB294B126C6088B003788CA /* Training.swift in Sources */,
 				FA0B49EC26C50A820018DE69 /* TrainingDetailInternalDB.swift in Sources */,
+				B56EFA4D26C7A098008A5346 /* ReadMemoViewController.swift in Sources */,
 				FAFA478926C20A4300CD820C /* HomeCoordinator.swift in Sources */,
+				B56EFA4626C79B57008A5346 /* ReadMemoViewModel.swift in Sources */,
 				FAFA46FC26C0A82900CD820C /* CalendarViewController.swift in Sources */,
 				FAB294CB26C60DC7003788CA /* FetchMusclesUseCase.swift in Sources */,
 				B541963726C2B2E400B2080A /* DetailCoordinator.swift in Sources */,
 				FAFA484526C3A77D00CD820C /* UITextView+Extension.swift in Sources */,
+				B56EFA4826C79C3E008A5346 /* WriteMemoViewModel.swift in Sources */,
 				FAFA479B26C245E600CD820C /* MemoCell.swift in Sources */,
 				FAFA46C326BD246F00CD820C /* ModalNavigationRouter.swift in Sources */,
-				B541963526C2B29F00B2080A /* MemoCoordinator.swift in Sources */,
 				FAFA46B626BD243B00CD820C /* Router.swift in Sources */,
 				FAFA484F26C3B2FD00CD820C /* SaveDetailContentUseCase.swift in Sources */,
 				FAFA46F126C0A80800CD820C /* HomeViewController.swift in Sources */,
@@ -799,10 +837,12 @@
 				FAB294A126C5FFA8003788CA /* TrainingInternalDB.swift in Sources */,
 				FAB294C626C60D74003788CA /* MuscleRepository.swift in Sources */,
 				FAFA472226C0C79100CD820C /* TabBarRouter.swift in Sources */,
-				B541963226C2B27A00B2080A /* MemoViewController.swift in Sources */,
 				FAFA47A426C246FE00CD820C /* Content.swift in Sources */,
+				B56EFA5026C7A18B008A5346 /* MemoVCCoordinatorDelegate.swift in Sources */,
 				FAFA478E26C20B9700CD820C /* CalendarCoordinator.swift in Sources */,
 				FAFA47DF26C2665D00CD820C /* PhotoCell.swift in Sources */,
+				B56EFA5A26C7D5E6008A5346 /* UpdateDetailContentUseCase.swift in Sources */,
+				B56EFA5426C7A532008A5346 /* ReadMemoCoordinator.swift in Sources */,
 				FAFA47BA26C24D5500CD820C /* FetchDetailContentsUseCase.swift in Sources */,
 				FAB294ED26C65E17003788CA /* RealmObjectError.swift in Sources */,
 			);

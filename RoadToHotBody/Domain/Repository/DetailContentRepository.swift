@@ -20,6 +20,10 @@ protocol DetailContentRepositoryProtocol {
 		request: SaveDetailContentUseCaseModels.Request
 	) -> Observable<SaveDetailContentUseCaseModels.Response>
 	
+    func updateDetailContent(
+        request: UpdateDetailContentUseCaseModels.Request
+    ) -> Observable<UpdateDetailContentUseCaseModels.Response>
+    
 	func deleteDetailContent(
 		request: DeleteDetailContentUseCaseModels.Request
 	) -> Observable<DeleteDetailContentUseCaseModels.Response>

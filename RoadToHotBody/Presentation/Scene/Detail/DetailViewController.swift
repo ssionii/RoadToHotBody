@@ -96,13 +96,12 @@ class DetailViewController: UIViewController {
 			.withUnretained(self)
 			.subscribe(onNext: { owner, contents in
 				owner.contents = contents
-				print("contents 불림 !")
 			})
 			.disposed(by: disposeBag)
 		
 		reloadView.subscribe(onNext: { _ in
-			print("hello ~")
 		})
+        .disposed(by: disposeBag)
 	}
 }
 

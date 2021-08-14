@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import JJFloatingActionButton
 
-protocol HomeVCCoordinatorDelegate: class {
+protocol HomeVCCoordinatorDelegate: AnyObject {
 	func buttonClicked(muscle: Muscle)
 }
 

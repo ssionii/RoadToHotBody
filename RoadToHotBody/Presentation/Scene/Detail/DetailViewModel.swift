@@ -33,9 +33,6 @@ class DetailViewModel {
 			.asDriver(onErrorJustReturn: "")
 		
 		let contents = input.reloadView
-			.do(onNext: {
-				print("hello ~ 2")
-			})
 			.flatMap { _ -> Observable<FetchDetailContentsUseCaseModels.Response> in
 				self.fetchDetailContentsUseCase.execute(
 					request: FetchDetailContentsUseCaseModels.Request(trainingIndex: self.muscle.index)

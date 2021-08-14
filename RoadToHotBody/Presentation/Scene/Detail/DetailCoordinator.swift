@@ -25,22 +25,31 @@ class DetailCoordinator: Coordinator {
         router.present(detailViewController, animated: true)
     }
     
-	private func presentMemo(parentViewController: DetailViewController, memoType: MemoType, content: Content?) {
+	private func presentReadMemo(parentViewController: DetailViewController, content: Content) {
 		let router = ModalNavigationRouter(parentViewController: parentViewController, modalPresentationStyle: .automatic)
-        let coordinator = MemoCoordinator(router: router, memoType: memoType, content: content, muscle: muscle)
-
+        let coordinator = ReadMemoCoordinator(router: router, content: content)
+        
 		presentChild(coordinator, animated: true, onDismissed: {
 			parentViewController.reloadView.onNext(())
 		})
+    }
+    
+    private func presentWriteMemo(parentViewController: DetailViewController, muscle: Muscle) {
+        let router = ModalNavigationRouter(parentViewController: parentViewController, modalPresentationStyle: .automatic)
+        let coordinator = WriteMemoCoordinator(router: router, muscle: muscle)
+        
+        presentChild(coordinator, animated: true, onDismissed: {
+            parentViewController.reloadView.onNext(())
+        })
     }
 }
 
 extension DetailCoordinator: DetailVCCoordinatorDelegate {
 	func writeMemoButtonClicked(_ parentViewController: DetailViewController) {
-		self.presentMemo(parentViewController: parentViewController, memoType: .Write, content: nil)
+        self.presentWriteMemo(parentViewController: parentViewController, muscle: muscle)
     }
 	
 	func readMemo(_ parentViewController: DetailViewController, content: Content) {
-		self.presentMemo(parentViewController: parentViewController, memoType: .Read, content: content)
+        self.presentReadMemo(parentViewController: parentViewController, content: content)
 	}
 }

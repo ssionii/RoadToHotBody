@@ -8,7 +8,7 @@
 import RxSwift
 
 class DetailContentRepository: DetailContentRepositoryProtocol {
-	
+    
 	// dummy data
 	let detailContents = [
 		Content(index: 0, type: .Memo, text: "승모근 운동방법 1 \n승모근은 이렇게 한다. 으쓱으쓱호오오오잇 하아아아잇 \n줄바꿈 했다"),
@@ -28,15 +28,10 @@ class DetailContentRepository: DetailContentRepositoryProtocol {
 	
 	func fetchDetailContents(request: FetchDetailContentsUseCaseModels.Request) -> Observable<FetchDetailContentsUseCaseModels.Response> {
 		
-//		return trainingDetailDataSource.fetchDetailContents(muscleIndex: request.trainingIndex)
-//			.asObservable().map { contents -> FetchDetailContentsUseCaseModels.Response in
-//				if contents.isEmpty {
-//					throw DetailContentEmptyError(detailMessage: "repository.fetchDetailContes")
-//				}
-//				return FetchDetailContentsUseCaseModels.Response(contents: contents)
-//			}
-		
-		return Observable.just(FetchDetailContentsUseCaseModels.Response(contents: detailContents))
+		return trainingDetailDataSource.fetchDetailContents(muscleIndex: request.trainingIndex)
+			.asObservable().map { contents -> FetchDetailContentsUseCaseModels.Response in
+				return FetchDetailContentsUseCaseModels.Response(contents: contents)
+			}
 	}
 	
 	func fetchDetailContent(request: FetchDetailContentUseCaseModels.Request) -> Observable<FetchDetailContentUseCaseModels.Response> {
@@ -46,18 +41,14 @@ class DetailContentRepository: DetailContentRepositoryProtocol {
 	}
 	
 	func saveDetailContent(request: SaveDetailContentUseCaseModels.Request) -> Observable<SaveDetailContentUseCaseModels.Response> {
-		
-		if let index = request.index {
-			// 업데이트
-			
-			let response = SaveDetailContentUseCaseModels.Response(isSuccess: true)
-			return Observable.of(response)
-		} else {
-			
-			return trainingDetailDataSource.saveDetailContent(muscleIndex: request.muscleIndex, text: request.text, type: request.type)
-				.andThen(Observable.of(SaveDetailContentUseCaseModels.Response(isSuccess: true)))
-		}
+        return trainingDetailDataSource.saveDetailContent(muscleIndex: request.muscleIndex, text: request.text, type: request.type)
+            .andThen(Observable.of(SaveDetailContentUseCaseModels.Response(isSuccess: true)))
 	}
+    
+    func updateDetailContent(request: UpdateDetailContentUseCaseModels.Request) -> Observable<UpdateDetailContentUseCaseModels.Response> {
+        return trainingDetailDataSource.updateDetailContent(index: request.index, text: request.text)
+            .andThen(Observable.of(UpdateDetailContentUseCaseModels.Response(isSuccess: true)))
+    }
 	
 	func deleteDetailContent(request: DeleteDetailContentUseCaseModels.Request) -> Observable<DeleteDetailContentUseCaseModels.Response> {
 		return trainingDetailDataSource.deleteDetailContent(index: request.index)

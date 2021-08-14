@@ -13,7 +13,7 @@ protocol TrainingInternalDBProtocol {
 }
 
 class TrainingInternalDB: TrainingInternalDBProtocol {
-
+    
 	func fetchTrainings() -> Single<[Training]> {
 		return Single<[Training]>.create { single in
 			

@@ -35,8 +35,6 @@ class FetchDetailContentsUseCase: FetchDetailContentsUseCaseProtocol {
 	func execute(
 		request: FetchDetailContentsUseCaseModels.Request
 	) -> Observable<FetchDetailContentsUseCaseModels.Response> {
-		let response = contentRepository.fetchDetailContents(request: request)
-		print("response \(response)")
-		return response
+		return contentRepository.fetchDetailContents(request: request)
 	}
 }

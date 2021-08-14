@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MemoViewController" customModule="RoadToHotBody" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WriteMemoViewController" customModule="RoadToHotBody" customModuleProvider="target">
             <connections>
-                <outlet property="deleteButton" destination="oIO-wy-vUS" id="dpA-ax-Go9"/>
-                <outlet property="textView" destination="xKy-yV-TFW" id="U6V-YG-IIr"/>
-                <outlet property="textViewBottomConstraint" destination="O3h-Vu-jgW" id="h3q-iJ-8PD"/>
+                <outlet property="textView" destination="xKy-yV-TFW" id="LmC-bm-dGD"/>
+                <outlet property="textViewBottomConstraint" destination="O3h-Vu-jgW" id="ACN-F0-vbx"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -28,41 +27,24 @@
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oIO-wy-vUS">
-                    <rect key="frame" x="16" y="816" width="30" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="30" id="FDz-dW-ZqS"/>
-                        <constraint firstAttribute="width" constant="30" id="Z2o-W1-6HX"/>
-                    </constraints>
-                    <color key="tintColor" systemColor="systemRedColor"/>
-                    <state key="normal" image="trash" catalog="system">
-                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22"/>
-                    </state>
-                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="oIO-wy-vUS" secondAttribute="bottom" constant="16" id="Lnx-vr-M0k"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="xKy-yV-TFW" secondAttribute="bottom" constant="10" id="O3h-Vu-jgW"/>
                 <constraint firstItem="xKy-yV-TFW" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="VVy-Cx-3gc"/>
                 <constraint firstItem="xKy-yV-TFW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="klw-aG-CbA"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xKy-yV-TFW" secondAttribute="trailing" constant="16" id="ntN-Pg-F2y"/>
-                <constraint firstItem="oIO-wy-vUS" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="sp9-cf-j1D"/>
             </constraints>
             <point key="canvasLocation" x="-48" y="76"/>
         </view>
     </objects>
     <resources>
-        <image name="trash" catalog="system" width="121" height="128"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
