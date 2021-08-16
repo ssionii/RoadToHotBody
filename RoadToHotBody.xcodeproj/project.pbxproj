@@ -20,6 +20,11 @@
 		B56EFA5626C7A623008A5346 /* WriteMemoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EFA5526C7A623008A5346 /* WriteMemoCoordinator.swift */; };
 		B56EFA5826C7C2C0008A5346 /* ReadMemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B56EFA5726C7C2C0008A5346 /* ReadMemoViewController.xib */; };
 		B56EFA5A26C7D5E6008A5346 /* UpdateDetailContentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EFA5926C7D5E6008A5346 /* UpdateDetailContentUseCase.swift */; };
+		B56EFA6026C803EC008A5346 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EFA5E26C803EC008A5346 /* PhotoViewController.swift */; };
+		B56EFA6126C803EC008A5346 /* PhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B56EFA5F26C803EC008A5346 /* PhotoViewController.xib */; };
+		B56EFA6326C80872008A5346 /* PhotoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EFA6226C80872008A5346 /* PhotoCoordinator.swift */; };
+		B56EFA6526C80B0E008A5346 /* NoNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EFA6426C80B0E008A5346 /* NoNavigationRouter.swift */; };
+		B56EFA6726C81F30008A5346 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EFA6626C81F30008A5346 /* UIImageView+Extension.swift */; };
 		C33815C08C875C8F95249255 /* Pods_RoadToHotBody.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E77AEEB598B06694A614A896 /* Pods_RoadToHotBody.framework */; };
 		FA0B49D826C509190018DE69 /* DetailContentDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B49D726C509190018DE69 /* DetailContentDataSource.swift */; };
 		FA0B49EC26C50A820018DE69 /* TrainingDetailInternalDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B49EB26C50A820018DE69 /* TrainingDetailInternalDB.swift */; };
@@ -109,6 +114,11 @@
 		B56EFA5526C7A623008A5346 /* WriteMemoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteMemoCoordinator.swift; sourceTree = "<group>"; };
 		B56EFA5726C7C2C0008A5346 /* ReadMemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReadMemoViewController.xib; sourceTree = "<group>"; };
 		B56EFA5926C7D5E6008A5346 /* UpdateDetailContentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDetailContentUseCase.swift; sourceTree = "<group>"; };
+		B56EFA5E26C803EC008A5346 /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
+		B56EFA5F26C803EC008A5346 /* PhotoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoViewController.xib; sourceTree = "<group>"; };
+		B56EFA6226C80872008A5346 /* PhotoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCoordinator.swift; sourceTree = "<group>"; };
+		B56EFA6426C80B0E008A5346 /* NoNavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNavigationRouter.swift; sourceTree = "<group>"; };
+		B56EFA6626C81F30008A5346 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		C8134247A7D02BF2AD8DAEF1 /* Pods_RoadToHotBody_RoadToHotBodyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoadToHotBody_RoadToHotBodyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E77AEEB598B06694A614A896 /* Pods_RoadToHotBody.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoadToHotBody.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED5047F09EC0E1FEEA2F521D /* Pods-RoadToHotBodyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoadToHotBodyTests.release.xcconfig"; path = "Target Support Files/Pods-RoadToHotBodyTests/Pods-RoadToHotBodyTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -254,6 +264,16 @@
 				B56EFA5326C7A532008A5346 /* ReadMemoCoordinator.swift */,
 			);
 			path = Read;
+			sourceTree = "<group>";
+		};
+		B56EFA5B26C80386008A5346 /* Photo */ = {
+			isa = PBXGroup;
+			children = (
+				B56EFA5E26C803EC008A5346 /* PhotoViewController.swift */,
+				B56EFA5F26C803EC008A5346 /* PhotoViewController.xib */,
+				B56EFA6226C80872008A5346 /* PhotoCoordinator.swift */,
+			);
+			path = Photo;
 			sourceTree = "<group>";
 		};
 		FA0B49CB26C505140018DE69 /* Service */ = {
@@ -445,6 +465,7 @@
 				FAFA46F926C0A81C00CD820C /* Calendar */,
 				FAFA470A26C0BC7D00CD820C /* Detail */,
 				B541962F26C2B25A00B2080A /* Memo */,
+				B56EFA5B26C80386008A5346 /* Photo */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -474,6 +495,7 @@
 				FAFA46BD26BD245700CD820C /* NavigationRouter.swift */,
 				FAFA46C226BD246F00CD820C /* ModalNavigationRouter.swift */,
 				FAFA472126C0C79100CD820C /* TabBarRouter.swift */,
+				B56EFA6426C80B0E008A5346 /* NoNavigationRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -491,6 +513,7 @@
 			children = (
 				FAFA46CE26BD24B900CD820C /* UIView+Extension.swift */,
 				FAFA484426C3A77D00CD820C /* UITextView+Extension.swift */,
+				B56EFA6626C81F30008A5346 /* UIImageView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -666,6 +689,7 @@
 				B541963326C2B27A00B2080A /* WriteMemoViewController.xib in Resources */,
 				FAFA46F226C0A80800CD820C /* HomeViewController.xib in Resources */,
 				FAFA479C26C245E600CD820C /* MemoCell.xib in Resources */,
+				B56EFA6126C803EC008A5346 /* PhotoViewController.xib in Resources */,
 				FAFA47E026C2665D00CD820C /* PhotoCell.xib in Resources */,
 				B56EFA5826C7C2C0008A5346 /* ReadMemoViewController.xib in Resources */,
 			);
@@ -802,10 +826,12 @@
 				FAB294D326C60F25003788CA /* HomeViewModel.swift in Sources */,
 				FAFA46CF26BD24B900CD820C /* UIView+Extension.swift in Sources */,
 				FAFA46DB26BD250E00CD820C /* MainCoordinator.swift in Sources */,
+				B56EFA6526C80B0E008A5346 /* NoNavigationRouter.swift in Sources */,
 				FAB2948D26C5FE5C003788CA /* EmptyError.swift in Sources */,
 				FAFA46EA26BD256B00CD820C /* AppRouter.swift in Sources */,
 				FAB2948026C5F785003788CA /* TrainingDetail.swift in Sources */,
 				B56EFA5226C7A2E1008A5346 /* WriteMemoViewController.swift in Sources */,
+				B56EFA6726C81F30008A5346 /* UIImageView+Extension.swift in Sources */,
 				FAFA470D26C0BC8F00CD820C /* DetailViewController.swift in Sources */,
 				B56EFA5626C7A623008A5346 /* WriteMemoCoordinator.swift in Sources */,
 				FAFA473B26C0DE1600CD820C /* AppCoordinator.swift in Sources */,
@@ -834,11 +860,13 @@
 				FA0B49FE26C511CE0018DE69 /* InternalDBError.swift in Sources */,
 				FAFA46BE26BD245700CD820C /* NavigationRouter.swift in Sources */,
 				FAB294C126C60D42003788CA /* MuscleRepositoryImpl.swift in Sources */,
+				B56EFA6326C80872008A5346 /* PhotoCoordinator.swift in Sources */,
 				FAB294A126C5FFA8003788CA /* TrainingInternalDB.swift in Sources */,
 				FAB294C626C60D74003788CA /* MuscleRepository.swift in Sources */,
 				FAFA472226C0C79100CD820C /* TabBarRouter.swift in Sources */,
 				FAFA47A426C246FE00CD820C /* Content.swift in Sources */,
 				B56EFA5026C7A18B008A5346 /* MemoVCCoordinatorDelegate.swift in Sources */,
+				B56EFA6026C803EC008A5346 /* PhotoViewController.swift in Sources */,
 				FAFA478E26C20B9700CD820C /* CalendarCoordinator.swift in Sources */,
 				FAFA47DF26C2665D00CD820C /* PhotoCell.swift in Sources */,
 				B56EFA5A26C7D5E6008A5346 /* UpdateDetailContentUseCase.swift in Sources */,

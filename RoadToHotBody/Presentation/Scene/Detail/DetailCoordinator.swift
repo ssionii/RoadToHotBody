@@ -11,7 +11,8 @@ class DetailCoordinator: Coordinator {
     var children: [Coordinator] = []
     var router: Router
     
-	private var muscle: Muscle
+    private var detailViewController: DetailViewController?
+	private let muscle: Muscle
 	
     init(router: Router, muscle: Muscle) {
         self.router = router
@@ -19,8 +20,9 @@ class DetailCoordinator: Coordinator {
     }
     
     func present(animated: Bool, onDismissed: (() -> Void)?) {
-		let detailViewModel = DetailViewModel(muscle: muscle)
+        let detailViewModel = DetailViewModel(muscle: muscle)
         let detailViewController = DetailViewController(viewModel: detailViewModel)
+        self.detailViewController = detailViewController
         detailViewController.coordinatorDelegate = self
         router.present(detailViewController, animated: true)
     }
@@ -42,14 +44,36 @@ class DetailCoordinator: Coordinator {
             parentViewController.reloadView.onNext(())
         })
     }
+    
+    private func presentPhoto(parentViewController: DetailViewController) {
+        let router = NoNavigationRouter(rootViewController: parentViewController, modalPresentationStyle: .automatic)
+        let coordinator = PhotoCoordinator(router: router)
+        coordinator.delegate = self
+        presentChild(coordinator, animated: true)
+    }
 }
 
 extension DetailCoordinator: DetailVCCoordinatorDelegate {
+  
+    func readMemo(_ parentViewController: DetailViewController, content: Content) {
+        self.presentReadMemo(parentViewController: parentViewController, content: content)
+    }
+    
 	func writeMemoButtonClicked(_ parentViewController: DetailViewController) {
         self.presentWriteMemo(parentViewController: parentViewController, muscle: muscle)
     }
-	
-	func readMemo(_ parentViewController: DetailViewController, content: Content) {
-        self.presentReadMemo(parentViewController: parentViewController, content: content)
-	}
+    
+    func addPhotoButtomClicked(_ parentViewController: DetailViewController) {
+        self.presentPhoto(parentViewController: parentViewController)
+    }
+}
+
+extension DetailCoordinator: PhotoCoordinatorDelegate {
+    func dismissPhtoLibrary(image: UIImage, imageUrl: NSURL) {
+        print("image: \(image), imageUrl: \(imageUrl)")
+    
+        guard let detailViewController = self.detailViewController else { return }
+        detailViewController.addedPhotoURL.onNext(imageUrl)
+        
+    }
 }

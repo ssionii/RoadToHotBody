@@ -5,13 +5,15 @@
 //  Created by  60117280 on 2021/08/09.
 //
 
+import Foundation
 import RxSwift
 import RxCocoa
 import JJFloatingActionButton
 
 protocol DetailVCCoordinatorDelegate: AnyObject {
+    func readMemo(_ parentViewController: DetailViewController, content: Content)
     func writeMemoButtonClicked(_ parentViewController: DetailViewController)
-	func readMemo(_ parentViewController: DetailViewController, content: Content)
+    func addPhotoButtomClicked(_ parentViewController: DetailViewController)
 }
 
 class DetailViewController: UIViewController {
@@ -32,7 +34,9 @@ class DetailViewController: UIViewController {
         button.addItem(title: "", image: UIImage(systemName: "pencil")) { _ in
             self.coordinatorDelegate?.writeMemoButtonClicked(self)
         }
-        button.addItem(title: "", image: UIImage(systemName: "photo"), action: nil)
+        button.addItem(title: "", image: UIImage(systemName: "photo")) { _ in
+            self.coordinatorDelegate?.addPhotoButtomClicked(self)
+        }
         button.addItem(title: "", image: UIImage(systemName: "video"), action: nil)
         
         return button
@@ -43,6 +47,9 @@ class DetailViewController: UIViewController {
 	private let disposeBag = DisposeBag()
 	
 	let reloadView = BehaviorSubject<Void>(value: ())
+    let addedPhotoURL = PublishSubject<NSURL>()
+    
+    private let cellSpacingHeight: CGFloat = 10
 	
 	private var contents: [Content] = [] {
 		didSet {
@@ -77,14 +84,17 @@ class DetailViewController: UIViewController {
 	private func configureTableView() {
 		tableView.delegate = self
 		tableView.dataSource = self
-		
+        
 		tableView.register(UINib(nibName: MemoCell.ID, bundle: nil), forCellReuseIdentifier: MemoCell.ID)
 		tableView.register(UINib(nibName: PhotoCell.ID, bundle: nil), forCellReuseIdentifier: PhotoCell.ID)
 	}
 	
 	private func bind() {
 		let output = viewModel.transform(
-			input: DetailViewModel.Input(reloadView: reloadView.asObserver())
+			input: DetailViewModel.Input(
+                reloadView: reloadView.asObserver(),
+                addedPhotoURL: addedPhotoURL.asObserver()
+            )
 		)
 		
 		output.muscleName
@@ -102,25 +112,45 @@ class DetailViewController: UIViewController {
 		reloadView.subscribe(onNext: { _ in
 		})
         .disposed(by: disposeBag)
+        
+        output.isPhotoAdded
+            .subscribe(onNext: { _ in
+                self.reloadView.onNext(())
+            })
+            .disposed(by: disposeBag)
 	}
 }
 
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
 	
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return contents.count
+    }
+    
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return contents.count
+		return 1
 	}
-	
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return cellSpacingHeight
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }
+    
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		switch contents[indexPath.row].type {
+		switch contents[indexPath.section].type {
 		case .Memo:
 			let cell = tableView.dequeueReusableCell(withIdentifier: MemoCell.ID, for: indexPath) as! MemoCell
-			cell.bind(text: contents[indexPath.row].text)
+            cell.bind(text: contents[indexPath.section].text)
 			return cell
 		case .Photo:
 			let cell = tableView.dequeueReusableCell(withIdentifier: PhotoCell.ID, for: indexPath) as! PhotoCell
             cell.delegate = self
-            cell.bind(url: contents[indexPath.row].text, index: indexPath)
+            cell.bind(url: contents[indexPath.section].text, index: indexPath)
 			return cell
 		default:
 			let cell = tableView.dequeueReusableCell(withIdentifier: MemoCell.ID, for: indexPath)
@@ -131,7 +161,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		switch contents[indexPath.row].type {
 		case .Memo:
-			self.coordinatorDelegate?.readMemo(self, content: contents[indexPath.row])
+			self.coordinatorDelegate?.readMemo(self, content: contents[indexPath.section])
 			break
 		case .Photo:
 			break
@@ -143,6 +173,9 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension DetailViewController: PhotoCellDelegate {
     func resizeImage(indexPath: IndexPath) {
-        self.tableView.reloadRows(at: [indexPath], with: .none)
+        
+        UIView.performWithoutAnimation {
+            self.tableView.reloadRows(at: [indexPath], with: .none)
+        }
     }
 }
