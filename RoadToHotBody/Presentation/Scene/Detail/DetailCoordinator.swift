@@ -63,17 +63,19 @@ extension DetailCoordinator: DetailVCCoordinatorDelegate {
         self.presentWriteMemo(parentViewController: parentViewController, muscle: muscle)
     }
     
-    func addPhotoButtomClicked(_ parentViewController: DetailViewController) {
+    func photoLibraryButtonClicked(_ parentViewController: DetailViewController) {
         self.presentPhoto(parentViewController: parentViewController)
     }
 }
 
 extension DetailCoordinator: PhotoCoordinatorDelegate {
-    func dismissPhtoLibrary(image: UIImage, imageUrl: NSURL) {
-        print("image: \(image), imageUrl: \(imageUrl)")
-    
+    func selectImage(imageUrl: NSURL) {
         guard let detailViewController = self.detailViewController else { return }
         detailViewController.addedPhotoURL.onNext(imageUrl)
-        
+    }
+    
+    func selectVideo(videoUrl: NSURL) {
+        guard let detailViewController = self.detailViewController else { return }
+        detailViewController.addedVideoURL.onNext(videoUrl)
     }
 }

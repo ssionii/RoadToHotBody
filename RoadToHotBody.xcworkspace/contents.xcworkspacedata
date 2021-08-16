@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:RoadToHotBody.xcodeproj">
+      location = "group:/opt/RoadToHotBody/RoadToHotBody.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

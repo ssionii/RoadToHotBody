@@ -9,7 +9,8 @@ import UIKit
 import Photos
 
 protocol PhotoCoordinatorDelegate: AnyObject {
-    func dismissPhtoLibrary(image: UIImage, imageUrl: NSURL)
+    func selectImage(imageUrl: NSURL)
+    func selectVideo(videoUrl: NSURL)
 }
 
 class PhotoCoordinator: NSObject, Coordinator {
@@ -25,6 +26,7 @@ class PhotoCoordinator: NSObject, Coordinator {
     func present(animated: Bool, onDismissed: (() -> Void)?) {
         let photoController = UIImagePickerController()
         photoController.delegate = self
+        photoController.mediaTypes = ["public.movie", "public.image"]
         router.present(photoController, animated: animated)
     }
 }
@@ -35,13 +37,16 @@ extension PhotoCoordinator: UIImagePickerControllerDelegate, UINavigationControl
         
         print(info)
         
-        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage,
-           let imageUrl = info[UIImagePickerController.InfoKey.imageURL] {
-            // save image url
-            self.delegate?.dismissPhtoLibrary(image: image, imageUrl: imageUrl as! NSURL)
+        if info[UIImagePickerController.InfoKey.mediaType] as! String == "public.image" {
+            if let imageUrl = info[UIImagePickerController.InfoKey.imageURL] {
+                self.delegate?.selectImage(imageUrl: imageUrl as! NSURL)
+            }
+            router.dismiss(animated: true)
+        } else if info[UIImagePickerController.InfoKey.mediaType] as! String == "public.movie" {
+            if let videoUrl = info[UIImagePickerController.InfoKey.mediaURL] {
+                self.delegate?.selectVideo(videoUrl: videoUrl as! NSURL)
+            }
         }
-        router.dismiss(animated: true)
-        
     }
 }
 

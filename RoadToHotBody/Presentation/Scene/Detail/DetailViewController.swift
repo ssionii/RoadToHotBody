@@ -13,7 +13,7 @@ import JJFloatingActionButton
 protocol DetailVCCoordinatorDelegate: AnyObject {
     func readMemo(_ parentViewController: DetailViewController, content: Content)
     func writeMemoButtonClicked(_ parentViewController: DetailViewController)
-    func addPhotoButtomClicked(_ parentViewController: DetailViewController)
+    func photoLibraryButtonClicked(_ parentViewController: DetailViewController)
 }
 
 class DetailViewController: UIViewController {
@@ -35,9 +35,9 @@ class DetailViewController: UIViewController {
             self.coordinatorDelegate?.writeMemoButtonClicked(self)
         }
         button.addItem(title: "", image: UIImage(systemName: "photo")) { _ in
-            self.coordinatorDelegate?.addPhotoButtomClicked(self)
+            self.coordinatorDelegate?.photoLibraryButtonClicked(self)
         }
-        button.addItem(title: "", image: UIImage(systemName: "video"), action: nil)
+//        button.addItem(title: "", image: UIImage(systemName: "video"), action: nil)
         
         return button
     }()
@@ -48,6 +48,7 @@ class DetailViewController: UIViewController {
 	
 	let reloadView = BehaviorSubject<Void>(value: ())
     let addedPhotoURL = PublishSubject<NSURL>()
+    let addedVideoURL = PublishSubject<NSURL>()
     
     private let cellSpacingHeight: CGFloat = 10
 	
@@ -93,7 +94,8 @@ class DetailViewController: UIViewController {
 		let output = viewModel.transform(
 			input: DetailViewModel.Input(
                 reloadView: reloadView.asObserver(),
-                addedPhotoURL: addedPhotoURL.asObserver()
+                addedPhotoURL: addedPhotoURL.asObserver(),
+                addedVideoURL: addedVideoURL.asObserver()
             )
 		)
 		
@@ -114,6 +116,12 @@ class DetailViewController: UIViewController {
         .disposed(by: disposeBag)
         
         output.isPhotoAdded
+            .subscribe(onNext: { _ in
+                self.reloadView.onNext(())
+            })
+            .disposed(by: disposeBag)
+        
+        output.isVideoAdded
             .subscribe(onNext: { _ in
                 self.reloadView.onNext(())
             })
@@ -152,6 +160,10 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             cell.delegate = self
             cell.bind(url: contents[indexPath.section].text, index: indexPath)
 			return cell
+        case .Video:
+            let cell = tableView.dequeueReusableCell(withIdentifier: VideoCell.ID, for: indexPath) as! VideoCell
+            cell.bind(url: contents[indexPath.section].text)
+            return cell
 		default:
 			let cell = tableView.dequeueReusableCell(withIdentifier: MemoCell.ID, for: indexPath)
 			return cell

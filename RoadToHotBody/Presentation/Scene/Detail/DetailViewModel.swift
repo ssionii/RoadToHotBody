@@ -12,12 +12,14 @@ class DetailViewModel {
 	struct Input {
 		var reloadView: Observable<Void>
         var addedPhotoURL: Observable<NSURL>
+        var addedVideoURL: Observable<NSURL>
 	}
 	
 	struct Output {
 		var muscleName: Driver<String>
 		var contents: Observable<[Content]?>
         var isPhotoAdded: Observable<Void>
+        var isVideoAdded: Observable<Void>
 	}
 	
 	// TODO: DI
@@ -62,6 +64,23 @@ class DetailViewModel {
                 }
             }
         
-        return Output(muscleName: name, contents: content, isPhotoAdded: isPhotoAdded)
+        
+        let isVideoAdded = input.addedVideoURL
+            .flatMap { url -> Observable<SaveDetailContentUseCaseModels.Response> in
+                self.saveDetailContentUseCase.execute(
+                    request: SaveDetailContentUseCaseModels.Request(
+                        type: .Video,
+                        text: String(describing: url),
+                        muscleIndex: self.muscle.index
+                    )
+                )
+            }
+            .map { response -> Void in
+                if response.isSuccess {
+                    return ()
+                }
+            }
+        
+        return Output(muscleName: name, contents: content, isPhotoAdded: isPhotoAdded, isVideoAdded: isVideoAdded)
 	}
 }

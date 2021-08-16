@@ -25,6 +25,8 @@
 		B56EFA6326C80872008A5346 /* PhotoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EFA6226C80872008A5346 /* PhotoCoordinator.swift */; };
 		B56EFA6526C80B0E008A5346 /* NoNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EFA6426C80B0E008A5346 /* NoNavigationRouter.swift */; };
 		B56EFA6726C81F30008A5346 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EFA6626C81F30008A5346 /* UIImageView+Extension.swift */; };
+		B56EFA6926CA7C75008A5346 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EFA6826CA7C75008A5346 /* VideoCell.swift */; };
+		B56EFA6B26CA7E1B008A5346 /* VideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B56EFA6A26CA7E1B008A5346 /* VideoCell.xib */; };
 		C33815C08C875C8F95249255 /* Pods_RoadToHotBody.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E77AEEB598B06694A614A896 /* Pods_RoadToHotBody.framework */; };
 		FA0B49D826C509190018DE69 /* DetailContentDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B49D726C509190018DE69 /* DetailContentDataSource.swift */; };
 		FA0B49EC26C50A820018DE69 /* TrainingDetailInternalDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B49EB26C50A820018DE69 /* TrainingDetailInternalDB.swift */; };
@@ -119,6 +121,8 @@
 		B56EFA6226C80872008A5346 /* PhotoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCoordinator.swift; sourceTree = "<group>"; };
 		B56EFA6426C80B0E008A5346 /* NoNavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNavigationRouter.swift; sourceTree = "<group>"; };
 		B56EFA6626C81F30008A5346 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		B56EFA6826CA7C75008A5346 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
+		B56EFA6A26CA7E1B008A5346 /* VideoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoCell.xib; sourceTree = "<group>"; };
 		C8134247A7D02BF2AD8DAEF1 /* Pods_RoadToHotBody_RoadToHotBodyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoadToHotBody_RoadToHotBodyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E77AEEB598B06694A614A896 /* Pods_RoadToHotBody.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoadToHotBody.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED5047F09EC0E1FEEA2F521D /* Pods-RoadToHotBodyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoadToHotBodyTests.release.xcconfig"; path = "Target Support Files/Pods-RoadToHotBodyTests/Pods-RoadToHotBodyTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -568,6 +572,8 @@
 				FAFA479A26C245E600CD820C /* MemoCell.xib */,
 				FAFA47DD26C2665C00CD820C /* PhotoCell.swift */,
 				FAFA47DE26C2665C00CD820C /* PhotoCell.xib */,
+				B56EFA6826CA7C75008A5346 /* VideoCell.swift */,
+				B56EFA6A26CA7E1B008A5346 /* VideoCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -682,6 +688,7 @@
 			files = (
 				FAFA467E26BD1FA400CD820C /* LaunchScreen.storyboard in Resources */,
 				FAFA470E26C0BC8F00CD820C /* DetailViewController.xib in Resources */,
+				B56EFA6B26CA7E1B008A5346 /* VideoCell.xib in Resources */,
 				FAB294E526C62DCC003788CA /* MuscleCell.xib in Resources */,
 				FAFA46FD26C0A82900CD820C /* CalendarViewController.xib in Resources */,
 				FAFA467B26BD1FA400CD820C /* Assets.xcassets in Resources */,
@@ -859,6 +866,7 @@
 				FAFA47A926C2488500CD820C /* DetailViewModel.swift in Sources */,
 				FA0B49FE26C511CE0018DE69 /* InternalDBError.swift in Sources */,
 				FAFA46BE26BD245700CD820C /* NavigationRouter.swift in Sources */,
+				B56EFA6926CA7C75008A5346 /* VideoCell.swift in Sources */,
 				FAB294C126C60D42003788CA /* MuscleRepositoryImpl.swift in Sources */,
 				B56EFA6326C80872008A5346 /* PhotoCoordinator.swift in Sources */,
 				FAB294A126C5FFA8003788CA /* TrainingInternalDB.swift in Sources */,
@@ -1041,6 +1049,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3AM7R7TW97;
 				INFOPLIST_FILE = RoadToHotBody/Info.plist;
@@ -1050,6 +1059,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssionii.RoadToHotBody;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1061,6 +1071,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3AM7R7TW97;
 				INFOPLIST_FILE = RoadToHotBody/Info.plist;
@@ -1070,6 +1081,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssionii.RoadToHotBody;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
