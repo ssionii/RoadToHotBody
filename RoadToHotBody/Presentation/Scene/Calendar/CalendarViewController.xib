@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -10,7 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CalendarViewController" customModule="RoadToHotBody" customModuleProvider="target">
             <connections>
-                <outlet property="calendarCollectionVIew" destination="ECa-Me-4oP" id="dzH-UR-Bm9"/>
+                <outlet property="baseCollectionView" destination="kTI-F3-frV" id="3Ru-9D-IEM"/>
+                <outlet property="calendarHeightConstraint" destination="rKj-03-C7M" id="h2d-xc-DqS"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -69,13 +70,13 @@
                         <constraint firstAttribute="height" constant="30" id="nix-FB-yyq"/>
                     </constraints>
                 </stackView>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ECa-Me-4oP">
-                    <rect key="frame" x="0.0" y="74" width="390" height="400"/>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="kTI-F3-frV">
+                    <rect key="frame" x="0.0" y="84" width="390" height="200"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="400" id="cd4-0a-tz8"/>
+                        <constraint firstAttribute="height" constant="200" id="rKj-03-C7M"/>
                     </constraints>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="VE9-eI-pk6">
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="fMg-5c-TTD">
                         <size key="itemSize" width="128" height="128"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -86,10 +87,10 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="ECa-Me-4oP" firstAttribute="top" secondItem="22j-cB-Esf" secondAttribute="bottom" id="2Ev-bc-Ccb"/>
-                <constraint firstItem="ECa-Me-4oP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="EPX-f7-bAh"/>
+                <constraint firstItem="kTI-F3-frV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5TL-Dd-ACt"/>
+                <constraint firstItem="kTI-F3-frV" firstAttribute="top" secondItem="22j-cB-Esf" secondAttribute="bottom" constant="10" id="Mad-zb-E4P"/>
                 <constraint firstItem="22j-cB-Esf" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Nj8-kP-RkX"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ECa-Me-4oP" secondAttribute="trailing" id="baA-lS-2tH"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kTI-F3-frV" secondAttribute="trailing" id="ZdK-Oa-LaV"/>
                 <constraint firstItem="22j-cB-Esf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="uaU-AH-KYZ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="22j-cB-Esf" secondAttribute="trailing" constant="10" id="z2q-8m-kpZ"/>
             </constraints>

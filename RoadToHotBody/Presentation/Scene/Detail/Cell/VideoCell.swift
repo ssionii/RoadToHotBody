@@ -35,7 +35,6 @@ class VideoCell: UITableViewCell {
 		player = AVPlayer(url: url)
 		playerLayer = AVPlayerLayer(player: player)
 		playerLayer?.frame = bounds
-		print(playerLayer?.frame)
 		playerLayer?.videoGravity = AVLayerVideoGravity.resize
 		if let playerLayer = self.playerLayer {
 			layer.addSublayer(playerLayer)

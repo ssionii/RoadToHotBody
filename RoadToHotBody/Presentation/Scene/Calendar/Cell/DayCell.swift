@@ -9,6 +9,8 @@ import UIKit
 
 class DayCell: UICollectionViewCell {
 
+    static let ID = "DayCell"
+    
 	@IBOutlet weak var dayLabel: UILabel!
 	@IBOutlet weak var exerciseView: UIView!
 	@IBOutlet weak var memoView: UIView!
@@ -19,7 +21,10 @@ class DayCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 		
-		
+        self.exerciseView.layer.cornerRadius = self.exerciseView.frame.height / 2
+        self.exerciseView.backgroundColor = UIColor.init(named: "mainColor")
+        self.memoView.layer.cornerRadius = self.memoView.frame.height / 2
+        self.photoView.layer.cornerRadius = self.photoView.frame.height / 2
     }
 
 	func bind(day: String, contents: [Content]?) {

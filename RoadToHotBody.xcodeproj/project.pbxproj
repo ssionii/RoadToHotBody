@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		5FF627ABB4851819CF13F7D5 /* Pods_RoadToHotBody_RoadToHotBodyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8134247A7D02BF2AD8DAEF1 /* Pods_RoadToHotBody_RoadToHotBodyUITests.framework */; };
 		836C27234C1CCA15094D2249 /* Pods_RoadToHotBodyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0B6360B526218DC1B578501 /* Pods_RoadToHotBodyTests.framework */; };
+		B5117F5326CBF54200E6ABB5 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5117F5226CBF54200E6ABB5 /* CalendarViewModel.swift */; };
+		B5117F5626CBF8C000E6ABB5 /* MonthCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5117F5426CBF8C000E6ABB5 /* MonthCell.swift */; };
+		B5117F5726CBF8C000E6ABB5 /* MonthCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5117F5526CBF8C000E6ABB5 /* MonthCell.xib */; };
 		B541963326C2B27A00B2080A /* WriteMemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B541963126C2B27A00B2080A /* WriteMemoViewController.xib */; };
 		B541963726C2B2E400B2080A /* DetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B541963626C2B2E400B2080A /* DetailCoordinator.swift */; };
 		B56EFA4626C79B57008A5346 /* ReadMemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EFA4526C79B57008A5346 /* ReadMemoViewModel.swift */; };
@@ -107,6 +110,9 @@
 		7C102BA349609BF759994D0A /* Pods-RoadToHotBody-RoadToHotBodyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoadToHotBody-RoadToHotBodyUITests.release.xcconfig"; path = "Target Support Files/Pods-RoadToHotBody-RoadToHotBodyUITests/Pods-RoadToHotBody-RoadToHotBodyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		90CE53B0D93AD0E247216CCF /* Pods-RoadToHotBody.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoadToHotBody.debug.xcconfig"; path = "Target Support Files/Pods-RoadToHotBody/Pods-RoadToHotBody.debug.xcconfig"; sourceTree = "<group>"; };
 		B3BDFFEC9A18FC24E387C1BE /* Pods-RoadToHotBody-RoadToHotBodyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoadToHotBody-RoadToHotBodyUITests.debug.xcconfig"; path = "Target Support Files/Pods-RoadToHotBody-RoadToHotBodyUITests/Pods-RoadToHotBody-RoadToHotBodyUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		B5117F5226CBF54200E6ABB5 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
+		B5117F5426CBF8C000E6ABB5 /* MonthCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthCell.swift; sourceTree = "<group>"; };
+		B5117F5526CBF8C000E6ABB5 /* MonthCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MonthCell.xib; sourceTree = "<group>"; };
 		B541963126C2B27A00B2080A /* WriteMemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WriteMemoViewController.xib; sourceTree = "<group>"; };
 		B541963626C2B2E400B2080A /* DetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCoordinator.swift; sourceTree = "<group>"; };
 		B56EFA4526C79B57008A5346 /* ReadMemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadMemoViewModel.swift; sourceTree = "<group>"; };
@@ -317,6 +323,8 @@
 			children = (
 				FA9B27EA26CBA42400FC05E9 /* DayCell.swift */,
 				FA9B27EB26CBA42400FC05E9 /* DayCell.xib */,
+				B5117F5426CBF8C000E6ABB5 /* MonthCell.swift */,
+				B5117F5526CBF8C000E6ABB5 /* MonthCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -563,6 +571,7 @@
 				FAFA46FA26C0A82900CD820C /* CalendarViewController.swift */,
 				FAFA46FB26C0A82900CD820C /* CalendarViewController.xib */,
 				FAFA478D26C20B9700CD820C /* CalendarCoordinator.swift */,
+				B5117F5226CBF54200E6ABB5 /* CalendarViewModel.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -703,6 +712,7 @@
 				FAFA467E26BD1FA400CD820C /* LaunchScreen.storyboard in Resources */,
 				FAFA470E26C0BC8F00CD820C /* DetailViewController.xib in Resources */,
 				FA9B27ED26CBA42400FC05E9 /* DayCell.xib in Resources */,
+				B5117F5726CBF8C000E6ABB5 /* MonthCell.xib in Resources */,
 				FA9B27B326CB399D00FC05E9 /* VideoCell.xib in Resources */,
 				FAB294E526C62DCC003788CA /* MuscleCell.xib in Resources */,
 				FAFA46FD26C0A82900CD820C /* CalendarViewController.xib in Resources */,
@@ -869,6 +879,7 @@
 				B541963726C2B2E400B2080A /* DetailCoordinator.swift in Sources */,
 				FAFA484526C3A77D00CD820C /* UITextView+Extension.swift in Sources */,
 				B56EFA4826C79C3E008A5346 /* WriteMemoViewModel.swift in Sources */,
+				B5117F5626CBF8C000E6ABB5 /* MonthCell.swift in Sources */,
 				FAFA479B26C245E600CD820C /* MemoCell.swift in Sources */,
 				FAFA46C326BD246F00CD820C /* ModalNavigationRouter.swift in Sources */,
 				FAFA46B626BD243B00CD820C /* Router.swift in Sources */,
@@ -892,6 +903,7 @@
 				B56EFA5026C7A18B008A5346 /* MemoVCCoordinatorDelegate.swift in Sources */,
 				B56EFA6026C803EC008A5346 /* PhotoViewController.swift in Sources */,
 				FAFA478E26C20B9700CD820C /* CalendarCoordinator.swift in Sources */,
+				B5117F5326CBF54200E6ABB5 /* CalendarViewModel.swift in Sources */,
 				FAFA47DF26C2665D00CD820C /* PhotoCell.swift in Sources */,
 				B56EFA5A26C7D5E6008A5346 /* UpdateDetailContentUseCase.swift in Sources */,
 				B56EFA5426C7A532008A5346 /* ReadMemoCoordinator.swift in Sources */,

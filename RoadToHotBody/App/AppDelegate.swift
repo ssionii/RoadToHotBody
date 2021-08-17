@@ -15,16 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	public lazy var router = AppRouter(window: window!)
 	public lazy var window: UIWindow? = UIWindow(frame: UIScreen.main.bounds)
 	
-	lazy var persistentContainer: NSPersistentContainer = {
-		let container = NSPersistentContainer(name: "Mdoel")
-		container.loadPersistentStores { description, error in
-			if let error = error {
-				fatalError("Unable to load persistent stores :\(error)")
-			}
-		}
-		return container
-	}()
-	
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		
 		coordinator.present(animated: true, onDismissed: nil)
