@@ -26,7 +26,7 @@ class PhotoCoordinator: NSObject, Coordinator {
     func present(animated: Bool, onDismissed: (() -> Void)?) {
         let photoController = UIImagePickerController()
         photoController.delegate = self
-        photoController.mediaTypes = ["public.movie", "public.image"]
+        photoController.mediaTypes = ["public.image"]
         router.present(photoController, animated: animated)
     }
 }
@@ -34,19 +34,17 @@ class PhotoCoordinator: NSObject, Coordinator {
 extension PhotoCoordinator: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        print(info)
-        
+
         if info[UIImagePickerController.InfoKey.mediaType] as! String == "public.image" {
             if let imageUrl = info[UIImagePickerController.InfoKey.imageURL] {
                 self.delegate?.selectImage(imageUrl: imageUrl as! NSURL)
             }
-            router.dismiss(animated: true)
         } else if info[UIImagePickerController.InfoKey.mediaType] as! String == "public.movie" {
             if let videoUrl = info[UIImagePickerController.InfoKey.mediaURL] {
                 self.delegate?.selectVideo(videoUrl: videoUrl as! NSURL)
             }
         }
+		
+		router.dismiss(animated: true)
     }
 }
-

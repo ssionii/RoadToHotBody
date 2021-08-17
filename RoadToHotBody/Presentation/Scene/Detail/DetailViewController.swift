@@ -9,6 +9,8 @@ import Foundation
 import RxSwift
 import RxCocoa
 import JJFloatingActionButton
+import AVKit
+import Photos
 
 protocol DetailVCCoordinatorDelegate: AnyObject {
     func readMemo(_ parentViewController: DetailViewController, content: Content)
@@ -46,7 +48,7 @@ class DetailViewController: UIViewController {
     weak var coordinatorDelegate: DetailVCCoordinatorDelegate?
 	private let disposeBag = DisposeBag()
 	
-	let reloadView = BehaviorSubject<Void>(value: ())
+	let reloadView = PublishSubject<Void>()
     let addedPhotoURL = PublishSubject<NSURL>()
     let addedVideoURL = PublishSubject<NSURL>()
     
@@ -74,6 +76,7 @@ class DetailViewController: UIViewController {
 		configureUI()
 		configureTableView()
 		bind()
+//		requestPermssion()
     }
 	
 	private func configureUI() {
@@ -82,12 +85,31 @@ class DetailViewController: UIViewController {
         floatingButton.display(inViewController: self)
 	}
 	
+	private func requestPermssion() {
+		PHPhotoLibrary.requestAuthorization { status in
+			switch status {
+			case .authorized:
+				print("갤러리 권한 허용")
+				OperationQueue.main.addOperation {
+					self.reloadView.onNext(())
+				}
+			case .denied:
+				print("갤러리 권한 거부")
+			case .restricted, .notDetermined:
+				print("갤러리 선택하지 않음")
+			default:
+				break
+			}
+		}
+	}
+	
 	private func configureTableView() {
 		tableView.delegate = self
 		tableView.dataSource = self
         
 		tableView.register(UINib(nibName: MemoCell.ID, bundle: nil), forCellReuseIdentifier: MemoCell.ID)
 		tableView.register(UINib(nibName: PhotoCell.ID, bundle: nil), forCellReuseIdentifier: PhotoCell.ID)
+		tableView.register(UINib(nibName: VideoCell.ID, bundle: nil), forCellReuseIdentifier: VideoCell.ID)
 	}
 	
 	private func bind() {
@@ -112,6 +134,7 @@ class DetailViewController: UIViewController {
 			.disposed(by: disposeBag)
 		
 		reloadView.subscribe(onNext: { _ in
+			print("realod view called")
 		})
         .disposed(by: disposeBag)
         
@@ -162,7 +185,8 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
 			return cell
         case .Video:
             let cell = tableView.dequeueReusableCell(withIdentifier: VideoCell.ID, for: indexPath) as! VideoCell
-            cell.bind(url: contents[indexPath.section].text)
+			cell.delegate = self
+			cell.bind(url: contents[indexPath.section].text, indexPath: indexPath)
             return cell
 		default:
 			let cell = tableView.dequeueReusableCell(withIdentifier: MemoCell.ID, for: indexPath)
@@ -190,4 +214,13 @@ extension DetailViewController: PhotoCellDelegate {
             self.tableView.reloadRows(at: [indexPath], with: .none)
         }
     }
+}
+
+extension DetailViewController: VideoCellDelegate {
+	func loadedThumbnail(indexPath: IndexPath) {
+		
+		UIView.performWithoutAnimation {
+			self.tableView.reloadRows(at: [indexPath], with: .none)
+		}
+	}
 }

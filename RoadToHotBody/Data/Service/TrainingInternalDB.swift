@@ -13,6 +13,28 @@ protocol TrainingInternalDBProtocol {
 }
 
 class TrainingInternalDB: TrainingInternalDBProtocol {
+	
+	init() {
+//		removeRealm()
+	}
+	
+	private func removeRealm() {
+		let realmURL = Realm.Configuration.defaultConfiguration.fileURL!
+		let realmURLs = [
+			realmURL,
+			realmURL.appendingPathExtension("lock"),
+			realmURL.appendingPathExtension("note"),
+			realmURL.appendingPathExtension("management")
+		]
+				
+		for URL in realmURLs {
+			do {
+				try FileManager.default.removeItem(at: URL)
+			} catch {
+			// handle error
+			}
+		}
+	}
     
 	func fetchTrainings() -> Single<[Training]> {
 		return Single<[Training]>.create { single in

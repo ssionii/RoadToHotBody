@@ -40,7 +40,6 @@ class PhotoCell: UITableViewCell {
     }
     
     func bind(url: String?, index: IndexPath) {
-        
         guard let url = url else {
             // TODO: default 이미지
             return
