@@ -8,15 +8,16 @@
 import UIKit
 
 class CalendarViewController: UIViewController {
-
+	
+	@IBOutlet weak var calendarCollectionVIew: UICollectionView!
+	
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
 
 	init() {
 		super.init(nibName: "CalendarViewController", bundle: nil)
-		
+	
 		self.tabBarItem = UITabBarItem(title: "캘린더", image: UIImage(systemName: "calendar"), tag: 2)
 	}
 	
