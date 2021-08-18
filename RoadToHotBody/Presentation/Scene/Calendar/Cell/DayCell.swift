@@ -27,7 +27,14 @@ class DayCell: UICollectionViewCell {
         self.photoView.layer.cornerRadius = self.photoView.frame.height / 2
     }
 
-	func bind(day: String, contents: [Content]?) {
+	func bind(isThisMonth: Bool, day: String, contents: [Content]?) {
+		
+		if !isThisMonth {
+			dayLabel.textColor = .lightGray
+		} else {
+			dayLabel.textColor = .black
+		}
+		
 		self.dayLabel.text = day
 		
 		self.contents = contents

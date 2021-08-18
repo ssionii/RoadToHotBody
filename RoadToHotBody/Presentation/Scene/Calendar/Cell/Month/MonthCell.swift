@@ -6,15 +6,25 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class MonthCell: UICollectionViewCell {
     
     static let ID = "MonthCell"
     
     @IBOutlet weak var monthCollectionView: UICollectionView!
-    
     private var cellSize: CGFloat = 0
-    
+	
+	private var viewModel: MonthViewModel?
+	private let disposeBag = DisposeBag()
+	
+	private var calendarDates: [CalendarDate] = [] {
+		didSet {
+			monthCollectionView.reloadData()
+		}
+	}
+	
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -25,17 +35,28 @@ class MonthCell: UICollectionViewCell {
         
         monthCollectionView.register(UINib(nibName: DayCell.ID, bundle: nil), forCellWithReuseIdentifier: DayCell.ID)
     }
+	
+	func bind(viewModel: MonthViewModel) {
+		self.viewModel = viewModel
+		
+		let output = viewModel.transform(input: MonthViewModel.Input())
+		output.calendarDates
+			.subscribe(onNext: { dates in
+				self.calendarDates = dates
+			})
+			.disposed(by: disposeBag)
+	}
 }
 
 extension MonthCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7 * 6 // 6주
+		return self.calendarDates.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCell.ID, for: indexPath) as! DayCell
-        cell.bind(day: String(indexPath.row), contents: nil)
+		cell.bind(isThisMonth: self.calendarDates[indexPath.row].isThisMonth, day: self.calendarDates[indexPath.row].dayString , contents: nil)
         return cell
     }
     

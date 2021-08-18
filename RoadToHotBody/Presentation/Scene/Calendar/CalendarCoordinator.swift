@@ -16,7 +16,8 @@ class CalendarCoordinator: Coordinator {
 	init(router: Router) {
 		self.router = router
 		
-		self.calendarViewController = CalendarViewController()
+		let viewModel = CalendarViewModel()
+		self.calendarViewController = CalendarViewController(viewModel: viewModel)
 	}
 	
 	func present(animated: Bool, onDismissed: (() -> Void)?) {

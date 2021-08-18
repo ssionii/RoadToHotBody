@@ -31,10 +31,6 @@ class MainCoordinator: Coordinator {
 		presentCalendar()
 	}
 	
-	func presentChild() {
-		// navigaitonController..로 라우터 만들어서.. 해야하지 안하? ㅜㅡㅜ ㅜㅡㅜ 어려워 ㅜㅡㅜ
-	}
-	
 	func presentHome() {
 		let router = NavigationRouter(navigationController: baseNavigationController)
 		let coordinator = HomeCoordinator(router: router)
