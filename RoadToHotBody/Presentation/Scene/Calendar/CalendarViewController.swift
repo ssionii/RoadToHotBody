@@ -18,6 +18,7 @@ class CalendarViewController: UIViewController {
 	private let viewModel: CalendarViewModel
 	private let disposeBag = DisposeBag()
 	
+    private let cellSpacingHeight: CGFloat = 10
 	private var cellSize: CGFloat = 0
 	
 	private let isScrolled = PublishSubject<Int>()
@@ -50,6 +51,7 @@ class CalendarViewController: UIViewController {
 		
         configureUI()
         configureCollectoinView()
+        configureTableView()
 		bind()
     }
 	
@@ -112,6 +114,7 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MonthCell.ID, for: indexPath) as! MonthCell
+        cell.delegate = self
 		guard let displayedMonths = self.displayedMonths else { return cell }
 		cell.bind(viewModel: MonthViewModel(year: displayedMonths[indexPath.row].0, month: displayedMonths[indexPath.row].1))
         return cell
@@ -131,21 +134,42 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
 }
 
 extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return records.count
-	}
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return records.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return cellSpacingHeight
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		
-		switch records[indexPath.row].type {
+		switch records[indexPath.section].type {
 		case .Exercise:
 			let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseCell.ID, for: indexPath) as! ExerciseCell
-			cell.bind(text: records[indexPath.row].text ?? "")
+			cell.bind(text: records[indexPath.section].text ?? "")
 			return cell
 		default:
 			let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseCell.ID, for: indexPath) as! ExerciseCell
-			cell.bind(text: records[indexPath.row].text ?? "")
+			cell.bind(text: records[indexPath.section].text ?? "")
 			return cell
 		}
 	}
+}
+
+extension CalendarViewController: MonthCellDelegate {
+    func selectedDate(records: [Content]?) {
+        if let records = records {
+            self.records = records
+        }
+    }
 }

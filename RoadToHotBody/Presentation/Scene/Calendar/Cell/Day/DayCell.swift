@@ -9,23 +9,31 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+protocol DayCellDelegate: AnyObject {
+    func selectedDate(records: [Content]?)
+}
+
 class DayCell: UICollectionViewCell {
 
     static let ID = "DayCell"
     
-	@IBOutlet weak var dayLabel: UILabel!
+    @IBOutlet weak var dayLabelBackgroundView: UIView!
+    @IBOutlet weak var dayLabel: UILabel!
 	@IBOutlet weak var exerciseView: UIView!
 	@IBOutlet weak var memoView: UIView!
 	@IBOutlet weak var photoView: UIView!
 	
-	private var contents: [Content]?
-	
-	private var viewModel: DayViewModel?
+    private var viewModel: DayViewModel?
 	private let disposeBag = DisposeBag()
+    
+    weak var delegate: DayCellDelegate?
 
+    private var isDateSelected = BehaviorSubject<Bool>(value: false)
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-		
+        
+        self.dayLabelBackgroundView.layer.cornerRadius = self.dayLabelBackgroundView.frame.width / 2
         self.exerciseView.layer.cornerRadius = self.exerciseView.frame.height / 2
         self.exerciseView.backgroundColor = UIColor.init(named: "mainColor")
         self.memoView.layer.cornerRadius = self.memoView.frame.height / 2
@@ -33,18 +41,40 @@ class DayCell: UICollectionViewCell {
         self.photoView.layer.cornerRadius = self.photoView.frame.height / 2
 		self.photoView.backgroundColor = UIColor.systemPink
     }
+    
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                isDateSelected.onNext(true)
+                delegate?.selectedDate(records: viewModel?.records)
+            } else {
+                isDateSelected.onNext(false)
+            }
+        }
+    }
 	
 	func bind(viewModel: DayViewModel) {
 		
 		self.viewModel = viewModel
 		
-		let output = viewModel.transform(input: DayViewModel.Input(viewLoaded: Observable.just(())))
+        let output = viewModel.transform(
+            input: DayViewModel.Input(
+                viewLoaded: Observable.just(()),
+                isDateSelected: isDateSelected.asObservable()
+            )
+        )
 		
 		output.textColor
 			.subscribe(onNext: { color in
 				self.dayLabel.textColor = color
 			})
 			.disposed(by: disposeBag)
+        
+        output.textBackgroundColor
+            .subscribe(onNext: { color in
+                self.dayLabelBackgroundView.backgroundColor = color
+            })
+            .disposed(by: disposeBag)
 		
 		output.dayString
 			.drive(self.dayLabel.rx.text)
@@ -57,24 +87,5 @@ class DayCell: UICollectionViewCell {
 				self.photoView.isHidden = !hasRecord.2
 			})
 			.disposed(by: disposeBag)
-		
-		
-//		output.hasExerciseRecord?
-//			.subscribe(onNext: { bool in
-//				self.exerciseView.isHidden = !bool
-//			})
-//			.disposed(by: disposeBag)
-//
-//		output.hasMemoRecord?
-//			.subscribe(onNext: { bool in
-//				self.memoView.isHidden = !bool
-//			})
-//			.disposed(by: disposeBag)
-//
-//		output.hasPhotoRecord?
-//			.subscribe(onNext: { bool in
-//				self.photoView.isHidden = !bool
-//			})
-//			.disposed(by: disposeBag)
 	}
 }

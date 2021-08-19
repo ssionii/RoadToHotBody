@@ -19,7 +19,8 @@ class ExerciseCell: UITableViewCell {
 		
 		exerciseBackgroundView.roundCorners([.topLeft, .topRight, .bottomLeft, .bottomRight], radius: 10)
 		exerciseBackgroundView.backgroundColor = UIColor.init(named: "mainColor")
-		
+        exerciseLabel.textColor = .white
+        
 		let backgroundView = UIView()
 		backgroundView.backgroundColor = .clear
 		selectedBackgroundView = backgroundView

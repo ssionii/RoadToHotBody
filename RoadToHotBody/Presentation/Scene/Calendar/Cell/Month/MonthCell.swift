@@ -10,6 +10,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+protocol MonthCellDelegate: AnyObject {
+    func selectedDate(records: [Content]?)
+}
+
 class MonthCell: UICollectionViewCell {
     
     static let ID = "MonthCell"
@@ -20,6 +24,8 @@ class MonthCell: UICollectionViewCell {
 	
 	private var viewModel: MonthViewModel?
 	private let disposeBag = DisposeBag()
+    
+    weak var delegate: MonthCellDelegate?
 	
 	private var calendarDates: [CalendarDate] = [] {
 		didSet {
@@ -59,11 +65,18 @@ extension MonthCell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCell.ID, for: indexPath) as! DayCell
+        cell.delegate = self
 		cell.bind(viewModel: DayViewModel(calendarDate: calendarDates[indexPath.row]))
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: cellWidth, height: cellHeight)
+    }
+}
+
+extension MonthCell: DayCellDelegate {
+    func selectedDate(records: [Content]?) {
+        self.delegate?.selectedDate(records: records)
     }
 }

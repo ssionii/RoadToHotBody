@@ -11,13 +11,16 @@ import RxCocoa
 
 class DayViewModel {
 	struct Input {
-		var viewLoaded: Observable<Void>
+        var viewLoaded: Observable<Void>
+		var isDateSelected: Observable<Bool>
 	}
 	
 	struct Output {
 		var textColor: Observable<UIColor>
+        var textBackgroundColor: Observable<UIColor>
 		var dayString: Driver<String>
 		var hasRecord: Observable<(Bool, Bool, Bool)>?
+        var isToday: Observable<Bool>
 	}
 	
 	private let fetchRecordsUseCase = FetchRecordsUseCase(repository: RecordRepository(dataSource: RecordDataSource()))
@@ -31,46 +34,51 @@ class DayViewModel {
 	init(calendarDate: CalendarDate) {
 		
 		self.calendarDate = calendarDate
-		
+        
 		date = Date()
 		formatter = DateFormatter()
 		formatter.dateFormat = "yyyy-M-d"
 	}
 	
 	func transform(input: Input) -> Output {
-		
-		var textColor: Observable<UIColor>
-		
-		if isToday(dateString: calendarDate.date ?? "") {
-			textColor = Observable.just(UIColor.red)
-		} else {
-			if calendarDate.isThisMonth {
-				textColor = Observable.just(UIColor.black)
-			} else {
-				textColor = Observable.just(UIColor.lightGray)
-			}
-		}
+
+        let textColor = input.isDateSelected
+            .map { isSelected -> UIColor in
+                if isSelected {
+                    return UIColor.white
+                }
+                
+                if self.calendarDate.isThisMonth {
+                    if self.isToday(dateString: self.calendarDate.date) {
+                        return UIColor.red
+                    } else {
+                        return UIColor.black
+                    }
+                } else {
+                    return UIColor.lightGray
+                }
+            }
+        
+        let backgroundColor = input.isDateSelected
+            .map { isSelected -> UIColor in
+                if isSelected {
+                    return UIColor.darkGray
+                } else {
+                    return UIColor.clear
+                }
+            }
 
 		let dayString = Observable.just(calendarDate.dayString)
 			.asDriver(onErrorJustReturn: "")
 		
-		guard let date = calendarDate.date else {
-			return Output(
-				textColor: textColor,
-				dayString: dayString,
-				hasRecord: Observable.of((false, false, false))
-			)
-		}
-		
 		let records = input.viewLoaded
 			.flatMap { _ -> Observable<FetchRecordsUseCaseModels.Response> in
 				self.fetchRecordsUseCase.execute(
-					request: FetchRecordsUseCaseModels.Request(date: date)
+                    request: FetchRecordsUseCaseModels.Request(date: self.calendarDate.date)
 				)
 			}
 			.map { response -> [Content] in
 				self.records = response.records
-				print(response.records)
 				return response.records
 			}
 			.share()
@@ -83,11 +91,15 @@ class DayViewModel {
 					contents.contains { $0.type == .Photo }
 				)
 			}
+        
+        let isToday = Observable.just(self.isToday(dateString: self.calendarDate.date))
 		
 		return Output(
 			textColor: textColor,
+            textBackgroundColor: backgroundColor,
 			dayString: dayString,
-			hasRecord: hasRecord
+			hasRecord: hasRecord,
+            isToday: isToday
 		)
 	}
 	
