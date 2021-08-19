@@ -38,7 +38,7 @@ class DayCell: UICollectionViewCell {
 		
 		self.viewModel = viewModel
 		
-		let output = viewModel.transform(input: DayViewModel.Input())
+		let output = viewModel.transform(input: DayViewModel.Input(viewLoaded: Observable.just(())))
 		
 		output.textColor
 			.subscribe(onNext: { color in
@@ -50,22 +50,31 @@ class DayCell: UICollectionViewCell {
 			.drive(self.dayLabel.rx.text)
 			.disposed(by: disposeBag)
 		
-		output.hasExerciseRecord
-			.subscribe(onNext: { bool in
-				self.exerciseView.isHidden = !bool
+		output.hasRecord?
+			.subscribe(onNext: { hasRecord in
+				self.exerciseView.isHidden = !hasRecord.0
+				self.memoView.isHidden = !hasRecord.1
+				self.photoView.isHidden = !hasRecord.2
 			})
 			.disposed(by: disposeBag)
 		
-		output.hasMemoRecord
-			.subscribe(onNext: { bool in
-				self.memoView.isHidden = !bool
-			})
-			.disposed(by: disposeBag)
 		
-		output.hasPhotoRecord
-			.subscribe(onNext: { bool in
-				self.photoView.isHidden = !bool
-			})
-			.disposed(by: disposeBag)
+//		output.hasExerciseRecord?
+//			.subscribe(onNext: { bool in
+//				self.exerciseView.isHidden = !bool
+//			})
+//			.disposed(by: disposeBag)
+//
+//		output.hasMemoRecord?
+//			.subscribe(onNext: { bool in
+//				self.memoView.isHidden = !bool
+//			})
+//			.disposed(by: disposeBag)
+//
+//		output.hasPhotoRecord?
+//			.subscribe(onNext: { bool in
+//				self.photoView.isHidden = !bool
+//			})
+//			.disposed(by: disposeBag)
 	}
 }

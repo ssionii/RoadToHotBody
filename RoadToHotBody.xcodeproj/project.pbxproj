@@ -32,6 +32,13 @@
 		FA0B49FE26C511CE0018DE69 /* InternalDBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B49FD26C511CE0018DE69 /* InternalDBError.swift */; };
 		FA3AD7A026CCBD1200270AC1 /* MonthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3AD79F26CCBD1200270AC1 /* MonthViewModel.swift */; };
 		FA3AD7B626CDED2100270AC1 /* DayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3AD7B526CDED2100270AC1 /* DayViewModel.swift */; };
+		FA3AD7CC26CE138400270AC1 /* RecordInternalDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3AD7CB26CE138400270AC1 /* RecordInternalDB.swift */; };
+		FA3AD7D126CE144600270AC1 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3AD7D026CE144600270AC1 /* Record.swift */; };
+		FA3AD7D626CE158000270AC1 /* RecordDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3AD7D526CE158000270AC1 /* RecordDataSource.swift */; };
+		FA3AD7DB26CE165A00270AC1 /* RecordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3AD7DA26CE165A00270AC1 /* RecordRepository.swift */; };
+		FA3AD7E026CE167D00270AC1 /* FetchRecordsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3AD7DF26CE167D00270AC1 /* FetchRecordsUseCase.swift */; };
+		FA3AD7E826CE173300270AC1 /* RecordRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3AD7E726CE173300270AC1 /* RecordRepositoryImpl.swift */; };
+		FA3AD7ED26CE1CD800270AC1 /* SaveRecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3AD7EC26CE1CD800270AC1 /* SaveRecordUseCase.swift */; };
 		FA9B27B226CB399D00FC05E9 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B27B026CB399D00FC05E9 /* VideoCell.swift */; };
 		FA9B27B326CB399D00FC05E9 /* VideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9B27B126CB399D00FC05E9 /* VideoCell.xib */; };
 		FA9B27EC26CBA42400FC05E9 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B27EA26CBA42400FC05E9 /* DayCell.swift */; };
@@ -136,6 +143,13 @@
 		FA0B49FD26C511CE0018DE69 /* InternalDBError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalDBError.swift; sourceTree = "<group>"; };
 		FA3AD79F26CCBD1200270AC1 /* MonthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthViewModel.swift; sourceTree = "<group>"; };
 		FA3AD7B526CDED2100270AC1 /* DayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewModel.swift; sourceTree = "<group>"; };
+		FA3AD7CB26CE138400270AC1 /* RecordInternalDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordInternalDB.swift; sourceTree = "<group>"; };
+		FA3AD7D026CE144600270AC1 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
+		FA3AD7D526CE158000270AC1 /* RecordDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDataSource.swift; sourceTree = "<group>"; };
+		FA3AD7DA26CE165A00270AC1 /* RecordRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRepository.swift; sourceTree = "<group>"; };
+		FA3AD7DF26CE167D00270AC1 /* FetchRecordsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecordsUseCase.swift; sourceTree = "<group>"; };
+		FA3AD7E726CE173300270AC1 /* RecordRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRepositoryImpl.swift; sourceTree = "<group>"; };
+		FA3AD7EC26CE1CD800270AC1 /* SaveRecordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveRecordUseCase.swift; sourceTree = "<group>"; };
 		FA9B27B026CB399D00FC05E9 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		FA9B27B126CB399D00FC05E9 /* VideoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoCell.xib; sourceTree = "<group>"; };
 		FA9B27EA26CBA42400FC05E9 /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
@@ -293,6 +307,7 @@
 			children = (
 				FAB294A026C5FFA8003788CA /* TrainingInternalDB.swift */,
 				FA0B49EB26C50A820018DE69 /* TrainingDetailInternalDB.swift */,
+				FA3AD7CB26CE138400270AC1 /* RecordInternalDB.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -302,6 +317,7 @@
 			children = (
 				FAB294BB26C60C8E003788CA /* MuscleDataSource.swift */,
 				FA0B49D726C509190018DE69 /* DetailContentDataSource.swift */,
+				FA3AD7D526CE158000270AC1 /* RecordDataSource.swift */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -350,6 +366,7 @@
 			children = (
 				FAB294B026C6088B003788CA /* Training.swift */,
 				FAB2947F26C5F785003788CA /* TrainingDetail.swift */,
+				FA3AD7D026CE144600270AC1 /* Record.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -444,6 +461,7 @@
 			children = (
 				FAB294C026C60D42003788CA /* MuscleRepositoryImpl.swift */,
 				FAFA47C626C24ED800CD820C /* DetailContentRepositoryImpl.swift */,
+				FA3AD7E726CE173300270AC1 /* RecordRepositoryImpl.swift */,
 			);
 			path = RepositoryImpl;
 			sourceTree = "<group>";
@@ -463,6 +481,7 @@
 			children = (
 				FAB294C526C60D74003788CA /* MuscleRepository.swift */,
 				FAFA47C126C24E4300CD820C /* DetailContentRepository.swift */,
+				FA3AD7DA26CE165A00270AC1 /* RecordRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -476,6 +495,8 @@
 				FAFA484E26C3B2FD00CD820C /* SaveDetailContentUseCase.swift */,
 				B56EFA5926C7D5E6008A5346 /* UpdateDetailContentUseCase.swift */,
 				FAB294F126C65EAF003788CA /* DeleteDetailContentUseCase.swift */,
+				FA3AD7DF26CE167D00270AC1 /* FetchRecordsUseCase.swift */,
+				FA3AD7EC26CE1CD800270AC1 /* SaveRecordUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -869,6 +890,7 @@
 				FAB2948826C5FBF5003788CA /* Muscle.swift in Sources */,
 				FA0B49D826C509190018DE69 /* DetailContentDataSource.swift in Sources */,
 				FAB294E426C62DCC003788CA /* MuscleCell.swift in Sources */,
+				FA3AD7CC26CE138400270AC1 /* RecordInternalDB.swift in Sources */,
 				FAFA486626C3B90A00CD820C /* FetchDetailContentUseCase.swift in Sources */,
 				FAB294D326C60F25003788CA /* HomeViewModel.swift in Sources */,
 				FAFA46CF26BD24B900CD820C /* UIView+Extension.swift in Sources */,
@@ -880,10 +902,13 @@
 				FAB2948026C5F785003788CA /* TrainingDetail.swift in Sources */,
 				B56EFA5226C7A2E1008A5346 /* WriteMemoViewController.swift in Sources */,
 				B56EFA6726C81F30008A5346 /* UIImageView+Extension.swift in Sources */,
+				FA3AD7E826CE173300270AC1 /* RecordRepositoryImpl.swift in Sources */,
 				FAFA470D26C0BC8F00CD820C /* DetailViewController.swift in Sources */,
 				B56EFA5626C7A623008A5346 /* WriteMemoCoordinator.swift in Sources */,
+				FA3AD7DB26CE165A00270AC1 /* RecordRepository.swift in Sources */,
 				FAFA473B26C0DE1600CD820C /* AppCoordinator.swift in Sources */,
 				FAFA47C226C24E4300CD820C /* DetailContentRepository.swift in Sources */,
+				FA3AD7ED26CE1CD800270AC1 /* SaveRecordUseCase.swift in Sources */,
 				FAB294BC26C60C8E003788CA /* MuscleDataSource.swift in Sources */,
 				FAB294B126C6088B003788CA /* Training.swift in Sources */,
 				FA3AD7B626CDED2100270AC1 /* DayViewModel.swift in Sources */,
@@ -902,7 +927,10 @@
 				FAFA46B626BD243B00CD820C /* Router.swift in Sources */,
 				FAFA484F26C3B2FD00CD820C /* SaveDetailContentUseCase.swift in Sources */,
 				FAFA46F126C0A80800CD820C /* HomeViewController.swift in Sources */,
+				FA3AD7D626CE158000270AC1 /* RecordDataSource.swift in Sources */,
+				FA3AD7D126CE144600270AC1 /* Record.swift in Sources */,
 				FAFA46C826BD248300CD820C /* Coordinator.swift in Sources */,
+				FA3AD7E026CE167D00270AC1 /* FetchRecordsUseCase.swift in Sources */,
 				FAFA47C726C24ED800CD820C /* DetailContentRepositoryImpl.swift in Sources */,
 				FAB294F226C65EAF003788CA /* DeleteDetailContentUseCase.swift in Sources */,
 				FAFA467226BD1F9D00CD820C /* AppDelegate.swift in Sources */,

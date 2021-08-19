@@ -11,21 +11,22 @@ import RxCocoa
 
 class DayViewModel {
 	struct Input {
+		var viewLoaded: Observable<Void>
 	}
 	
 	struct Output {
 		var textColor: Observable<UIColor>
 		var dayString: Driver<String>
-		var hasExerciseRecord: Observable<Bool>
-		var hasMemoRecord: Observable<Bool>
-		var hasPhotoRecord: Observable<Bool>
+		var hasRecord: Observable<(Bool, Bool, Bool)>?
 	}
+	
+	private let fetchRecordsUseCase = FetchRecordsUseCase(repository: RecordRepository(dataSource: RecordDataSource()))
 	
 	private let calendarDate: CalendarDate
 	private let date: Date
 	private let formatter: DateFormatter
 	
-	var records: PublishSubject<[Content]>()
+	var records: [Content]?
 	
 	init(calendarDate: CalendarDate) {
 		
@@ -53,12 +54,40 @@ class DayViewModel {
 		let dayString = Observable.just(calendarDate.dayString)
 			.asDriver(onErrorJustReturn: "")
 		
+		guard let date = calendarDate.date else {
+			return Output(
+				textColor: textColor,
+				dayString: dayString,
+				hasRecord: Observable.of((false, false, false))
+			)
+		}
+		
+		let records = input.viewLoaded
+			.flatMap { _ -> Observable<FetchRecordsUseCaseModels.Response> in
+				self.fetchRecordsUseCase.execute(
+					request: FetchRecordsUseCaseModels.Request(date: date)
+				)
+			}
+			.map { response -> [Content] in
+				self.records = response.records
+				print(response.records)
+				return response.records
+			}
+			.share()
+		
+		let hasRecord = records
+			.map { contents -> (Bool, Bool, Bool) in
+				return (
+					contents.contains { $0.type == .Exercise } ,
+					contents.contains { $0.type == .Memo },
+					contents.contains { $0.type == .Photo }
+				)
+			}
+		
 		return Output(
 			textColor: textColor,
 			dayString: dayString,
-			hasExerciseRecord: Observable.of(true),
-			hasMemoRecord: Observable.of(true),
-			hasPhotoRecord: Observable.of(true)
+			hasRecord: hasRecord
 		)
 	}
 	
@@ -67,11 +96,5 @@ class DayViewModel {
 			return true
 		}
 		return false
-	}
-	
-	private func fetchRecords(date: String) -> Observable<[Content]> {
-		// TODO: use case에서 records fetch
-		
-		return Observable.just([])
 	}
 }

@@ -37,7 +37,7 @@ class MonthViewModel {
 			numOfDaysInMonth[1] = 29
 		}
 		
-		formatter.dateFormat = "yyyy-MM-dd"
+		formatter.dateFormat = "yyyy-M-d"
 	}
 	
 	func transform(input: Input) -> Output {

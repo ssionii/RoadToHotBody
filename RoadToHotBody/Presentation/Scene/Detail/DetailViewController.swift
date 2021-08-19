@@ -117,7 +117,8 @@ class DetailViewController: UIViewController {
 			input: DetailViewModel.Input(
                 reloadView: reloadView.asObserver(),
                 addedPhotoURL: addedPhotoURL.asObserver(),
-                addedVideoURL: addedVideoURL.asObserver()
+                addedVideoURL: addedVideoURL.asObserver(),
+				doExercise: doExerciseButton.rx.tap.asObservable()
             )
 		)
 		
@@ -132,11 +133,6 @@ class DetailViewController: UIViewController {
 				owner.contents = contents
 			})
 			.disposed(by: disposeBag)
-		
-		reloadView.subscribe(onNext: { _ in
-			print("realod view called")
-		})
-        .disposed(by: disposeBag)
         
         output.isPhotoAdded
             .subscribe(onNext: { _ in
@@ -149,6 +145,12 @@ class DetailViewController: UIViewController {
                 self.reloadView.onNext(())
             })
             .disposed(by: disposeBag)
+		
+		output.doExercise
+			.subscribe(onNext: { _ in
+				print("운동 시작 등록 완료")
+			})
+			.disposed(by: disposeBag)
 	}
 }
 

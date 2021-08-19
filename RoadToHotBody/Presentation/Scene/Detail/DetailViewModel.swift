@@ -13,6 +13,7 @@ class DetailViewModel {
 		var reloadView: Observable<Void>
         var addedPhotoURL: Observable<NSURL>
         var addedVideoURL: Observable<NSURL>
+		var doExercise: Observable<Void>
 	}
 	
 	struct Output {
@@ -20,11 +21,13 @@ class DetailViewModel {
 		var contents: Observable<[Content]?>
         var isPhotoAdded: Observable<Void>
         var isVideoAdded: Observable<Void>
+		var doExercise: Observable<Void>
 	}
 	
 	// TODO: DI
 	let fetchDetailContentsUseCase = FetchDetailContentsUseCase(repository: DetailContentRepository(dataSource: DetailContentDataSource()))
     let saveDetailContentUseCase = SaveDetailContentUseCase(repository: DetailContentRepository(dataSource: DetailContentDataSource()))
+	let saveRecordUseCase = SaveRecordUseCase(repository: RecordRepository(dataSource: RecordDataSource()))
 	
     private var contents: [Content]?
 	private var muscle: Muscle
@@ -80,7 +83,29 @@ class DetailViewModel {
                     return ()
                 }
             }
+		
+		let doExercise = input.doExercise
+			.flatMap { _ -> Observable<SaveRecordUseCaseModels.Response> in
+				self.saveRecordUseCase.execute(
+					request: SaveRecordUseCaseModels.Request(
+						date: nil,
+						text: "\(self.muscle.name) 운동 완료",
+						type: .Exercise,
+						muscle: self.muscle
+					)
+				)
+			}
+			.map { response -> Void in
+				return ()
+			}
+
         
-        return Output(muscleName: name, contents: content, isPhotoAdded: isPhotoAdded, isVideoAdded: isVideoAdded)
+		return Output(
+			muscleName: name,
+			contents: content,
+			isPhotoAdded: isPhotoAdded,
+			isVideoAdded: isVideoAdded,
+			doExercise: doExercise
+		)
 	}
 }
