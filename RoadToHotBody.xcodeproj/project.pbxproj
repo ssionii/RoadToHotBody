@@ -39,6 +39,8 @@
 		FA3AD7E026CE167D00270AC1 /* FetchRecordsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3AD7DF26CE167D00270AC1 /* FetchRecordsUseCase.swift */; };
 		FA3AD7E826CE173300270AC1 /* RecordRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3AD7E726CE173300270AC1 /* RecordRepositoryImpl.swift */; };
 		FA3AD7ED26CE1CD800270AC1 /* SaveRecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3AD7EC26CE1CD800270AC1 /* SaveRecordUseCase.swift */; };
+		FA3AD82026CE523300270AC1 /* ExerciseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3AD81E26CE523300270AC1 /* ExerciseCell.swift */; };
+		FA3AD82126CE523300270AC1 /* ExerciseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA3AD81F26CE523300270AC1 /* ExerciseCell.xib */; };
 		FA9B27B226CB399D00FC05E9 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B27B026CB399D00FC05E9 /* VideoCell.swift */; };
 		FA9B27B326CB399D00FC05E9 /* VideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9B27B126CB399D00FC05E9 /* VideoCell.xib */; };
 		FA9B27EC26CBA42400FC05E9 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B27EA26CBA42400FC05E9 /* DayCell.swift */; };
@@ -150,6 +152,8 @@
 		FA3AD7DF26CE167D00270AC1 /* FetchRecordsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecordsUseCase.swift; sourceTree = "<group>"; };
 		FA3AD7E726CE173300270AC1 /* RecordRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRepositoryImpl.swift; sourceTree = "<group>"; };
 		FA3AD7EC26CE1CD800270AC1 /* SaveRecordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveRecordUseCase.swift; sourceTree = "<group>"; };
+		FA3AD81E26CE523300270AC1 /* ExerciseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCell.swift; sourceTree = "<group>"; };
+		FA3AD81F26CE523300270AC1 /* ExerciseCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseCell.xib; sourceTree = "<group>"; };
 		FA9B27B026CB399D00FC05E9 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		FA9B27B126CB399D00FC05E9 /* VideoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoCell.xib; sourceTree = "<group>"; };
 		FA9B27EA26CBA42400FC05E9 /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
@@ -527,6 +531,7 @@
 				FAFA46F926C0A81C00CD820C /* Calendar */,
 				FAFA470A26C0BC7D00CD820C /* Detail */,
 				B541962F26C2B25A00B2080A /* Memo */,
+				FAFA479826C245B800CD820C /* ContentCell */,
 				B56EFA5B26C80386008A5346 /* Photo */,
 			);
 			path = Scene;
@@ -616,7 +621,6 @@
 		FAFA470A26C0BC7D00CD820C /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				FAFA479826C245B800CD820C /* Cell */,
 				FAFA470B26C0BC8F00CD820C /* DetailViewController.swift */,
 				FAFA470C26C0BC8F00CD820C /* DetailViewController.xib */,
 				FAFA47A826C2488500CD820C /* DetailViewModel.swift */,
@@ -625,7 +629,7 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
-		FAFA479826C245B800CD820C /* Cell */ = {
+		FAFA479826C245B800CD820C /* ContentCell */ = {
 			isa = PBXGroup;
 			children = (
 				FAFA479926C245E600CD820C /* MemoCell.swift */,
@@ -634,8 +638,10 @@
 				FAFA47DE26C2665C00CD820C /* PhotoCell.xib */,
 				FA9B27B026CB399D00FC05E9 /* VideoCell.swift */,
 				FA9B27B126CB399D00FC05E9 /* VideoCell.xib */,
+				FA3AD81E26CE523300270AC1 /* ExerciseCell.swift */,
+				FA3AD81F26CE523300270AC1 /* ExerciseCell.xib */,
 			);
-			path = Cell;
+			path = ContentCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -753,6 +759,7 @@
 				FA9B27B326CB399D00FC05E9 /* VideoCell.xib in Resources */,
 				FAB294E526C62DCC003788CA /* MuscleCell.xib in Resources */,
 				FAFA46FD26C0A82900CD820C /* CalendarViewController.xib in Resources */,
+				FA3AD82126CE523300270AC1 /* ExerciseCell.xib in Resources */,
 				FAFA467B26BD1FA400CD820C /* Assets.xcassets in Resources */,
 				FAB294D826C62003003788CA /* training.json in Resources */,
 				B541963326C2B27A00B2080A /* WriteMemoViewController.xib in Resources */,
@@ -941,6 +948,7 @@
 				FA9B27B226CB399D00FC05E9 /* VideoCell.swift in Sources */,
 				FAB294C126C60D42003788CA /* MuscleRepositoryImpl.swift in Sources */,
 				B56EFA6326C80872008A5346 /* PhotoCoordinator.swift in Sources */,
+				FA3AD82026CE523300270AC1 /* ExerciseCell.swift in Sources */,
 				FAB294A126C5FFA8003788CA /* TrainingInternalDB.swift in Sources */,
 				FAB294C626C60D74003788CA /* MuscleRepository.swift in Sources */,
 				FAFA472226C0C79100CD820C /* TabBarRouter.swift in Sources */,

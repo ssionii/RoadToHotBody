@@ -13,6 +13,7 @@ class CalendarViewController: UIViewController {
 	
     @IBOutlet weak var baseCollectionView: UICollectionView!
     @IBOutlet weak var calendarHeightConstraint: NSLayoutConstraint!
+	@IBOutlet weak var recordTableView: UITableView!
 	
 	private let viewModel: CalendarViewModel
 	private let disposeBag = DisposeBag()
@@ -21,9 +22,15 @@ class CalendarViewController: UIViewController {
 	
 	private let isScrolled = PublishSubject<Int>()
 	
-	private var displayedMonths : [(Int, Int)]? {
+	private var displayedMonths: [(Int, Int)]? {
 		didSet {
 			baseCollectionView.reloadData()
+		}
+	}
+	
+	private var records: [Content] = [] {
+		didSet {
+			recordTableView.reloadData()
 		}
 	}
 	
@@ -62,6 +69,14 @@ class CalendarViewController: UIViewController {
         
         baseCollectionView.register(UINib(nibName: MonthCell.ID, bundle: nil), forCellWithReuseIdentifier: MonthCell.ID)
     }
+	
+	private func configureTableView() {
+		recordTableView.delegate = self
+		recordTableView.dataSource = self
+		
+		recordTableView.register(UINib(nibName: MemoCell.ID, bundle: nil), forCellReuseIdentifier: MemoCell.ID)
+		recordTableView.register(UINib(nibName: ExerciseCell.ID, bundle: nil), forCellReuseIdentifier: ExerciseCell.ID)
+	}
 	
 	private func bind() {
 		let output = viewModel.transform(
@@ -111,6 +126,26 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
 			isScrolled.onNext(-1)
 		} else if scrollView.contentOffset.x > view.frame.size.width {
 			isScrolled.onNext(1)
+		}
+	}
+}
+
+extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return records.count
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		
+		switch records[indexPath.row].type {
+		case .Exercise:
+			let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseCell.ID, for: indexPath) as! ExerciseCell
+			cell.bind(text: records[indexPath.row].text ?? "")
+			return cell
+		default:
+			let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseCell.ID, for: indexPath) as! ExerciseCell
+			cell.bind(text: records[indexPath.row].text ?? "")
+			return cell
 		}
 	}
 }

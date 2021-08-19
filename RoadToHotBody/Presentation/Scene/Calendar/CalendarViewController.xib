@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="baseCollectionView" destination="kTI-F3-frV" id="3Ru-9D-IEM"/>
                 <outlet property="calendarHeightConstraint" destination="rKj-03-C7M" id="h2d-xc-DqS"/>
+                <outlet property="recordTableView" destination="c0r-Oo-avi" id="H4B-cD-9s5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -83,14 +84,22 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="c0r-Oo-avi">
+                    <rect key="frame" x="16" y="274" width="358" height="570"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="kTI-F3-frV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5TL-Dd-ACt"/>
                 <constraint firstItem="kTI-F3-frV" firstAttribute="top" secondItem="22j-cB-Esf" secondAttribute="bottom" id="Mad-zb-E4P"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="c0r-Oo-avi" secondAttribute="trailing" constant="16" id="Mar-SP-ON3"/>
                 <constraint firstItem="22j-cB-Esf" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Nj8-kP-RkX"/>
+                <constraint firstItem="c0r-Oo-avi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="OfI-0f-cjc"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kTI-F3-frV" secondAttribute="trailing" id="ZdK-Oa-LaV"/>
+                <constraint firstItem="c0r-Oo-avi" firstAttribute="top" secondItem="kTI-F3-frV" secondAttribute="bottom" id="f9h-Sc-HZL"/>
+                <constraint firstAttribute="bottom" secondItem="c0r-Oo-avi" secondAttribute="bottom" id="krl-WS-oe7"/>
                 <constraint firstItem="22j-cB-Esf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="uaU-AH-KYZ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="22j-cB-Esf" secondAttribute="trailing" constant="10" id="z2q-8m-kpZ"/>
             </constraints>
