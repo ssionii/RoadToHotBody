@@ -10,7 +10,7 @@ import RxCocoa
 
 class CalendarViewModel {
 	struct Input {
-		var isScrolledToFront: Observable<Bool>
+		var isScrolled: Observable<Int>
 	}
 	
 	struct Output {
@@ -18,70 +18,51 @@ class CalendarViewModel {
 		var displayedMonthString: Driver<String>
 	}
 	
-	var currentYear = PublishSubject<Int>()
-	var currentMonth = PublishSubject<Int>()
+	private var currentYear: Int
+	private var currentMonth: Int
+	private var currentYearAndMonthChanged = PublishSubject<Void>()
 	
 	init() {
 		let date = Date()
-		self.currentYear.onNext(Calendar.current.component(.year, from: date))
-		self.currentMonth.onNext(Calendar.current.component(.month, from: date))
+		currentYear = Calendar.current.component(.year, from: date)
+		currentMonth = Calendar.current.component(.month, from: date)
 	}
 	
 	func transform(input: Input) -> Output {
-		
-//		Observable.combineLatest(self.currentYear, self.currentMonth)
-//			.withLatestFrom(<#T##second: ObservableConvertibleType##ObservableConvertibleType#>, resultSelector: <#T##((Int, Int), ObservableConvertibleType.Element) throws -> ResultType#>)
-			
-		
-		
-		
-//		let displayedMonths = input.isScrolledToFront
-//			.map { isScrolledToFront -> (Int, Int) in
-//				if isScrolledToFront {
-//					let preYearAndMonth = self.preYearAndMonth(currentYear: self.currentYear, currentMonth: self.currentMonth)
-//					self.currentYear = preYearAndMonth.0
-//					self.currentMonth = preYearAndMonth.1
-//				} else {
-//					let nextYearAndMonth = self.nextYearAndMonth(currentYear: self.currentYear, currentMonth: self.currentMonth)
-//					self.currentYear = nextYearAndMonth.0
-//					self.currentMonth = nextYearAndMonth.1
-//				}
-//				return (self.currentYear, self.currentMonth)
-//			}
-//			.flatMap { (year, month) -> Observable<[(Int, Int)]> in
-//				self.displayedMonths(currentYear: year, currentMonth: month)
-//			}
-//
-//		let displayedMonthString = input.isScrolledToFront
-//			.flatMap { _ -> String in
-//
-//			}
-//
-//			Observable.of("\(currentYear)년 \(currentMonth)월")
-//			.asDriver(onErrorJustReturn: "")
 
+		let displayedMonths = input.isScrolled
+			.map { isScrolled -> (Int, Int) in
+				switch isScrolled {
+				case -1:
+					return self.preYearAndMonth(currentYear: self.currentYear, currentMonth: self.currentMonth)
+				case 1:
+					return self.nextYearAndMonth(currentYear: self.currentYear, currentMonth: self.currentMonth)
+				default:
+					return (self.currentYear, self.currentMonth)
+				}
+			}
+			.flatMap { year, month -> Observable<[(Int, Int)]> in
+				self.currentYear = year
+				self.currentMonth = month
+				self.currentYearAndMonthChanged.onNext(())
+				
+				return self.displayedMonths(currentYear: year, currentMonth: month)
+			}
+		
+		let displayedMonthString = currentYearAndMonthChanged
+			.map { _ -> String in
+				return "\(self.currentYear)년 \(self.currentMonth)월"
+			}
+			.asDriver(onErrorJustReturn: "")
+		
 		return Output(displayedMonths: displayedMonths, displayedMonthString: displayedMonthString)
 	}
 	
 	private func displayedMonths(currentYear: Int, currentMonth: Int) -> Observable<[(Int, Int)]> {
-		var preYear = currentYear
-		var preMonth = currentMonth - 1
-		if preMonth < 1 {
-			preYear -= 1
-			preMonth = 12
-		}
-		
-		var nextYear = currentYear
-		var nextMonth = currentMonth + 1
-		if nextMonth > 12 {
-			nextYear += 1
-			nextMonth = 1
-		}
-		
 		return Observable.just([
-			(preYear, preMonth),
+			self.preYearAndMonth(currentYear: currentYear, currentMonth: currentMonth),
 			(currentYear, currentMonth),
-			(nextYear, nextMonth)
+			self.nextYearAndMonth(currentYear: currentYear, currentMonth: currentMonth)
 		])
 	}
 	
@@ -97,7 +78,7 @@ class CalendarViewModel {
 	
 	private func nextYearAndMonth(currentYear: Int, currentMonth: Int) -> (Int, Int) {
 		var nextYear = currentYear
-		var nextMonth = currentMonth + 12
+		var nextMonth = currentMonth + 1
 		if nextMonth == 13 {
 			nextYear += 1
 			nextMonth = 1

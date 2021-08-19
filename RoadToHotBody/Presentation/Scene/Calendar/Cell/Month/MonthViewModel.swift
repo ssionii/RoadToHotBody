@@ -70,7 +70,6 @@ class MonthViewModel {
 		
 		// 이번 달
 		for i in 1 ... numOfDaysInMonth[currentMonth - 1] {
-			// useCase로 records 가져오기
 			calendarDates.append(CalendarDate(isThisMonth: true, date: "\(currentYear)-\(currentMonth)-\(i)", dayString: String(i)))
 		}
 		

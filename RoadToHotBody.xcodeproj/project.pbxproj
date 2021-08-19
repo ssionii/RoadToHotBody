@@ -31,6 +31,7 @@
 		FA0B49EC26C50A820018DE69 /* TrainingDetailInternalDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B49EB26C50A820018DE69 /* TrainingDetailInternalDB.swift */; };
 		FA0B49FE26C511CE0018DE69 /* InternalDBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B49FD26C511CE0018DE69 /* InternalDBError.swift */; };
 		FA3AD7A026CCBD1200270AC1 /* MonthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3AD79F26CCBD1200270AC1 /* MonthViewModel.swift */; };
+		FA3AD7B626CDED2100270AC1 /* DayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3AD7B526CDED2100270AC1 /* DayViewModel.swift */; };
 		FA9B27B226CB399D00FC05E9 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B27B026CB399D00FC05E9 /* VideoCell.swift */; };
 		FA9B27B326CB399D00FC05E9 /* VideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9B27B126CB399D00FC05E9 /* VideoCell.xib */; };
 		FA9B27EC26CBA42400FC05E9 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B27EA26CBA42400FC05E9 /* DayCell.swift */; };
@@ -134,6 +135,7 @@
 		FA0B49EB26C50A820018DE69 /* TrainingDetailInternalDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingDetailInternalDB.swift; sourceTree = "<group>"; };
 		FA0B49FD26C511CE0018DE69 /* InternalDBError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalDBError.swift; sourceTree = "<group>"; };
 		FA3AD79F26CCBD1200270AC1 /* MonthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthViewModel.swift; sourceTree = "<group>"; };
+		FA3AD7B526CDED2100270AC1 /* DayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewModel.swift; sourceTree = "<group>"; };
 		FA9B27B026CB399D00FC05E9 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		FA9B27B126CB399D00FC05E9 /* VideoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoCell.xib; sourceTree = "<group>"; };
 		FA9B27EA26CBA42400FC05E9 /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
@@ -324,12 +326,21 @@
 			path = Month;
 			sourceTree = "<group>";
 		};
+		FA3AD7B426CDED0E00270AC1 /* Day */ = {
+			isa = PBXGroup;
+			children = (
+				FA9B27EA26CBA42400FC05E9 /* DayCell.swift */,
+				FA9B27EB26CBA42400FC05E9 /* DayCell.xib */,
+				FA3AD7B526CDED2100270AC1 /* DayViewModel.swift */,
+			);
+			path = Day;
+			sourceTree = "<group>";
+		};
 		FA9B27E926CBA3E600FC05E9 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
 				FA3AD79E26CCBCFB00270AC1 /* Month */,
-				FA9B27EA26CBA42400FC05E9 /* DayCell.swift */,
-				FA9B27EB26CBA42400FC05E9 /* DayCell.xib */,
+				FA3AD7B426CDED0E00270AC1 /* Day */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -875,6 +886,7 @@
 				FAFA47C226C24E4300CD820C /* DetailContentRepository.swift in Sources */,
 				FAB294BC26C60C8E003788CA /* MuscleDataSource.swift in Sources */,
 				FAB294B126C6088B003788CA /* Training.swift in Sources */,
+				FA3AD7B626CDED2100270AC1 /* DayViewModel.swift in Sources */,
 				FA0B49EC26C50A820018DE69 /* TrainingDetailInternalDB.swift in Sources */,
 				B56EFA4D26C7A098008A5346 /* ReadMemoViewController.swift in Sources */,
 				FAFA478926C20A4300CD820C /* HomeCoordinator.swift in Sources */,

@@ -19,9 +19,9 @@ class CalendarViewController: UIViewController {
 	
 	private var cellSize: CGFloat = 0
 	
-	private let isScrolledFront = PublishSubject<Bool>()
+	private let isScrolled = PublishSubject<Int>()
 	
-	private var displayedMonths : [(Int, Int)] = [] {
+	private var displayedMonths : [(Int, Int)]? {
 		didSet {
 			baseCollectionView.reloadData()
 		}
@@ -40,18 +40,19 @@ class CalendarViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+		
         configureUI()
         configureCollectoinView()
 		bind()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        baseCollectionView.scrollToItem(at: IndexPath(row: 1, section: 0), at: .right, animated: false)
-    }
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		isScrolled.onNext(0)
+	}
     
     private func configureUI() {
-        cellSize = (view.frame.width - ( 10 * 2 )) / 7
+		cellSize = floor((baseCollectionView.frame.size.width - ( 10 * 2 )) / 7)
         calendarHeightConstraint.constant = cellSize * 6
     }
     
@@ -65,7 +66,7 @@ class CalendarViewController: UIViewController {
 	private func bind() {
 		let output = viewModel.transform(
 			input: CalendarViewModel.Input(
-				isScrolledToFront: self.isScrolledFront.asObservable()
+				isScrolled: self.isScrolled.asObservable()
 			)
 		)
 		
@@ -73,13 +74,14 @@ class CalendarViewController: UIViewController {
 			.withUnretained(self)
 			.subscribe(onNext: { owner, yearAndMonth in
 				owner.displayedMonths = yearAndMonth
-				owner.baseCollectionView.scrollToItem(at: IndexPath(row: 1, section: 0), at: .right, animated: false)
+				owner.baseCollectionView.scrollToItem(at: IndexPath(row: 1, section: 0), at: .left, animated: false)
 			})
 			.disposed(by: disposeBag)
 		
 		guard let topItem = self.navigationController?.navigationBar.topItem else {
 			return
 		}
+		
 		output.displayedMonthString
 			.drive(topItem.rx.title)
 			.disposed(by: disposeBag)
@@ -95,19 +97,20 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MonthCell.ID, for: indexPath) as! MonthCell
+		guard let displayedMonths = self.displayedMonths else { return cell }
 		cell.bind(viewModel: MonthViewModel(year: displayedMonths[indexPath.row].0, month: displayedMonths[indexPath.row].1))
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.frame.width, height: cellSize * 6)
+		return CGSize(width: collectionView.frame.width, height: cellSize * 6)
     }
 	
 	func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
 		if scrollView.contentOffset.x  == 0 {
-			isScrolledFront.onNext(true)
+			isScrolled.onNext(-1)
 		} else if scrollView.contentOffset.x > view.frame.size.width {
-			isScrolledFront.onNext(false)
+			isScrolled.onNext(1)
 		}
 	}
 }

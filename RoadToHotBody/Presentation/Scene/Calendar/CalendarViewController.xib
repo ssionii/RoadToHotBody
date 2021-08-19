@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -70,8 +70,8 @@
                         <constraint firstAttribute="height" constant="30" id="nix-FB-yyq"/>
                     </constraints>
                 </stackView>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="kTI-F3-frV">
-                    <rect key="frame" x="0.0" y="84" width="390" height="200"/>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="kTI-F3-frV">
+                    <rect key="frame" x="0.0" y="74" width="390" height="200"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="200" id="rKj-03-C7M"/>
@@ -88,7 +88,7 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="kTI-F3-frV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5TL-Dd-ACt"/>
-                <constraint firstItem="kTI-F3-frV" firstAttribute="top" secondItem="22j-cB-Esf" secondAttribute="bottom" constant="10" id="Mad-zb-E4P"/>
+                <constraint firstItem="kTI-F3-frV" firstAttribute="top" secondItem="22j-cB-Esf" secondAttribute="bottom" id="Mad-zb-E4P"/>
                 <constraint firstItem="22j-cB-Esf" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Nj8-kP-RkX"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kTI-F3-frV" secondAttribute="trailing" id="ZdK-Oa-LaV"/>
                 <constraint firstItem="22j-cB-Esf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="uaU-AH-KYZ"/>

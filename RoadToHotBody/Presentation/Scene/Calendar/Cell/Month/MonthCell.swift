@@ -5,6 +5,7 @@
 //  Created by 양시연 on 2021/08/17.
 //
 
+import Foundation
 import UIKit
 import RxSwift
 import RxCocoa
@@ -14,7 +15,8 @@ class MonthCell: UICollectionViewCell {
     static let ID = "MonthCell"
     
     @IBOutlet weak var monthCollectionView: UICollectionView!
-    private var cellSize: CGFloat = 0
+    private var cellWidth: CGFloat = 0
+	private var cellHeight: CGFloat = 0
 	
 	private var viewModel: MonthViewModel?
 	private let disposeBag = DisposeBag()
@@ -28,8 +30,9 @@ class MonthCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        cellSize = contentView.frame.width / 7
-        
+		cellWidth = monthCollectionView.frame.width / 7
+		cellHeight = monthCollectionView.frame.height / 6
+		
         monthCollectionView.dataSource = self
         monthCollectionView.delegate = self
         
@@ -56,11 +59,11 @@ extension MonthCell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCell.ID, for: indexPath) as! DayCell
-		cell.bind(isThisMonth: self.calendarDates[indexPath.row].isThisMonth, day: self.calendarDates[indexPath.row].dayString , contents: nil)
+		cell.bind(viewModel: DayViewModel(calendarDate: calendarDates[indexPath.row]))
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: cellSize, height: cellSize)
+        return CGSize(width: cellWidth, height: cellHeight)
     }
 }
