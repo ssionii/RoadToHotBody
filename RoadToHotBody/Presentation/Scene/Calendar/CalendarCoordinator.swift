@@ -40,6 +40,13 @@ class CalendarCoordinator: Coordinator {
 			self.calendarViewController.reloadView.onNext(())
 		}
 	}
+	
+	private func presentPhoto(parentViewController: UIViewController, date: String) {
+		let router = NoNavigationRouter(rootViewController: parentViewController, modalPresentationStyle: .automatic)
+		let coordinator = PhotoCoordinator(router: router)
+		coordinator.delegate = self
+		presentChild(coordinator, animated: true)
+	}
 }
 
 extension CalendarCoordinator: CalendarVCCoordinatorDelegate {
@@ -48,7 +55,7 @@ extension CalendarCoordinator: CalendarVCCoordinatorDelegate {
 	}
 	
 	func photoLibraryButtonClicked(_ viewController: UIViewController, date: String) {
-		
+		self.presentPhoto(parentViewController: viewController, date: date)
 	}
 	
 	func addExerciseButtonClicked(_ viewController: UIViewController, date: String) {
@@ -57,5 +64,15 @@ extension CalendarCoordinator: CalendarVCCoordinatorDelegate {
 	
 	func readMemoClicked(_ viewController: UIViewController, content: Content) {
 		self.presentReadMemo(parentViewController: viewController, content: content)
+	}
+}
+
+extension CalendarCoordinator: PhotoCoordinatorDelegate {
+	func selectImage(imageUrl: NSURL) {
+		self.calendarViewController.addedPhotoURL.onNext(imageUrl)
+	}
+	
+	func selectVideo(videoUrl: NSURL) {
+		
 	}
 }

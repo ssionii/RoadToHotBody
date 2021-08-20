@@ -55,6 +55,11 @@ class CalendarViewController: UIViewController {
 	
 	private let isScrolled = PublishSubject<Int>()
 	let reloadView = PublishSubject<Void>()
+	let addedPhotoURL = PublishSubject<NSURL>()
+	
+	private let selectedDateObservable = PublishSubject<String>()
+	private var selectedDate: String = ""
+	private var selectedIndexPath = IndexPath()
 	
 	private var displayedMonths: [(Int, Int)]? {
 		didSet {
@@ -67,9 +72,6 @@ class CalendarViewController: UIViewController {
 			recordTableView.reloadData()
 		}
 	}
-	
-	private var selectedDate: String = ""
-	private var selectedIndexPath: IndexPath = IndexPath()
 	
 	init(viewModel: CalendarViewModel) {
 		self.viewModel = viewModel
@@ -123,11 +125,14 @@ class CalendarViewController: UIViewController {
 		
 		recordTableView.register(UINib(nibName: MemoCell.ID, bundle: nil), forCellReuseIdentifier: MemoCell.ID)
 		recordTableView.register(UINib(nibName: ExerciseCell.ID, bundle: nil), forCellReuseIdentifier: ExerciseCell.ID)
+		recordTableView.register(UINib(nibName: PhotoCell.ID, bundle: nil), forCellReuseIdentifier: PhotoCell.ID)
 	}
 	
 	private func bind() {
 		let output = viewModel.transform(
 			input: CalendarViewModel.Input(
+				addedPhotoDate: selectedDateObservable.asObservable(),
+				addedPhotoURL: addedPhotoURL.asObservable(),
 				isScrolled: self.isScrolled.asObservable()
 			)
 		)
@@ -146,6 +151,12 @@ class CalendarViewController: UIViewController {
 		
 		output.displayedMonthString
 			.drive(topItem.rx.title)
+			.disposed(by: disposeBag)
+		
+		output.isPhotoAdded
+			.subscribe(onNext: { _ in
+				self.reloadView.onNext(())
+			})
 			.disposed(by: disposeBag)
 		
 	}
@@ -208,6 +219,10 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
 			let cell = tableView.dequeueReusableCell(withIdentifier: MemoCell.ID, for: indexPath) as! MemoCell
 			cell.bind(text: records[indexPath.section].text ?? "")
 			return cell
+		case .Photo:
+			let cell = tableView.dequeueReusableCell(withIdentifier: PhotoCell.ID, for: indexPath) as! PhotoCell
+			cell.bind(url: records[indexPath.section].text, index: indexPath)
+			return cell
 		default:
 			let cell = tableView.dequeueReusableCell(withIdentifier: MemoCell.ID, for: indexPath) as! MemoCell
 			cell.bind(text: records[indexPath.section].text ?? "")
@@ -230,7 +245,9 @@ extension CalendarViewController: MonthCellDelegate {
         if let records = records {
             self.records = records
         }
+		
 		self.selectedDate = date
+		self.selectedDateObservable.onNext(date)
 		self.selectedIndexPath = indexPath
     }
 }

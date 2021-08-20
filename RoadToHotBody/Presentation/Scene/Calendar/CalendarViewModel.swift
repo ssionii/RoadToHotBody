@@ -10,13 +10,18 @@ import RxCocoa
 
 class CalendarViewModel {
 	struct Input {
+		var addedPhotoDate: Observable<String>
+		var addedPhotoURL: Observable<NSURL>
 		var isScrolled: Observable<Int>
 	}
 	
 	struct Output {
 		var displayedMonths: Observable<[(Int, Int)]>
 		var displayedMonthString: Driver<String>
+		var isPhotoAdded: Observable<Void>
 	}
+	
+	private let saveRecordUseCase = SaveRecordUseCase(repository: RecordRepository(dataSource: RecordInternalDB()))
 	
 	private var currentYear: Int
 	private var currentMonth: Int
@@ -54,8 +59,23 @@ class CalendarViewModel {
 				return "\(self.currentYear)년 \(self.currentMonth)월"
 			}
 			.asDriver(onErrorJustReturn: "")
+	
+		let isPhotoAdded = Observable.zip(input.addedPhotoURL, input.addedPhotoDate)
+			.flatMap { url, date -> Observable<SaveRecordUseCaseModels.Response> in
+				self.saveRecordUseCase.execute(
+					request: SaveRecordUseCaseModels.Request(
+						date: date,
+						text: String(describing: url),
+						type: .Photo,
+						muscle: nil
+					)
+				)
+			}
+			.map { response -> Void in
+				return ()
+			}
 		
-		return Output(displayedMonths: displayedMonths, displayedMonthString: displayedMonthString)
+		return Output(displayedMonths: displayedMonths, displayedMonthString: displayedMonthString, isPhotoAdded: isPhotoAdded)
 	}
 	
 	private func displayedMonths(currentYear: Int, currentMonth: Int) -> Observable<[(Int, Int)]> {
