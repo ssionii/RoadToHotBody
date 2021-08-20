@@ -69,10 +69,6 @@ class WriteMemoViewController: UIViewController {
             .disposed(by: disposeBag)
 		
 		output.title
-			.do(onNext: { title in
-				print(title)
-				
-			})
 			.drive(self.navigationItem.rx.title)
 			.disposed(by: disposeBag)
     }

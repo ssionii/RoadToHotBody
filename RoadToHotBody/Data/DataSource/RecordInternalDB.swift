@@ -9,8 +9,9 @@ import RxSwift
 import RealmSwift
 
 protocol RecordInternalDBProtocol {
-	func fetchRecords(by date: String) -> Single<[Record]>
+	func fetchRecords(date: String) -> Single<[Record]>
 	func saveRecord(date: String, content: String, type: Int, trainingIndex: Int?) -> Completable
+	func updateRecord(index: Int, content: String) -> Completable
 }
 
 class RecordInternalDB: RecordInternalDBProtocol {
@@ -25,7 +26,7 @@ class RecordInternalDB: RecordInternalDBProtocol {
 		}
 	}
 	
-	func fetchRecords(by date: String) -> Single<[Record]> {
+	func fetchRecords(date: String) -> Single<[Record]> {
 		return Single<[Record]>.create { single in
 			if let realm = self.realm {
 				
@@ -64,6 +65,32 @@ class RecordInternalDB: RecordInternalDBProtocol {
 				do {
 					try realm.write {
 						realm.add(record)
+						completable(.completed)
+					}
+				} catch (let error) {
+					print(error)
+				}
+			} else {
+				completable(.error(RealmNotInitError(detailMessage: "")))
+			}
+
+			return Disposables.create { }
+		}
+	}
+	
+	func updateRecord(index: Int, content: String) -> Completable {
+		return Completable.create { completable in
+			
+			if let realm = self.realm {
+				
+				guard let record = realm.object(ofType: Record.self, forPrimaryKey: index) else {
+					completable(.error(RecordNotFoundError(detailMessage: "")))
+					return Disposables.create { }
+				}
+				
+				do {
+					try realm.write {
+						record.content = content
 						completable(.completed)
 					}
 				} catch (let error) {

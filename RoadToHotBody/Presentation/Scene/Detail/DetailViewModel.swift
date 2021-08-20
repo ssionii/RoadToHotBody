@@ -25,9 +25,9 @@ class DetailViewModel {
 	}
 	
 	// TODO: DI
-	let fetchDetailContentsUseCase = FetchDetailContentsUseCase(repository: DetailContentRepository(dataSource: DetailContentDataSource()))
-    let saveDetailContentUseCase = SaveDetailContentUseCase(repository: DetailContentRepository(dataSource: DetailContentDataSource()))
-	let saveRecordUseCase = SaveRecordUseCase(repository: RecordRepository(dataSource: RecordDataSource()))
+	let fetchDetailContentsUseCase = FetchDetailContentsUseCase(repository: DetailContentRepository(dataSource: TrainingDetailInternalDB()))
+    let saveDetailContentUseCase = SaveContentUseCase(repository: DetailContentRepository(dataSource: TrainingDetailInternalDB()))
+	let saveRecordUseCase = SaveRecordUseCase(repository: RecordRepository(dataSource: RecordInternalDB()))
 	
     private var contents: [Content]?
 	private var muscle: Muscle
@@ -44,7 +44,7 @@ class DetailViewModel {
         let content = input.reloadView
 			.flatMap { _ -> Observable<FetchDetailContentsUseCaseModels.Response> in
 				self.fetchDetailContentsUseCase.execute(
-					request: FetchDetailContentsUseCaseModels.Request(trainingIndex: self.muscle.index)
+					request: FetchDetailContentsUseCaseModels.Request(muscleIndex: self.muscle.index)
 				)
 			}
 			.map { response -> [Content]? in
@@ -52,36 +52,32 @@ class DetailViewModel {
 			}
         
         let isPhotoAdded = input.addedPhotoURL
-            .flatMap { url -> Observable<SaveDetailContentUseCaseModels.Response> in
+            .flatMap { url -> Observable<SaveContentUseCaseModels.Response> in
                 self.saveDetailContentUseCase.execute(
-                    request: SaveDetailContentUseCaseModels.Request(
-                        type: .Photo,
-                        text: String(describing: url),
-                        muscleIndex: self.muscle.index
+                    request: SaveContentUseCaseModels.Request(
+						muscleIndex: self.muscle.index,
+						text: String(describing: url),
+						type: .Photo
                     )
                 )
             }
             .map { response -> Void in
-                if response.isSuccess {
-                    return ()
-                }
+                return ()
             }
         
         
         let isVideoAdded = input.addedVideoURL
-            .flatMap { url -> Observable<SaveDetailContentUseCaseModels.Response> in
+            .flatMap { url -> Observable<SaveContentUseCaseModels.Response> in
                 self.saveDetailContentUseCase.execute(
-                    request: SaveDetailContentUseCaseModels.Request(
-                        type: .Video,
-                        text: String(describing: url),
-                        muscleIndex: self.muscle.index
+                    request: SaveContentUseCaseModels.Request(
+						muscleIndex: self.muscle.index,
+						text: String(describing: url),
+                        type: .Video
                     )
                 )
             }
             .map { response -> Void in
-                if response.isSuccess {
-                    return ()
-                }
+               	return ()
             }
 		
 		let doExercise = input.doExercise

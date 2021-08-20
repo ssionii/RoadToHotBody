@@ -9,24 +9,30 @@ import RxSwift
 
 class RecordRepository: RecordRepositoryProtocol {
 	
-	private let recordDataSource: RecordDataSourceProtocol
+	private let recordDB: RecordInternalDBProtocol
 	
-	init(dataSource: RecordDataSourceProtocol) {
-		self.recordDataSource = dataSource
+	init(dataSource: RecordInternalDBProtocol) {
+		self.recordDB = dataSource
 	}
 	
-	func fetchRecords(request: FetchRecordsUseCaseModels.Request) -> Observable<FetchRecordsUseCaseModels.Response> {
-		return recordDataSource.fetchRecords(by: request.date)
-			.asObservable()
-			.map { contents -> FetchRecordsUseCaseModels.Response in
-				return FetchRecordsUseCaseModels.Response(records: contents)
+	func fetchRecords(date: String) -> Single<[Content]> {
+		return recordDB.fetchRecords(date: date)
+			.map { records -> [Content] in
+				records.map { record -> Content in
+					return Content(
+						index: record.index,
+						type: ContentType.init(rawValue: record.type) ?? .Memo,
+						text: record.content
+					)
+				}
 			}
 	}
 	
+	func saveRecord(date: String, text: String, type: ContentType, muscleIndex: Int?) -> Completable {
+		return recordDB.saveRecord(date: date, content: text, type: type.rawValue, trainingIndex: muscleIndex)
+	}
 	
-	func saveRecord(request: SaveRecordUseCaseModels.Request) -> Observable<SaveRecordUseCaseModels.Response> {
-		guard let date = request.date else { return .never() }
-		return recordDataSource.saveRecord(date: date, text: request.text, type: request.type, muscleIndex: request.muscle?.index)
-			.andThen(Observable.of(SaveRecordUseCaseModels.Response()))
+	func updateRecord(index: Int, text: String) -> Completable {
+		return recordDB.updateRecord(index: index, content: text)
 	}
 }

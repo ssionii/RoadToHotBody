@@ -8,16 +8,17 @@
 import Foundation
 import RxSwift
 
-protocol DetailContentDataSourceProtocol {
+protocol ContentDataSourceProtocol {
 	func fetchDetailContents(muscleIndex: Int) -> Single<[Content]>
-	func saveDetailContent(muscleIndex: Int, text: String, type: ContentType) -> Completable
-    func updateDetailContent(index: Int, text: String) -> Completable
-	func deleteDetailContent(index: Int) -> Completable
+	func saveContent(type: ContentType, text: String, muscleIndex: Int?, date: Int?) -> Completable
+	func updateContent(index: Int, text: String) -> Completable
+	func deleteContent(index: Int) -> Completable
 }
 
-class DetailContentDataSource: DetailContentDataSourceProtocol {
+class ContentDataSource: ContentDataSourceProtocol {
 	
 	private let trainingDetailInternalDB = TrainingDetailInternalDB()
+	private let recordInternalDB = RecordInternalDB()
 	
 	func fetchDetailContents(muscleIndex: Int) -> Single<[Content]> {
 		return trainingDetailInternalDB.fetchTrainingDetails(trainingIndex: muscleIndex)
@@ -32,16 +33,23 @@ class DetailContentDataSource: DetailContentDataSourceProtocol {
 			}
 	}
 	
-	func saveDetailContent(muscleIndex: Int, text: String, type: ContentType) -> Completable {
-		return trainingDetailInternalDB.saveTrainingDetail(trainingIndex: muscleIndex, content: text, type: type.rawValue)
+	func saveContent(type: ContentType, text: String, muscleIndex: Int?, date: Int?) -> Completable {
+		
+		if let muscleIndex = muscleIndex {
+			return trainingDetailInternalDB.saveTrainingDetail(trainingIndex: muscleIndex, content: text, type: type.rawValue)
+		}
+		
+		if let date = date {
+			return recordInternalDB.saveRecord(date: date, content: text, type: type.rawValue, trainingIndex: nil)
+		}
 	}
     
     
-    func updateDetailContent(index: Int, text: String) -> Completable {
+    func updateContent(index: Int, text: String) -> Completable {
         return trainingDetailInternalDB.updateTrainingDetail(index: index, content: text)
     }
 	
-	func deleteDetailContent(index: Int) -> Completable {
+	func deleteContent(index: Int) -> Completable {
 		return trainingDetailInternalDB.deleteTrainingDetail(index: index)
 	}
 }

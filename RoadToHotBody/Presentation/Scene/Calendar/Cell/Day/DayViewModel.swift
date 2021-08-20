@@ -23,7 +23,7 @@ class DayViewModel {
         var isToday: Observable<Bool>
 	}
 	
-	private let fetchRecordsUseCase = FetchRecordsUseCase(repository: RecordRepository(dataSource: RecordDataSource()))
+	private let fetchRecordsUseCase = FetchRecordsUseCase(repository: RecordRepository(dataSource: RecordInternalDB()))
 	
 	let calendarDate: CalendarDate
 	private let today: Date

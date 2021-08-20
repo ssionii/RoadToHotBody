@@ -9,20 +9,19 @@ import RxSwift
 
 class MuscleRepository: MuscleRepositoryProtocol {
 	
-	private let muscleDataSource: MuscleDataSourceProtocol
-	
+	private let trainingDB: TrainingInternalDBProtocol
 	private var muscleCache: [Muscle]?
 	
 	private let disposeBag = DisposeBag()
 	
-	init(dataSource: MuscleDataSourceProtocol) {
-		self.muscleDataSource = dataSource
+	init(dataSource: TrainingInternalDBProtocol) {
+		self.trainingDB = dataSource
 		
 		self.initMuscleCache()
 	}
 	
-	func initMuscleCache() {
-		muscleDataSource.fetchMuscles()
+	private func initMuscleCache() {
+		self.fetchTrainingFromDB()
 			.subscribe(
 				onSuccess: { muscles in
 					self.muscleCache = muscles
@@ -31,22 +30,27 @@ class MuscleRepository: MuscleRepositoryProtocol {
 					print(MusclesEmptyError(detailMessage: error.localizedDescription))
 				})
 			.disposed(by: disposeBag)
-		
 	}
 	
-	func fetchMuscles(
-		request: FetchMuscleUseCaseModels.Request
-	) -> Observable<FetchMuscleUseCaseModels.Response> {
+	private func fetchTrainingFromDB() -> Single<[Muscle]> {
+		return trainingDB.fetchTrainings()
+			.map { trainings -> [Muscle] in
+				return trainings.map { training -> Muscle in
+					training.toMuscle()
+				}
+			}
+	}
+	
+	func fetchMuscles(direction: Direction) -> Single<[Muscle]> {
 		
-		return Observable<FetchMuscleUseCaseModels.Response>.create { [weak self] emit in
+		return Single<[Muscle]>.create { [weak self] single in
 			guard let self = self else { return Disposables.create { } }
 			if let cache = self.muscleCache {
-				let filteredMuscles = cache.filter { $0.direction == request.direction || $0.direction == Direction.Both }
-				emit.onNext(FetchMuscleUseCaseModels.Response(muscles: filteredMuscles))
+				let filteredMuscles = cache.filter { $0.direction == direction || $0.direction == Direction.Both }
+				single(.success(filteredMuscles))
 			} else {
-				emit.onError(MuscleCacheEmptyError(detailMessage: ""))
+				single(.failure(MuscleCacheEmptyError(detailMessage: "")))
 			}
-			
 			return Disposables.create { }
 		}
 	}

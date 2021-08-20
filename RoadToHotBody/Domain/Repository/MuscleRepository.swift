@@ -6,7 +6,8 @@
 //
 
 import RxSwift
+import RxCocoa
 
 protocol MuscleRepositoryProtocol {
-	func fetchMuscles(request: FetchMuscleUseCaseModels.Request) -> Observable<FetchMuscleUseCaseModels.Response>
+	func fetchMuscles(direction: Direction) -> Single<[Muscle]>
 }

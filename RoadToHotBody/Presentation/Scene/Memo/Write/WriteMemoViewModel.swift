@@ -8,6 +8,11 @@
 import RxSwift
 import RxCocoa
 
+enum OpenMemoFrom {
+	case Detail
+	case Calendar
+}
+
 class WriteMemoViewModel {
     
     struct Input {
@@ -20,26 +25,33 @@ class WriteMemoViewModel {
 		var title: Driver<String>
     }
     
-    private let saveDetailContentUseCase = SaveDetailContentUseCase(repository: DetailContentRepository(dataSource: DetailContentDataSource()))
-    private let saveRecordUseCase = SaveRecordUseCase(repository: RecordRepository(dataSource: RecordDataSource()))
+    private let saveContentUseCase = SaveContentUseCase(repository: DetailContentRepository(dataSource: TrainingDetailInternalDB()))
+	private let saveRecordUseCase = SaveRecordUseCase(repository: RecordRepository(dataSource: RecordInternalDB()))
 	
+	private let from: OpenMemoFrom
     private var muscle: Muscle?
 	private var date: String?
     
-	init(muscle: Muscle?, date: String?) {
+	init(from: OpenMemoFrom, muscle: Muscle?, date: String?) {
+		self.from = from
         self.muscle = muscle
 		self.date = date
     }
     
     func transform(input: Input) -> Output {
 		
-		if let muscle = self.muscle {
+		if from == .Detail,
+		   let muscle = self.muscle {
 			let isSaved = input.confirmButtonClicked
 				.withLatestFrom(input.text)
 				.compactMap { $0 }
-				.flatMap({ text -> Observable<SaveDetailContentUseCaseModels.Response> in
-					self.saveDetailContentUseCase.execute(
-						request: SaveDetailContentUseCaseModels.Request(type: .Memo, text: text, muscleIndex: muscle.index)
+				.flatMap({ text -> Observable<SaveContentUseCaseModels.Response> in
+					self.saveContentUseCase.execute(
+						request: SaveContentUseCaseModels.Request(
+							muscleIndex: muscle.index,
+							text: text,
+							type: .Memo
+						)
 					)
 				})
 				.map({ response -> Void in
@@ -47,17 +59,16 @@ class WriteMemoViewModel {
 				})
 			
 			return Output(isSaved: isSaved, title: Driver.just(""))
-		}
-		
-		if let date = self.date {
+		} else if from == .Calendar,
+				let date = self.date {
 			let isSaved = input.confirmButtonClicked
 				.withLatestFrom(input.text)
 				.compactMap { $0 }
-				.flatMap({ text -> Observable<SaveRecordUseCaseModels.Response> in
+				.flatMap { text -> Observable<SaveRecordUseCaseModels.Response> in
 					self.saveRecordUseCase.execute(
 						request: SaveRecordUseCaseModels.Request(date: date, text: text, type: .Memo, muscle: nil)
 					)
-				})
+				}
 				.map({ response -> Void in
 					return ()
 				})

@@ -19,13 +19,14 @@ class ReadMemoViewModel {
     struct Output {
         var text: Driver<String>?
         var isEditType: Observable<Void>
-        var isUpdated: Observable<Bool>
-        var isDeleted: Observable<Bool>
+        var isUpdated: Observable<Void>
+        var isDeleted: Observable<Void>
     }
     
-    private let updateDetailContentUseCase = UpdateDetailContentUseCase(repository: DetailContentRepository(dataSource: DetailContentDataSource()))
-    private let deleteDetailContentUseCase = DeleteDetailContentUseCase(repository: DetailContentRepository(dataSource: DetailContentDataSource()))
-    
+    private let updateDetailContentUseCase = UpdateDetailContentUseCase(repository: DetailContentRepository(dataSource: TrainingDetailInternalDB()))
+    private let deleteDetailContentUseCase = DeleteDetailContentUseCase(repository: DetailContentRepository(dataSource: TrainingDetailInternalDB()))
+    private let updateRecordUseCase = UpdateRecordUseCase(repository: RecordRepository(dataSource: RecordInternalDB()))
+	
     private var content: Content
     
     init(content: Content) {
@@ -48,7 +49,7 @@ class ReadMemoViewModel {
             .map { _ -> Void in
                 return ()
             }
-        
+		
         let isUpdated = input.confirmButtonClicked
             .withLatestFrom(input.text)
             .compactMap { $0 }
@@ -60,8 +61,8 @@ class ReadMemoViewModel {
                     )
                 )
             }
-            .map { response -> Bool in
-                return response.isSuccess
+            .map { response -> Void in
+                return ()
             }
         
         let isDeleted = input.deleteButtonClicked
@@ -70,8 +71,8 @@ class ReadMemoViewModel {
                     request: DeleteDetailContentUseCaseModels.Request(index: self.content.index)
                 )
             }
-            .map { response -> Bool in
-                return response.isSuccess
+            .map { response -> Void in
+                return ()
             }
 
         return Output(text: text, isEditType: isEditType, isUpdated: isUpdated, isDeleted: isDeleted)

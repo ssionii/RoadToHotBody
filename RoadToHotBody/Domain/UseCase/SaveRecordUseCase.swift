@@ -9,7 +9,6 @@ import RxSwift
 
 protocol SaveRecordUseCaseProtocol {
 	func execute(request: SaveRecordUseCaseModels.Request) -> Observable<SaveRecordUseCaseModels.Response>
-
 }
 
 struct SaveRecordUseCaseModels {
@@ -28,7 +27,7 @@ struct SaveRecordUseCaseModels {
 class SaveRecordUseCase: SaveRecordUseCaseProtocol {
 	
 	private let recordRepository: RecordRepositoryProtocol
-	private let formatter = DateFormatter()
+	private var formatter = DateFormatter()
 	
 	init(repository: RecordRepositoryProtocol) {
 		self.recordRepository = repository
@@ -38,14 +37,13 @@ class SaveRecordUseCase: SaveRecordUseCaseProtocol {
 	
 	func execute(request: SaveRecordUseCaseModels.Request) -> Observable<SaveRecordUseCaseModels.Response> {
 		
-		guard let _ = request.date else {
-			let date = formatter.string(from: Date())
-			let newRequest = SaveRecordUseCaseModels.Request(
-				date: date, text: request.text, type: request.type, muscle: request.muscle)
-			
-			return recordRepository.saveRecord(request: newRequest)
+		guard let date = request.date else {
+			let today = formatter.string(from: Date())
+			return recordRepository.saveRecord(date: today, text: request.text, type: request.type, muscleIndex: request.muscle?.index)
+				.andThen(Observable.just(SaveRecordUseCaseModels.Response()))
 		}
 		
-		return recordRepository.saveRecord(request: request)
+		return recordRepository.saveRecord(date: date, text: request.text, type: request.type, muscleIndex: request.muscle?.index)
+			.andThen(Observable.just(SaveRecordUseCaseModels.Response()))
 	}
 }

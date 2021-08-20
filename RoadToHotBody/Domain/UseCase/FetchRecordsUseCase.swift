@@ -30,6 +30,10 @@ class FetchRecordsUseCase: FetchRecordsUseCaseProtocol {
 	}
 	
 	func execute(request: FetchRecordsUseCaseModels.Request) -> Observable<FetchRecordsUseCaseModels.Response> {
-		return recordRepository.fetchRecords(request: request)
+		return recordRepository.fetchRecords(date: request.date)
+			.asObservable()
+			.map { contents -> FetchRecordsUseCaseModels.Response in
+				FetchRecordsUseCaseModels.Response(records: contents)
+			}
 	}
 }

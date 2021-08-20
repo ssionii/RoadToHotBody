@@ -34,7 +34,11 @@ class FetchMuscleUseCase: FetchMuscleUseCaseProtocol {
 	func execute(
 		request: FetchMuscleUseCaseModels.Request
 	) -> Observable<FetchMuscleUseCaseModels.Response> {
-		return muscleRepository.fetchMuscles(request: request)
+		return muscleRepository.fetchMuscles(direction: request.direction)
+			.asObservable()
+			.map { muscles -> FetchMuscleUseCaseModels.Response in
+				return FetchMuscleUseCaseModels.Response(muscles: muscles)
+			}
 	}
 	
 }

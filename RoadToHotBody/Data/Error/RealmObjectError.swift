@@ -15,3 +15,12 @@ struct TrainingDetailNotFoundError: Error {
 		self.detailMessage = detailMessage
 	}
 }
+
+struct RecordNotFoundError: Error {
+	var message = "찾는 Record가 없습니다. (RecordNotFoundError)"
+	var detailMessage: String
+	
+	init(detailMessage: String) {
+		self.detailMessage = detailMessage
+	}
+}

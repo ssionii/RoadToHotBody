@@ -38,7 +38,7 @@ class DetailCoordinator: Coordinator {
 	
     private func presentWriteMemo(parentViewController: DetailViewController, muscle: Muscle) {
         let router = ModalNavigationRouter(parentViewController: parentViewController, modalPresentationStyle: .automatic)
-		let coordinator = WriteMemoCoordinator(router: router, muscle: muscle, date: nil)
+		let coordinator = WriteMemoCoordinator(router: router, from: .Detail, muscle: muscle, date: nil)
         
         presentChild(coordinator, animated: true, onDismissed: {
             parentViewController.reloadView.onNext(())

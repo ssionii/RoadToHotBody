@@ -17,7 +17,7 @@ class HomeViewModel {
 		var muscles: Observable<[Muscle]>
 	}
 	
-	let fetchMusclesUseCase = FetchMuscleUseCase(repository: MuscleRepository(dataSource: MuscleDataSource()))
+	let fetchMusclesUseCase = FetchMuscleUseCase(repository: MuscleRepository(dataSource: TrainingInternalDB()))
 	
 	private var direction = Direction.Front
 	

@@ -20,7 +20,6 @@ struct UpdateDetailContentUseCaseModels {
     }
     
     struct Response {
-        var isSuccess: Bool
     }
 }
 
@@ -33,6 +32,7 @@ class UpdateDetailContentUseCase: UpdateDetailContentUseCaseProtocol {
     }
     
     func execute(request: UpdateDetailContentUseCaseModels.Request) -> Observable<UpdateDetailContentUseCaseModels.Response> {
-        return detailContentRepository.updateDetailContent(request: request)
+		return detailContentRepository.updateDetailContent(index: request.index, text: request.text)
+			.andThen(Observable.just(UpdateDetailContentUseCaseModels.Response()))
     }
 }

@@ -19,7 +19,6 @@ struct DeleteDetailContentUseCaseModels {
 	}
 	
 	struct Response {
-		var isSuccess: Bool
 	}
 }
 
@@ -32,6 +31,7 @@ class DeleteDetailContentUseCase: DeleteDetailContentUseCaseProtocol {
 	}
 	
 	func execute(request: DeleteDetailContentUseCaseModels.Request) -> Observable<DeleteDetailContentUseCaseModels.Response> {
-		return detailContentRepository.deleteDetailContent(request: request)
+		return detailContentRepository.deleteDetailContent(index: request.index)
+			.andThen(Observable.just(DeleteDetailContentUseCaseModels.Response()))
 	}
 }

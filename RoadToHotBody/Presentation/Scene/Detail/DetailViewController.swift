@@ -48,7 +48,7 @@ class DetailViewController: UIViewController {
     weak var coordinatorDelegate: DetailVCCoordinatorDelegate?
 	private let disposeBag = DisposeBag()
 	
-	let reloadView = PublishSubject<Void>()
+	let reloadView = BehaviorSubject<Void>(value: ())
     let addedPhotoURL = PublishSubject<NSURL>()
     let addedVideoURL = PublishSubject<NSURL>()
     

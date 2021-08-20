@@ -27,7 +27,7 @@ class CalendarCoordinator: Coordinator {
 	
 	private func presentWriteMemo(parentViewController: UIViewController, date: String) {
 		let router = ModalNavigationRouter(parentViewController: parentViewController, modalPresentationStyle: .automatic)
-		let coordinator = WriteMemoCoordinator(router: router, muscle: nil, date: date)
+		let coordinator = WriteMemoCoordinator(router: router, from: .Calendar, muscle: nil, date: date)
 		presentChild(coordinator, animated: true) {
 			self.calendarViewController.reloadView.onNext(())
 		}

@@ -8,6 +8,7 @@
 import RxSwift
 
 protocol RecordRepositoryProtocol {
-	func fetchRecords(request: FetchRecordsUseCaseModels.Request) -> Observable<FetchRecordsUseCaseModels.Response>
-	func saveRecord(request: SaveRecordUseCaseModels.Request) -> Observable<SaveRecordUseCaseModels.Response>
+	func fetchRecords(date: String) -> Single<[Content]>
+	func saveRecord(date: String, text: String, type: ContentType, muscleIndex: Int?) -> Completable
+	func updateRecord(index: Int, text: String) -> Completable
 }
