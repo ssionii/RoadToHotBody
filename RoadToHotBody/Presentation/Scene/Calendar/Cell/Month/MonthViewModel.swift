@@ -60,10 +60,10 @@ class MonthViewModel {
 		// 전 달
 		let preYearAndMonth = self.preYearAndMonth(currentYear: self.currentYear, currentMonth: self.currentMonth)
 		if firstDayOfWeek > 1 {
-			let day = numOfDaysInMonth[preYearAndMonth.1 - 1] - firstDayOfWeek + 2
-			
+			var day = numOfDaysInMonth[preYearAndMonth.1 - 1] - firstDayOfWeek + 2
 			for _ in 0 ... firstDayOfWeek - 2 {
 				calendarDates.append(CalendarDate(isThisMonth: false, date: "\(preYearAndMonth.0)-\(preYearAndMonth.1)-\(day)", dayString: String(day)))
+				day += 1
 			}
 		}
 		

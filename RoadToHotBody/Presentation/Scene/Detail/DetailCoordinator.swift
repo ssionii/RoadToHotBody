@@ -29,7 +29,7 @@ class DetailCoordinator: Coordinator {
     
 	private func presentReadMemo(parentViewController: DetailViewController, content: Content) {
 		let router = ModalNavigationRouter(parentViewController: parentViewController, modalPresentationStyle: .automatic)
-        let coordinator = ReadMemoCoordinator(router: router, content: content)
+		let coordinator = ReadMemoCoordinator(router: router, from: .Detail, content: content)
         
 		presentChild(coordinator, animated: true, onDismissed: {
 			parentViewController.reloadView.onNext(())

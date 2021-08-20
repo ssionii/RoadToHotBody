@@ -35,4 +35,8 @@ class RecordRepository: RecordRepositoryProtocol {
 	func updateRecord(index: Int, text: String) -> Completable {
 		return recordDB.updateRecord(index: index, content: text)
 	}
+	
+	func deleteRecord(index: Int) -> Completable {
+		return recordDB.deleteRecord(index: index)
+	}
 }

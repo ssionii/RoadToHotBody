@@ -58,6 +58,11 @@
 		FAB294ED26C65E17003788CA /* RealmObjectError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB294EC26C65E17003788CA /* RealmObjectError.swift */; };
 		FAB294F226C65EAF003788CA /* DeleteDetailContentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB294F126C65EAF003788CA /* DeleteDetailContentUseCase.swift */; };
 		FAC0CF5926CF4531004DC8BB /* UpdateRecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC0CF5826CF4531004DC8BB /* UpdateRecordUseCase.swift */; };
+		FAF7036A26CF921900CDEBEF /* ReadRecordMemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF7036926CF921900CDEBEF /* ReadRecordMemoViewModel.swift */; };
+		FAF7036F26CF94D300CDEBEF /* ReadDetailContentMemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF7036E26CF94D300CDEBEF /* ReadDetailContentMemoViewModel.swift */; };
+		FAF7038626CF972C00CDEBEF /* DeleteRecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF7038526CF972C00CDEBEF /* DeleteRecordUseCase.swift */; };
+		FAF7038C26CF99D100CDEBEF /* WriteRecordMemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF7038B26CF99D100CDEBEF /* WriteRecordMemoViewModel.swift */; };
+		FAF7039426CF9A9400CDEBEF /* WriteDetailContentMemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF7039326CF9A9400CDEBEF /* WriteDetailContentMemoViewModel.swift */; };
 		FAFA467226BD1F9D00CD820C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA467126BD1F9D00CD820C /* AppDelegate.swift */; };
 		FAFA467B26BD1FA400CD820C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAFA467A26BD1FA400CD820C /* Assets.xcassets */; };
 		FAFA467E26BD1FA400CD820C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAFA467C26BD1FA400CD820C /* LaunchScreen.storyboard */; };
@@ -168,6 +173,11 @@
 		FAB294EC26C65E17003788CA /* RealmObjectError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmObjectError.swift; sourceTree = "<group>"; };
 		FAB294F126C65EAF003788CA /* DeleteDetailContentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDetailContentUseCase.swift; sourceTree = "<group>"; };
 		FAC0CF5826CF4531004DC8BB /* UpdateRecordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateRecordUseCase.swift; sourceTree = "<group>"; };
+		FAF7036926CF921900CDEBEF /* ReadRecordMemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadRecordMemoViewModel.swift; sourceTree = "<group>"; };
+		FAF7036E26CF94D300CDEBEF /* ReadDetailContentMemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadDetailContentMemoViewModel.swift; sourceTree = "<group>"; };
+		FAF7038526CF972C00CDEBEF /* DeleteRecordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRecordUseCase.swift; sourceTree = "<group>"; };
+		FAF7038B26CF99D100CDEBEF /* WriteRecordMemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordMemoViewModel.swift; sourceTree = "<group>"; };
+		FAF7039326CF9A9400CDEBEF /* WriteDetailContentMemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteDetailContentMemoViewModel.swift; sourceTree = "<group>"; };
 		FAFA466E26BD1F9D00CD820C /* RoadToHotBody.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoadToHotBody.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAFA467126BD1F9D00CD820C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAFA467A26BD1FA400CD820C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -273,9 +283,9 @@
 		B56EFA4126C79A58008A5346 /* Write */ = {
 			isa = PBXGroup;
 			children = (
+				FAF7038A26CF996500CDEBEF /* ViewModel */,
 				B56EFA5126C7A2E1008A5346 /* WriteMemoViewController.swift */,
 				B541963126C2B27A00B2080A /* WriteMemoViewController.xib */,
-				B56EFA4726C79C3E008A5346 /* WriteMemoViewModel.swift */,
 				B56EFA5526C7A623008A5346 /* WriteMemoCoordinator.swift */,
 			);
 			path = Write;
@@ -284,9 +294,9 @@
 		B56EFA4226C79A5F008A5346 /* Read */ = {
 			isa = PBXGroup;
 			children = (
+				FAF7037326CF956B00CDEBEF /* ViewModel */,
 				B56EFA4B26C7A098008A5346 /* ReadMemoViewController.swift */,
 				B56EFA5726C7C2C0008A5346 /* ReadMemoViewController.xib */,
-				B56EFA4526C79B57008A5346 /* ReadMemoViewModel.swift */,
 				B56EFA5326C7A532008A5346 /* ReadMemoCoordinator.swift */,
 			);
 			path = Read;
@@ -357,6 +367,26 @@
 				FA3AD7D026CE144600270AC1 /* Record.swift */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		FAF7037326CF956B00CDEBEF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B56EFA4526C79B57008A5346 /* ReadMemoViewModel.swift */,
+				FAF7036E26CF94D300CDEBEF /* ReadDetailContentMemoViewModel.swift */,
+				FAF7036926CF921900CDEBEF /* ReadRecordMemoViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FAF7038A26CF996500CDEBEF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B56EFA4726C79C3E008A5346 /* WriteMemoViewModel.swift */,
+				FAF7039326CF9A9400CDEBEF /* WriteDetailContentMemoViewModel.swift */,
+				FAF7038B26CF99D100CDEBEF /* WriteRecordMemoViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		FAFA466526BD1F9D00CD820C = {
@@ -484,6 +514,7 @@
 				FA3AD7DF26CE167D00270AC1 /* FetchRecordsUseCase.swift */,
 				FA3AD7EC26CE1CD800270AC1 /* SaveRecordUseCase.swift */,
 				FAC0CF5826CF4531004DC8BB /* UpdateRecordUseCase.swift */,
+				FAF7038526CF972C00CDEBEF /* DeleteRecordUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -884,8 +915,10 @@
 				FAFA46CF26BD24B900CD820C /* UIView+Extension.swift in Sources */,
 				FAFA46DB26BD250E00CD820C /* MainCoordinator.swift in Sources */,
 				B56EFA6526C80B0E008A5346 /* NoNavigationRouter.swift in Sources */,
+				FAF7036F26CF94D300CDEBEF /* ReadDetailContentMemoViewModel.swift in Sources */,
 				FAB2948D26C5FE5C003788CA /* EmptyError.swift in Sources */,
 				FA3AD7A026CCBD1200270AC1 /* MonthViewModel.swift in Sources */,
+				FAF7038626CF972C00CDEBEF /* DeleteRecordUseCase.swift in Sources */,
 				FAFA46EA26BD256B00CD820C /* AppRouter.swift in Sources */,
 				FAB2948026C5F785003788CA /* TrainingDetail.swift in Sources */,
 				B56EFA5226C7A2E1008A5346 /* WriteMemoViewController.swift in Sources */,
@@ -907,6 +940,7 @@
 				FAB294CB26C60DC7003788CA /* FetchMusclesUseCase.swift in Sources */,
 				B541963726C2B2E400B2080A /* DetailCoordinator.swift in Sources */,
 				FAFA484526C3A77D00CD820C /* UITextView+Extension.swift in Sources */,
+				FAF7036A26CF921900CDEBEF /* ReadRecordMemoViewModel.swift in Sources */,
 				B56EFA4826C79C3E008A5346 /* WriteMemoViewModel.swift in Sources */,
 				B5117F5626CBF8C000E6ABB5 /* MonthCell.swift in Sources */,
 				FAFA479B26C245E600CD820C /* MemoCell.swift in Sources */,
@@ -919,12 +953,14 @@
 				FA3AD7E026CE167D00270AC1 /* FetchRecordsUseCase.swift in Sources */,
 				FAFA47C726C24ED800CD820C /* DetailContentRepositoryImpl.swift in Sources */,
 				FAB294F226C65EAF003788CA /* DeleteDetailContentUseCase.swift in Sources */,
+				FAF7038C26CF99D100CDEBEF /* WriteRecordMemoViewModel.swift in Sources */,
 				FAFA467226BD1F9D00CD820C /* AppDelegate.swift in Sources */,
 				FAFA47A926C2488500CD820C /* DetailViewModel.swift in Sources */,
 				FA9B27EC26CBA42400FC05E9 /* DayCell.swift in Sources */,
 				FA0B49FE26C511CE0018DE69 /* InternalDBError.swift in Sources */,
 				FAFA46BE26BD245700CD820C /* NavigationRouter.swift in Sources */,
 				FA9B27B226CB399D00FC05E9 /* VideoCell.swift in Sources */,
+				FAF7039426CF9A9400CDEBEF /* WriteDetailContentMemoViewModel.swift in Sources */,
 				FAB294C126C60D42003788CA /* MuscleRepositoryImpl.swift in Sources */,
 				B56EFA6326C80872008A5346 /* PhotoCoordinator.swift in Sources */,
 				FA3AD82026CE523300270AC1 /* ExerciseCell.swift in Sources */,

@@ -12,6 +12,7 @@ protocol RecordInternalDBProtocol {
 	func fetchRecords(date: String) -> Single<[Record]>
 	func saveRecord(date: String, content: String, type: Int, trainingIndex: Int?) -> Completable
 	func updateRecord(index: Int, content: String) -> Completable
+	func deleteRecord(index: Int) -> Completable
 }
 
 class RecordInternalDB: RecordInternalDBProtocol {
@@ -91,6 +92,32 @@ class RecordInternalDB: RecordInternalDBProtocol {
 				do {
 					try realm.write {
 						record.content = content
+						completable(.completed)
+					}
+				} catch (let error) {
+					print(error)
+				}
+			} else {
+				completable(.error(RealmNotInitError(detailMessage: "")))
+			}
+
+			return Disposables.create { }
+		}
+	}
+	
+	func deleteRecord(index: Int) -> Completable {
+		return Completable.create { completable in
+			
+			if let realm = self.realm {
+				
+				guard let record = realm.object(ofType: Record.self, forPrimaryKey: index) else {
+					completable(.error(RecordNotFoundError(detailMessage: "")))
+					return Disposables.create { }
+				}
+				
+				do {
+					try realm.write {
+						realm.delete(record)
 						completable(.completed)
 					}
 				} catch (let error) {

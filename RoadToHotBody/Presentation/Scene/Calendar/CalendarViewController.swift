@@ -14,6 +14,7 @@ protocol CalendarVCCoordinatorDelegate {
 	func writeMemoButtonClicked(_ viewController: UIViewController, date: String)
 	func photoLibraryButtonClicked(_ viewController: UIViewController, date: String)
 	func addExerciseButtonClicked(_ viewController: UIViewController, date: String)
+	func readMemoClicked(_ viewController: UIViewController, content: Content)
 }
 
 class CalendarViewController: UIViewController {
@@ -211,6 +212,15 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
 			let cell = tableView.dequeueReusableCell(withIdentifier: MemoCell.ID, for: indexPath) as! MemoCell
 			cell.bind(text: records[indexPath.section].text ?? "")
 			return cell
+		}
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		switch records[indexPath.section].type {
+		case .Memo:
+			self.coordinatorDelegate?.readMemoClicked(self, content: records[indexPath.section])
+		default:
+			break
 		}
 	}
 }

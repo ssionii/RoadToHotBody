@@ -128,6 +128,4 @@ class TrainingDetailInternalDB: TrainingDetailInternalDBProtocol {
 			return Disposables.create { }
 		}
 	}
-	
-
 }

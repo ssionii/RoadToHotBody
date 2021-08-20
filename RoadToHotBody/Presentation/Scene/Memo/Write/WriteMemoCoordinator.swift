@@ -23,11 +23,19 @@ class WriteMemoCoordinator: Coordinator {
     }
     
     func present(animated: Bool, onDismissed: (() -> Void)?) {
-		let viewModel = WriteMemoViewModel(from: from, muscle: muscle, date: date)
-        let viewController = WriteMemoViewController(viewModel: viewModel)
+        let viewController = WriteMemoViewController(viewModel: makeWriteMemoViewModel())
         viewController.coordinatorDelegate = self
         router.present(viewController, animated: animated, onDismissed: onDismissed)
     }
+	
+	private func makeWriteMemoViewModel() -> WriteMemoViewModel {
+		switch from {
+		case .Detail:
+			return WriteDetailContentViewModel(muscle: muscle, date: date)
+		case .Calendar:
+			return WriteRecordMemoViewModel(muscle: muscle, date: date)
+		}
+	}
 }
 
 extension WriteMemoCoordinator: MemoVCCoordinatorDelegate {
@@ -35,4 +43,3 @@ extension WriteMemoCoordinator: MemoVCCoordinatorDelegate {
         router.dismiss(animated: true)
     }
 }
-

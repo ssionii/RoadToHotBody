@@ -31,7 +31,14 @@ class CalendarCoordinator: Coordinator {
 		presentChild(coordinator, animated: true) {
 			self.calendarViewController.reloadView.onNext(())
 		}
-		
+	}
+	
+	private func presentReadMemo(parentViewController: UIViewController, content: Content) {
+		let router = ModalNavigationRouter(parentViewController: parentViewController, modalPresentationStyle: .automatic)
+		let coordinator = ReadMemoCoordinator(router: router, from: .Calendar, content: content)
+		presentChild(coordinator, animated: true) {
+			self.calendarViewController.reloadView.onNext(())
+		}
 	}
 }
 
@@ -48,5 +55,7 @@ extension CalendarCoordinator: CalendarVCCoordinatorDelegate {
 		
 	}
 	
-	
+	func readMemoClicked(_ viewController: UIViewController, content: Content) {
+		self.presentReadMemo(parentViewController: viewController, content: content)
+	}
 }

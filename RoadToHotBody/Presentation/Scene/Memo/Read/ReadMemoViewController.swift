@@ -75,14 +75,14 @@ class ReadMemoViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        output.isUpdated
+        output.isUpdated?
             .withUnretained(self)
             .subscribe(onNext: { owner, isUpdated in
                 owner.coordinatorDelegate?.dismissMemo()
             })
             .disposed(by: disposeBag)
         
-        output.isDeleted
+        output.isDeleted?
             .withUnretained(self)
             .subscribe(onNext: { owner, isDeleted in
                 owner.coordinatorDelegate?.dismissMemo()
