@@ -25,8 +25,8 @@ class DayViewModel {
 	
 	private let fetchRecordsUseCase = FetchRecordsUseCase(repository: RecordRepository(dataSource: RecordDataSource()))
 	
-	private let calendarDate: CalendarDate
-	private let date: Date
+	let calendarDate: CalendarDate
+	private let today: Date
 	private let formatter: DateFormatter
 	
 	var records: [Content]?
@@ -35,7 +35,7 @@ class DayViewModel {
 		
 		self.calendarDate = calendarDate
         
-		date = Date()
+		today = Date()
 		formatter = DateFormatter()
 		formatter.dateFormat = "yyyy-M-d"
 	}
@@ -104,7 +104,7 @@ class DayViewModel {
 	}
 	
 	private func isToday(dateString: String) -> Bool {
-		if formatter.string(from: self.date) == dateString {
+		if formatter.string(from: self.today) == dateString {
 			return true
 		}
 		return false

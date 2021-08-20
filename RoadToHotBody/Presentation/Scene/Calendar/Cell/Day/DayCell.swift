@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 protocol DayCellDelegate: AnyObject {
-    func selectedDate(records: [Content]?)
+	func selectedDate(records: [Content]?, date: String, indexPath: IndexPath)
 }
 
 class DayCell: UICollectionViewCell {
@@ -28,6 +28,7 @@ class DayCell: UICollectionViewCell {
     
     weak var delegate: DayCellDelegate?
 
+	private var indexPath: IndexPath?
     private var isDateSelected = BehaviorSubject<Bool>(value: false)
     
     override func awakeFromNib() {
@@ -46,16 +47,19 @@ class DayCell: UICollectionViewCell {
         didSet {
             if isSelected {
                 isDateSelected.onNext(true)
-                delegate?.selectedDate(records: viewModel?.records)
+				guard let viewModel = viewModel,
+					  let indexPath = indexPath else { return }
+				delegate?.selectedDate(records: viewModel.records, date: viewModel.calendarDate.date, indexPath: indexPath)
             } else {
                 isDateSelected.onNext(false)
             }
         }
     }
 	
-	func bind(viewModel: DayViewModel) {
+	func bind(viewModel: DayViewModel, indexPath: IndexPath) {
 		
 		self.viewModel = viewModel
+		self.indexPath = indexPath
 		
         let output = viewModel.transform(
             input: DayViewModel.Input(

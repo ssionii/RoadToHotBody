@@ -16,30 +16,71 @@ class WriteMemoViewModel {
     }
     
     struct Output {
-        var isSaved: Observable<Bool>
+        var isSaved: Observable<Void>?
+		var title: Driver<String>
     }
     
     private let saveDetailContentUseCase = SaveDetailContentUseCase(repository: DetailContentRepository(dataSource: DetailContentDataSource()))
+    private let saveRecordUseCase = SaveRecordUseCase(repository: RecordRepository(dataSource: RecordDataSource()))
+	
+    private var muscle: Muscle?
+	private var date: String?
     
-    private var muscle: Muscle
-    
-    init(muscle: Muscle) {
+	init(muscle: Muscle?, date: String?) {
         self.muscle = muscle
+		self.date = date
     }
     
     func transform(input: Input) -> Output {
-        let isSaved = input.confirmButtonClicked
-            .withLatestFrom(input.text)
-            .compactMap { $0 }
-            .flatMap({ text -> Observable<SaveDetailContentUseCaseModels.Response> in
-                self.saveDetailContentUseCase.execute(
-                    request: SaveDetailContentUseCaseModels.Request(type: .Memo, text: text, muscleIndex: self.muscle.index)
-                )
-            })
-            .map { response -> Bool in
-                return response.isSuccess
-            }
+		
+		if let muscle = self.muscle {
+			let isSaved = input.confirmButtonClicked
+				.withLatestFrom(input.text)
+				.compactMap { $0 }
+				.flatMap({ text -> Observable<SaveDetailContentUseCaseModels.Response> in
+					self.saveDetailContentUseCase.execute(
+						request: SaveDetailContentUseCaseModels.Request(type: .Memo, text: text, muscleIndex: muscle.index)
+					)
+				})
+				.map({ response -> Void in
+					return ()
+				})
+			
+			return Output(isSaved: isSaved, title: Driver.just(""))
+		}
+		
+		if let date = self.date {
+			let isSaved = input.confirmButtonClicked
+				.withLatestFrom(input.text)
+				.compactMap { $0 }
+				.flatMap({ text -> Observable<SaveRecordUseCaseModels.Response> in
+					self.saveRecordUseCase.execute(
+						request: SaveRecordUseCaseModels.Request(date: date, text: text, type: .Memo, muscle: nil)
+					)
+				})
+				.map({ response -> Void in
+					return ()
+				})
+			
+			let title = Observable.just(dateTitle(date: date))
+				.asDriver(onErrorJustReturn: "")
+				
+			return Output(isSaved: isSaved, title: title)
+		}
         
-        return Output(isSaved: isSaved)
+        return Output(isSaved: nil, title: Driver.just(""))
     }
+	
+	private func dateTitle(date: String) -> String {
+		let stringFormatter = DateFormatter()
+		stringFormatter.dateFormat = "yyyy-M-d"
+
+		guard let newDate = stringFormatter.date(from: date) else { return date }
+		
+		let dateFormatter = DateFormatter()
+		dateFormatter.locale = Locale(identifier:"ko_KR")
+		dateFormatter.dateFormat = "M월 d일 EEEE"
+		
+		return dateFormatter.string(from: newDate)
+	}
 }

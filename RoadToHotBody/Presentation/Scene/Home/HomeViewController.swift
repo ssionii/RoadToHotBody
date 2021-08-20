@@ -53,8 +53,16 @@ class HomeViewController: UIViewController {
 		directionButton.sendActions(for: .touchUpInside)
     }
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		guard let topItem = self.navigationController?.navigationBar.topItem else {
+			return
+		}
+		topItem.title = "몸짱이 되는 길"
+	}
+	
 	private func configureUI() {
-		self.navigationController?.navigationItem.title = "title"
 
 		directionButton.layer.cornerRadius = directionButton.frame.width / 2
 		directionButton.layer.shadowColor = UIColor.black.cgColor

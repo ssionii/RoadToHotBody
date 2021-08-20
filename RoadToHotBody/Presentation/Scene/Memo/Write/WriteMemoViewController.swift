@@ -61,12 +61,20 @@ class WriteMemoViewController: UIViewController {
             )
         )
         
-        output.isSaved
+        output.isSaved?
             .withUnretained(self)
-            .subscribe(onNext: { owner, isSaved in
+            .subscribe(onNext: { owner, _ in
                 owner.coordinatorDelegate?.dismissMemo()
             })
             .disposed(by: disposeBag)
+		
+		output.title
+			.do(onNext: { title in
+				print(title)
+				
+			})
+			.drive(self.navigationItem.rx.title)
+			.disposed(by: disposeBag)
     }
     
     private func keyboardNotification() {

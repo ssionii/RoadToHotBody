@@ -8,6 +8,13 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import JJFloatingActionButton
+
+protocol CalendarVCCoordinatorDelegate {
+	func writeMemoButtonClicked(_ viewController: UIViewController, date: String)
+	func photoLibraryButtonClicked(_ viewController: UIViewController, date: String)
+	func addExerciseButtonClicked(_ viewController: UIViewController, date: String)
+}
 
 class CalendarViewController: UIViewController {
 	
@@ -15,13 +22,38 @@ class CalendarViewController: UIViewController {
     @IBOutlet weak var calendarHeightConstraint: NSLayoutConstraint!
 	@IBOutlet weak var recordTableView: UITableView!
 	
+	lazy var floatingButton: JJFloatingActionButton = {
+		let button = JJFloatingActionButton()
+		button.buttonColor = .white
+		button.buttonImageColor = .black
+		
+		button.addItem(title: "", image: UIImage(systemName: "pencil")) { _ in
+			self.coordinatorDelegate?.writeMemoButtonClicked(self, date: self.selectedDate)
+		}
+		button.addItem(title: "", image: UIImage(systemName: "photo")) { _ in
+			self.coordinatorDelegate?.photoLibraryButtonClicked(self, date: self.selectedDate)
+		}
+		
+		button.addItem(title: "", image: UIImage(systemName: "checkmark")) { _ in
+			self.coordinatorDelegate?.addExerciseButtonClicked(self, date: self.selectedDate)
+		}
+		
+		for item in button.items {
+			item.imageView.tintColor = .black
+		}
+		
+		return button
+	}()
+	
 	private let viewModel: CalendarViewModel
+	var coordinatorDelegate: CalendarVCCoordinatorDelegate?
 	private let disposeBag = DisposeBag()
 	
     private let cellSpacingHeight: CGFloat = 10
 	private var cellSize: CGFloat = 0
 	
 	private let isScrolled = PublishSubject<Int>()
+	let reloadView = PublishSubject<Void>()
 	
 	private var displayedMonths: [(Int, Int)]? {
 		didSet {
@@ -34,6 +66,9 @@ class CalendarViewController: UIViewController {
 			recordTableView.reloadData()
 		}
 	}
+	
+	private var selectedDate: String = ""
+	private var selectedIndexPath: IndexPath = IndexPath()
 	
 	init(viewModel: CalendarViewModel) {
 		self.viewModel = viewModel
@@ -63,6 +98,8 @@ class CalendarViewController: UIViewController {
     private func configureUI() {
 		cellSize = floor((baseCollectionView.frame.size.width - ( 10 * 2 )) / 7)
         calendarHeightConstraint.constant = cellSize * 6
+		
+		floatingButton.display(inViewController: self)
     }
     
     private func configureCollectoinView() {
@@ -70,6 +107,13 @@ class CalendarViewController: UIViewController {
         baseCollectionView.dataSource = self
         
         baseCollectionView.register(UINib(nibName: MonthCell.ID, bundle: nil), forCellWithReuseIdentifier: MonthCell.ID)
+		
+		reloadView
+			.withUnretained(self)
+			.subscribe(onNext: { owner, _ in
+				(owner.baseCollectionView.cellForItem(at: IndexPath(row: 1, section: 0)) as! MonthCell).addedRecord.onNext(owner.selectedIndexPath)
+			})
+			.disposed(by: disposeBag)
     }
 	
 	private func configureTableView() {
@@ -102,6 +146,7 @@ class CalendarViewController: UIViewController {
 		output.displayedMonthString
 			.drive(topItem.rx.title)
 			.disposed(by: disposeBag)
+		
 	}
     
 }
@@ -158,8 +203,12 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
 			let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseCell.ID, for: indexPath) as! ExerciseCell
 			cell.bind(text: records[indexPath.section].text ?? "")
 			return cell
+		case .Memo:
+			let cell = tableView.dequeueReusableCell(withIdentifier: MemoCell.ID, for: indexPath) as! MemoCell
+			cell.bind(text: records[indexPath.section].text ?? "")
+			return cell
 		default:
-			let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseCell.ID, for: indexPath) as! ExerciseCell
+			let cell = tableView.dequeueReusableCell(withIdentifier: MemoCell.ID, for: indexPath) as! MemoCell
 			cell.bind(text: records[indexPath.section].text ?? "")
 			return cell
 		}
@@ -167,9 +216,11 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension CalendarViewController: MonthCellDelegate {
-    func selectedDate(records: [Content]?) {
+	func selectedDate(records: [Content]?, date: String, indexPath: IndexPath) {
         if let records = records {
             self.records = records
         }
+		self.selectedDate = date
+		self.selectedIndexPath = indexPath
     }
 }
