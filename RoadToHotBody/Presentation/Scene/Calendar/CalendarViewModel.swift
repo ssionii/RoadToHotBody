@@ -10,7 +10,7 @@ import RxCocoa
 
 class CalendarViewModel {
 	struct Input {
-		var addedPhotoDate: Observable<String>
+		var selectedDate: Observable<String>
 		var addedPhotoURL: Observable<NSURL>
 		var isScrolled: Observable<Int>
 	}
@@ -60,9 +60,10 @@ class CalendarViewModel {
 			}
 			.asDriver(onErrorJustReturn: "")
 	
-		let isPhotoAdded = Observable.zip(input.addedPhotoURL, input.addedPhotoDate)
+		let isPhotoAdded = input.addedPhotoURL
+			.withLatestFrom(input.selectedDate) { return ($0, $1) }
 			.flatMap { url, date -> Observable<SaveRecordUseCaseModels.Response> in
-				self.saveRecordUseCase.execute(
+				return self.saveRecordUseCase.execute(
 					request: SaveRecordUseCaseModels.Request(
 						date: date,
 						text: String(describing: url),

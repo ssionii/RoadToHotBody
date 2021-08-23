@@ -41,7 +41,7 @@ class CalendarCoordinator: Coordinator {
 		}
 	}
 	
-	private func presentPhoto(parentViewController: UIViewController, date: String) {
+	private func presentPhoto(parentViewController: UIViewController) {
 		let router = NoNavigationRouter(rootViewController: parentViewController, modalPresentationStyle: .automatic)
 		let coordinator = PhotoCoordinator(router: router)
 		coordinator.delegate = self
@@ -54,8 +54,8 @@ extension CalendarCoordinator: CalendarVCCoordinatorDelegate {
 		self.presentWriteMemo(parentViewController: viewController, date: date)
 	}
 	
-	func photoLibraryButtonClicked(_ viewController: UIViewController, date: String) {
-		self.presentPhoto(parentViewController: viewController, date: date)
+	func photoLibraryButtonClicked(_ viewController: UIViewController) {
+		self.presentPhoto(parentViewController: viewController)
 	}
 	
 	func addExerciseButtonClicked(_ viewController: UIViewController, date: String) {

@@ -12,7 +12,7 @@ import JJFloatingActionButton
 
 protocol CalendarVCCoordinatorDelegate {
 	func writeMemoButtonClicked(_ viewController: UIViewController, date: String)
-	func photoLibraryButtonClicked(_ viewController: UIViewController, date: String)
+	func photoLibraryButtonClicked(_ viewController: UIViewController)
 	func addExerciseButtonClicked(_ viewController: UIViewController, date: String)
 	func readMemoClicked(_ viewController: UIViewController, content: Content)
 }
@@ -29,19 +29,20 @@ class CalendarViewController: UIViewController {
 		button.buttonImageColor = .black
 		
 		button.addItem(title: "", image: UIImage(systemName: "pencil")) { _ in
-			self.coordinatorDelegate?.writeMemoButtonClicked(self, date: self.selectedDate)
+			self.writeMemoButtonClicked.onNext(())
 		}
 		button.addItem(title: "", image: UIImage(systemName: "photo")) { _ in
-			self.coordinatorDelegate?.photoLibraryButtonClicked(self, date: self.selectedDate)
+			self.photoLibraryButtonClicked.onNext(())
 		}
 		
 		button.addItem(title: "", image: UIImage(systemName: "checkmark")) { _ in
-			self.coordinatorDelegate?.addExerciseButtonClicked(self, date: self.selectedDate)
+			self.addExerciseButtonClicked.onNext(())
 		}
 		
 		for item in button.items {
 			item.imageView.tintColor = .black
 		}
+		button.isHidden = true
 		
 		return button
 	}()
@@ -50,15 +51,19 @@ class CalendarViewController: UIViewController {
 	var coordinatorDelegate: CalendarVCCoordinatorDelegate?
 	private let disposeBag = DisposeBag()
 	
-    private let cellSpacingHeight: CGFloat = 10
-	private var cellSize: CGFloat = 0
-	
+	// event
 	private let isScrolled = PublishSubject<Int>()
 	let reloadView = PublishSubject<Void>()
 	let addedPhotoURL = PublishSubject<NSURL>()
+	private let writeMemoButtonClicked = PublishSubject<Void>()
+	private let photoLibraryButtonClicked = PublishSubject<Void>()
+	private let addExerciseButtonClicked = PublishSubject<Void>()
+	
+	// present
+    private let cellSpacingHeight: CGFloat = 10
+	private var cellSize: CGFloat = 0
 	
 	private let selectedDateObservable = PublishSubject<String>()
-	private var selectedDate: String = ""
 	private var selectedIndexPath = IndexPath()
 	
 	private var displayedMonths: [(Int, Int)]? {
@@ -129,9 +134,11 @@ class CalendarViewController: UIViewController {
 	}
 	
 	private func bind() {
+		
+		// viewModel bind
 		let output = viewModel.transform(
 			input: CalendarViewModel.Input(
-				addedPhotoDate: selectedDateObservable.asObservable(),
+				selectedDate: selectedDateObservable.asObservable(),
 				addedPhotoURL: addedPhotoURL.asObservable(),
 				isScrolled: self.isScrolled.asObservable()
 			)
@@ -159,6 +166,39 @@ class CalendarViewController: UIViewController {
 			})
 			.disposed(by: disposeBag)
 		
+		// event bind
+		writeMemoButtonClicked
+			.withLatestFrom(selectedDateObservable)
+			.withUnretained(self)
+			.subscribe(onNext: { owner, date in
+				owner.coordinatorDelegate?.writeMemoButtonClicked(self, date: date)
+			})
+			.disposed(by: disposeBag)
+		
+		photoLibraryButtonClicked
+			.withLatestFrom(selectedDateObservable)
+			.withUnretained(self)
+			.subscribe(onNext: { owner, date in
+				print("눌린 date: \(date)")
+				owner.coordinatorDelegate?.photoLibraryButtonClicked(self)
+			})
+			.disposed(by: disposeBag)
+		
+		addExerciseButtonClicked
+			.withLatestFrom(selectedDateObservable)
+			.withUnretained(self)
+			.subscribe(onNext: { owner, date in
+				owner.coordinatorDelegate?.addExerciseButtonClicked(self, date: date)
+			})
+			.disposed(by: disposeBag)
+		
+		selectedDateObservable
+			.take(1)
+			.withUnretained(self)
+			.subscribe(onNext: { owner, _ in
+				owner.floatingButton.isHidden = false
+			})
+			.disposed(by: disposeBag)
 	}
     
 }
@@ -221,6 +261,7 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
 			return cell
 		case .Photo:
 			let cell = tableView.dequeueReusableCell(withIdentifier: PhotoCell.ID, for: indexPath) as! PhotoCell
+			cell.delegate = self
 			cell.bind(url: records[indexPath.section].text, index: indexPath)
 			return cell
 		default:
@@ -240,13 +281,17 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 }
 
+extension CalendarViewController: PhotoCellDelegate {
+	func resizeImage(indexPath: IndexPath) {
+		self.recordTableView.reloadRows(at: [indexPath], with: .none)
+	}
+}
+
 extension CalendarViewController: MonthCellDelegate {
 	func selectedDate(records: [Content]?, date: String, indexPath: IndexPath) {
         if let records = records {
             self.records = records
         }
-		
-		self.selectedDate = date
 		self.selectedDateObservable.onNext(date)
 		self.selectedIndexPath = indexPath
     }
