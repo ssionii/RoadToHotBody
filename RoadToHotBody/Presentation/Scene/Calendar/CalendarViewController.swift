@@ -222,10 +222,12 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
     }
 	
 	func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-		if scrollView.contentOffset.x  == 0 {
-			isScrolled.onNext(-1)
-		} else if scrollView.contentOffset.x > view.frame.size.width {
-			isScrolled.onNext(1)
+		if scrollView is UICollectionView {
+			if scrollView.contentOffset.x  == 0 {
+				isScrolled.onNext(-1)
+			} else if scrollView.contentOffset.x > view.frame.size.width {
+				isScrolled.onNext(1)
+			}
 		}
 	}
 }
@@ -261,7 +263,6 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
 			return cell
 		case .Photo:
 			let cell = tableView.dequeueReusableCell(withIdentifier: PhotoCell.ID, for: indexPath) as! PhotoCell
-			cell.delegate = self
 			cell.bind(url: records[indexPath.section].text, index: indexPath)
 			return cell
 		default:
@@ -278,12 +279,6 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
 		default:
 			break
 		}
-	}
-}
-
-extension CalendarViewController: PhotoCellDelegate {
-	func resizeImage(indexPath: IndexPath) {
-		self.recordTableView.reloadRows(at: [indexPath], with: .none)
 	}
 }
 
