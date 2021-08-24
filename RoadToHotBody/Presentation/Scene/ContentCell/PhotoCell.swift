@@ -39,17 +39,22 @@ class PhotoCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func bind(url: String?, index: IndexPath) {
-        guard let url = url else {
-            // TODO: default 이미지
-            return
-        }
-        
-        photoView.sd_setImage(with: URL(string: url)) { [weak self] image, _, _, _ in
-            guard let self = self else { return }
-            
-            self.photoView.image = image?.resize(newWidth: self.photoView.frame.width)
-            self.delegate?.resizeImage(indexPath: index)
-        }
+	func bind(url: String?, index: IndexPath) {
+		
+		guard let url = url else {
+			// TODO: Place holder
+			return
+		}
+		
+		SDWebImageManager.shared.loadImage(with: URL(string: url), options: .delayPlaceholder, progress: nil) { image, _, error, _, _, _ in
+			
+			if let error = error {
+				print(error)
+				return
+			}
+			
+			self.photoView.image = image?.resize(newWidth: self.photoView.frame.width)
+			self.delegate?.resizeImage(indexPath: index)
+		}
     }
 }

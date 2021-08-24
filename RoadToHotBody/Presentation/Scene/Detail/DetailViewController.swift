@@ -11,11 +11,13 @@ import RxCocoa
 import JJFloatingActionButton
 import AVKit
 import Photos
+import SDWebImage
 
 protocol DetailVCCoordinatorDelegate: AnyObject {
     func readMemo(_ parentViewController: DetailViewController, content: Content)
     func writeMemoButtonClicked(_ parentViewController: DetailViewController)
     func photoLibraryButtonClicked(_ parentViewController: DetailViewController)
+	func photoDetailClicked(imageUrlString: String)
 }
 
 class DetailViewController: UIViewController {
@@ -60,6 +62,8 @@ class DetailViewController: UIViewController {
 		}
 	}
 	
+	private var prefetchedImage: [IndexPath : UIImage] = [:]
+	
 	init(viewModel: DetailViewModel) {
 		self.viewModel = viewModel
 		
@@ -81,6 +85,7 @@ class DetailViewController: UIViewController {
 	
 	private func configureUI() {
 		self.navigationItem.rightBarButtonItem = doExerciseButton
+		self.navigationItem.leftBarButtonItem = .none
         
         floatingButton.display(inViewController: self)
 	}
@@ -163,6 +168,10 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return 1
 	}
+	
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		return UITableView.automaticDimension
+	}
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return cellSpacingHeight
@@ -183,7 +192,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
 		case .Photo:
 			let cell = tableView.dequeueReusableCell(withIdentifier: PhotoCell.ID, for: indexPath) as! PhotoCell
             cell.delegate = self
-            cell.bind(url: contents[indexPath.section].text, index: indexPath)
+			cell.bind(url: contents[indexPath.section].text, index: indexPath)
 			return cell
         case .Video:
             let cell = tableView.dequeueReusableCell(withIdentifier: VideoCell.ID, for: indexPath) as! VideoCell
@@ -202,6 +211,8 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
 			self.coordinatorDelegate?.readMemo(self, content: contents[indexPath.section])
 			break
 		case .Photo:
+			guard let urlString = contents[indexPath.section].text else { return }
+			self.coordinatorDelegate?.photoDetailClicked(imageUrlString: urlString)
 			break
 		default:
 			break
@@ -211,7 +222,6 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension DetailViewController: PhotoCellDelegate {
     func resizeImage(indexPath: IndexPath) {
-        
         UIView.performWithoutAnimation {
             self.tableView.reloadRows(at: [indexPath], with: .none)
         }

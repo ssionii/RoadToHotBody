@@ -45,16 +45,20 @@ class DetailCoordinator: Coordinator {
         })
     }
     
-    private func presentPhoto(parentViewController: DetailViewController) {
+    private func presentPhotoLibrary(parentViewController: DetailViewController) {
         let router = NoNavigationRouter(rootViewController: parentViewController, modalPresentationStyle: .automatic)
-        let coordinator = PhotoCoordinator(router: router)
+        let coordinator = PhotoLibraryCoordinator(router: router)
         coordinator.delegate = self
         presentChild(coordinator, animated: true)
     }
+	
+	private func presentPhoto(urlString: String) {
+		let coordinator = PhotoCoordinator(router: router, url: urlString)
+		presentChild(coordinator, animated: true)
+	}
 }
 
 extension DetailCoordinator: DetailVCCoordinatorDelegate {
-  
     func readMemo(_ parentViewController: DetailViewController, content: Content) {
         self.presentReadMemo(parentViewController: parentViewController, content: content)
     }
@@ -64,11 +68,15 @@ extension DetailCoordinator: DetailVCCoordinatorDelegate {
     }
     
     func photoLibraryButtonClicked(_ parentViewController: DetailViewController) {
-        self.presentPhoto(parentViewController: parentViewController)
+        self.presentPhotoLibrary(parentViewController: parentViewController)
     }
+	
+	func photoDetailClicked(imageUrlString: String) {
+		self.presentPhoto(urlString: imageUrlString)
+	}
 }
 
-extension DetailCoordinator: PhotoCoordinatorDelegate {
+extension DetailCoordinator: PhotoLibraryCoordinatorDelegate {
     func selectImage(imageUrl: NSURL) {
         guard let detailViewController = self.detailViewController else { return }
         detailViewController.addedPhotoURL.onNext(imageUrl)

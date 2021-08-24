@@ -15,6 +15,7 @@ protocol CalendarVCCoordinatorDelegate {
 	func photoLibraryButtonClicked(_ viewController: UIViewController)
 	func addExerciseButtonClicked(_ viewController: UIViewController, date: String)
 	func readMemoClicked(_ viewController: UIViewController, content: Content)
+	func photoDetailClicked(imageUrlString: String)
 }
 
 class CalendarViewController: UIViewController {
@@ -222,7 +223,7 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
     }
 	
 	func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-		if scrollView is UICollectionView {
+		if scrollView == self.baseCollectionView {
 			if scrollView.contentOffset.x  == 0 {
 				isScrolled.onNext(-1)
 			} else if scrollView.contentOffset.x > view.frame.size.width {
@@ -263,6 +264,7 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
 			return cell
 		case .Photo:
 			let cell = tableView.dequeueReusableCell(withIdentifier: PhotoCell.ID, for: indexPath) as! PhotoCell
+			cell.delegate = self
 			cell.bind(url: records[indexPath.section].text, index: indexPath)
 			return cell
 		default:
@@ -276,14 +278,28 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
 		switch records[indexPath.section].type {
 		case .Memo:
 			self.coordinatorDelegate?.readMemoClicked(self, content: records[indexPath.section])
+		case .Photo:
+			guard let urlString = records[indexPath.section].text else { return }
+			self.coordinatorDelegate?.photoDetailClicked(imageUrlString: urlString)
 		default:
 			break
 		}
 	}
 }
 
+extension CalendarViewController: PhotoCellDelegate {
+	func resizeImage(indexPath: IndexPath) {
+		if self.recordTableView.accessibilityElementCount() >= indexPath.section {
+			UIView.performWithoutAnimation {
+				self.recordTableView.reloadRows(at: [indexPath], with: .none)
+			}
+		}
+	}
+}
+
 extension CalendarViewController: MonthCellDelegate {
 	func selectedDate(records: [Content]?, date: String, indexPath: IndexPath) {
+		self.records.removeAll()
         if let records = records {
             self.records = records
         }
