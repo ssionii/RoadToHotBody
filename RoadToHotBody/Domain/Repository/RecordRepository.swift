@@ -12,4 +12,5 @@ protocol RecordRepositoryProtocol {
 	func saveRecord(date: String, text: String, type: ContentType, muscleIndex: Int?) -> Completable
 	func updateRecord(index: Int, text: String) -> Completable
 	func deleteRecord(index: Int) -> Completable
+	func fetchPhotos() -> Single<[String]>
 }

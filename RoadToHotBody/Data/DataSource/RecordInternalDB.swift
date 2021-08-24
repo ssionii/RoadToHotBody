@@ -13,6 +13,7 @@ protocol RecordInternalDBProtocol {
 	func saveRecord(date: String, content: String, type: Int, trainingIndex: Int?) -> Completable
 	func updateRecord(index: Int, content: String) -> Completable
 	func deleteRecord(index: Int) -> Completable
+	func fetchPhotos() -> Single<[String]>
 }
 
 class RecordInternalDB: RecordInternalDBProtocol {
@@ -125,6 +126,25 @@ class RecordInternalDB: RecordInternalDBProtocol {
 				}
 			} else {
 				completable(.error(RealmNotInitError(detailMessage: "")))
+			}
+
+			return Disposables.create { }
+		}
+	}
+	
+	func fetchPhotos() -> Single<[String]> {
+		return Single<[String]>.create { single in
+			if let realm = self.realm {
+				
+				let photoRecords = realm.objects(Record.self).filter("type == '\(ContentType.Photo.rawValue)'")
+				let photoUrls = photoRecords.map { record -> String in
+					record.content
+				}
+				let photoUrlArray = Array(photoUrls)
+				single(.success(photoUrlArray))
+	
+			} else {
+				single(.failure(RealmNotInitError(detailMessage: "")))
 			}
 
 			return Disposables.create { }

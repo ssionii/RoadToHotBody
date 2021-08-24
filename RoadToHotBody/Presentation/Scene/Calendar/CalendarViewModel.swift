@@ -13,6 +13,7 @@ class CalendarViewModel {
 		var selectedDate: Observable<String>
 		var addedPhotoURL: Observable<NSURL>
 		var isScrolled: Observable<Int>
+		var isViewAppear: Observable<Void>
 	}
 	
 	struct Output {
@@ -54,7 +55,9 @@ class CalendarViewModel {
 				return self.displayedMonths(currentYear: year, currentMonth: month)
 			}
 		
-		let displayedMonthString = currentYearAndMonthChanged
+		let displayedMonthString = Observable.of(currentYearAndMonthChanged, input.isViewAppear)
+			.merge()
+			.skip(1)
 			.map { _ -> String in
 				return "\(self.currentYear)년 \(self.currentMonth)월"
 			}

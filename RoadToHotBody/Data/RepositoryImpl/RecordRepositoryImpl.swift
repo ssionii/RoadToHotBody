@@ -39,4 +39,8 @@ class RecordRepository: RecordRepositoryProtocol {
 	func deleteRecord(index: Int) -> Completable {
 		return recordDB.deleteRecord(index: index)
 	}
+	
+	func fetchPhotos() -> Single<[String]> {
+		return recordDB.fetchPhotos()
+	}
 }

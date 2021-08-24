@@ -54,6 +54,7 @@ class CalendarViewController: UIViewController {
 	
 	// event
 	private let isScrolled = PublishSubject<Int>()
+	private let isAppearView = PublishSubject<Void>()
 	let reloadView = PublishSubject<Void>()
 	let addedPhotoURL = PublishSubject<NSURL>()
 	private let writeMemoButtonClicked = PublishSubject<Void>()
@@ -61,6 +62,7 @@ class CalendarViewController: UIViewController {
 	private let addExerciseButtonClicked = PublishSubject<Void>()
 	
 	// present
+	private var isFirstAppear = true
     private let cellSpacingHeight: CGFloat = 10
 	private var cellSize: CGFloat = 0
 	
@@ -97,11 +99,17 @@ class CalendarViewController: UIViewController {
         configureCollectoinView()
         configureTableView()
 		bind()
+		
     }
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		isScrolled.onNext(0)
+		if isFirstAppear {
+			isScrolled.onNext(0)
+			isFirstAppear = false
+		}
+		
+		isAppearView.onNext(())
 	}
     
     private func configureUI() {
@@ -141,7 +149,8 @@ class CalendarViewController: UIViewController {
 			input: CalendarViewModel.Input(
 				selectedDate: selectedDateObservable.asObservable(),
 				addedPhotoURL: addedPhotoURL.asObservable(),
-				isScrolled: self.isScrolled.asObservable()
+				isScrolled: self.isScrolled.asObservable(),
+				isViewAppear: self.isAppearView.asObserver()
 			)
 		)
 		

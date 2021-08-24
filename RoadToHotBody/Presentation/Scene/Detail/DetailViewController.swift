@@ -85,8 +85,7 @@ class DetailViewController: UIViewController {
 	
 	private func configureUI() {
 		self.navigationItem.rightBarButtonItem = doExerciseButton
-		self.navigationItem.leftBarButtonItem = .none
-        
+		
         floatingButton.display(inViewController: self)
 	}
 	
@@ -206,7 +205,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		switch contents[indexPath.row].type {
+		switch contents[indexPath.section].type {
 		case .Memo:
 			self.coordinatorDelegate?.readMemo(self, content: contents[indexPath.section])
 			break

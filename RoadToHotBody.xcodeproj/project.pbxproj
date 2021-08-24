@@ -44,6 +44,14 @@
 		FA83113226D4A159000B1AE9 /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA83113126D4A159000B1AE9 /* PhotoViewModel.swift */; };
 		FA83113826D4A7E0000B1AE9 /* PhotoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA83113726D4A7E0000B1AE9 /* PhotoCoordinator.swift */; };
 		FA83114026D4AAB6000B1AE9 /* LoadImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA83113F26D4AAB6000B1AE9 /* LoadImageUseCase.swift */; };
+		FA83114A26D4CEB2000B1AE9 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA83114826D4CEB2000B1AE9 /* RecordViewController.swift */; };
+		FA83114B26D4CEB2000B1AE9 /* RecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA83114926D4CEB2000B1AE9 /* RecordViewController.xib */; };
+		FA83115326D4CF03000B1AE9 /* RecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA83115226D4CF03000B1AE9 /* RecordCoordinator.swift */; };
+		FA83115826D4CF26000B1AE9 /* RecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA83115726D4CF26000B1AE9 /* RecordViewModel.swift */; };
+		FA83116526D4DF43000B1AE9 /* PhotoGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA83116326D4DF43000B1AE9 /* PhotoGridViewController.swift */; };
+		FA83116626D4DF43000B1AE9 /* PhotoGridViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA83116426D4DF43000B1AE9 /* PhotoGridViewController.xib */; };
+		FA83116C26D4DF94000B1AE9 /* PhotoGridViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA83116B26D4DF94000B1AE9 /* PhotoGridViewModel.swift */; };
+		FA83117426D4E033000B1AE9 /* FetchPhotosUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA83117326D4E033000B1AE9 /* FetchPhotosUseCase.swift */; };
 		FA9B27B226CB399D00FC05E9 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B27B026CB399D00FC05E9 /* VideoCell.swift */; };
 		FA9B27B326CB399D00FC05E9 /* VideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9B27B126CB399D00FC05E9 /* VideoCell.xib */; };
 		FA9B27EC26CBA42400FC05E9 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B27EA26CBA42400FC05E9 /* DayCell.swift */; };
@@ -164,6 +172,14 @@
 		FA83113126D4A159000B1AE9 /* PhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewModel.swift; sourceTree = "<group>"; };
 		FA83113726D4A7E0000B1AE9 /* PhotoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCoordinator.swift; sourceTree = "<group>"; };
 		FA83113F26D4AAB6000B1AE9 /* LoadImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageUseCase.swift; sourceTree = "<group>"; };
+		FA83114826D4CEB2000B1AE9 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
+		FA83114926D4CEB2000B1AE9 /* RecordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordViewController.xib; sourceTree = "<group>"; };
+		FA83115226D4CF03000B1AE9 /* RecordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCoordinator.swift; sourceTree = "<group>"; };
+		FA83115726D4CF26000B1AE9 /* RecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewModel.swift; sourceTree = "<group>"; };
+		FA83116326D4DF43000B1AE9 /* PhotoGridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGridViewController.swift; sourceTree = "<group>"; };
+		FA83116426D4DF43000B1AE9 /* PhotoGridViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoGridViewController.xib; sourceTree = "<group>"; };
+		FA83116B26D4DF94000B1AE9 /* PhotoGridViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGridViewModel.swift; sourceTree = "<group>"; };
+		FA83117326D4E033000B1AE9 /* FetchPhotosUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPhotosUseCase.swift; sourceTree = "<group>"; };
 		FA9B27B026CB399D00FC05E9 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		FA9B27B126CB399D00FC05E9 /* VideoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoCell.xib; sourceTree = "<group>"; };
 		FA9B27EA26CBA42400FC05E9 /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
@@ -315,6 +331,7 @@
 		B56EFA5B26C80386008A5346 /* Photo */ = {
 			isa = PBXGroup;
 			children = (
+				FA83115F26D4DF2D000B1AE9 /* Grid */,
 				FA83113626D4A7D1000B1AE9 /* Library */,
 				FA83112426D4A003000B1AE9 /* PhotoViewController.swift */,
 				FA83112526D4A003000B1AE9 /* PhotoViewController.xib */,
@@ -370,6 +387,27 @@
 				B56EFA6226C80872008A5346 /* PhotoLibraryCoordinator.swift */,
 			);
 			path = Library;
+			sourceTree = "<group>";
+		};
+		FA83114726D4CE99000B1AE9 /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				FA83114826D4CEB2000B1AE9 /* RecordViewController.swift */,
+				FA83114926D4CEB2000B1AE9 /* RecordViewController.xib */,
+				FA83115726D4CF26000B1AE9 /* RecordViewModel.swift */,
+				FA83115226D4CF03000B1AE9 /* RecordCoordinator.swift */,
+			);
+			path = Record;
+			sourceTree = "<group>";
+		};
+		FA83115F26D4DF2D000B1AE9 /* Grid */ = {
+			isa = PBXGroup;
+			children = (
+				FA83116326D4DF43000B1AE9 /* PhotoGridViewController.swift */,
+				FA83116426D4DF43000B1AE9 /* PhotoGridViewController.xib */,
+				FA83116B26D4DF94000B1AE9 /* PhotoGridViewModel.swift */,
+			);
+			path = Grid;
 			sourceTree = "<group>";
 		};
 		FA9B27E926CBA3E600FC05E9 /* Cell */ = {
@@ -538,6 +576,7 @@
 				FAC0CF5826CF4531004DC8BB /* UpdateRecordUseCase.swift */,
 				FAF7038526CF972C00CDEBEF /* DeleteRecordUseCase.swift */,
 				FA83113F26D4AAB6000B1AE9 /* LoadImageUseCase.swift */,
+				FA83117326D4E033000B1AE9 /* FetchPhotosUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -566,6 +605,7 @@
 				FAFA46D926BD250200CD820C /* Main */,
 				FAFA46EE26C0A7EF00CD820C /* Home */,
 				FAFA46F926C0A81C00CD820C /* Calendar */,
+				FA83114726D4CE99000B1AE9 /* Record */,
 				FAFA470A26C0BC7D00CD820C /* Detail */,
 				B541962F26C2B25A00B2080A /* Memo */,
 				FAFA479826C245B800CD820C /* ContentCell */,
@@ -790,6 +830,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAFA467E26BD1FA400CD820C /* LaunchScreen.storyboard in Resources */,
+				FA83114B26D4CEB2000B1AE9 /* RecordViewController.xib in Resources */,
 				FA83112726D4A003000B1AE9 /* PhotoViewController.xib in Resources */,
 				FAFA470E26C0BC8F00CD820C /* DetailViewController.xib in Resources */,
 				FA9B27ED26CBA42400FC05E9 /* DayCell.xib in Resources */,
@@ -803,6 +844,7 @@
 				B541963326C2B27A00B2080A /* WriteMemoViewController.xib in Resources */,
 				FAFA46F226C0A80800CD820C /* HomeViewController.xib in Resources */,
 				FAFA479C26C245E600CD820C /* MemoCell.xib in Resources */,
+				FA83116626D4DF43000B1AE9 /* PhotoGridViewController.xib in Resources */,
 				FAFA47E026C2665D00CD820C /* PhotoCell.xib in Resources */,
 				B56EFA5826C7C2C0008A5346 /* ReadMemoViewController.xib in Resources */,
 			);
@@ -943,6 +985,7 @@
 				FAB2948D26C5FE5C003788CA /* EmptyError.swift in Sources */,
 				FA3AD7A026CCBD1200270AC1 /* MonthViewModel.swift in Sources */,
 				FA83113226D4A159000B1AE9 /* PhotoViewModel.swift in Sources */,
+				FA83115826D4CF26000B1AE9 /* RecordViewModel.swift in Sources */,
 				FAF7038626CF972C00CDEBEF /* DeleteRecordUseCase.swift in Sources */,
 				FA83114026D4AAB6000B1AE9 /* LoadImageUseCase.swift in Sources */,
 				FAFA46EA26BD256B00CD820C /* AppRouter.swift in Sources */,
@@ -950,6 +993,7 @@
 				B56EFA5226C7A2E1008A5346 /* WriteMemoViewController.swift in Sources */,
 				B56EFA6726C81F30008A5346 /* UIImageView+Extension.swift in Sources */,
 				FA3AD7E826CE173300270AC1 /* RecordRepositoryImpl.swift in Sources */,
+				FA83117426D4E033000B1AE9 /* FetchPhotosUseCase.swift in Sources */,
 				FAFA470D26C0BC8F00CD820C /* DetailViewController.swift in Sources */,
 				B56EFA5626C7A623008A5346 /* WriteMemoCoordinator.swift in Sources */,
 				FA3AD7DB26CE165A00270AC1 /* RecordRepository.swift in Sources */,
@@ -962,8 +1006,10 @@
 				B56EFA4D26C7A098008A5346 /* ReadMemoViewController.swift in Sources */,
 				FAFA478926C20A4300CD820C /* HomeCoordinator.swift in Sources */,
 				B56EFA4626C79B57008A5346 /* ReadMemoViewModel.swift in Sources */,
+				FA83116C26D4DF94000B1AE9 /* PhotoGridViewModel.swift in Sources */,
 				FAFA46FC26C0A82900CD820C /* CalendarViewController.swift in Sources */,
 				FAB294CB26C60DC7003788CA /* FetchMusclesUseCase.swift in Sources */,
+				FA83116526D4DF43000B1AE9 /* PhotoGridViewController.swift in Sources */,
 				B541963726C2B2E400B2080A /* DetailCoordinator.swift in Sources */,
 				FAFA484526C3A77D00CD820C /* UITextView+Extension.swift in Sources */,
 				FAF7036A26CF921900CDEBEF /* ReadRecordMemoViewModel.swift in Sources */,
@@ -972,6 +1018,7 @@
 				FAFA479B26C245E600CD820C /* MemoCell.swift in Sources */,
 				FAFA46C326BD246F00CD820C /* ModalNavigationRouter.swift in Sources */,
 				FAFA46B626BD243B00CD820C /* Router.swift in Sources */,
+				FA83115326D4CF03000B1AE9 /* RecordCoordinator.swift in Sources */,
 				FAFA484F26C3B2FD00CD820C /* SaveContentUseCase.swift in Sources */,
 				FA83112626D4A003000B1AE9 /* PhotoViewController.swift in Sources */,
 				FAFA46F126C0A80800CD820C /* HomeViewController.swift in Sources */,
@@ -987,6 +1034,7 @@
 				FA0B49FE26C511CE0018DE69 /* InternalDBError.swift in Sources */,
 				FAFA46BE26BD245700CD820C /* NavigationRouter.swift in Sources */,
 				FA9B27B226CB399D00FC05E9 /* VideoCell.swift in Sources */,
+				FA83114A26D4CEB2000B1AE9 /* RecordViewController.swift in Sources */,
 				FAF7039426CF9A9400CDEBEF /* WriteDetailContentMemoViewModel.swift in Sources */,
 				FAB294C126C60D42003788CA /* MuscleRepositoryImpl.swift in Sources */,
 				B56EFA6326C80872008A5346 /* PhotoLibraryCoordinator.swift in Sources */,

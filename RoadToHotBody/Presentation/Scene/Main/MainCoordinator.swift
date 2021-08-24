@@ -29,6 +29,7 @@ class MainCoordinator: Coordinator {
 
 		presentHome()
 		presentCalendar()
+		presentRecord()
 	}
 	
 	func presentHome() {
@@ -41,5 +42,11 @@ class MainCoordinator: Coordinator {
 		let router = NavigationRouter(navigationController: baseNavigationController)
 		let coordinator = CalendarCoordinator(router: router)
 		self.router.present(coordinator.calendarViewController, animated: false)
+	}
+	
+	private func presentRecord() {
+		let router = NavigationRouter(navigationController: baseNavigationController)
+		let coordinator = RecordCoordinator(router: router)
+		self.router.present(coordinator.recordViewController, animated: false)
 	}
 }

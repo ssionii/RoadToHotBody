@@ -29,9 +29,14 @@ class PhotoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		
+		configureUI()
 		bind()
 
     }
+	
+	private func configureUI() {
+		self.navigationItem.backButtonTitle = ""
+	}
 	
 	private func bind() {
 		let output = viewModel.transform(input: PhotoViewModel.Input())
