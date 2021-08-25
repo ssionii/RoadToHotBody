@@ -8,11 +8,15 @@
 import UIKit
 import RxSwift
 
+protocol PhotoGridVCCoordinatorDelegate: AnyObject {
+	func photoClicked(photos: [Photo], index: Int)
+}
+
 class PhotoGridViewController: UIViewController {
 	
 	@IBOutlet weak var photoGridCollectionView: UICollectionView!
 	
-	private var photoUrls: [String] = [] {
+	private var photos: [Photo] = [] {
 		didSet {
 			photoGridCollectionView.reloadData()
 		}
@@ -20,8 +24,11 @@ class PhotoGridViewController: UIViewController {
 	
 	private let viewModel: PhotoGridViewModel
 	private let disposeBag = DisposeBag()
+	weak var coordinatorDelegate: PhotoGridVCCoordinatorDelegate?
 	
 	private let minimumSpacing: CGFloat = 4
+	
+	let reloadView = BehaviorSubject<Void>(value: ())
 	
 	init(viewModel: PhotoGridViewModel) {
 		self.viewModel = viewModel
@@ -39,34 +46,39 @@ class PhotoGridViewController: UIViewController {
 		configureCollectionView()
 		bind()
     }
-	
+
 	private func configureCollectionView() {
 		photoGridCollectionView.delegate = self
 		photoGridCollectionView.dataSource = self
 		
-		photoGridCollectionView.register(PhotoGridCell.self, forCellWithReuseIdentifier: PhotoGridCell.ID)
+		photoGridCollectionView.register(PhotoDetailCell.self, forCellWithReuseIdentifier: PhotoDetailCell.ID)
 	}
 	
 	private func bind() {
-		let output = viewModel.transform(input: PhotoGridViewModel.Input())
+		let output = viewModel.transform(input: PhotoGridViewModel.Input(reloadView: reloadView.asObserver()))
 		
 		output.photos
 			.withUnretained(self)
-			.subscribe(onNext: { owner, urls in
-				owner.photoUrls = urls
+			.subscribe(onNext: { owner, photos in
+				owner.photos = photos
 			})
 			.disposed(by: disposeBag)
+		
+		reloadView
+			.subscribe(onNext: { _ in
+				print("reload")
+			})
 	}
 }
 
 extension PhotoGridViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return photoUrls.count
+		return photos.count
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoGridCell.ID, for: indexPath) as! PhotoGridCell
-		cell.bind(urlString: photoUrls[indexPath.row])
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoDetailCell.ID, for: indexPath) as! PhotoDetailCell
+		cell.bind(photo: photos[indexPath.row])
 		return cell
 	}
 	
@@ -85,5 +97,9 @@ extension PhotoGridViewController: UICollectionViewDataSource, UICollectionViewD
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
 		return minimumSpacing
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		self.coordinatorDelegate?.photoClicked(photos: photos, index: indexPath.row)
 	}
 }

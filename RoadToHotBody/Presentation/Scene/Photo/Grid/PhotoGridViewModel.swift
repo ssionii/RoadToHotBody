@@ -10,21 +10,26 @@ import RxCocoa
 
 class PhotoGridViewModel {
 	struct Input {
+		var reloadView: Observable<Void>
 	}
 	
 	struct Output {
-		var photos: Observable<[String]>
+		var photos: Observable<[Photo]>
 	}
 	
 	private let fetchPhotosUseCase = FetchPhotosUseCase(repository: RecordRepository(dataSource: RecordInternalDB()))
 	
 	func transform(input: Input) -> Output {
 		
-		let imageUrls = fetchPhotosUseCase.execute(request: FetchPhotosUseCaseModels.Request())
-			.map { response -> [String] in
-				response.photoUrls
+		let photos = input.reloadView
+			.withUnretained(self)
+			.flatMap { owner, _ -> Observable<FetchPhotosUseCaseModels.Response> in
+				owner.fetchPhotosUseCase.execute(request: FetchPhotosUseCaseModels.Request())
 			}
-		
-		return Output(photos: imageUrls)
+			.map { response -> [Photo] in
+				response.photos
+			}
+	
+		return Output(photos: photos)
 	}
 }

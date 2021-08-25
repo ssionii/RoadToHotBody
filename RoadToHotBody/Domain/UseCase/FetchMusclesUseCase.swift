@@ -40,5 +40,4 @@ class FetchMuscleUseCase: FetchMuscleUseCaseProtocol {
 				return FetchMuscleUseCaseModels.Response(muscles: muscles)
 			}
 	}
-	
 }

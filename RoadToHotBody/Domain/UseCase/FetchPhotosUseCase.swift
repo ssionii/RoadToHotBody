@@ -17,7 +17,7 @@ struct FetchPhotosUseCaseModels {
 	}
 	
 	struct Response {
-		var photoUrls: [String]
+		var photos: [Photo]
 	}
 }
 
@@ -32,8 +32,9 @@ class FetchPhotosUseCase: FetchPhotosUseCaseProtocol {
 	func execute(request: FetchPhotosUseCaseModels.Request) -> Observable<FetchPhotosUseCaseModels.Response> {
 		return recordRepository.fetchPhotos()
 			.asObservable()
-			.map { urls -> FetchPhotosUseCaseModels.Response in
-				return FetchPhotosUseCaseModels.Response(photoUrls: urls)
+			.map { photos -> FetchPhotosUseCaseModels.Response in
+				let sortedPhotos = photos.sorted(by: { $0.date ?? "" > $1.date ?? "" })
+				return FetchPhotosUseCaseModels.Response(photos: sortedPhotos)
 			}
 	}
 }

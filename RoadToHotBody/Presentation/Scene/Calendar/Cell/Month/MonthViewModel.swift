@@ -24,7 +24,6 @@ class MonthViewModel {
     
     private var currentYear: Int
     private var currentMonth: Int
-    private var today: String
     private var numOfDaysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     private let formatter = DateFormatter()
     
@@ -37,9 +36,7 @@ class MonthViewModel {
             numOfDaysInMonth[1] = 29
         }
         
-        formatter.dateFormat = "yyyy-M-d"
-		
-		self.today = formatter.string(from: Date())
+        formatter.dateFormat = "yyyy-MM-dd"
     }
     
     func transform(input: Input) -> Output {

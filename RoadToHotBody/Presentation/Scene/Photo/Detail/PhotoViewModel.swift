@@ -8,39 +8,28 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import SDWebImage
 
-class PhotoViewModel {
+class PhotoDetailViewModel {
 	struct Input {
 		
 	}
 	
 	struct Output {
-		var image: Driver<UIImage>
+		var urlStrings: Observable<[String]>
+		var index: Observable<Int>
 	}
 	
 	private let loadImageUseCase = LoadImageUseCase()
 	
-	private let urlString: String
+	private let urlStrings: [String]
+	private let index: Int
 	
-	init(url: String) {
-		self.urlString = url
+	init(urls: [String], index: Int) {
+		self.urlStrings = urls
+		self.index = index
 	}
 	
 	func transform(input: Input) -> Output {
-		
-		guard let url = URL(string: urlString) else {
-			return Output(image: Driver.never())
-		}
-		
-		let image = loadImageUseCase.execute(request: LoadImageUseCaseModels.Request(url: url))
-			.map { response -> UIImage? in
-				response.image
-			}
-			.compactMap { $0 }
-			.asDriver(onErrorJustReturn: UIImage())
-		
-		return Output(image: image)
+		return Output( urlStrings: Observable.just(urlStrings), index: Observable.just(index))
 	}
-
 }

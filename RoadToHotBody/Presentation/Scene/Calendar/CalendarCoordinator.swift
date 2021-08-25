@@ -49,7 +49,8 @@ class CalendarCoordinator: Coordinator {
 	}
 	
 	private func presentPhoto(urlString: String) {
-		let coordinator = PhotoCoordinator(router: router, url: urlString)
+		let coordinator = PhotoDetailCoordinator(router: router, photos: [Photo(index: 0, urlString: urlString)], index: 0)
+		coordinator.delegate = self
 		presentChild(coordinator, animated: true)
 	}
 }
@@ -71,8 +72,8 @@ extension CalendarCoordinator: CalendarVCCoordinatorDelegate {
 		self.presentReadMemo(parentViewController: viewController, content: content)
 	}
 	
-	func photoDetailClicked(imageUrlString: String) {
-		self.presentPhoto(urlString: imageUrlString)
+	func photoDetailClicked(urlString: String) {
+		self.presentPhoto(urlString: urlString)
 	}
 }
 
@@ -83,5 +84,11 @@ extension CalendarCoordinator: PhotoLibraryCoordinatorDelegate {
 	
 	func selectVideo(videoUrl: NSURL) {
 		
+	}
+}
+
+extension CalendarCoordinator: PhotoDetailCoordinatorDelegate {
+	func deletePhoto() {
+		calendarViewController.reloadView.onNext(())
 	}
 }

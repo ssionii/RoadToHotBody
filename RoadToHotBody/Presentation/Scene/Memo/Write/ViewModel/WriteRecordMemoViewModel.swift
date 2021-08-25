@@ -27,7 +27,7 @@ class WriteRecordMemoViewModel: WriteMemoViewModel {
 				return ()
 			})
 		
-		let title = Observable.just(super.dateTitle(date: date))
+		let title = Observable.just(DateHelper.dateTitle(date: date, dateFormat: "M월 d일 EEEE"))
 			.asDriver(onErrorJustReturn: "")
 		
 		return Output(isSaved: isSaved, title: title)

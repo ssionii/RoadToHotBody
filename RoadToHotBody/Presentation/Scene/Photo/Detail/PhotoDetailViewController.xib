@@ -8,9 +8,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoViewController" customModule="RoadToHotBody" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoDetailViewController" customModule="RoadToHotBody" customModuleProvider="target">
             <connections>
-                <outlet property="photoImageView" destination="xd1-Da-22b" id="XUv-4N-qha"/>
+                <outlet property="photoCollectionView" destination="IfR-E3-dRo" id="Shj-Zi-ZaG"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,6 +19,16 @@
             <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="IfR-E3-dRo">
+                    <rect key="frame" x="0.0" y="44" width="390" height="718"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="dBJ-yS-usA">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CkB-2t-aCG">
                     <rect key="frame" x="0.0" y="762" width="390" height="48"/>
                     <subviews>
@@ -31,6 +41,9 @@
                             <state key="normal" image="trash" catalog="system">
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
                             </state>
+                            <connections>
+                                <action selector="deleteButtonClicked:" destination="-1" eventType="touchUpInside" id="tni-ei-D7D"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -41,20 +54,17 @@
                         <constraint firstItem="9H9-Vz-0B3" firstAttribute="top" secondItem="CkB-2t-aCG" secondAttribute="top" id="zv3-Cx-O1g"/>
                     </constraints>
                 </view>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xd1-Da-22b">
-                    <rect key="frame" x="0.0" y="92" width="390" height="670"/>
-                </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xd1-Da-22b" secondAttribute="trailing" id="2Ph-6R-dwi"/>
-                <constraint firstItem="xd1-Da-22b" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="6af-jt-N9K"/>
-                <constraint firstItem="CkB-2t-aCG" firstAttribute="top" secondItem="xd1-Da-22b" secondAttribute="bottom" id="AcZ-I4-jYA"/>
+                <constraint firstItem="IfR-E3-dRo" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="88Y-VJ-JZw"/>
+                <constraint firstItem="IfR-E3-dRo" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Ds8-4h-miF"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="CkB-2t-aCG" secondAttribute="bottom" id="NNK-uF-Lma"/>
+                <constraint firstItem="CkB-2t-aCG" firstAttribute="top" secondItem="IfR-E3-dRo" secondAttribute="bottom" id="RMa-SV-dFX"/>
                 <constraint firstAttribute="trailing" secondItem="CkB-2t-aCG" secondAttribute="trailing" id="T0t-7f-yiY"/>
-                <constraint firstItem="xd1-Da-22b" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="Vgv-eZ-iZU"/>
                 <constraint firstItem="CkB-2t-aCG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="gjK-4B-rlk"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="IfR-E3-dRo" secondAttribute="trailing" id="xej-mt-XJA"/>
             </constraints>
             <point key="canvasLocation" x="140.57971014492756" y="125.89285714285714"/>
         </view>

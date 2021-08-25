@@ -32,7 +32,7 @@ class SaveRecordUseCase: SaveRecordUseCaseProtocol {
 	init(repository: RecordRepositoryProtocol) {
 		self.recordRepository = repository
 		
-		formatter.dateFormat = "yyyy-M-d"
+		formatter.dateFormat = "yyyy-MM-dd"
 	}
 	
 	func execute(request: SaveRecordUseCaseModels.Request) -> Observable<SaveRecordUseCaseModels.Response> {

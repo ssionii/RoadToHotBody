@@ -40,7 +40,12 @@ class RecordRepository: RecordRepositoryProtocol {
 		return recordDB.deleteRecord(index: index)
 	}
 	
-	func fetchPhotos() -> Single<[String]> {
+	func fetchPhotos() -> Single<[Photo]> {
 		return recordDB.fetchPhotos()
+			.map { records -> [Photo] in
+				records.map { record -> Photo in
+					return Photo(index: record.index, urlString: record.content, date: record.date)
+				}
+			}
 	}
 }

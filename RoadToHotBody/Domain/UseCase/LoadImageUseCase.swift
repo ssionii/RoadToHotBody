@@ -26,7 +26,7 @@ struct LoadImageUseCaseModels {
 class LoadImageUseCase: LoadImageUseCaseProtocol {
 	func execute(request: LoadImageUseCaseModels.Request) -> Observable<LoadImageUseCaseModels.Response> {
 		return Observable.create() { emit -> Disposable in
-			SDWebImageManager.shared.loadImage(with: request.url, options: .allowInvalidSSLCertificates, progress: nil) { (image, _, error, _, _, _) in
+			SDWebImageManager.shared.loadImage(with: request.url, options: .retryFailed, progress: nil) { (image, _, error, _, _, _) in
 				
 				if let error = error {
 					emit.onError(error)

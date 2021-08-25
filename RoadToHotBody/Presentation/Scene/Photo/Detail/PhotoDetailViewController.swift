@@ -1,5 +1,5 @@
 //
-//  PhotoViewController.swift
+//  PhotoDetailViewController.swift
 //  RoadToHotBody
 //
 //  Created by Yang Siyeon on 2021/08/24.
@@ -9,23 +9,35 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+protocol PhotoDetailVCCoordinatorDelegate: AnyObject {
+	func deletePhoto()
+}
+
 class PhotoDetailViewController: UIViewController {
 	
 	@IBOutlet weak var photoCollectionView: UICollectionView!
+	@IBAction func deleteButtonClicked(_ sender: Any) {
+		deletePhotoIndex.onNext(displayedIndex)
+	}
 	
-	private var photoUrlStrings: [String] = [] {
+	private var photos: [Photo] = [] {
 		didSet {
 			photoCollectionView.reloadData()
 		}
 	}
 	
-	private var viewModel: PhotoViewModel
+	private var viewModel: PhotoDetailViewModel
 	private let disposeBag = DisposeBag()
+	weak var coordinatorDelegate: PhotoDetailVCCoordinatorDelegate?
 	
-	init(viewModel: PhotoViewModel){
+	private let displayedPhotoDate = PublishSubject<String>()
+	private var displayedIndex = 0
+	private let deletePhotoIndex = PublishSubject<Int>()
+	
+	init(viewModel: PhotoDetailViewModel){
 		self.viewModel = viewModel
 		
-		super.init(nibName: "PhotoViewController", bundle: nil)
+		super.init(nibName: "PhotoDetailViewController", bundle: nil)
 	}
 	
 	required init?(coder: NSCoder) {
@@ -37,8 +49,13 @@ class PhotoDetailViewController: UIViewController {
 		
 		configureUI()
 		configureCollectionView()
-		bind()
     }
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		bind()
+	}
 	
 	private func configureUI() {
 		self.navigationItem.backButtonTitle = ""
@@ -52,19 +69,33 @@ class PhotoDetailViewController: UIViewController {
 	}
 	
 	private func bind() {
-		let output = viewModel.transform(input: PhotoViewModel.Input())
+		let output = viewModel.transform(input: PhotoDetailViewModel.Input(deletePhotoIndex: deletePhotoIndex.asObservable()))
 		
-		output.urlStrings
+		output.photos
 			.withUnretained(self)
-			.subscribe(onNext: { owner, urlStrings in
-				owner.photoUrlStrings = urlStrings
+			.subscribe(onNext: { owner, photos in
+				owner.photos = photos
 			})
 			.disposed(by: disposeBag)
 		
 		output.index
 			.withUnretained(self)
 			.subscribe(onNext: { owner, index in
-				owner.photoCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .right, animated: false)
+				owner.photoCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .left, animated: false)
+			})
+			.disposed(by: disposeBag)
+		
+		output.photoDeleted
+			.withUnretained(self)
+			.subscribe(onNext: { owner, _ in
+				owner.coordinatorDelegate?.deletePhoto()
+			})
+			.disposed(by: disposeBag)
+		
+		displayedPhotoDate
+			.withUnretained(self)
+			.subscribe(onNext: { owner, date in
+				owner.navigationItem.title = date
 			})
 			.disposed(by: disposeBag)
 	}
@@ -73,18 +104,26 @@ class PhotoDetailViewController: UIViewController {
 extension PhotoDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return self.photoUrlStrings.count
+		return self.photos.count
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoDetailCell.ID, for: indexPath) as! PhotoDetailCell
-		cell.configureCell(contentMode: .scaleAspectFill)
-		cell.bind(urlString: photoUrlStrings[indexPath.row])
+		cell.configureCell(contentMode: .scaleAspectFit)
+		cell.delegate = self
+		cell.bind(photo: photos[indexPath.row])
 		return cell
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 		return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
 	}
+}
 
+extension PhotoDetailViewController: PhotoDetailCellDelegate {
+	func cellDidLoad(index: Int, date: String) {
+		self.displayedIndex = index
+		
+		self.displayedPhotoDate.onNext(DateHelper.dateTitle(date: date, dateFormat: "yyyy년 M월 d일"))
+	}
 }

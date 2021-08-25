@@ -37,7 +37,7 @@ class DayViewModel {
         
 		today = Date()
 		formatter = DateFormatter()
-		formatter.dateFormat = "yyyy-M-d"
+		formatter.dateFormat = "yyyy-MM-dd"
 	}
 	
 	func transform(input: Input) -> Output {

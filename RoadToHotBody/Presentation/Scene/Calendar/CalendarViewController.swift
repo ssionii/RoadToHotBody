@@ -15,7 +15,7 @@ protocol CalendarVCCoordinatorDelegate {
 	func photoLibraryButtonClicked(_ viewController: UIViewController)
 	func addExerciseButtonClicked(_ viewController: UIViewController, date: String)
 	func readMemoClicked(_ viewController: UIViewController, content: Content)
-	func photoDetailClicked(imageUrlString: String)
+	func photoDetailClicked(urlString: String)
 }
 
 class CalendarViewController: UIViewController {
@@ -189,7 +189,6 @@ class CalendarViewController: UIViewController {
 			.withLatestFrom(selectedDateObservable)
 			.withUnretained(self)
 			.subscribe(onNext: { owner, date in
-				print("눌린 date: \(date)")
 				owner.coordinatorDelegate?.photoLibraryButtonClicked(self)
 			})
 			.disposed(by: disposeBag)
@@ -289,7 +288,7 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
 			self.coordinatorDelegate?.readMemoClicked(self, content: records[indexPath.section])
 		case .Photo:
 			guard let urlString = records[indexPath.section].text else { return }
-			self.coordinatorDelegate?.photoDetailClicked(imageUrlString: urlString)
+			self.coordinatorDelegate?.photoDetailClicked(urlString: urlString)
 		default:
 			break
 		}
