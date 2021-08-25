@@ -18,9 +18,31 @@ class RecordCoordinator: Coordinator {
 		
 		let viewModel = RecordViewModel()
 		recordViewController = RecordViewController(viewModel: viewModel)
+		recordViewController.coordinatorDelegate = self
 	}
 	
 	func present(animated: Bool, onDismissed: (() -> Void)?) {
-		router.present(recordViewController, animated: true)
+		router.present(recordViewController, animated: animated)
 	}
+	
+	private func presentPhotoGrid() {
+		let coordinator = PhotoGridCoordinator(router: router)
+		presentChild(coordinator, animated: true)
+	}
+}
+
+extension RecordCoordinator: RecordVCCoordinatorDelegate {
+	func stopWatchClicked() {
+		
+	}
+	
+	func photoClicked() {
+		self.presentPhotoGrid()
+	}
+	
+	func allRecordClicked() {
+		
+	}
+	
+	
 }

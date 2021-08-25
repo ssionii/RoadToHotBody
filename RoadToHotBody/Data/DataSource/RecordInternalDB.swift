@@ -136,7 +136,7 @@ class RecordInternalDB: RecordInternalDBProtocol {
 		return Single<[String]>.create { single in
 			if let realm = self.realm {
 				
-				let photoRecords = realm.objects(Record.self).filter("type == '\(ContentType.Photo.rawValue)'")
+				let photoRecords = realm.objects(Record.self).filter("type == \(ContentType.Photo.rawValue)")
 				let photoUrls = photoRecords.map { record -> String in
 					record.content
 				}

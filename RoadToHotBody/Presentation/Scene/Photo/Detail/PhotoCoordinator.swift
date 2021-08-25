@@ -22,6 +22,6 @@ class PhotoCoordinator: Coordinator {
 	func present(animated: Bool, onDismissed: (() -> Void)?) {
 		let viewModel = PhotoViewModel(url: url)
 		let viewController = PhotoViewController(viewModel: viewModel)
-		router.present(viewController, animated: true)
+		router.present(viewController, animated: animated)
 	}
 }

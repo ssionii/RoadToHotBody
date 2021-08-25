@@ -7,9 +7,18 @@
 
 import UIKit
 
-class RecordViewController: UIViewController {
+protocol RecordVCCoordinatorDelegate: AnyObject {
+	func stopWatchClicked()
+	func photoClicked()
+	func allRecordClicked()
+}
 
+class RecordViewController: UIViewController {
+	
+	@IBOutlet weak var photoView: UIView!
+	
 	private let viewModel: RecordViewModel
+	var coordinatorDelegate: RecordVCCoordinatorDelegate?
 	
 	init(viewModel: RecordViewModel) {
 		self.viewModel = viewModel
@@ -25,6 +34,8 @@ class RecordViewController: UIViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+		
+		configureUI()
     }
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -33,6 +44,16 @@ class RecordViewController: UIViewController {
 		guard let topItem = self.navigationController?.navigationBar.topItem else {
 			return
 		}
+		
 		topItem.title = "너의 기록"
+	}
+	
+	private func configureUI() {
+		self.photoView.addGestureRecognizer(UITapGestureRecognizer(target: self, action:  #selector(self.photoClicked)))
+	}
+	
+	
+	@objc func photoClicked(sender : UITapGestureRecognizer) {
+		self.coordinatorDelegate?.photoClicked()
 	}
 }
