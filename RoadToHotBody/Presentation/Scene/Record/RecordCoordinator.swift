@@ -25,6 +25,11 @@ class RecordCoordinator: Coordinator {
 		router.present(recordViewController, animated: animated)
 	}
 	
+	private func presentTimer() {
+		let coordinator = TimerCoordinator(router: router)
+		presentChild(coordinator, animated: true)
+	}
+	
 	private func presentPhotoGrid() {
 		let coordinator = PhotoGridCoordinator(router: router)
 		presentChild(coordinator, animated: true)
@@ -32,8 +37,8 @@ class RecordCoordinator: Coordinator {
 }
 
 extension RecordCoordinator: RecordVCCoordinatorDelegate {
-	func stopWatchClicked() {
-		
+	func timerClicked() {
+		self.presentTimer()
 	}
 	
 	func photoClicked() {
@@ -43,6 +48,4 @@ extension RecordCoordinator: RecordVCCoordinatorDelegate {
 	func allRecordClicked() {
 		
 	}
-	
-	
 }

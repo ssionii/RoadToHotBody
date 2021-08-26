@@ -8,13 +8,14 @@
 import UIKit
 
 protocol RecordVCCoordinatorDelegate: AnyObject {
-	func stopWatchClicked()
+	func timerClicked()
 	func photoClicked()
 	func allRecordClicked()
 }
 
 class RecordViewController: UIViewController {
 	
+	@IBOutlet weak var timerView: UIView!
 	@IBOutlet weak var photoView: UIView!
 	
 	private let viewModel: RecordViewModel
@@ -49,11 +50,15 @@ class RecordViewController: UIViewController {
 	}
 	
 	private func configureUI() {
+		self.timerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action:  #selector(self.timerClicked)))
 		self.photoView.addGestureRecognizer(UITapGestureRecognizer(target: self, action:  #selector(self.photoClicked)))
 	}
 	
-	
 	@objc func photoClicked(sender : UITapGestureRecognizer) {
 		self.coordinatorDelegate?.photoClicked()
+	}
+	
+	@objc func timerClicked(sender : UITapGestureRecognizer) {
+		self.coordinatorDelegate?.timerClicked()
 	}
 }

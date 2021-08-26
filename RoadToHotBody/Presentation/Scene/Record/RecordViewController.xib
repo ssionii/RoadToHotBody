@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RecordViewController" customModule="RoadToHotBody" customModuleProvider="target">
             <connections>
                 <outlet property="photoView" destination="Eqt-4V-Yl3" id="Rvb-wC-1Qr"/>
+                <outlet property="timerView" destination="Sqi-yE-g6y" id="cAw-zy-DLM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
