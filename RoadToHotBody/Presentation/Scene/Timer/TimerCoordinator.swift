@@ -16,7 +16,8 @@ class TimerCoordinator: Coordinator {
 	}
 	
 	func present(animated: Bool, onDismissed: (() -> Void)?) {
-		let viewController = TimerViewController()
+		let viewModel = TimerViewModel()
+		let viewController = TimerViewController(viewModel: viewModel)
 		router.present(viewController, animated: animated)
 	}
 }

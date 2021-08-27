@@ -11,7 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TimerViewController" customModule="RoadToHotBody" customModuleProvider="target">
             <connections>
-                <outlet property="playingButton" destination="Iqv-ro-0lZ" id="CvD-Gi-quB"/>
+                <outlet property="playButton" destination="Iqv-ro-0lZ" id="TWY-qr-hnP"/>
+                <outlet property="stopButton" destination="1uu-5B-a6h" id="SsT-74-HEV"/>
                 <outlet property="timerLabel" destination="dTi-k8-d9o" id="rnt-P7-HMV"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -64,11 +65,31 @@
                                     <state key="normal" title="시작">
                                         <color key="titleColor" name="mainColor"/>
                                     </state>
+                                    <connections>
+                                        <action selector="playButtonClicked:" destination="-1" eventType="touchUpInside" id="jcT-oh-YE9"/>
+                                    </connections>
+                                </button>
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1uu-5B-a6h">
+                                    <rect key="frame" x="28.333333333333343" y="0.0" width="60" height="60"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="60" id="22Y-02-KSK"/>
+                                        <constraint firstAttribute="width" constant="60" id="gtX-JU-cta"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                    <state key="normal" title="정지">
+                                        <color key="titleColor" systemColor="systemRedColor"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="playButtonClicked:" destination="-1" eventType="touchUpInside" id="Nja-9o-Ebv"/>
+                                        <action selector="stopButtonClicked:" destination="-1" eventType="touchUpInside" id="DZc-tH-eO7"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
+                                <constraint firstItem="1uu-5B-a6h" firstAttribute="centerY" secondItem="j03-zM-qIs" secondAttribute="centerY" id="8BC-LB-SAY"/>
                                 <constraint firstItem="Iqv-ro-0lZ" firstAttribute="centerY" secondItem="j03-zM-qIs" secondAttribute="centerY" id="S9i-bg-9CE"/>
+                                <constraint firstItem="1uu-5B-a6h" firstAttribute="centerX" secondItem="j03-zM-qIs" secondAttribute="centerX" id="e61-Qy-QOf"/>
                                 <constraint firstItem="Iqv-ro-0lZ" firstAttribute="centerX" secondItem="j03-zM-qIs" secondAttribute="centerX" id="rfh-NP-257"/>
                             </constraints>
                         </view>
@@ -123,6 +144,9 @@
         </systemColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
