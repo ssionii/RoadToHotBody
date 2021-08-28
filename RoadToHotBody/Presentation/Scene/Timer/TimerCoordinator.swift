@@ -18,6 +18,13 @@ class TimerCoordinator: Coordinator {
 	func present(animated: Bool, onDismissed: (() -> Void)?) {
 		let viewModel = TimerViewModel()
 		let viewController = TimerViewController(viewModel: viewModel)
+        viewController.coordiantorDelegate = self
 		router.present(viewController, animated: animated)
 	}
+}
+
+extension TimerCoordinator: TimerVCCoordinatorDelegate {
+    func saveTimeRecord() {
+        router.dismiss(animated: true)
+    }
 }

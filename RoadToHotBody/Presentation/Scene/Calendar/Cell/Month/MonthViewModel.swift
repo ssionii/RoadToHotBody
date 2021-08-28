@@ -50,7 +50,7 @@ class MonthViewModel {
 		var calendarDates = [CalendarDate]()
 		
 		// 이번달의 첫날 구하기
-		guard let firstDayOfWeek = self.dayOfWeek("\(currentYear)-\(currentMonth)-01") else {
+        guard let firstDayOfWeek = self.dayOfWeek(dateString(year: currentYear, month: currentMonth, day: 1)) else {
 			return []
 		}
 		
@@ -59,20 +59,20 @@ class MonthViewModel {
 		if firstDayOfWeek > 1 {
 			var day = numOfDaysInMonth[preYearAndMonth.1 - 1] - firstDayOfWeek + 2
 			for _ in 0 ... firstDayOfWeek - 2 {
-				calendarDates.append(CalendarDate(isThisMonth: false, date: "\(preYearAndMonth.0)-\(preYearAndMonth.1)-\(day)", dayString: String(day)))
+                calendarDates.append(CalendarDate(isThisMonth: false, date: dateString(year: preYearAndMonth.0, month: preYearAndMonth.1, day: day), dayString: String(day)))
 				day += 1
 			}
 		}
 		
 		// 이번 달
 		for i in 1 ... numOfDaysInMonth[currentMonth - 1] {
-			let date = "\(currentYear)-\(currentMonth)-\(i)"
+			let date = dateString(year: currentYear, month: currentMonth, day: i)
 			calendarDates.append(CalendarDate(isThisMonth: true, date: date, dayString: String(i)))
 		}
 		
 		let nextYearAndMonth = self.nextYearAndMonth(currentYear: self.currentYear, currentMonth: self.currentMonth)
 		for i in 1 ... ( 7 * 6 ) - calendarDates.count {
-			calendarDates.append(CalendarDate(isThisMonth: false, date: "\(nextYearAndMonth.0)-\(nextYearAndMonth.1)-\(i)", dayString: String(i)))
+            calendarDates.append(CalendarDate(isThisMonth: false, date: dateString(year: nextYearAndMonth.0, month: nextYearAndMonth.1, day: i), dayString: String(i)))
 		}
 		
 		return calendarDates
@@ -103,5 +103,12 @@ class MonthViewModel {
         let myCalendar = Calendar(identifier: .gregorian)
         let weekDay = myCalendar.component(.weekday, from: todayDate)
         return weekDay
+    }
+    
+    private func dateString(year: Int, month: Int, day: Int) -> String {
+        let monthString = "\(month)".count == 1 ? "0\(month)" : "\(month)"
+        let dayString = "\(day)".count == 1 ? "0\(day)" : "\(day)"
+        
+        return "\(year)-\(monthString)-\(dayString)"
     }
 }

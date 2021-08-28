@@ -9,9 +9,14 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+protocol TimerVCCoordinatorDelegate: AnyObject {
+    func saveTimeRecord()
+}
+
 class TimerViewController: UIViewController {
 
 	@IBOutlet weak var timerLabel: UILabel!
+    
 	@IBOutlet weak var playButton: UIButton!
 	@IBOutlet weak var stopButton: UIButton!
 	
@@ -24,8 +29,11 @@ class TimerViewController: UIViewController {
 	
 	private let viewModel: TimerViewModel
 	private let disposeBag = DisposeBag()
+    weak var coordiantorDelegate: TimerVCCoordinatorDelegate?
 	
 	private var isPlaying = PublishSubject<Bool>()
+    private var tempTime = 0
+    private var stoppedTime = 0
 	
 	init(viewModel: TimerViewModel) {
 		self.viewModel = viewModel
@@ -54,19 +62,27 @@ class TimerViewController: UIViewController {
 	}
 	
 	private func bind() {
-		let output = viewModel.transform(input: TimerViewModel.Input(isPlaying: self.isPlaying.asObservable()))
-		
-		output.timeString
-			.drive(timerLabel.rx.text)
-			.disposed(by: disposeBag)
-		
-		isPlaying
-			.withUnretained(self)
-			.subscribe(onNext: { owner, isPlaying in
-				owner.stopButton.isHidden = !isPlaying
-				owner.playButton.isHidden = isPlaying
-			})
-			.disposed(by: disposeBag)
+        let output = viewModel.transform(
+            input: TimerViewModel.Input(
+                isPlaying: self.isPlaying.asObservable(),
+                saveTimeRecord: self.stopButton.rx.tap.asObservable()
+            )
+        )
+
+        output.timeString
+            .withUnretained(self)
+            .subscribe(onNext: { owner, time in
+                owner.timerLabel.text = time
+            })
+            .disposed(by: disposeBag)
+        
+        output.savedTimeRecord
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                print("저장 완료")
+                owner.coordiantorDelegate?.saveTimeRecord()
+            })
+            .disposed(by: disposeBag)
 	}
 	
 	required init?(coder: NSCoder) {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -22,8 +22,8 @@
             <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:06.41" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dTi-k8-d9o">
-                    <rect key="frame" x="67" y="144" width="256" height="83.666666666666686"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dTi-k8-d9o">
+                    <rect key="frame" x="60" y="144" width="270" height="83.666666666666686"/>
                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="70"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -31,32 +31,11 @@
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ftq-C0-asJ">
                     <rect key="frame" x="20" y="327.66666666666669" width="350" height="60"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EgA-EG-kAJ">
-                            <rect key="frame" x="0.0" y="0.0" width="116.66666666666667" height="60"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5CY-a5-VJZ">
-                                    <rect key="frame" x="28.333333333333336" y="0.0" width="60.000000000000007" height="60"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="60" id="Z0I-Sr-J7C"/>
-                                        <constraint firstAttribute="width" constant="60" id="vvW-m4-gib"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                    <state key="normal" title="초기화">
-                                        <color key="titleColor" systemColor="systemGray2Color"/>
-                                    </state>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            <constraints>
-                                <constraint firstItem="5CY-a5-VJZ" firstAttribute="centerX" secondItem="EgA-EG-kAJ" secondAttribute="centerX" id="dcy-46-dWd"/>
-                                <constraint firstItem="5CY-a5-VJZ" firstAttribute="centerY" secondItem="EgA-EG-kAJ" secondAttribute="centerY" id="mUQ-dj-YRe"/>
-                            </constraints>
-                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j03-zM-qIs">
-                            <rect key="frame" x="116.66666666666666" y="0.0" width="116.66666666666666" height="60"/>
+                            <rect key="frame" x="0.0" y="0.0" width="175" height="60"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iqv-ro-0lZ">
-                                    <rect key="frame" x="28.333333333333343" y="0.0" width="60" height="60"/>
+                                    <rect key="frame" x="57.666666666666671" y="0.0" width="60" height="60"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="60" id="aZX-mW-8qy"/>
                                         <constraint firstAttribute="height" constant="60" id="vlx-U6-qEj"/>
@@ -69,8 +48,18 @@
                                         <action selector="playButtonClicked:" destination="-1" eventType="touchUpInside" id="jcT-oh-YE9"/>
                                     </connections>
                                 </button>
-                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1uu-5B-a6h">
-                                    <rect key="frame" x="28.333333333333343" y="0.0" width="60" height="60"/>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="Iqv-ro-0lZ" firstAttribute="centerY" secondItem="j03-zM-qIs" secondAttribute="centerY" id="S9i-bg-9CE"/>
+                                <constraint firstItem="Iqv-ro-0lZ" firstAttribute="centerX" secondItem="j03-zM-qIs" secondAttribute="centerX" id="rfh-NP-257"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M02-ly-NGI">
+                            <rect key="frame" x="175" y="0.0" width="175" height="60"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1uu-5B-a6h">
+                                    <rect key="frame" x="57.666666666666657" y="0.0" width="60" height="60"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="60" id="22Y-02-KSK"/>
                                         <constraint firstAttribute="width" constant="60" id="gtX-JU-cta"/>
@@ -87,31 +76,8 @@
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
-                                <constraint firstItem="1uu-5B-a6h" firstAttribute="centerY" secondItem="j03-zM-qIs" secondAttribute="centerY" id="8BC-LB-SAY"/>
-                                <constraint firstItem="Iqv-ro-0lZ" firstAttribute="centerY" secondItem="j03-zM-qIs" secondAttribute="centerY" id="S9i-bg-9CE"/>
-                                <constraint firstItem="1uu-5B-a6h" firstAttribute="centerX" secondItem="j03-zM-qIs" secondAttribute="centerX" id="e61-Qy-QOf"/>
-                                <constraint firstItem="Iqv-ro-0lZ" firstAttribute="centerX" secondItem="j03-zM-qIs" secondAttribute="centerX" id="rfh-NP-257"/>
-                            </constraints>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="is9-8m-MkB">
-                            <rect key="frame" x="233.33333333333334" y="0.0" width="116.66666666666666" height="60"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9OK-d3-rHi">
-                                    <rect key="frame" x="28.333333333333343" y="0.0" width="60" height="60"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="60" id="8rh-bh-5NP"/>
-                                        <constraint firstAttribute="width" constant="60" id="rus-V6-AH7"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                    <state key="normal" title="완료">
-                                        <color key="titleColor" systemColor="systemBlueColor"/>
-                                    </state>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            <constraints>
-                                <constraint firstItem="9OK-d3-rHi" firstAttribute="centerX" secondItem="is9-8m-MkB" secondAttribute="centerX" id="bWS-wt-u4A"/>
-                                <constraint firstItem="9OK-d3-rHi" firstAttribute="centerY" secondItem="is9-8m-MkB" secondAttribute="centerY" id="cXl-2S-3QX"/>
+                                <constraint firstItem="1uu-5B-a6h" firstAttribute="centerX" secondItem="M02-ly-NGI" secondAttribute="centerX" id="BEC-XI-q1y"/>
+                                <constraint firstItem="1uu-5B-a6h" firstAttribute="centerY" secondItem="M02-ly-NGI" secondAttribute="centerY" id="Sdu-C0-BcR"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -138,12 +104,6 @@
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGray2Color">
-            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
