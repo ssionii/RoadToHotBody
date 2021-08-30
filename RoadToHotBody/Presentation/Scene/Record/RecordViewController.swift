@@ -16,7 +16,9 @@ protocol RecordVCCoordinatorDelegate: AnyObject {
 class RecordViewController: UIViewController {
 	
 	@IBOutlet weak var timerView: UIView!
+	@IBOutlet weak var timerIconBackgroundView: UIView!
 	@IBOutlet weak var photoView: UIView!
+	@IBOutlet weak var photoIconBackgroundView: UIView!
 	
 	private let viewModel: RecordViewModel
 	var coordinatorDelegate: RecordVCCoordinatorDelegate?
@@ -52,6 +54,12 @@ class RecordViewController: UIViewController {
 	private func configureUI() {
 		self.timerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action:  #selector(self.timerClicked)))
 		self.photoView.addGestureRecognizer(UITapGestureRecognizer(target: self, action:  #selector(self.photoClicked)))
+		
+		timerIconBackgroundView.layer.cornerRadius = timerIconBackgroundView.frame.height / 2
+		timerIconBackgroundView.backgroundColor = .systemGray6
+		
+		photoIconBackgroundView.layer.cornerRadius = photoIconBackgroundView.frame.height / 2
+		photoIconBackgroundView.backgroundColor = .yellow
 	}
 	
 	@objc func photoClicked(sender : UITapGestureRecognizer) {
