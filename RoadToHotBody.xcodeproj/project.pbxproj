@@ -26,6 +26,7 @@
 		B56EFA6326C80872008A5346 /* PhotoLibraryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EFA6226C80872008A5346 /* PhotoLibraryCoordinator.swift */; };
 		B56EFA6526C80B0E008A5346 /* NoNavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EFA6426C80B0E008A5346 /* NoNavigationRouter.swift */; };
 		B56EFA6726C81F30008A5346 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EFA6626C81F30008A5346 /* UIImageView+Extension.swift */; };
+		B59716F726DE7486000D3558 /* Notification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59716F626DE7486000D3558 /* Notification+Extension.swift */; };
 		C33815C08C875C8F95249255 /* Pods_RoadToHotBody.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E77AEEB598B06694A614A896 /* Pods_RoadToHotBody.framework */; };
 		FA0B49EC26C50A820018DE69 /* TrainingDetailInternalDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B49EB26C50A820018DE69 /* TrainingDetailInternalDB.swift */; };
 		FA0B49FE26C511CE0018DE69 /* InternalDBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B49FD26C511CE0018DE69 /* InternalDBError.swift */; };
@@ -159,6 +160,7 @@
 		B56EFA6226C80872008A5346 /* PhotoLibraryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryCoordinator.swift; sourceTree = "<group>"; };
 		B56EFA6426C80B0E008A5346 /* NoNavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNavigationRouter.swift; sourceTree = "<group>"; };
 		B56EFA6626C81F30008A5346 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		B59716F626DE7486000D3558 /* Notification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extension.swift"; sourceTree = "<group>"; };
 		C8134247A7D02BF2AD8DAEF1 /* Pods_RoadToHotBody_RoadToHotBodyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoadToHotBody_RoadToHotBodyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E77AEEB598B06694A614A896 /* Pods_RoadToHotBody.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoadToHotBody.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED5047F09EC0E1FEEA2F521D /* Pods-RoadToHotBodyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoadToHotBodyTests.release.xcconfig"; path = "Target Support Files/Pods-RoadToHotBodyTests/Pods-RoadToHotBodyTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -714,6 +716,7 @@
 				FAFA46CE26BD24B900CD820C /* UIView+Extension.swift */,
 				FAFA484426C3A77D00CD820C /* UITextView+Extension.swift */,
 				B56EFA6626C81F30008A5346 /* UIImageView+Extension.swift */,
+				B59716F626DE7486000D3558 /* Notification+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1066,6 +1069,7 @@
 				FA0B49EC26C50A820018DE69 /* TrainingDetailInternalDB.swift in Sources */,
 				B56EFA4D26C7A098008A5346 /* ReadMemoViewController.swift in Sources */,
 				FAFA478926C20A4300CD820C /* HomeCoordinator.swift in Sources */,
+				B59716F726DE7486000D3558 /* Notification+Extension.swift in Sources */,
 				B56EFA4626C79B57008A5346 /* ReadMemoViewModel.swift in Sources */,
 				FA83116C26D4DF94000B1AE9 /* PhotoGridViewModel.swift in Sources */,
 				FAFA46FC26C0A82900CD820C /* CalendarViewController.swift in Sources */,

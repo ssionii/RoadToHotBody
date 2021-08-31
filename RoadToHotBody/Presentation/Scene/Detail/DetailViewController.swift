@@ -153,6 +153,7 @@ class DetailViewController: UIViewController {
 		output.doExercise
 			.subscribe(onNext: { _ in
 				print("운동 시작 등록 완료")
+                NotificationCenter.default.post(name: .reloadCalendar, object: nil)
 			})
 			.disposed(by: disposeBag)
 	}

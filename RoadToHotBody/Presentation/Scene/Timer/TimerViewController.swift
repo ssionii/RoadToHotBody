@@ -79,7 +79,7 @@ class TimerViewController: UIViewController {
         output.savedTimeRecord
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                print("저장 완료")
+                NotificationCenter.default.post(name: .reloadCalendar, object: nil)
                 owner.coordiantorDelegate?.saveTimeRecord()
             })
             .disposed(by: disposeBag)

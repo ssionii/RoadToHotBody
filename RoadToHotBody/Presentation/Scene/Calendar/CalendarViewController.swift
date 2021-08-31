@@ -98,6 +98,7 @@ class CalendarViewController: UIViewController {
         configureUI()
         configureCollectoinView()
         configureTableView()
+        configureNotificationCenter()
 		bind()
 		
     }
@@ -142,6 +143,14 @@ class CalendarViewController: UIViewController {
 		recordTableView.register(UINib(nibName: PhotoCell.ID, bundle: nil), forCellReuseIdentifier: PhotoCell.ID)
 	}
 	
+    private func configureNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveReloadView(_:)), name: .reloadCalendar, object: nil)
+    }
+    
+    @objc func didReceiveReloadView(_ notification: Notification) {
+        reloadView.onNext(())
+    }
+    
 	private func bind() {
 		
 		// viewModel bind
