@@ -112,7 +112,7 @@ class RecordInternalDB: RecordInternalDBProtocol {
 			if let realm = self.realm {
 				
 				guard let record = realm.object(ofType: Record.self, forPrimaryKey: index) else {
-					completable(.error(RecordNotFoundError(detailMessage: "")))
+					completable(.error(RecordNotFoundError(detailMessage: "primaryKey: \(index)")))
 					return Disposables.create { }
 				}
 				

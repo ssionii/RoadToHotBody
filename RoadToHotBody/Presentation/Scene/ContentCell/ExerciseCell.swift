@@ -11,14 +11,14 @@ class ExerciseCell: UITableViewCell {
 
 	static let ID = "ExerciseCell"
 	
-	@IBOutlet weak var exerciseBackgroundView: UIView!
+	@IBOutlet weak var contentBackgroundView: UIView!
 	@IBOutlet weak var exerciseLabel: UILabel!
 	
 	override func awakeFromNib() {
         super.awakeFromNib()
 		
-		exerciseBackgroundView.roundCorners([.topLeft, .topRight, .bottomLeft, .bottomRight], radius: 10)
-		exerciseBackgroundView.backgroundColor = UIColor.init(named: "mainColor")
+		contentBackgroundView.roundCorners([.topLeft, .topRight, .bottomLeft, .bottomRight], radius: 10)
+		contentBackgroundView.backgroundColor = UIColor.init(named: "mainColor")
         exerciseLabel.textColor = .white
         
 		let backgroundView = UIView()

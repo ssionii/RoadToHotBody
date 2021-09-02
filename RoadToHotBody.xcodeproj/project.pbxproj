@@ -79,6 +79,7 @@
 		FAB294ED26C65E17003788CA /* RealmObjectError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB294EC26C65E17003788CA /* RealmObjectError.swift */; };
 		FAB294F226C65EAF003788CA /* DeleteDetailContentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB294F126C65EAF003788CA /* DeleteDetailContentUseCase.swift */; };
 		FAC0CF5926CF4531004DC8BB /* UpdateRecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC0CF5826CF4531004DC8BB /* UpdateRecordUseCase.swift */; };
+		FAC8CF3726DDD9D900C0B0D5 /* SelfSizingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC8CF3626DDD9D900C0B0D5 /* SelfSizingTableView.swift */; };
 		FAF7036A26CF921900CDEBEF /* ReadRecordMemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF7036926CF921900CDEBEF /* ReadRecordMemoViewModel.swift */; };
 		FAF7036F26CF94D300CDEBEF /* ReadDetailContentMemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF7036E26CF94D300CDEBEF /* ReadDetailContentMemoViewModel.swift */; };
 		FAF7038626CF972C00CDEBEF /* DeleteRecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF7038526CF972C00CDEBEF /* DeleteRecordUseCase.swift */; };
@@ -215,6 +216,7 @@
 		FAB294EC26C65E17003788CA /* RealmObjectError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmObjectError.swift; sourceTree = "<group>"; };
 		FAB294F126C65EAF003788CA /* DeleteDetailContentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDetailContentUseCase.swift; sourceTree = "<group>"; };
 		FAC0CF5826CF4531004DC8BB /* UpdateRecordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateRecordUseCase.swift; sourceTree = "<group>"; };
+		FAC8CF3626DDD9D900C0B0D5 /* SelfSizingTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizingTableView.swift; sourceTree = "<group>"; };
 		FAF7036926CF921900CDEBEF /* ReadRecordMemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadRecordMemoViewModel.swift; sourceTree = "<group>"; };
 		FAF7036E26CF94D300CDEBEF /* ReadDetailContentMemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadDetailContentMemoViewModel.swift; sourceTree = "<group>"; };
 		FAF7038526CF972C00CDEBEF /* DeleteRecordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRecordUseCase.swift; sourceTree = "<group>"; };
@@ -482,6 +484,14 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
+		FAC8CF3526DDD9C300C0B0D5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FAC8CF3626DDD9D900C0B0D5 /* SelfSizingTableView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		FAF7037326CF956B00CDEBEF /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -672,6 +682,7 @@
 		FAFA46AE26BD23F400CD820C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				FAC8CF3526DDD9C300C0B0D5 /* View */,
 				FAFA46B226BD241400CD820C /* Coordinator */,
 			);
 			path = Utils;
@@ -1037,6 +1048,7 @@
 				FAB294D326C60F25003788CA /* HomeViewModel.swift in Sources */,
 				FAFA46CF26BD24B900CD820C /* UIView+Extension.swift in Sources */,
 				FAFA46DB26BD250E00CD820C /* MainCoordinator.swift in Sources */,
+				FAC8CF3726DDD9D900C0B0D5 /* SelfSizingTableView.swift in Sources */,
 				B56EFA6526C80B0E008A5346 /* NoNavigationRouter.swift in Sources */,
 				FAF7036F26CF94D300CDEBEF /* ReadDetailContentMemoViewModel.swift in Sources */,
 				FAB2948D26C5FE5C003788CA /* EmptyError.swift in Sources */,

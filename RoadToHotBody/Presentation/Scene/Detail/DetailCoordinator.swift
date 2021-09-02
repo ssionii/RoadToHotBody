@@ -52,8 +52,8 @@ class DetailCoordinator: Coordinator {
         presentChild(coordinator, animated: true)
     }
 	
-	private func presentPhoto(urlString: String) {
-		let coordinator = PhotoDetailCoordinator(router: router, photos: [Photo(index: 0, urlString: urlString)], index: 0)
+	private func presentPhoto(photoIndex: Int, urlString: String) {
+		let coordinator = PhotoDetailCoordinator(router: router, photos: [Photo(index: photoIndex, urlString: urlString)], index: 0)
 		coordinator.delegate = self
 		presentChild(coordinator, animated: true)
 	}
@@ -72,8 +72,8 @@ extension DetailCoordinator: DetailVCCoordinatorDelegate {
         self.presentPhotoLibrary(parentViewController: parentViewController)
     }
 	
-	func photoDetailClicked(imageUrlString: String) {
-		self.presentPhoto(urlString: imageUrlString)
+	func photoDetailClicked(photoIndex: Int, imageUrlString: String) {
+		self.presentPhoto(photoIndex: photoIndex, urlString: imageUrlString)
 	}
 }
 

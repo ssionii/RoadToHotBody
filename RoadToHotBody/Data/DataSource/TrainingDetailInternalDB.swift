@@ -54,6 +54,8 @@ class TrainingDetailInternalDB: TrainingDetailInternalDBProtocol {
 					index = last.index + 1
 				}
 				
+				print("save index: \(index)")
+				
 				let detail = TrainingDetail()
 				detail.type = type
 				detail.content = content

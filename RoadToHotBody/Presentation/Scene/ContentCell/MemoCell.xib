@@ -18,10 +18,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSx-Q9-1eQ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="81"/>
+                        <rect key="frame" x="0.0" y="10" width="320" height="71"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hck-7o-Lmn">
-                                <rect key="frame" x="12" y="12" width="296" height="57"/>
+                                <rect key="frame" x="12" y="12" width="296" height="47"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -40,13 +40,13 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="hSx-Q9-1eQ" secondAttribute="trailing" id="O39-e3-HGg"/>
                     <constraint firstAttribute="bottom" secondItem="hSx-Q9-1eQ" secondAttribute="bottom" id="cjc-gG-WXG"/>
-                    <constraint firstItem="hSx-Q9-1eQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="gZs-yb-AhD"/>
+                    <constraint firstItem="hSx-Q9-1eQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="gZs-yb-AhD"/>
                     <constraint firstItem="hSx-Q9-1eQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="nWM-6C-Ckb"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="memoBackgroundView" destination="hSx-Q9-1eQ" id="bkr-IW-fiI"/>
+                <outlet property="contentBackgroundView" destination="hSx-Q9-1eQ" id="bkr-IW-fiI"/>
                 <outlet property="memoLabel" destination="Hck-7o-Lmn" id="tn4-I2-D5B"/>
             </connections>
             <point key="canvasLocation" x="140.57971014492756" y="165.73660714285714"/>

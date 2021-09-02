@@ -25,6 +25,15 @@ class TimerViewController: UIViewController {
 	}
 	@IBAction func stopButtonClicked(_ sender: Any) {
 		self.isPlaying.onNext(false)
+		
+		let alert = UIAlertController(title: "시간 기록 하시겠습니까?", message: "", preferredStyle: .alert)
+		alert.addAction(UIAlertAction(title: "네", style: .default, handler: { [weak self ] _ in
+			guard let self = self else { return }
+			self.saveTimeRecord.onNext(())
+		}))
+		alert.addAction(UIAlertAction(title: "아니오", style: .cancel, handler: nil))
+		
+		present(alert, animated: false, completion: nil)
 	}
 	
 	private let viewModel: TimerViewModel
@@ -32,6 +41,7 @@ class TimerViewController: UIViewController {
     weak var coordiantorDelegate: TimerVCCoordinatorDelegate?
 	
 	private var isPlaying = PublishSubject<Bool>()
+	private var saveTimeRecord = PublishSubject<Void>()
     private var tempTime = 0
     private var stoppedTime = 0
 	
@@ -65,7 +75,7 @@ class TimerViewController: UIViewController {
         let output = viewModel.transform(
             input: TimerViewModel.Input(
                 isPlaying: self.isPlaying.asObservable(),
-                saveTimeRecord: self.stopButton.rx.tap.asObservable()
+                saveTimeRecord: self.saveTimeRecord.asObservable()
             )
         )
 
@@ -79,7 +89,6 @@ class TimerViewController: UIViewController {
         output.savedTimeRecord
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                print("저장 완료")
                 owner.coordiantorDelegate?.saveTimeRecord()
             })
             .disposed(by: disposeBag)

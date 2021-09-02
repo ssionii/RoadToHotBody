@@ -7,12 +7,12 @@
 
 import RealmSwift
 
-class Record: Object {
-	@objc dynamic var index: Int = 0
-	@objc dynamic var type: Int = 0
-	@objc dynamic var content: String = ""
-	@objc dynamic var date: String = ""
-	@objc dynamic var trainingIndex: Int = -1
+@objcMembers class Record: Object {
+	dynamic var index: Int = 0
+	dynamic var type: Int = 0
+	dynamic var content: String = ""
+	dynamic var date: String = ""
+	dynamic var trainingIndex: Int = -1
 	
 	override class func primaryKey() -> String? {
 		return "index"

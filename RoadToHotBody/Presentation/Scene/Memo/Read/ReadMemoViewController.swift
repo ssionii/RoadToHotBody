@@ -15,7 +15,18 @@ class ReadMemoViewController: UIViewController {
     @IBOutlet weak var textViewBottomLayout: NSLayoutConstraint!
     @IBOutlet weak var deleteButton: UIButton!
     
-    lazy var confirmButton: UIBarButtonItem = {
+	@IBAction func deleteButtonClicked(_ sender: Any) {
+		let alert = UIAlertController(title: "삭제 하시겠습니까?", message: "", preferredStyle: .alert)
+		alert.addAction(UIAlertAction(title: "네", style: .default, handler: { [weak self ] _ in
+			guard let self = self else { return }
+			self.deleteMemo.onNext(())
+		}))
+		alert.addAction(UIAlertAction(title: "아니오", style: .cancel, handler: nil))
+		
+		present(alert, animated: false, completion: nil)
+	}
+	
+	lazy var confirmButton: UIBarButtonItem = {
         let button = UIBarButtonItem(
             title: "완료",
             style: .plain,
@@ -31,6 +42,7 @@ class ReadMemoViewController: UIViewController {
     
     private let disposeBag = DisposeBag()
     private let tapButton = PublishSubject<Void>()
+	private let deleteMemo = PublishSubject<Void>()
     
     init(viewModel: ReadMemoViewModel) {
         self.viewModel = viewModel
@@ -58,7 +70,7 @@ class ReadMemoViewController: UIViewController {
         let output = viewModel.transform(
             input: ReadMemoViewModel.Input(
                 confirmButtonClicked: confirmButton.rx.tap.asObservable(),
-                deleteButtonClicked: deleteButton.rx.tap.asObservable(),
+                deleteButtonClicked: deleteMemo.asObservable(),
                 text: textView.rx.text.asObservable()
             )
         )

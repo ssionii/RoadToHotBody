@@ -40,6 +40,9 @@
                             <state key="normal" image="trash" catalog="system">
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
                             </state>
+                            <connections>
+                                <action selector="deleteButtonClicked:" destination="-1" eventType="touchUpInside" id="vLs-qW-krw"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>

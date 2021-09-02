@@ -17,7 +17,15 @@ class PhotoDetailViewController: UIViewController {
 	
 	@IBOutlet weak var photoCollectionView: UICollectionView!
 	@IBAction func deleteButtonClicked(_ sender: Any) {
-		deletePhotoIndex.onNext(displayedIndex)
+		
+		let alert = UIAlertController(title: "삭제 하시겠습니까?", message: "", preferredStyle: .alert)
+		alert.addAction(UIAlertAction(title: "네", style: .default, handler: { [weak self ] _ in
+			guard let self = self else { return }
+			self.deletePhotoIndex.onNext(self.displayedIndex)
+		}))
+		alert.addAction(UIAlertAction(title: "아니오", style: .cancel, handler: nil))
+		
+		present(alert, animated: false, completion: nil)
 	}
 	
 	private var photos: [Photo] = [] {
