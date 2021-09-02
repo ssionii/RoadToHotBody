@@ -1,5 +1,5 @@
 //
-//  ExerciseCell.swift
+//  ExerciseRecordCell.swift
 //  RoadToHotBody
 //
 //  Created by  60117280 on 2021/08/19.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-class ExerciseCell: UITableViewCell {
+class ExerciseRecordCell: UITableViewCell {
 
-	static let ID = "ExerciseCell"
+	static let ID = "ExerciseRecordCell"
 	
 	@IBOutlet weak var contentBackgroundView: UIView!
 	@IBOutlet weak var exerciseLabel: UILabel!

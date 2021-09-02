@@ -139,7 +139,7 @@ class CalendarViewController: UIViewController {
 		recordTableView.dataSource = self
 		
 		recordTableView.register(UINib(nibName: MemoCell.ID, bundle: nil), forCellReuseIdentifier: MemoCell.ID)
-		recordTableView.register(UINib(nibName: ExerciseCell.ID, bundle: nil), forCellReuseIdentifier: ExerciseCell.ID)
+		recordTableView.register(UINib(nibName: ExerciseRecordCell.ID, bundle: nil), forCellReuseIdentifier: ExerciseRecordCell.ID)
 		recordTableView.register(UINib(nibName: PhotoCell.ID, bundle: nil), forCellReuseIdentifier: PhotoCell.ID)
 	}
 	
@@ -265,7 +265,7 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		switch records[indexPath.row].type {
 		case .Exercise:
-			let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseCell.ID, for: indexPath) as! ExerciseCell
+			let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseRecordCell.ID, for: indexPath) as! ExerciseRecordCell
 			cell.bind(text: records[indexPath.row].text ?? "")
 			return cell
 		case .Memo:

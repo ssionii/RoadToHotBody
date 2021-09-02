@@ -53,6 +53,10 @@ class CalendarCoordinator: Coordinator {
 		coordinator.delegate = self
 		presentChild(coordinator, animated: true)
 	}
+	
+	private func presentExerciseList() {
+		
+	}
 }
 
 extension CalendarCoordinator: CalendarVCCoordinatorDelegate {
