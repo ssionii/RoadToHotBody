@@ -63,11 +63,6 @@ class PhotoGridViewController: UIViewController {
 				owner.photos = photos
 			})
 			.disposed(by: disposeBag)
-		
-		reloadView
-			.subscribe(onNext: { _ in
-				print("reload")
-			})
 	}
 }
 

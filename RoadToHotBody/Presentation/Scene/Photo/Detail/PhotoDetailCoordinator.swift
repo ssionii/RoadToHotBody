@@ -19,16 +19,18 @@ class PhotoDetailCoordinator: Coordinator {
 	weak var delegate: PhotoDetailCoordinatorDelegate?
 	
 	private let photos: [Photo]
-	private let index: Int
+	private let pageIndex: Int
+	private let photoType: PhotoType
 	
-	init(router: Router, photos: [Photo], index: Int) {
+	init(router: Router, photos: [Photo], pageIndex: Int, photoType: PhotoType) {
 		self.router = router
 		self.photos = photos
-		self.index = index
+		self.pageIndex = pageIndex
+		self.photoType = photoType
 	}
 	
 	func present(animated: Bool, onDismissed: (() -> Void)?) {
-		let viewModel = PhotoDetailViewModel(photos: photos, index: index)
+		let viewModel = PhotoDetailViewModel(photos: photos, pageIndex: pageIndex, photoType: photoType)
 		let viewController = PhotoDetailViewController(viewModel: viewModel)
 		viewController.coordinatorDelegate = self
 		router.present(viewController, animated: animated)

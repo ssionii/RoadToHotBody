@@ -122,8 +122,6 @@ class DetailViewController: UIViewController {
 		tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
 		tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
 		
-		print(tableView.frame)
-        
 		tableView.register(UINib(nibName: MemoCell.ID, bundle: nil), forCellReuseIdentifier: MemoCell.ID)
 		tableView.register(UINib(nibName: PhotoCell.ID, bundle: nil), forCellReuseIdentifier: PhotoCell.ID)
 		tableView.register(UINib(nibName: VideoCell.ID, bundle: nil), forCellReuseIdentifier: VideoCell.ID)
@@ -166,6 +164,7 @@ class DetailViewController: UIViewController {
 		output.doExercise
 			.subscribe(onNext: { _ in
 				print("운동 시작 등록 완료")
+                NotificationCenter.default.post(name: .reloadCalendar, object: nil)
 			})
 			.disposed(by: disposeBag)
 	}

@@ -48,8 +48,8 @@ class CalendarCoordinator: Coordinator {
 		presentChild(coordinator, animated: true)
 	}
 	
-	private func presentPhoto(urlString: String) {
-		let coordinator = PhotoDetailCoordinator(router: router, photos: [Photo(index: 0, urlString: urlString)], index: 0)
+	private func presentPhoto(photoIndex: Int, urlString: String) {
+		let coordinator = PhotoDetailCoordinator(router: router, photos: [Photo(index: photoIndex, urlString: urlString)], pageIndex: 0, photoType: .Record)
 		coordinator.delegate = self
 		presentChild(coordinator, animated: true)
 	}
@@ -72,8 +72,8 @@ extension CalendarCoordinator: CalendarVCCoordinatorDelegate {
 		self.presentReadMemo(parentViewController: viewController, content: content)
 	}
 	
-	func photoDetailClicked(urlString: String) {
-		self.presentPhoto(urlString: urlString)
+	func photoDetailClicked(photoIndex: Int, urlString: String) {
+		self.presentPhoto(photoIndex: photoIndex, urlString: urlString)
 	}
 }
 

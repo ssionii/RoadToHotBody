@@ -53,7 +53,7 @@ class DetailCoordinator: Coordinator {
     }
 	
 	private func presentPhoto(photoIndex: Int, urlString: String) {
-		let coordinator = PhotoDetailCoordinator(router: router, photos: [Photo(index: photoIndex, urlString: urlString)], index: 0)
+		let coordinator = PhotoDetailCoordinator(router: router, photos: [Photo(index: photoIndex, urlString: urlString)], pageIndex: 0, photoType: .ContentDetail)
 		coordinator.delegate = self
 		presentChild(coordinator, animated: true)
 	}

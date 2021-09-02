@@ -86,16 +86,17 @@ class PhotoDetailViewController: UIViewController {
 			})
 			.disposed(by: disposeBag)
 		
-		output.index
+		output.pageIndex
 			.withUnretained(self)
-			.subscribe(onNext: { owner, index in
-				owner.photoCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .left, animated: false)
+			.subscribe(onNext: { owner, pageIndex in
+				owner.photoCollectionView.scrollToItem(at: IndexPath(row: pageIndex, section: 0), at: .left, animated: false)
 			})
 			.disposed(by: disposeBag)
 		
 		output.photoDeleted
 			.withUnretained(self)
 			.subscribe(onNext: { owner, _ in
+				NotificationCenter.default.post(name: .reloadCalendar, object: nil)
 				owner.coordinatorDelegate?.deletePhoto()
 			})
 			.disposed(by: disposeBag)

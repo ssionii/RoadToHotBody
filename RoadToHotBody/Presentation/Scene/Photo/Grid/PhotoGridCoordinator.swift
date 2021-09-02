@@ -29,7 +29,7 @@ class PhotoGridCoordinator: Coordinator {
 	private func presentPhotoDetail(photos: [Photo], index: Int) {
 		guard let vc = self.viewController else { return }
 		let router = ModalNavigationRouter(parentViewController: vc)
-		let coordinator = PhotoDetailCoordinator(router: router, photos: photos, index: index)
+		let coordinator = PhotoDetailCoordinator(router: router, photos: photos, pageIndex: index, photoType: .Record)
 		coordinator.delegate = self
 		presentChild(coordinator, animated: true)
 	}

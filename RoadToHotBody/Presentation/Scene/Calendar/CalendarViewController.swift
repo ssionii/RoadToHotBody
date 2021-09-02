@@ -15,7 +15,7 @@ protocol CalendarVCCoordinatorDelegate {
 	func photoLibraryButtonClicked(_ viewController: UIViewController)
 	func addExerciseButtonClicked(_ viewController: UIViewController, date: String)
 	func readMemoClicked(_ viewController: UIViewController, content: Content)
-	func photoDetailClicked(urlString: String)
+	func photoDetailClicked(photoIndex: Int, urlString: String)
 }
 
 class CalendarViewController: UIViewController {
@@ -98,6 +98,7 @@ class CalendarViewController: UIViewController {
         configureUI()
         configureCollectoinView()
         configureTableView()
+        configureNotificationCenter()
 		bind()
 		
     }
@@ -142,6 +143,14 @@ class CalendarViewController: UIViewController {
 		recordTableView.register(UINib(nibName: PhotoCell.ID, bundle: nil), forCellReuseIdentifier: PhotoCell.ID)
 	}
 	
+    private func configureNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveReloadView(_:)), name: .reloadCalendar, object: nil)
+    }
+    
+    @objc func didReceiveReloadView(_ notification: Notification) {
+        reloadView.onNext(())
+    }
+    
 	private func bind() {
 		
 		// viewModel bind
@@ -242,16 +251,9 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
 }
 
 extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return records.count
-    }
-    
+	
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return cellSpacingHeight
+		return records.count
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -261,34 +263,34 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     }
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		switch records[indexPath.section].type {
+		switch records[indexPath.row].type {
 		case .Exercise:
 			let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseCell.ID, for: indexPath) as! ExerciseCell
-			cell.bind(text: records[indexPath.section].text ?? "")
+			cell.bind(text: records[indexPath.row].text ?? "")
 			return cell
 		case .Memo:
 			let cell = tableView.dequeueReusableCell(withIdentifier: MemoCell.ID, for: indexPath) as! MemoCell
-			cell.bind(text: records[indexPath.section].text ?? "")
+			cell.bind(text: records[indexPath.row].text ?? "")
 			return cell
 		case .Photo:
 			let cell = tableView.dequeueReusableCell(withIdentifier: PhotoCell.ID, for: indexPath) as! PhotoCell
 			cell.delegate = self
-			cell.bind(url: records[indexPath.section].text, index: indexPath)
+			cell.bind(url: records[indexPath.row].text, index: indexPath)
 			return cell
 		default:
 			let cell = tableView.dequeueReusableCell(withIdentifier: MemoCell.ID, for: indexPath) as! MemoCell
-			cell.bind(text: records[indexPath.section].text ?? "")
+			cell.bind(text: records[indexPath.row].text ?? "")
 			return cell
 		}
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		switch records[indexPath.section].type {
+		switch records[indexPath.row].type {
 		case .Memo:
-			self.coordinatorDelegate?.readMemoClicked(self, content: records[indexPath.section])
+			self.coordinatorDelegate?.readMemoClicked(self, content: records[indexPath.row])
 		case .Photo:
-			guard let urlString = records[indexPath.section].text else { return }
-			self.coordinatorDelegate?.photoDetailClicked(urlString: urlString)
+			guard let urlString = records[indexPath.row].text else { return }
+			self.coordinatorDelegate?.photoDetailClicked(photoIndex: records[indexPath.row].index, urlString: urlString)
 		default:
 			break
 		}
