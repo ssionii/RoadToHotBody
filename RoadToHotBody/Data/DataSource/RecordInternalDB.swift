@@ -10,6 +10,7 @@ import RealmSwift
 
 protocol RecordInternalDBProtocol {
 	func fetchRecords(date: String) -> Single<[Record]>
+	func fetchMonthRecords(startDate: Date, endDate: Date) -> Single<[DateRecordDTO]>
 	func saveRecord(date: String, content: String, type: Int, trainingIndex: Int?) -> Completable
 	func updateRecord(index: Int, content: String) -> Completable
 	func deleteRecord(index: Int) -> Completable
@@ -36,6 +37,33 @@ class RecordInternalDB: RecordInternalDBProtocol {
 				let recordArray = Array(records)
 				single(.success(recordArray))
 	
+			} else {
+				single(.failure(RealmNotInitError(detailMessage: "")))
+			}
+
+			return Disposables.create { }
+		}
+	}
+	
+	func fetchMonthRecords(startDate: Date, endDate: Date) -> Single<[DateRecordDTO]> {
+		return Single<[DateRecordDTO]>.create { single in
+			if let realm = self.realm {
+				
+				var recordArray: [DateRecordDTO] = []
+				
+				let dateFormatter = DateFormatter()
+				dateFormatter.dateFormat = "yyyy-MM"
+				
+				let yearAndMonth = dateFormatter.string(from: endDate)
+				for day in startDate.day ... endDate.day {
+					let convertedDay = String(day).count == 1 ? "0\(day)" : String(day)
+					let dateString = "\(yearAndMonth)-\(convertedDay)"
+		
+					let records = realm.objects(Record.self).filter("date == '\(dateString)'")
+					let dateRecord = DateRecordDTO(date: dateString, records: Array(records))
+					recordArray.append(dateRecord)
+				}
+				single(.success(recordArray))
 			} else {
 				single(.failure(RealmNotInitError(detailMessage: "")))
 			}
@@ -147,4 +175,5 @@ class RecordInternalDB: RecordInternalDBProtocol {
 			return Disposables.create { }
 		}
 	}
+	
 }

@@ -54,29 +54,26 @@ class CalendarViewController: UIViewController {
 	private let disposeBag = DisposeBag()
 	
 	// calendar event
-	private let currentDateString = BehaviorSubject<String>(value: "")
+	private let currentPage = BehaviorSubject<Date>(value: Date())
+	private let selectedDateObservable = PublishSubject<String>()
+	private let calendarScopeIsWeek = BehaviorSubject<Bool>(value: false)
 
-	
-	// event
-	private let isScrolled = PublishSubject<Int>()
-	private let isAppearView = PublishSubject<Void>()
-	let reloadView = PublishSubject<Void>()
-	let addedPhotoURL = PublishSubject<NSURL>()
+	// floating button event
 	private let writeMemoButtonClicked = PublishSubject<Void>()
 	private let photoLibraryButtonClicked = PublishSubject<Void>()
 	private let addExerciseButtonClicked = PublishSubject<Void>()
 	
-	// present
-	private var isFirstAppear = true
-    private let cellSpacingHeight: CGFloat = 10
+	// event
+	let reloadView = PublishSubject<Void>()
+	let addedPhotoRecordURL = PublishSubject<NSURL>()
+
+	// view
 	private var cellSize: CGFloat = 0
 	
-	private let selectedDateObservable = PublishSubject<String>()
-	private var selectedIndexPath = IndexPath()
-	
-	private var records: [Content] = [] {
+	private var dateRecords: [String : [Content]] = [:]
+	private var selectedDateRecord: [Content] = [] {
 		didSet {
-			recordTableView.reloadData()
+			self.recordTableView.reloadData()
 		}
 	}
 	
@@ -99,21 +96,10 @@ class CalendarViewController: UIViewController {
         configureTableView()
         configureNotificationCenter()
 		bind()
-		
     }
-	
-	override func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
-		if isFirstAppear {
-			isScrolled.onNext(0)
-			isFirstAppear = false
-		}
-		
-		isAppearView.onNext(())
-	}
     
     private func configureUI() {
-		configureCurrentDate(date: calendar.currentPage)
+		
 		floatingButton.display(inViewController: self)
     }
 	
@@ -135,11 +121,11 @@ class CalendarViewController: UIViewController {
 		calendar.dataSource = self
 	}
 	
-	private func configureCurrentDate(date: Date) {
+	private func configureCurrentDate(date: Date) -> String {
 		let year = Calendar.current.component(.year, from: date)
 		let month = Calendar.current.component(.month, from: date)
 		
-		currentDateString.onNext("\(year)년 \(month)월")
+		return "\(year)년 \(month)월"
 	}
 	
 	private func configureTableView() {
@@ -160,22 +146,29 @@ class CalendarViewController: UIViewController {
     }
     
 	private func bind() {
+
+		guard let topItem = self.navigationController?.navigationBar.topItem else { return }
+		
+		currentPage
+			.withUnretained(self)
+			.subscribe(onNext: { owner, date in
+				topItem.title = owner.configureCurrentDate(date: date)
+			})
+			.disposed(by: disposeBag)
 		
 		// viewModel bind
 		let output = viewModel.transform(
 			input: CalendarViewModel.Input(
 				selectedDate: selectedDateObservable.asObservable(),
-				addedPhotoURL: addedPhotoURL.asObservable(),
-				isScrolled: self.isScrolled.asObservable(),
-				isViewAppear: self.isAppearView.asObserver()
+				addedPhotoRecordURL: addedPhotoRecordURL.asObservable(),
+				currentPage: currentPage.asObserver()
 			)
 		)
 		
-		guard let topItem = self.navigationController?.navigationBar.topItem else { return }
-		
-		currentDateString
-			.subscribe(onNext: { date in
-				topItem.title = date
+		output.dateRecords
+			.withUnretained(self)
+			.subscribe(onNext: { owner, dateRecords in
+				owner.dateRecords = dateRecords
 			})
 			.disposed(by: disposeBag)
 		
@@ -185,7 +178,7 @@ class CalendarViewController: UIViewController {
 			})
 			.disposed(by: disposeBag)
 		
-		// event bind
+		// floating button event bind
 		writeMemoButtonClicked
 			.withLatestFrom(selectedDateObservable)
 			.withUnretained(self)
@@ -210,11 +203,11 @@ class CalendarViewController: UIViewController {
 			})
 			.disposed(by: disposeBag)
 		
-		selectedDateObservable
-			.take(1)
+		calendarScopeIsWeek
+			.distinctUntilChanged()
 			.withUnretained(self)
-			.subscribe(onNext: { owner, _ in
-				owner.floatingButton.isHidden = false
+			.subscribe(onNext: { owner, isWeek in
+				owner.floatingButton.isHidden = !isWeek
 			})
 			.disposed(by: disposeBag)
 	}
@@ -229,24 +222,46 @@ class CalendarViewController: UIViewController {
 
 extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
 	func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-		calendar.setScope(.week, animated: true)
+		selectedDateObservable.onNext(date.toString)
+		selectedDateRecord = self.dateRecords[date.toString] ?? []
 	}
 	
 	func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-		return 1
+		
+		return self.dateRecords[date.toString]?.count ?? 0
 	}
 	
 	func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
+		
+		if calendar.scope == .month {
+			calendarScopeIsWeek.onNext(false)
+		} else {
+			calendarScopeIsWeek.onNext(true)
+		}
+		
 		self.calendarHeight.constant = bounds.height
 		self.view.layoutIfNeeded()
 	}
 	
 	func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
-		self.configureCurrentDate(date: calendar.currentPage)
+		self.currentPage.onNext(calendar.currentPage)
 	}
 	
 	func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
-		return [.lightGray, .green, .systemPink ]
+		
+		var resultColors = [UIColor]()
+		
+		let contentType: [ContentType] = [ .Memo, .Exercise, .Photo ]
+		let color: [UIColor] = [ .lightGray, UIColor(named: "mainColor") ?? .black , .systemPink ]
+		
+		
+		for (index, type) in contentType.enumerated() {
+			if ((self.dateRecords[date.toString]?.contains { $0.type == type }) != nil) {
+				resultColors.append(color[index])
+			}
+		}
+		
+		return resultColors
 	}
 	
 	func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventSelectionColorsFor date: Date) -> [UIColor]? {
@@ -263,7 +278,7 @@ extension CalendarViewController: UIGestureRecognizerDelegate {
 extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
 	
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return records.count
+		return selectedDateRecord.count
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -273,34 +288,37 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     }
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		switch records[indexPath.row].type {
+		
+		let record = self.selectedDateRecord[indexPath.row]
+		switch record.type {
 		case .Exercise:
 			let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseRecordCell.ID, for: indexPath) as! ExerciseRecordCell
-			cell.bind(text: records[indexPath.row].text ?? "")
+			cell.bind(text: record.text ?? "")
 			return cell
 		case .Memo:
 			let cell = tableView.dequeueReusableCell(withIdentifier: MemoCell.ID, for: indexPath) as! MemoCell
-			cell.bind(text: records[indexPath.row].text ?? "")
+			cell.bind(text: record.text ?? "")
 			return cell
 		case .Photo:
 			let cell = tableView.dequeueReusableCell(withIdentifier: PhotoCell.ID, for: indexPath) as! PhotoCell
 			cell.delegate = self
-			cell.bind(url: records[indexPath.row].text, index: indexPath)
+			cell.bind(url: record.text, index: indexPath)
 			return cell
 		default:
 			let cell = tableView.dequeueReusableCell(withIdentifier: MemoCell.ID, for: indexPath) as! MemoCell
-			cell.bind(text: records[indexPath.row].text ?? "")
+			cell.bind(text: record.text ?? "")
 			return cell
 		}
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		switch records[indexPath.row].type {
+		let record = self.selectedDateRecord[indexPath.row]
+		switch record.type {
 		case .Memo:
-			self.coordinatorDelegate?.readMemoClicked(self, content: records[indexPath.row])
+			self.coordinatorDelegate?.readMemoClicked(self, content: record)
 		case .Photo:
-			guard let urlString = records[indexPath.row].text else { return }
-			self.coordinatorDelegate?.photoDetailClicked(photoIndex: records[indexPath.row].index, urlString: urlString)
+			guard let urlString = record.text else { return }
+			self.coordinatorDelegate?.photoDetailClicked(photoIndex: record.index, urlString: urlString)
 		default:
 			break
 		}
@@ -315,15 +333,4 @@ extension CalendarViewController: PhotoCellDelegate {
 			}
 		}
 	}
-}
-
-extension CalendarViewController: MonthCellDelegate {
-	func selectedDate(records: [Content]?, date: String, indexPath: IndexPath) {
-		self.records.removeAll()
-        if let records = records {
-            self.records = records
-        }
-		self.selectedDateObservable.onNext(date)
-		self.selectedIndexPath = indexPath
-    }
 }

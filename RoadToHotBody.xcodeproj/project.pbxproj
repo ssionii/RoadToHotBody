@@ -85,6 +85,9 @@
 		FAB294F226C65EAF003788CA /* DeleteDetailContentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB294F126C65EAF003788CA /* DeleteDetailContentUseCase.swift */; };
 		FAC0CF5926CF4531004DC8BB /* UpdateRecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC0CF5826CF4531004DC8BB /* UpdateRecordUseCase.swift */; };
 		FAC8CF3726DDD9D900C0B0D5 /* SelfSizingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC8CF3626DDD9D900C0B0D5 /* SelfSizingTableView.swift */; };
+		FAE110CB26E5E6A700CD6A68 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE110CA26E5E6A700CD6A68 /* Date+Extension.swift */; };
+		FAE110D026E5EDB900CD6A68 /* DateRecordDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE110CF26E5EDB900CD6A68 /* DateRecordDTO.swift */; };
+		FAE110D526E5F00D00CD6A68 /* FetchMonthRecordsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE110D426E5F00D00CD6A68 /* FetchMonthRecordsUseCase.swift */; };
 		FAF7036A26CF921900CDEBEF /* ReadRecordMemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF7036926CF921900CDEBEF /* ReadRecordMemoViewModel.swift */; };
 		FAF7036F26CF94D300CDEBEF /* ReadDetailContentMemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF7036E26CF94D300CDEBEF /* ReadDetailContentMemoViewModel.swift */; };
 		FAF7038626CF972C00CDEBEF /* DeleteRecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF7038526CF972C00CDEBEF /* DeleteRecordUseCase.swift */; };
@@ -227,6 +230,9 @@
 		FAB294F126C65EAF003788CA /* DeleteDetailContentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDetailContentUseCase.swift; sourceTree = "<group>"; };
 		FAC0CF5826CF4531004DC8BB /* UpdateRecordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateRecordUseCase.swift; sourceTree = "<group>"; };
 		FAC8CF3626DDD9D900C0B0D5 /* SelfSizingTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizingTableView.swift; sourceTree = "<group>"; };
+		FAE110CA26E5E6A700CD6A68 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		FAE110CF26E5EDB900CD6A68 /* DateRecordDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRecordDTO.swift; sourceTree = "<group>"; };
+		FAE110D426E5F00D00CD6A68 /* FetchMonthRecordsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMonthRecordsUseCase.swift; sourceTree = "<group>"; };
 		FAF7036926CF921900CDEBEF /* ReadRecordMemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadRecordMemoViewModel.swift; sourceTree = "<group>"; };
 		FAF7036E26CF94D300CDEBEF /* ReadDetailContentMemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadDetailContentMemoViewModel.swift; sourceTree = "<group>"; };
 		FAF7038526CF972C00CDEBEF /* DeleteRecordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRecordUseCase.swift; sourceTree = "<group>"; };
@@ -510,6 +516,7 @@
 				FAB294B026C6088B003788CA /* Training.swift */,
 				FAB2947F26C5F785003788CA /* TrainingDetail.swift */,
 				FA3AD7D026CE144600270AC1 /* Record.swift */,
+				FAE110CF26E5EDB900CD6A68 /* DateRecordDTO.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -670,6 +677,7 @@
 				FAF7038526CF972C00CDEBEF /* DeleteRecordUseCase.swift */,
 				FA83113F26D4AAB6000B1AE9 /* LoadImageUseCase.swift */,
 				FA83117326D4E033000B1AE9 /* FetchPhotosUseCase.swift */,
+				FAE110D426E5F00D00CD6A68 /* FetchMonthRecordsUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -754,6 +762,7 @@
 				FAFA484426C3A77D00CD820C /* UITextView+Extension.swift */,
 				B56EFA6626C81F30008A5346 /* UIImageView+Extension.swift */,
 				B59716F626DE7486000D3558 /* Notification+Extension.swift */,
+				FAE110CA26E5E6A700CD6A68 /* Date+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1142,6 +1151,7 @@
 				FA9B27EC26CBA42400FC05E9 /* DayCell.swift in Sources */,
 				FA0B49FE26C511CE0018DE69 /* InternalDBError.swift in Sources */,
 				FAFA46BE26BD245700CD820C /* NavigationRouter.swift in Sources */,
+				FAE110CB26E5E6A700CD6A68 /* Date+Extension.swift in Sources */,
 				FA9B27B226CB399D00FC05E9 /* VideoCell.swift in Sources */,
 				FA83114A26D4CEB2000B1AE9 /* RecordViewController.swift in Sources */,
 				FAF7039426CF9A9400CDEBEF /* WriteDetailContentMemoViewModel.swift in Sources */,
@@ -1161,9 +1171,11 @@
 				FA09746626E0C1400029458A /* ExerciseCell.swift in Sources */,
 				FAFA47DF26C2665D00CD820C /* PhotoCell.swift in Sources */,
 				FAC0CF5926CF4531004DC8BB /* UpdateRecordUseCase.swift in Sources */,
+				FAE110D526E5F00D00CD6A68 /* FetchMonthRecordsUseCase.swift in Sources */,
 				B56EFA5A26C7D5E6008A5346 /* UpdateDetailContentUseCase.swift in Sources */,
 				B56EFA5426C7A532008A5346 /* ReadMemoCoordinator.swift in Sources */,
 				FAFA47BA26C24D5500CD820C /* FetchDetailContentsUseCase.swift in Sources */,
+				FAE110D026E5EDB900CD6A68 /* DateRecordDTO.swift in Sources */,
 				FAB294ED26C65E17003788CA /* RealmObjectError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

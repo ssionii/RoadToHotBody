@@ -83,7 +83,7 @@ extension CalendarCoordinator: CalendarVCCoordinatorDelegate {
 
 extension CalendarCoordinator: PhotoLibraryCoordinatorDelegate {
 	func selectImage(imageUrl: NSURL) {
-		self.calendarViewController.addedPhotoURL.onNext(imageUrl)
+		self.calendarViewController.addedPhotoRecordURL.onNext(imageUrl)
 	}
 	
 	func selectVideo(videoUrl: NSURL) {

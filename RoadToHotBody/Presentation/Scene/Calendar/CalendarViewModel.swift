@@ -8,20 +8,24 @@
 import RxSwift
 import RxCocoa
 
+struct DateRecord {
+	var date: String
+	var records: [Content]
+}
+
 class CalendarViewModel {
 	struct Input {
 		var selectedDate: Observable<String>
-		var addedPhotoURL: Observable<NSURL>
-		var isScrolled: Observable<Int>
-		var isViewAppear: Observable<Void>
+		var addedPhotoRecordURL: Observable<NSURL>
+		var currentPage: Observable<Date>
 	}
 	
 	struct Output {
-		var displayedMonths: Observable<[(Int, Int)]>
-		var displayedMonthString: Driver<String>
+		var dateRecords: Observable<[String : [Content]]>
 		var isPhotoAdded: Observable<Void>
 	}
 	
+	private let fetchMonthRecordsUseCase = FetchMonthRecordsUseCase(repository: RecordRepository(dataSource: RecordInternalDB()))
 	private let saveRecordUseCase = SaveRecordUseCase(repository: RecordRepository(dataSource: RecordInternalDB()))
 	
 	private var currentYear: Int
@@ -35,35 +39,25 @@ class CalendarViewModel {
 	}
 	
 	func transform(input: Input) -> Output {
-
-		let displayedMonths = input.isScrolled
-			.map { isScrolled -> (Int, Int) in
-				switch isScrolled {
-				case -1:
-					return self.preYearAndMonth(currentYear: self.currentYear, currentMonth: self.currentMonth)
-				case 1:
-					return self.nextYearAndMonth(currentYear: self.currentYear, currentMonth: self.currentMonth)
-				default:
-					return (self.currentYear, self.currentMonth)
-				}
-			}
-			.flatMap { year, month -> Observable<[(Int, Int)]> in
-				self.currentYear = year
-				self.currentMonth = month
-				self.currentYearAndMonthChanged.onNext(())
-				
-				return self.displayedMonths(currentYear: year, currentMonth: month)
-			}
 		
-		let displayedMonthString = Observable.of(currentYearAndMonthChanged, input.isViewAppear)
-			.merge()
-			.skip(1)
-			.map { _ -> String in
-				return "\(self.currentYear)년 \(self.currentMonth)월"
+		let dateRecords = input.currentPage
+			.map { date -> (Date, Date) in
+				return (date.startOfMonth, date.endOfMonth)
+			}.flatMap { start, end -> Observable<FetchMonthRecordsUseCaseModels.Response> in
+				
+				return self.fetchMonthRecordsUseCase.execute(request: FetchMonthRecordsUseCaseModels.Request(startDate: start, endDate: end))
+			}.map { response -> [String : [Content]] in
+				
+				var hashMap: [String : [Content]] = [:]
+				
+				for dateRecord in response.dateRecords {
+					hashMap[dateRecord.date] = dateRecord.records
+				}
+				
+				return hashMap
 			}
-			.asDriver(onErrorJustReturn: "")
-	
-		let isPhotoAdded = input.addedPhotoURL
+			
+		let isPhotoAdded = input.addedPhotoRecordURL
 			.withLatestFrom(input.selectedDate) { return ($0, $1) }
 			.flatMap { url, date -> Observable<SaveRecordUseCaseModels.Response> in
 				return self.saveRecordUseCase.execute(
@@ -79,34 +73,6 @@ class CalendarViewModel {
 				return ()
 			}
 		
-		return Output(displayedMonths: displayedMonths, displayedMonthString: displayedMonthString, isPhotoAdded: isPhotoAdded)
-	}
-	
-	private func displayedMonths(currentYear: Int, currentMonth: Int) -> Observable<[(Int, Int)]> {
-		return Observable.just([
-			self.preYearAndMonth(currentYear: currentYear, currentMonth: currentMonth),
-			(currentYear, currentMonth),
-			self.nextYearAndMonth(currentYear: currentYear, currentMonth: currentMonth)
-		])
-	}
-	
-	private func preYearAndMonth(currentYear: Int, currentMonth: Int) -> (Int, Int) {
-		var preYear = currentYear
-		var preMonth = currentMonth - 1
-		if preMonth == 0 {
-			preYear -= 1
-			preMonth = 12
-		}
-		return (preYear, preMonth)
-	}
-	
-	private func nextYearAndMonth(currentYear: Int, currentMonth: Int) -> (Int, Int) {
-		var nextYear = currentYear
-		var nextMonth = currentMonth + 1
-		if nextMonth == 13 {
-			nextYear += 1
-			nextMonth = 1
-		}
-		return (nextYear, nextMonth)
+		return Output(dateRecords: dateRecords, isPhotoAdded: isPhotoAdded)
 	}
 }

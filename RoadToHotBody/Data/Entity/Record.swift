@@ -22,3 +22,13 @@ import RealmSwift
 		return ["index"]
 	}
 }
+
+extension Record {
+	func toContent() -> Content {
+		return Content(
+			index: self.index,
+			type: ContentType.init(rawValue: self.type) ?? .Memo,
+			text: self.content
+		)
+	}
+}

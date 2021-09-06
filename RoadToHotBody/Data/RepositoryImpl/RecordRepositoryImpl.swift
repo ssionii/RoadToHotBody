@@ -19,11 +19,19 @@ class RecordRepository: RecordRepositoryProtocol {
 		return recordDB.fetchRecords(date: date)
 			.map { records -> [Content] in
 				records.map { record -> Content in
-					return Content(
-						index: record.index,
-						type: ContentType.init(rawValue: record.type) ?? .Memo,
-						text: record.content
-					)
+					return record.toContent()
+				}
+			}
+	}
+	
+	func fetchMonthRecords(startDate: Date, endDate: Date) -> Single<[DateRecord]> {
+		return recordDB.fetchMonthRecords(startDate: startDate, endDate: endDate)
+			.map { dateRecordDTOs -> [DateRecord] in
+				dateRecordDTOs.map { dateRecordDTO -> DateRecord in
+					let records = dateRecordDTO.records.map { record -> Content in
+						return record.toContent()
+					}
+					return DateRecord(date: dateRecordDTO.date, records: records)
 				}
 			}
 	}
