@@ -14,6 +14,7 @@ pod 'JJFloatingActionButton'
 pod 'RealmSwift'
 pod 'Swinject'
 pod 'MaterialComponents/BottomSheet'
+pod 'FSCalendar'
 
   target 'RoadToHotBodyTests' do
     inherit! :search_paths

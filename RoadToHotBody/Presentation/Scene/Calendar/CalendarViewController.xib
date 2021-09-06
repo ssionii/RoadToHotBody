@@ -10,8 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CalendarViewController" customModule="RoadToHotBody" customModuleProvider="target">
             <connections>
-                <outlet property="baseCollectionView" destination="kTI-F3-frV" id="3Ru-9D-IEM"/>
-                <outlet property="calendarHeightConstraint" destination="rKj-03-C7M" id="h2d-xc-DqS"/>
+                <outlet property="calendar" destination="x0w-vf-pWf" id="aT3-7o-4By"/>
+                <outlet property="calendarHeight" destination="zEk-tn-fxZ" id="aAk-QQ-1VK"/>
                 <outlet property="recordTableView" destination="c0r-Oo-avi" id="H4B-cD-9s5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -21,87 +21,45 @@
             <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="22j-cB-Esf">
-                    <rect key="frame" x="10" y="44" width="370" height="30"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="일" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zpj-6l-pYO">
-                            <rect key="frame" x="0.0" y="0.0" width="53" height="30"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="월" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XPS-9j-xGo">
-                            <rect key="frame" x="53" y="0.0" width="52.666666666666657" height="30"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="화" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pxq-p2-77R">
-                            <rect key="frame" x="105.66666666666669" y="0.0" width="53" height="30"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="수" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qP3-hx-pTn">
-                            <rect key="frame" x="158.66666666666666" y="0.0" width="52.666666666666657" height="30"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="목" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wbG-JC-zsc">
-                            <rect key="frame" x="211.33333333333334" y="0.0" width="53.000000000000028" height="30"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="금" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ni-Ic-0d9">
-                            <rect key="frame" x="264.33333333333331" y="0.0" width="52.666666666666686" height="30"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="토" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7yN-BR-Kps">
-                            <rect key="frame" x="317" y="0.0" width="53" height="30"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="30" id="nix-FB-yyq"/>
-                    </constraints>
-                </stackView>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="kTI-F3-frV">
-                    <rect key="frame" x="0.0" y="74" width="390" height="200"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="200" id="rKj-03-C7M"/>
-                    </constraints>
-                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="fMg-5c-TTD">
-                        <size key="itemSize" width="128" height="128"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    </collectionViewFlowLayout>
-                </collectionView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="c0r-Oo-avi">
-                    <rect key="frame" x="16" y="274" width="358" height="570"/>
+                    <rect key="frame" x="16" y="244" width="358" height="600"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x0w-vf-pWf" customClass="FSCalendar">
+                    <rect key="frame" x="0.0" y="44" width="390" height="200"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="200" id="zEk-tn-fxZ"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="headerMinimumDissolvedAlpha">
+                            <real key="value" value="0.0"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="todayColor">
+                            <color key="value" systemColor="systemRedColor"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="weekdayHeight">
+                            <real key="value" value="11"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="weekdayTextColor">
+                            <color key="value" systemColor="labelColor"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="headerHeight">
+                            <real key="value" value="6"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="kTI-F3-frV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5TL-Dd-ACt"/>
-                <constraint firstItem="kTI-F3-frV" firstAttribute="top" secondItem="22j-cB-Esf" secondAttribute="bottom" id="Mad-zb-E4P"/>
+                <constraint firstItem="x0w-vf-pWf" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Gc8-oY-RMI"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="c0r-Oo-avi" secondAttribute="trailing" constant="16" id="Mar-SP-ON3"/>
-                <constraint firstItem="22j-cB-Esf" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Nj8-kP-RkX"/>
                 <constraint firstItem="c0r-Oo-avi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="OfI-0f-cjc"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kTI-F3-frV" secondAttribute="trailing" id="ZdK-Oa-LaV"/>
-                <constraint firstItem="c0r-Oo-avi" firstAttribute="top" secondItem="kTI-F3-frV" secondAttribute="bottom" id="f9h-Sc-HZL"/>
+                <constraint firstItem="x0w-vf-pWf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="TxH-Xm-pko"/>
+                <constraint firstItem="c0r-Oo-avi" firstAttribute="top" secondItem="x0w-vf-pWf" secondAttribute="bottom" id="YAX-VJ-0JU"/>
                 <constraint firstAttribute="bottom" secondItem="c0r-Oo-avi" secondAttribute="bottom" id="krl-WS-oe7"/>
-                <constraint firstItem="22j-cB-Esf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="uaU-AH-KYZ"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="22j-cB-Esf" secondAttribute="trailing" constant="10" id="z2q-8m-kpZ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="x0w-vf-pWf" secondAttribute="trailing" id="xZ2-Jy-bbE"/>
             </constraints>
             <point key="canvasLocation" x="-220" y="152.84360189573459"/>
         </view>
@@ -113,8 +71,14 @@
     </objects>
     <resources>
         <image name="pencil" catalog="system" width="128" height="113"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

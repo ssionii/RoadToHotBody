@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import JJFloatingActionButton
+import FSCalendar
 
 protocol CalendarVCCoordinatorDelegate {
 	func writeMemoButtonClicked(_ viewController: UIViewController, date: String)
@@ -20,8 +21,8 @@ protocol CalendarVCCoordinatorDelegate {
 
 class CalendarViewController: UIViewController {
 	
-    @IBOutlet weak var baseCollectionView: UICollectionView!
-    @IBOutlet weak var calendarHeightConstraint: NSLayoutConstraint!
+	@IBOutlet weak var calendar: FSCalendar!
+	@IBOutlet weak var calendarHeight: NSLayoutConstraint!
 	@IBOutlet weak var recordTableView: UITableView!
 	
 	lazy var floatingButton: JJFloatingActionButton = {
@@ -52,6 +53,10 @@ class CalendarViewController: UIViewController {
 	var coordinatorDelegate: CalendarVCCoordinatorDelegate?
 	private let disposeBag = DisposeBag()
 	
+	// calendar event
+	private let currentDateString = BehaviorSubject<String>(value: "")
+
+	
 	// event
 	private let isScrolled = PublishSubject<Int>()
 	private let isAppearView = PublishSubject<Void>()
@@ -68,12 +73,6 @@ class CalendarViewController: UIViewController {
 	
 	private let selectedDateObservable = PublishSubject<String>()
 	private var selectedIndexPath = IndexPath()
-	
-	private var displayedMonths: [(Int, Int)]? {
-		didSet {
-			baseCollectionView.reloadData()
-		}
-	}
 	
 	private var records: [Content] = [] {
 		didSet {
@@ -96,7 +95,7 @@ class CalendarViewController: UIViewController {
         super.viewDidLoad()
 		
         configureUI()
-        configureCollectoinView()
+        configureCalendar()
         configureTableView()
         configureNotificationCenter()
 		bind()
@@ -114,25 +113,34 @@ class CalendarViewController: UIViewController {
 	}
     
     private func configureUI() {
-		cellSize = floor((baseCollectionView.frame.size.width - ( 10 * 2 )) / 7)
-        calendarHeightConstraint.constant = cellSize * 6
-		
+		configureCurrentDate(date: calendar.currentPage)
 		floatingButton.display(inViewController: self)
     }
-    
-    private func configureCollectoinView() {
-        baseCollectionView.delegate = self
-        baseCollectionView.dataSource = self
-        
-        baseCollectionView.register(UINib(nibName: MonthCell.ID, bundle: nil), forCellWithReuseIdentifier: MonthCell.ID)
+	
+	private func configureCalendar() {
+		calendar.appearance.headerTitleFont = UIFont.systemFont(ofSize: 0)
+		calendar.appearance.weekdayFont = UIFont.systemFont(ofSize: 11)
+		calendar.appearance.todayColor = .clear
+		calendar.appearance.titleTodayColor = .red
+		calendar.appearance.titleFont = UIFont.systemFont(ofSize: 14, weight: .light)
+		calendar.appearance.selectionColor = .darkGray
 		
-		reloadView
-			.withUnretained(self)
-			.subscribe(onNext: { owner, _ in
-				(owner.baseCollectionView.cellForItem(at: IndexPath(row: 1, section: 0)) as! MonthCell).addedRecord.onNext(owner.selectedIndexPath)
-			})
-			.disposed(by: disposeBag)
-    }
+		self.cellSize = calendar.frame.width / 7
+		calendarHeight.constant = (cellSize - 4) * 7
+		
+		calendar.locale = Locale(identifier: "ko_KR")
+		calendar.addGestureRecognizer(scopeGesture)
+		
+		calendar.delegate = self
+		calendar.dataSource = self
+	}
+	
+	private func configureCurrentDate(date: Date) {
+		let year = Calendar.current.component(.year, from: date)
+		let month = Calendar.current.component(.month, from: date)
+		
+		currentDateString.onNext("\(year)년 \(month)월")
+	}
 	
 	private func configureTableView() {
 		recordTableView.delegate = self
@@ -163,20 +171,12 @@ class CalendarViewController: UIViewController {
 			)
 		)
 		
-		output.displayedMonths
-			.withUnretained(self)
-			.subscribe(onNext: { owner, yearAndMonth in
-				owner.displayedMonths = yearAndMonth
-				owner.baseCollectionView.scrollToItem(at: IndexPath(row: 1, section: 0), at: .left, animated: false)
+		guard let topItem = self.navigationController?.navigationBar.topItem else { return }
+		
+		currentDateString
+			.subscribe(onNext: { date in
+				topItem.title = date
 			})
-			.disposed(by: disposeBag)
-		
-		guard let topItem = self.navigationController?.navigationBar.topItem else {
-			return
-		}
-		
-		output.displayedMonthString
-			.drive(topItem.rx.title)
 			.disposed(by: disposeBag)
 		
 		output.isPhotoAdded
@@ -218,35 +218,45 @@ class CalendarViewController: UIViewController {
 			})
 			.disposed(by: disposeBag)
 	}
-    
+	
+	fileprivate lazy var scopeGesture: UIPanGestureRecognizer = {
+		[unowned self] in
+		let panGesture = UIPanGestureRecognizer(target: self.calendar, action: #selector(self.calendar.handleScopeGesture(_:)))
+		panGesture.delegate = self
+		return panGesture
+	}()
 }
 
-extension CalendarViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MonthCell.ID, for: indexPath) as! MonthCell
-        cell.delegate = self
-		guard let displayedMonths = self.displayedMonths else { return cell }
-		cell.bind(viewModel: MonthViewModel(year: displayedMonths[indexPath.row].0, month: displayedMonths[indexPath.row].1))
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return CGSize(width: collectionView.frame.width, height: cellSize * 6)
-    }
+extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
+	func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+		calendar.setScope(.week, animated: true)
+	}
 	
-	func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-		if scrollView == self.baseCollectionView {
-			if scrollView.contentOffset.x  == 0 {
-				isScrolled.onNext(-1)
-			} else if scrollView.contentOffset.x > view.frame.size.width {
-				isScrolled.onNext(1)
-			}
-		}
+	func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+		return 1
+	}
+	
+	func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
+		self.calendarHeight.constant = bounds.height
+		self.view.layoutIfNeeded()
+	}
+	
+	func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+		self.configureCurrentDate(date: calendar.currentPage)
+	}
+	
+	func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
+		return [.lightGray, .green, .systemPink ]
+	}
+	
+	func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventSelectionColorsFor date: Date) -> [UIColor]? {
+		return [.lightGray, .green, .systemPink ]
+	}
+}
+
+extension CalendarViewController: UIGestureRecognizerDelegate {
+	func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+		return true
 	}
 }
 

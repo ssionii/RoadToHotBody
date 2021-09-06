@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>사진 및 동영상 첨부를 위한 앨범 사용 권한</string>
 	<key>NSAppTransportSecurity</key>
