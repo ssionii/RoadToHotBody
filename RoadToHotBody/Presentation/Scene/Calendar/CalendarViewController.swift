@@ -49,10 +49,11 @@ class CalendarViewController: UIViewController {
 		return button
 	}()
 	
-	fileprivate lazy var scopeGesture: UIPanGestureRecognizer = {
-		[unowned self] in
+	fileprivate lazy var scopeGesture: UIPanGestureRecognizer = { [unowned self] in
 		let panGesture = UIPanGestureRecognizer(target: self.calendar, action: #selector(self.calendar.handleScopeGesture(_:)))
 		panGesture.delegate = self
+		panGesture.minimumNumberOfTouches = 1
+		panGesture.maximumNumberOfTouches = 2
 		return panGesture
 	}()
 	
@@ -118,6 +119,7 @@ class CalendarViewController: UIViewController {
     }
     
     private func configureUI() {
+		self.view.addGestureRecognizer(scopeGesture)
 		
 		floatingButton.display(inViewController: self)
     }
@@ -148,6 +150,9 @@ class CalendarViewController: UIViewController {
 	}
 	
 	private func configureTableView() {
+		recordTableView.addGestureRecognizer(self.scopeGesture)
+//		recordTableView.panGestureRecognizer.require(toFail: self.scopeGesture)
+		
 		recordTableView.delegate = self
 		recordTableView.dataSource = self
 		
@@ -246,8 +251,6 @@ class CalendarViewController: UIViewController {
 
 extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
 	func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-//		selectedDateObservable.onNext(date.toString)
-//		selectedDateRecord = self.dateRecords[date.toString] ?? []
 		selectedDate = date.toString
 		reloadTableView.onNext(date.toString)
 	}
@@ -315,7 +318,19 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCa
 
 extension CalendarViewController: UIGestureRecognizerDelegate {
 	func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-		return true
+		let shouldBegin = self.recordTableView.contentOffset.y <= -self.recordTableView.contentInset.top
+		if shouldBegin {
+			let velocity = self.scopeGesture.velocity(in: self.view)
+			switch self.calendar.scope {
+			case .month:
+				return velocity.y < 0
+			case .week:
+				return velocity.y > 0
+			@unknown default:
+				return false
+			}
+		}
+		return shouldBegin
 	}
 }
 
