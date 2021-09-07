@@ -74,9 +74,7 @@ class RecordInternalDB: RecordInternalDBProtocol {
 	
 	func saveRecord(date: String, content: String, type: Int, trainingIndex: Int?) -> Completable {
 		return Completable.create { completable in
-			
 			if let realm = self.realm {
-				
 				var index = 0
 				if let last = realm.objects(Record.self).last {
 					index = last.index + 1
@@ -87,7 +85,6 @@ class RecordInternalDB: RecordInternalDBProtocol {
 				record.date = date
 				record.content = content
 				record.type = type
-				
 				if let trainingIndex = trainingIndex {
 					record.trainingIndex = trainingIndex
 				}

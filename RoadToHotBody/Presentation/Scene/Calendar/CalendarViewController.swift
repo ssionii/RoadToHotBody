@@ -49,13 +49,19 @@ class CalendarViewController: UIViewController {
 		return button
 	}()
 	
+	fileprivate lazy var scopeGesture: UIPanGestureRecognizer = {
+		[unowned self] in
+		let panGesture = UIPanGestureRecognizer(target: self.calendar, action: #selector(self.calendar.handleScopeGesture(_:)))
+		panGesture.delegate = self
+		return panGesture
+	}()
+	
 	private let viewModel: CalendarViewModel
 	var coordinatorDelegate: CalendarVCCoordinatorDelegate?
 	private let disposeBag = DisposeBag()
 	
 	// calendar event
 	private let currentPage = BehaviorSubject<Date>(value: Date())
-	private let selectedDateObservable = PublishSubject<String>()
 	private let calendarScopeIsWeek = BehaviorSubject<Bool>(value: false)
 
 	// floating button event
@@ -64,13 +70,26 @@ class CalendarViewController: UIViewController {
 	private let addExerciseButtonClicked = PublishSubject<Void>()
 	
 	// event
-	let reloadView = PublishSubject<Void>()
+	let reloadView = BehaviorSubject<Void>(value: ())
 	let addedPhotoRecordURL = PublishSubject<NSURL>()
-
+	private let reloadTableView = PublishSubject<String>()
+	private let selectedDateObservable = PublishSubject<String>()
+	private var selectedDate = "" {
+		didSet {
+			selectedDateObservable.onNext(selectedDate)
+		}
+	}
+	
 	// view
 	private var cellSize: CGFloat = 0
 	
-	private var dateRecords: [String : [Content]] = [:]
+	private var dateRecords: [String : [Content]] = [:] {
+		didSet {
+			self.calendar.reloadData()
+			reloadTableView.onNext(selectedDate)
+		}
+	}
+	
 	private var selectedDateRecord: [Content] = [] {
 		didSet {
 			self.recordTableView.reloadData()
@@ -156,12 +175,26 @@ class CalendarViewController: UIViewController {
 			})
 			.disposed(by: disposeBag)
 		
+		reloadView
+			.withUnretained(self)
+			.subscribe(onNext: { owner, _ in
+				owner.currentPage.onNext(owner.calendar.currentPage)
+			})
+			.disposed(by: disposeBag)
+		
+		reloadTableView
+			.withUnretained(self)
+			.subscribe(onNext: { owner, date in
+				owner.selectedDateRecord = owner.dateRecords[date] ?? []
+			})
+			.disposed(by: disposeBag)
+		
 		// viewModel bind
 		let output = viewModel.transform(
 			input: CalendarViewModel.Input(
-				selectedDate: selectedDateObservable.asObservable(),
-				addedPhotoRecordURL: addedPhotoRecordURL.asObservable(),
-				currentPage: currentPage.asObserver()
+				currentPage: currentPage.asObservable(),
+				savePhoto: addedPhotoRecordURL.asObservable(),
+				selectedDate: selectedDateObservable.asObserver()
 			)
 		)
 		
@@ -172,34 +205,32 @@ class CalendarViewController: UIViewController {
 			})
 			.disposed(by: disposeBag)
 		
-		output.isPhotoAdded
-			.subscribe(onNext: { _ in
-				self.reloadView.onNext(())
+		output.photoSaved
+			.withUnretained(self)
+			.subscribe(onNext: { owner, _ in
+				owner.reloadView.onNext(())
 			})
 			.disposed(by: disposeBag)
 		
 		// floating button event bind
 		writeMemoButtonClicked
-			.withLatestFrom(selectedDateObservable)
 			.withUnretained(self)
-			.subscribe(onNext: { owner, date in
-				owner.coordinatorDelegate?.writeMemoButtonClicked(self, date: date)
+			.subscribe(onNext: { owner, _ in
+				owner.coordinatorDelegate?.writeMemoButtonClicked(owner, date: owner.selectedDate)
 			})
 			.disposed(by: disposeBag)
 		
 		photoLibraryButtonClicked
-			.withLatestFrom(selectedDateObservable)
 			.withUnretained(self)
-			.subscribe(onNext: { owner, date in
-				owner.coordinatorDelegate?.photoLibraryButtonClicked(self)
+			.subscribe(onNext: { owner, _ in
+				owner.coordinatorDelegate?.photoLibraryButtonClicked(owner)
 			})
 			.disposed(by: disposeBag)
 		
 		addExerciseButtonClicked
-			.withLatestFrom(selectedDateObservable)
 			.withUnretained(self)
-			.subscribe(onNext: { owner, date in
-				owner.coordinatorDelegate?.addExerciseButtonClicked(self, date: date)
+			.subscribe(onNext: { owner, _ in
+				owner.coordinatorDelegate?.addExerciseButtonClicked(owner, date: owner.selectedDate)
 			})
 			.disposed(by: disposeBag)
 		
@@ -211,24 +242,28 @@ class CalendarViewController: UIViewController {
 			})
 			.disposed(by: disposeBag)
 	}
-	
-	fileprivate lazy var scopeGesture: UIPanGestureRecognizer = {
-		[unowned self] in
-		let panGesture = UIPanGestureRecognizer(target: self.calendar, action: #selector(self.calendar.handleScopeGesture(_:)))
-		panGesture.delegate = self
-		return panGesture
-	}()
 }
 
 extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
 	func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-		selectedDateObservable.onNext(date.toString)
-		selectedDateRecord = self.dateRecords[date.toString] ?? []
+//		selectedDateObservable.onNext(date.toString)
+//		selectedDateRecord = self.dateRecords[date.toString] ?? []
+		selectedDate = date.toString
+		reloadTableView.onNext(date.toString)
 	}
 	
 	func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
 		
-		return self.dateRecords[date.toString]?.count ?? 0
+		var count = 0
+		
+		let contentType: [ContentType] = [ .Memo, .Exercise, .Photo ]
+		for type in contentType {
+			if self.dateRecords[date.toString]?.contains(where: { $0.type == type }) ?? false {
+				count += 1
+			}
+		}
+		
+		return count
 	}
 	
 	func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
@@ -248,24 +283,33 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCa
 	}
 	
 	func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
-		
 		var resultColors = [UIColor]()
 		
 		let contentType: [ContentType] = [ .Memo, .Exercise, .Photo ]
 		let color: [UIColor] = [ .lightGray, UIColor(named: "mainColor") ?? .black , .systemPink ]
 		
-		
 		for (index, type) in contentType.enumerated() {
-			if ((self.dateRecords[date.toString]?.contains { $0.type == type }) != nil) {
+			if self.dateRecords[date.toString]?.contains(where: { $0.type == type }) ?? false,
+			   !resultColors.contains(color[index]) {
 				resultColors.append(color[index])
 			}
 		}
-		
 		return resultColors
 	}
 	
 	func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventSelectionColorsFor date: Date) -> [UIColor]? {
-		return [.lightGray, .green, .systemPink ]
+		var resultColors = [UIColor]()
+		
+		let contentType: [ContentType] = [ .Memo, .Exercise, .Photo ]
+		let color: [UIColor] = [ .lightGray, UIColor(named: "mainColor") ?? .black , .systemPink ]
+		
+		for (index, type) in contentType.enumerated() {
+			if self.dateRecords[date.toString]?.contains(where: { $0.type == type }) ?? false,
+			   !resultColors.contains(color[index]) {
+				resultColors.append(color[index])
+			}
+		}
+		return resultColors
 	}
 }
 
@@ -327,7 +371,7 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension CalendarViewController: PhotoCellDelegate {
 	func resizeImage(indexPath: IndexPath) {
-		if self.recordTableView.accessibilityElementCount() >= indexPath.section {
+		if self.recordTableView.accessibilityElementCount() >= indexPath.row {
 			UIView.performWithoutAnimation {
 				self.recordTableView.reloadRows(at: [indexPath], with: .none)
 			}
