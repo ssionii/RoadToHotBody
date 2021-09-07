@@ -10,8 +10,6 @@
 		5FF627ABB4851819CF13F7D5 /* Pods_RoadToHotBody_RoadToHotBodyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8134247A7D02BF2AD8DAEF1 /* Pods_RoadToHotBody_RoadToHotBodyUITests.framework */; };
 		836C27234C1CCA15094D2249 /* Pods_RoadToHotBodyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0B6360B526218DC1B578501 /* Pods_RoadToHotBodyTests.framework */; };
 		B5117F5326CBF54200E6ABB5 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5117F5226CBF54200E6ABB5 /* CalendarViewModel.swift */; };
-		B5117F5626CBF8C000E6ABB5 /* MonthCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5117F5426CBF8C000E6ABB5 /* MonthCell.swift */; };
-		B5117F5726CBF8C000E6ABB5 /* MonthCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5117F5526CBF8C000E6ABB5 /* MonthCell.xib */; };
 		B541963326C2B27A00B2080A /* WriteMemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B541963126C2B27A00B2080A /* WriteMemoViewController.xib */; };
 		B541963726C2B2E400B2080A /* DetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B541963626C2B2E400B2080A /* DetailCoordinator.swift */; };
 		B56EFA4626C79B57008A5346 /* ReadMemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EFA4526C79B57008A5346 /* ReadMemoViewModel.swift */; };
@@ -38,8 +36,6 @@
 		FA32809D26D75EDF006728F8 /* TimerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA32809B26D75EDF006728F8 /* TimerViewController.xib */; };
 		FA3280A326D76330006728F8 /* TimerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3280A226D76330006728F8 /* TimerCoordinator.swift */; };
 		FA3280A826D764FE006728F8 /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3280A726D764FE006728F8 /* TimerViewModel.swift */; };
-		FA3AD7A026CCBD1200270AC1 /* MonthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3AD79F26CCBD1200270AC1 /* MonthViewModel.swift */; };
-		FA3AD7B626CDED2100270AC1 /* DayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3AD7B526CDED2100270AC1 /* DayViewModel.swift */; };
 		FA3AD7CC26CE138400270AC1 /* RecordInternalDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3AD7CB26CE138400270AC1 /* RecordInternalDB.swift */; };
 		FA3AD7D126CE144600270AC1 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3AD7D026CE144600270AC1 /* Record.swift */; };
 		FA3AD7DB26CE165A00270AC1 /* RecordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3AD7DA26CE165A00270AC1 /* RecordRepository.swift */; };
@@ -67,8 +63,6 @@
 		FA859D3426D62FF20008E115 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA859D3326D62FF20008E115 /* DateHelper.swift */; };
 		FA9B27B226CB399D00FC05E9 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B27B026CB399D00FC05E9 /* VideoCell.swift */; };
 		FA9B27B326CB399D00FC05E9 /* VideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9B27B126CB399D00FC05E9 /* VideoCell.xib */; };
-		FA9B27EC26CBA42400FC05E9 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B27EA26CBA42400FC05E9 /* DayCell.swift */; };
-		FA9B27ED26CBA42400FC05E9 /* DayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9B27EB26CBA42400FC05E9 /* DayCell.xib */; };
 		FAB2948026C5F785003788CA /* TrainingDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2947F26C5F785003788CA /* TrainingDetail.swift */; };
 		FAB2948826C5FBF5003788CA /* Muscle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2948726C5FBF5003788CA /* Muscle.swift */; };
 		FAB2948D26C5FE5C003788CA /* EmptyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2948C26C5FE5C003788CA /* EmptyError.swift */; };
@@ -152,8 +146,6 @@
 		90CE53B0D93AD0E247216CCF /* Pods-RoadToHotBody.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoadToHotBody.debug.xcconfig"; path = "Target Support Files/Pods-RoadToHotBody/Pods-RoadToHotBody.debug.xcconfig"; sourceTree = "<group>"; };
 		B3BDFFEC9A18FC24E387C1BE /* Pods-RoadToHotBody-RoadToHotBodyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoadToHotBody-RoadToHotBodyUITests.debug.xcconfig"; path = "Target Support Files/Pods-RoadToHotBody-RoadToHotBodyUITests/Pods-RoadToHotBody-RoadToHotBodyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B5117F5226CBF54200E6ABB5 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
-		B5117F5426CBF8C000E6ABB5 /* MonthCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthCell.swift; sourceTree = "<group>"; };
-		B5117F5526CBF8C000E6ABB5 /* MonthCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MonthCell.xib; sourceTree = "<group>"; };
 		B541963126C2B27A00B2080A /* WriteMemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WriteMemoViewController.xib; sourceTree = "<group>"; };
 		B541963626C2B2E400B2080A /* DetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCoordinator.swift; sourceTree = "<group>"; };
 		B56EFA4526C79B57008A5346 /* ReadMemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadMemoViewModel.swift; sourceTree = "<group>"; };
@@ -183,8 +175,6 @@
 		FA32809B26D75EDF006728F8 /* TimerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimerViewController.xib; sourceTree = "<group>"; };
 		FA3280A226D76330006728F8 /* TimerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCoordinator.swift; sourceTree = "<group>"; };
 		FA3280A726D764FE006728F8 /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
-		FA3AD79F26CCBD1200270AC1 /* MonthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthViewModel.swift; sourceTree = "<group>"; };
-		FA3AD7B526CDED2100270AC1 /* DayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewModel.swift; sourceTree = "<group>"; };
 		FA3AD7CB26CE138400270AC1 /* RecordInternalDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordInternalDB.swift; sourceTree = "<group>"; };
 		FA3AD7D026CE144600270AC1 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		FA3AD7DA26CE165A00270AC1 /* RecordRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRepository.swift; sourceTree = "<group>"; };
@@ -212,8 +202,6 @@
 		FA859D3326D62FF20008E115 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		FA9B27B026CB399D00FC05E9 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		FA9B27B126CB399D00FC05E9 /* VideoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoCell.xib; sourceTree = "<group>"; };
-		FA9B27EA26CBA42400FC05E9 /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
-		FA9B27EB26CBA42400FC05E9 /* DayCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DayCell.xib; sourceTree = "<group>"; };
 		FAB2947F26C5F785003788CA /* TrainingDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingDetail.swift; sourceTree = "<group>"; };
 		FAB2948726C5FBF5003788CA /* Muscle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Muscle.swift; sourceTree = "<group>"; };
 		FAB2948C26C5FE5C003788CA /* EmptyError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyError.swift; sourceTree = "<group>"; };
@@ -423,26 +411,6 @@
 			path = Timer;
 			sourceTree = "<group>";
 		};
-		FA3AD79E26CCBCFB00270AC1 /* Month */ = {
-			isa = PBXGroup;
-			children = (
-				B5117F5426CBF8C000E6ABB5 /* MonthCell.swift */,
-				B5117F5526CBF8C000E6ABB5 /* MonthCell.xib */,
-				FA3AD79F26CCBD1200270AC1 /* MonthViewModel.swift */,
-			);
-			path = Month;
-			sourceTree = "<group>";
-		};
-		FA3AD7B426CDED0E00270AC1 /* Day */ = {
-			isa = PBXGroup;
-			children = (
-				FA9B27EA26CBA42400FC05E9 /* DayCell.swift */,
-				FA9B27EB26CBA42400FC05E9 /* DayCell.xib */,
-				FA3AD7B526CDED2100270AC1 /* DayViewModel.swift */,
-			);
-			path = Day;
-			sourceTree = "<group>";
-		};
 		FA83113626D4A7D1000B1AE9 /* Library */ = {
 			isa = PBXGroup;
 			children = (
@@ -499,15 +467,6 @@
 				FA859D3326D62FF20008E115 /* DateHelper.swift */,
 			);
 			path = Helper;
-			sourceTree = "<group>";
-		};
-		FA9B27E926CBA3E600FC05E9 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				FA3AD79E26CCBCFB00270AC1 /* Month */,
-				FA3AD7B426CDED0E00270AC1 /* Day */,
-			);
-			path = Cell;
 			sourceTree = "<group>";
 		};
 		FAB2946926C5F42D003788CA /* Entity */ = {
@@ -793,7 +752,6 @@
 			isa = PBXGroup;
 			children = (
 				FA0973DD26E0ACD00029458A /* ExerciseList */,
-				FA9B27E926CBA3E600FC05E9 /* Cell */,
 				FAFA46FA26C0A82900CD820C /* CalendarViewController.swift */,
 				FAFA46FB26C0A82900CD820C /* CalendarViewController.xib */,
 				B5117F5226CBF54200E6ABB5 /* CalendarViewModel.swift */,
@@ -940,8 +898,6 @@
 				FA83114B26D4CEB2000B1AE9 /* RecordViewController.xib in Resources */,
 				FA83112726D4A003000B1AE9 /* PhotoDetailViewController.xib in Resources */,
 				FAFA470E26C0BC8F00CD820C /* DetailViewController.xib in Resources */,
-				FA9B27ED26CBA42400FC05E9 /* DayCell.xib in Resources */,
-				B5117F5726CBF8C000E6ABB5 /* MonthCell.xib in Resources */,
 				FA9B27B326CB399D00FC05E9 /* VideoCell.xib in Resources */,
 				FAB294E526C62DCC003788CA /* MuscleCell.xib in Resources */,
 				FAFA46FD26C0A82900CD820C /* CalendarViewController.xib in Resources */,
@@ -1094,7 +1050,6 @@
 				B56EFA6526C80B0E008A5346 /* NoNavigationRouter.swift in Sources */,
 				FAF7036F26CF94D300CDEBEF /* ReadDetailContentMemoViewModel.swift in Sources */,
 				FAB2948D26C5FE5C003788CA /* EmptyError.swift in Sources */,
-				FA3AD7A026CCBD1200270AC1 /* MonthViewModel.swift in Sources */,
 				FA83113226D4A159000B1AE9 /* PhotoDetailViewModel.swift in Sources */,
 				FA83115826D4CF26000B1AE9 /* RecordViewModel.swift in Sources */,
 				FAF7038626CF972C00CDEBEF /* DeleteRecordUseCase.swift in Sources */,
@@ -1116,7 +1071,6 @@
 				FA3AD7ED26CE1CD800270AC1 /* SaveRecordUseCase.swift in Sources */,
 				FA3280A326D76330006728F8 /* TimerCoordinator.swift in Sources */,
 				FAB294B126C6088B003788CA /* Training.swift in Sources */,
-				FA3AD7B626CDED2100270AC1 /* DayViewModel.swift in Sources */,
 				FA0B49EC26C50A820018DE69 /* TrainingDetailInternalDB.swift in Sources */,
 				B56EFA4D26C7A098008A5346 /* ReadMemoViewController.swift in Sources */,
 				FAFA478926C20A4300CD820C /* HomeCoordinator.swift in Sources */,
@@ -1131,7 +1085,6 @@
 				FA0973E026E0AD130029458A /* ExerciseListViewController.swift in Sources */,
 				FAF7036A26CF921900CDEBEF /* ReadRecordMemoViewModel.swift in Sources */,
 				B56EFA4826C79C3E008A5346 /* WriteMemoViewModel.swift in Sources */,
-				B5117F5626CBF8C000E6ABB5 /* MonthCell.swift in Sources */,
 				FAFA479B26C245E600CD820C /* MemoCell.swift in Sources */,
 				FAFA46C326BD246F00CD820C /* ModalNavigationRouter.swift in Sources */,
 				FAFA46B626BD243B00CD820C /* Router.swift in Sources */,
@@ -1148,7 +1101,6 @@
 				FAF7038C26CF99D100CDEBEF /* WriteRecordMemoViewModel.swift in Sources */,
 				FAFA467226BD1F9D00CD820C /* AppDelegate.swift in Sources */,
 				FAFA47A926C2488500CD820C /* DetailViewModel.swift in Sources */,
-				FA9B27EC26CBA42400FC05E9 /* DayCell.swift in Sources */,
 				FA0B49FE26C511CE0018DE69 /* InternalDBError.swift in Sources */,
 				FAFA46BE26BD245700CD820C /* NavigationRouter.swift in Sources */,
 				FAE110CB26E5E6A700CD6A68 /* Date+Extension.swift in Sources */,
